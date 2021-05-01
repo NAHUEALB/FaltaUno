@@ -1,5 +1,7 @@
 {
   "name": "Falta1",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }
