@@ -1,3 +1,22 @@
-<ion-app>
-  <ion-router-outlet></ion-router-outlet>
-</ion-app>
+
+<ion-menu menuId="slideMenu" contentId="content">
+  <ion-header>
+    <!-- <app-default-header></app-default-header> -->
+  </ion-header>
+
+  <ion-content id="content">
+    <ion-list>
+      <ion-menu-toggle>
+        <ion-item button lines="none" detail="false" *ngFor="let option of options" (click)="openOptions(option)">
+            <ion-label>
+              {{option.title}}
+            </ion-label>
+          <ion-icon name="home" slot="start"></ion-icon>
+        </ion-item>
+    </ion-menu-toggle>
+    </ion-list>
+  </ion-content>
+
+</ion-menu>
+
+<ion-router-outlet></ion-router-outlet>
