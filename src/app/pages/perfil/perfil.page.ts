@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Partido } from 'src/app/models/partido';
+import { Usuario } from 'src/app/models/usuario';
+
+
 
 @Component({
   selector: 'app-perfil',
@@ -6,12 +10,25 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./perfil.page.scss'],
 })
 export class PerfilPage implements OnInit {
+  usuario: Usuario;
+  partido: Partido;
 
-  constructor() {
-    console.log("Constructor del perfil");
+  constructor() { 
+    let nombre = "pepote";
+      
+    this.usuario = {
+      nomUsuario: "pepito",
+      edad: 15,
+      nombre: nombre
+     }
+
+    this.partido = {
+      resultado : "15 - 2"
+    }
    }
 
   ngOnInit() {
+
   }
 
 }

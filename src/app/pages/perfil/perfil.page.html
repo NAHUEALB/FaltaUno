@@ -8,5 +8,51 @@
 </ion-header>
 
 <ion-content class="background">
-  <h1 class="title">Hola Aby</h1>
+  <!-- <div>
+    
+    <p>{{usuario.nombre}}</p>
+    <p>{{usuario.nomUsuario}}</p>
+    <p>{{usuario.edad}}</p>
+  </div> -->
+  <div style="width: 20rem;">
+    <img [src]="'/assets/perfil.svg'">
+    <div>
+      <h5 >{{usuario.nombre}}</h5>
+      <p >@{{usuario.nomUsuario}}</p>
+      <p >{{usuario.edad}}</p>
+    </div>
+  </div>
+
+
+  <div>
+    <p>Último partido</p>
+    <p>{{partido.resultado}}</p>
+  </div>
+
+  <div>
+    <p>Valoracion</p>
+    <p>Estrellas</p>
+  </div>
+
+  <div>
+    <p>Estadisticas</p>
+  </div>
+
+  <ion-tabs>
+    <ion-tab-bar slot="bottom">
+      <ion-tab-button tab="editar">
+        <ion-label>Editar</ion-label>
+      </ion-tab-button>
+  
+      <ion-tab-button tab="perfil">
+        <ion-label>Perfil</ion-label>
+      </ion-tab-button>
+  
+      <ion-tab-button tab="historial">
+        <ion-label>Historial</ion-label>
+      </ion-tab-button>
+      
+    </ion-tab-bar>
+  </ion-tabs>
+
 </ion-content>
