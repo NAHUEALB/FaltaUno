@@ -1,5 +1,11 @@
 export interface Usuario{
     nombre: string;
     nomUsuario: string;
-    edad: number; 
+    fnacimiento: string; 
+	puntajeTotal: number;
+	votosTotal: number;
+	sexo: number;
+	perfil: boolean;
+	foto: string;
+	ubicacion: string;
 }
