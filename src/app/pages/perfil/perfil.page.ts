@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NavigationExtras, Router } from '@angular/router';
 import { Partido } from 'src/app/models/partido';
 import { Usuario } from 'src/app/models/usuario';
 
@@ -10,20 +11,21 @@ import { Usuario } from 'src/app/models/usuario';
 })
 
 export class PerfilPage implements OnInit {
+
 	usuario: Usuario;
 	partido: Partido;
 	edad: number;
 	valoracion: number;
-	stars: Array<string>;
+	stars = [];
 
-  	constructor() { 
+  	constructor( private router: Router ) { 
 		// lo que deberíamos traer de la db
 		let name = "Pepe"; 
 		let userName="pepito123";
 		let dateStr='1995-02-26'; 
 		let totalPunts=22;
 		let totalVotes=8; 
-		let sexStatus=1;
+		let sex='Masculino';
 		let privateProfile=false;
 		let picUrl='http://tuvieja.com/perfil.png';
 		let geo='La Plata';
@@ -35,7 +37,7 @@ export class PerfilPage implements OnInit {
 			fnacimiento: dateStr,
 			puntajeTotal: totalPunts,
 			votosTotal: totalVotes,
-			sexo: sexStatus,
+			sexo: sex,
 			perfil: privateProfile,
 			foto: picUrl,
 			ubicacion: geo,
@@ -44,29 +46,9 @@ export class PerfilPage implements OnInit {
 		this.partido = {
 			resultado : "15 - 2",
 		}
-		
-		function getEdad(dateNacimiento) {
-			let newDate = new Date(dateNacimiento);
-			let actualDate = Date.now();
-			let diff = actualDate - newDate.getTime();
-			let dateToYears = new Date(diff);
-			return dateToYears.getFullYear() - 1970;
-		}
-
-		this.edad = getEdad(this.usuario.fnacimiento);
-
-		function fillStars(value) {
-			let starsArr = []
-			for (let i=0; i<5; i++) {
-				if (value - .75 >= i) starsArr.push("full")
-				else if (value - .25 >= i) starsArr.push("half")
-				else starsArr.push("null");
-			}
-			return starsArr;
-		}
-		
+		this.edad = this.getEdad(this.usuario.fnacimiento);	
 		this.valoracion = parseFloat((this.usuario.puntajeTotal / this.usuario.votosTotal).toFixed(2));
-		this.stars = fillStars(this.valoracion);
+		this.fillStars(this.valoracion);
 	}
 
 
@@ -74,4 +56,30 @@ export class PerfilPage implements OnInit {
 
   	}
 
+	getEdad(dateNacimiento) {
+		let newDate = new Date(dateNacimiento);
+		let actualDate = Date.now();
+		let diff = actualDate - newDate.getTime();
+		let dateToYears = new Date(diff);
+		return dateToYears.getFullYear() - 1970;
+	}
+
+	
+	fillStars(value) {
+		for (let i=0; i<5; i++) {
+			if (value - .75 >= i) this.stars.push("full")
+			else if (value - .25 >= i) this.stars.push("half")
+			else this.stars.push("null");
+		}
+		
+	}
+
+	openTab(tab: String){
+		let usuarioExtra : NavigationExtras = {
+			state: {
+				usuario: this.usuario
+			}
+		}
+		this.router.navigate(['perfil/'+tab], usuarioExtra);
+	}
 }

@@ -4,7 +4,7 @@ export interface Usuario{
     fnacimiento: string; 
 	puntajeTotal: number;
 	votosTotal: number;
-	sexo: number;
+	sexo: string;
 	perfil: boolean;
 	foto: string;
 	ubicacion: string;

@@ -18,35 +18,18 @@
 		<div>
 			<h3>Nombre: <b>{{ usuario.nombre }}</b> (@{{ usuario.nomUsuario }})</h3>
 			<p>Edad: {{ edad }}</p>
-			<div *ngIf="usuario.sexo == 0"> <p>Sexo: No definido</p> </div>
-			<div *ngIf="usuario.sexo == 1"> <p>Sexo: Masculino</p> </div>
-			<div *ngIf="usuario.sexo == 2"> <p>Sexo: Femenino</p> </div>
-			<div *ngIf="usuario.sexo == 3"> <p>Sexo: No binario</p> </div>
-			
+			<p>Sexo: {{usuario.sexo}}</p>
 		</div>
   	</div>
 
-  	<div>
-		<h3><b>Valoracion:</b></h3>  
-		<img *ngIf="stars[0] == 'full'" class="star" [src]="'/assets/stars/star-full.png'">
-		<img *ngIf="stars[0] == 'half'" class="star" [src]="'/assets/stars/star-half.png'">
-		<img *ngIf="stars[0] == 'null'" class="star" [src]="'/assets/stars/star-null.png'">
+		<h3><b>Valoracion:</b></h3> <br>
+  	<div style="display: flex;">
+    <div *ngFor="let star of stars">
+      <img *ngIf="star === 'full'" class="star" [src]="'/assets/stars/star-full.png'">
+      <img *ngIf="star === 'half'" class="star" [src]="'/assets/stars/star-half.png'">
+      <img *ngIf="star === 'null'" class="star" [src]="'/assets/stars/star-null.png'">
+    </div>
 
-		<img *ngIf="stars[1] == 'full'" class="star" [src]="'/assets/stars/star-full.png'">
-		<img *ngIf="stars[1] == 'half'" class="star" [src]="'/assets/stars/star-half.png'">
-		<img *ngIf="stars[1] == 'null'" class="star" [src]="'/assets/stars/star-null.png'">
-
-		<img *ngIf="stars[2] == 'full'" class="star" [src]="'/assets/stars/star-full.png'">
-		<img *ngIf="stars[2] == 'half'" class="star" [src]="'/assets/stars/star-half.png'">
-		<img *ngIf="stars[2] == 'null'" class="star" [src]="'/assets/stars/star-null.png'">
-
-		<img *ngIf="stars[3] == 'full'" class="star" [src]="'/assets/stars/star-full.png'">
-		<img *ngIf="stars[3] == 'half'" class="star" [src]="'/assets/stars/star-half.png'">
-		<img *ngIf="stars[3] == 'null'" class="star" [src]="'/assets/stars/star-null.png'">
-
-		<img *ngIf="stars[4] == 'full'" class="star" [src]="'/assets/stars/star-full.png'">
-		<img *ngIf="stars[4] == 'half'" class="star" [src]="'/assets/stars/star-half.png'">
-		<img *ngIf="stars[4] == 'null'" class="star" [src]="'/assets/stars/star-null.png'">
 
 		<span style="font-size: 20px;">({{ valoracion }})</span>
   	</div>
@@ -59,22 +42,23 @@
 		<p>Votos recibidos?</p>
 	</div>
 
-
-	<ion-tabs>
+	
+	<!-- <ion-tabs>
 		<ion-tab-bar slot="bottom">
-		<ion-tab-button tab="editar">
-			<ion-label>Editar</ion-label>
-		</ion-tab-button>
-	
-		<ion-tab-button tab="perfil">
-			<ion-label>Perfil</ion-label>
-		</ion-tab-button>
-	
-		<ion-tab-button tab="historial">
-			<ion-label>Historial</ion-label>
-		</ion-tab-button>
+					
+			<ion-tab-button tab="editar" (click)="openTab('editar')">
+				<ion-label>Editar</ion-label>
+			</ion-tab-button>
+		
+			<ion-tab-button tab="perfil">
+				<ion-label>Perfil</ion-label>
+			</ion-tab-button>
+		
+			<ion-tab-button tab="historial" (click)="openTab('historial')">
+				<ion-label>Historial</ion-label>
+			</ion-tab-button>
 		
 		</ion-tab-bar>
-	</ion-tabs>
+	</ion-tabs> -->
 
 </ion-content>
