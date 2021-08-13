@@ -19,7 +19,7 @@ export class AppComponent {
       this.options = [
         { title: 'Inicio', component: InicioPage, icon:'home' ,  ruta:'inicio' },
         { title: 'Buscar', component: BuscarPage, icon: 'search',  ruta: 'buscar' },
-        { title: 'Perfil', component: PerfilPage, icon:'walk-outline',  ruta: 'perfil' }
+        { title: 'Perfil', component: PerfilPage, icon:'walk-outline',  ruta: 'registrar' }
       ]
     }
 

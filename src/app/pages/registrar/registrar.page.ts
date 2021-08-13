@@ -7,9 +7,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RegistrarPage implements OnInit {
 
-  constructor() { }
+  nombre: string;
+  fechaNacimiento: Date;
+  localidad: string;
+
+  constructor() { 
+    this.nombre = 'ariel';
+    this.fechaNacimiento =  new Date();  
+    this.localidad = "nahue";
+  }
 
   ngOnInit() {
+  }
+
+  localidadChange(value){
+    console.log(value.detail.value);
   }
 
 }

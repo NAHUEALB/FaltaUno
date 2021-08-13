@@ -3,6 +3,9 @@
     --background: none;
     background-image: url('../../../assets/imgs/background/f1_grass_background.jpg');
   }
+  ion-item{
+    --background: none;
+  }
 }
 
 .titulo{
@@ -15,8 +18,8 @@ form, input, optgroup, select{
 
 }
 
-ion-item{
-  background-color: rgba(255, 255, 255, .8);
+.box{
+  background-color: white;
   border-radius: 10px;
   margin-bottom: 15px; 
 
@@ -75,3 +78,4 @@ ion-radio{
   margin-left: 40px;
   
 }
+

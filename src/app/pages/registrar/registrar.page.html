@@ -6,14 +6,16 @@
 
 <ion-content class="background">
   <h1 class="titulo">Crear Perfil</h1>
-  <center><img src="../../../assets/imgs/background/iconoPerfil.jpg" width="150px" height="150px"></center>
+  <center>
+    <img src="../../../assets/imgs/background/iconoPerfil.jpg" width="150px" height="150px">
+  </center>
 
 <form #formulario="ngForm" (ngSubmit)="crearPerfil">
   <ion-row>
     <ion-col>
-      <ion-item>
+      <ion-item class="box">
         <ion-label position="floating">Nombre</ion-label>
-        <ion-input type="text" [(ngModel)]="nombre" required></ion-input>
+        <ion-input type="text" [value]="nombre" required></ion-input>
       </ion-item>
     </ion-col>
   </ion-row>
@@ -23,7 +25,7 @@
     <ion-col>
       <div class="fecha">
         <ion-datetime 
-        [(ngModel)]="fechaNacimiento" required
+        [value]="fechaNacimiento" required
         placeholder="Fecha de Nacimiento"
         display-format="DD/MM/YYYY">
         </ion-datetime>
@@ -35,37 +37,41 @@
 
   </ion-row>
 
-  <ion-list>
-    <ion-radio-group value="biff">
-      <center>
-      <div class="sexo">
-        <ion-label>Hombre</label>
-        <ion-radio ion-item-left slot="sexo" value="hombre"></ion-radio>
-      </div>
-      <div>
-        <ion-label>Mujer</ion-label>
-        <ion-radio slot="sexo" value="Mujer"></ion-radio>
-      </div>
-      <div>
-      <ion-label>No binario</ion-label>
-      <ion-radio  slot="sexo" value="No binario"></ion-radio>
-      </div>
-    </ion-radio-group>
-      </center>
-  </ion-list>
+<ion-list>
+  <ion-radio-group>
+    <ion-item>
+      <ion-label>Hombre</ion-label>
+      <ion-radio slot="end" value="Hombre"></ion-radio>
+    </ion-item>
 
+    <ion-item>
+      <ion-label>Mujer</ion-label>
+      <ion-radio slot="end" value="Mujer"></ion-radio>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>No binario</ion-label>
+      <ion-radio slot="end" value="No binario"></ion-radio>
+    </ion-item>
+
+  </ion-radio-group>
+</ion-list>
+
+
+
+  
   <ion-row>
     <ion-col>
-      <ion-item>
+      <ion-item class="box">
         <ion-label position="floating">Localidad</ion-label>
-        <ion-input type="text" [(ngModel)]="localidad" required></ion-input>
+        <ion-input type="text" [value]="localidad" (ionChange)="localidadChange($event)" required></ion-input>
       </ion-item>
     </ion-col>
   </ion-row>
 
   <ion-row>
     <ion-col>
-        <center><ion-button ion-button block (click)="registrarPerfil(formulario)">
+        <center><ion-button block (click)="registrarPerfil(formulario)">
           Crear
         </ion-button></center>
     </ion-col>
