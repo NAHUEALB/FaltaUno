@@ -4,7 +4,11 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
+<<<<<<< HEAD
     redirectTo: 'inicio',
+=======
+    redirectTo: 'registrar',
+>>>>>>> 5b4091ae4816938eba4d65a2c6e045cb4bb293aa
     pathMatch: 'full'
   },
   {
