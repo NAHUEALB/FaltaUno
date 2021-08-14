@@ -1,0 +1,81 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>registrar</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="background">
+  <h1 class="titulo">Crear Perfil</h1>
+  <center>
+    <img src="../../../assets/imgs/background/iconoPerfil.jpg" width="150px" height="150px">
+  </center>
+
+<form #formulario="ngForm" (ngSubmit)="crearPerfil">
+  <ion-row>
+    <ion-col>
+      <ion-item class="box">
+        <ion-label position="floating">Nombre</ion-label>
+        <ion-input type="text" [value]="nombre" required></ion-input>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+
+    <ion-col>
+      <div class="fecha">
+        <ion-datetime 
+        [value]="fechaNacimiento" required
+        placeholder="Fecha de Nacimiento"
+        display-format="DD/MM/YYYY">
+        </ion-datetime>
+      </div>
+    </ion-col>
+    <div class="fechaNaci">
+      <ion-icon name="calendar-outline"></ion-icon>
+    </div>
+
+  </ion-row>
+
+<<<<<<< HEAD
+<ion-list>
+  <ion-radio-group>
+    <ion-item>
+      <ion-label>Hombre</ion-label>
+      <ion-radio slot="end" value="Hombre"></ion-radio>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Mujer</ion-label>
+      <ion-radio slot="end" value="Mujer"></ion-radio>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>No binario</ion-label>
+      <ion-radio slot="end" value="No binario"></ion-radio>
+    </ion-item>
+
+  </ion-radio-group>
+</ion-list>
+
+
+
+  
+  <ion-row>
+    <ion-col>
+      <ion-item class="box">
+        <ion-label position="floating">Localidad</ion-label>
+        <ion-input type="text" [value]="localidad" (ionChange)="localidadChange($event)" required></ion-input>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col>
+        <center><ion-button block (click)="registrarPerfil(formulario)">
+          Crear
+        </ion-button></center>
+    </ion-col>
+  </ion-row>
+</form>
+</ion-content>
