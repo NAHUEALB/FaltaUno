@@ -24,4 +24,7 @@ export class RegistrarPage implements OnInit {
     console.log(value.detail.value);
   }
 
+  registrarPerfil(element){
+    console.log(element);
+  }
 }

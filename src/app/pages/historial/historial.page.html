@@ -1,9 +1,38 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>historial</ion-title>
-  </ion-toolbar>
+	<ion-toolbar>
+		<ion-buttons slot="start">
+			<ion-menu-button></ion-menu-button>
+		</ion-buttons>
+		<ion-title>Historial</ion-title>
+	</ion-toolbar>
 </ion-header>
 
-<ion-content>
-<h1> HISTORIAL PAGE</h1>
+<ion-content class="background">
+
+  <ion-refresher slot="fixed" (ionRefresh)="actualizarListado($event)" >
+    <ion-refresher-content refreshingSpinner="crescent"></ion-refresher-content>
+  </ion-refresher>
+
+  <ng-container>
+    <ion-list>
+      <ion-item *ngFor="let resultado of partidos">
+        <!-- Revisar como hacer la separacion entre "cards" o items mas marcada. item-inner tiene que estar la rta -->
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+                <ion-img style="width: 100%;" src="../../../assets/stadio-sfondo.jpg"></ion-img>
+                <div class="ion-text-start ">
+                  <p>{{resultado.resultado}}</p>
+                </div>
+                <div class="ion-text-end fecha">
+                  <p>{{resultado.fecha}}</p>
+              </div>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+    </ion-list>
+  </ng-container>
+
+
 </ion-content>
