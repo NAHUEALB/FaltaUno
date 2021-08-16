@@ -8,7 +8,7 @@
 </ion-header>
 
 <ion-content class="background">
-
+  <h1 class="titulo">Historial</h1>
   <ion-refresher slot="fixed" (ionRefresh)="actualizarListado($event)" >
     <ion-refresher-content refreshingSpinner="crescent"></ion-refresher-content>
   </ion-refresher>
@@ -18,9 +18,9 @@
       <ion-item *ngFor="let resultado of partidos">
         <!-- Revisar como hacer la separacion entre "cards" o items mas marcada. item-inner tiene que estar la rta -->
         <ion-grid>
-          <ion-row>
-            <ion-col>
-                <ion-img style="width: 100%;" src="../../../assets/stadio-sfondo.jpg"></ion-img>
+          <ion-row class="contenedor">
+            <ion-col class="figure">
+                <ion-img src="../../../assets/stadio-sfondo.jpg"></ion-img>
                 <div class="ion-text-start ">
                   <p>{{resultado.resultado}}</p>
                 </div>

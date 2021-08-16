@@ -20,7 +20,7 @@ export class HistorialPage implements OnInit {
     this.partidos=[];
     for(let i=1; i < 10 ; i++){
       this.partido = {
-        resultado : i+"- 2",
+        resultado : i+" - 2",
         fecha: i*2+"/"+i*3+"/"+i*4
       }
       this.partidos.push(this.partido);
