@@ -31,10 +31,9 @@
     <ion-input formControlName="nombre" type="text" required></ion-input>
   </ion-item>
 
-  <ion-item>
-    <ion-label position="floating">Localidad</ion-label>
-    <ion-input formControlName="localidad" type="text" required></ion-input>
-  </ion-item>
+  <ion-select formControlName="localidad">
+    <ion-select-option *ngFor="let localidad of localidades">{{localidad}}</ion-select-option>
+  </ion-select>
 
   <ion-item>
     <ion-label position="floating">Fecha de nacimiento</ion-label>

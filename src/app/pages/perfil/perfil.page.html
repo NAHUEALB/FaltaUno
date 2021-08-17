@@ -27,7 +27,7 @@
 	</div>
 	<br>
 	<h3 class="titulo"><b>Valoración</b></h3>
-	<div style="display: flex;">
+	<div class="stars">
 		<div *ngFor="let star of stars">
 			<img *ngIf="star === 'full'" class="star" [src]="'/assets/stars/star-full.png'">
 			

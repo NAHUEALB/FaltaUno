@@ -45,7 +45,8 @@ export class PerfilPage implements OnInit {
 		
 		this.partido = {
 			resultado : "15 - 2",
-			fecha: "10-2-2020"
+			fecha: "10-2-2020",
+			valoracion:12
 		}
 		this.edad = this.getEdad(this.usuario.fnacimiento);	
 		this.valoracion = parseFloat((this.usuario.puntajeTotal / this.usuario.votosTotal).toFixed(2));

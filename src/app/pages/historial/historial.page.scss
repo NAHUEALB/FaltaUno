@@ -7,8 +7,6 @@
       --background: none;
     }
   }
-  
-
 
 ion-list{
   background: none;
@@ -54,6 +52,9 @@ ion-list{
 }
 .star {
 	width: 30px;
-  position: absolute;
+  // padding-left: 15px;
 }
 
+.stars{
+  display: flex;
+}
