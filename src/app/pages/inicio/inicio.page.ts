@@ -8,10 +8,15 @@ import { Router } from '@angular/router';
 })
 export class InicioPage implements OnInit {
 
+  nombre;
+
   constructor(private router: Router) {
     console.log("Constructor del inicio");
     console.log(this.router.getCurrentNavigation().extras);
     console.log(this.router.getCurrentNavigation().extras.state.usuario);
+
+    this.nombre = this.router.getCurrentNavigation().extras.state.usuario.nombre;
+
    }
 
   ngOnInit() {
