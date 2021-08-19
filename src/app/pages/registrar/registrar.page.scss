@@ -3,9 +3,9 @@
     --background: none;
     background-image: url('../../../assets/imgs/background/f1_grass_background.jpg');
   }
-  ion-item{
-    --background: none;
-  }
+  // ion-item{
+  //   --background: none;
+  // }
 }
 
 .titulo{
@@ -67,15 +67,18 @@ ion-datetime{
 
 .fechaNaci{
   font-size: 50px;
-margin-right: 50px
+  margin-right: 50px
 }
 
-ion-list{
-  background: transparent;
-}
+// ion-list{
+//   background: transparent;
+// }
 
 ion-radio{
   margin-left: 40px;
   
 }
 
+.img{
+  margin-left: 30%;
+}

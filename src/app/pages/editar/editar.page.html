@@ -3,37 +3,37 @@
 		<ion-buttons slot="start">
 			<ion-menu-button></ion-menu-button>
 		</ion-buttons>
-		<ion-title>Registrar</ion-title>
+		<ion-title>Editar</ion-title>
 	</ion-toolbar>
 </ion-header>
 
 <ion-content class="background">
-  <h1 class="titulo">Crear Perfil</h1>
-    <img class="img" src="../../../assets/imgs/background/iconoPerfil.jpg" width="150px" height="150px">
+  <ion-grid>
+    <ion-row >
+      <ion-col>
+        <div class="ion-text-center">
+          <h1>Editar Perfil</h1>
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-item class="ion-text-center">
+          <img  src="../../../assets/imgs/background/iconoPerfil.jpg" width="150px" height="150px">
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
 <form [formGroup]="usuarioForm" (ngSubmit)="onSubmit()">
 
   <ion-item>
     <ion-label position="floating">Nombre</ion-label>
     <ion-input formControlName="nombre" type="text" required></ion-input>
   </ion-item>
-<ion-row>
-  <ion-col>
-    <div class="fecha">
-      <ion-datetime 
-      formControlName="edad" required
-      placeholder="Fecha de Nacimiento"
-      display-format="DD/MM/YYYY">
-      </ion-datetime>
-    </div>
-  </ion-col>
-  <div class="fechaNaci">
-    <ion-icon name="calendar-outline"></ion-icon>
-  </div>
 
-</ion-row>
-
-  <ion-select formControlName="localidad" placeholder="Seleccionar Localidad">
-    <ion-select-option *ngFor="let localidad of localidades" >{{localidad}}</ion-select-option>
+  <ion-select formControlName="localidad">
+    <ion-select-option *ngFor="let localidad of localidades">{{localidad}}</ion-select-option>
   </ion-select>
 
   <ion-list>
@@ -63,12 +63,6 @@
   </ion-row>
 
 </form>
-
-
-
-
-
-
 
 
 </ion-content>
