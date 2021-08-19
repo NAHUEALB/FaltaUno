@@ -13,6 +13,10 @@ export class InicioPage implements OnInit {
    }
 
   ngOnInit() {
+    // let nomUsuario="@roberto";
+    // let edad= 15 ;
+    // let nombre="Nahuel";
+    // this.usuario = new Usuario(nombre,nomUsuario,edad);
   }
 
 

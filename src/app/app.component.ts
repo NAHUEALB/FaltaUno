@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { BuscarPage } from './pages/buscar/buscar.page';
 import { InicioPage } from './pages/inicio/inicio.page';
 import { PerfilPage } from './pages/perfil/perfil.page';
+import { TabsPage } from './pages/tabs/tabs.page';
 
 @Component({
   selector: 'app-root',
@@ -19,7 +20,7 @@ export class AppComponent {
       this.options = [
         { title: 'Inicio', component: InicioPage, icon:'home' ,  ruta:'inicio' },
         { title: 'Buscar', component: BuscarPage, icon: 'search',  ruta: 'buscar' },
-        { title: 'Perfil', component: PerfilPage, icon:'walk-outline',  ruta: 'perfil' }
+        { title: 'Perfil', component: TabsPage, icon:'walk-outline',  ruta: 'tabs' }
       ]
     }
 

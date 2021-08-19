@@ -1,0 +1,81 @@
+:host {
+  ion-content.background{
+    --background: none;
+    background-image: url('../../../assets/imgs/background/f1_grass_background.jpg');
+  }
+  ion-item{
+    --background: none;
+  }
+}
+
+.titulo{
+  text-align: center;
+  font-size: 40px
+}
+
+form, input, optgroup, select{
+  margin-top:7%;
+
+}
+
+.box{
+  background-color: white;
+  border-radius: 10px;
+  margin-bottom: 15px; 
+
+  height: 40px;
+  width: 80%;
+  margin-left: 40px;
+  line-height: 1;
+}
+
+ion-input{
+ display: block;
+  background: transparent;
+  font-family: Josefin Sans;
+  border: none;
+  outline: none;
+  height: 10px;
+  padding: 0 10px 0 13px;
+  font-size: 16px; 
+
+}
+
+.fecha{
+  background-color: white;
+  border-radius: 10px;
+  margin-bottom: 15px; 
+  box-shadow: 0 10px 30px 0px rgba(57, 71, 82, 0.12);
+  height: 40px;
+  width: 50%;
+  margin-left: 40px;
+  font-family: Josefin Sans;
+}
+
+.label-stacked.sc-ion-label-md-h, .label-floating.sc-ion-label-md-h{
+  font-family: Josefin Sans;
+}
+ion-datetime{
+  font-size: 16px;
+  color: black;
+  background: transparent;
+  font-family: Josefin Sans;
+  line-height: 1.2;
+  border: none;
+  outline: none;
+}
+
+.fechaNaci{
+  font-size: 50px;
+margin-right: 50px
+}
+
+ion-list{
+  background: transparent;
+}
+
+ion-radio{
+  margin-left: 40px;
+  
+}
+
