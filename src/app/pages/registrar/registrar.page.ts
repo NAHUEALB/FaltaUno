@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { NavigationExtras, Router } from '@angular/router';
+import { MenuController } from '@ionic/angular';
+import { Usuario } from 'src/app/models/usuario';
 
 @Component({
   selector: 'app-registrar',
@@ -6,25 +10,51 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./registrar.page.scss'],
 })
 export class RegistrarPage implements OnInit {
+  usuarioForm: FormGroup;
+  usuario: Usuario;
+  localidades = ["La Plata", "Berazategue", "Tu vieja"];
 
-  nombre: string;
-  fechaNacimiento: Date;
-  localidad: string;
+  constructor(public formBuilder: FormBuilder, private router: Router, public menuCtrl: MenuController) { 
 
-  constructor() { 
-    this.nombre = 'ariel';
-    this.fechaNacimiento =  new Date();  
-    this.localidad = "nahue";
+    // this.menuCtrl.enable(false, 'slideMenu');
+
+    this.usuario = {
+			nombre: 'Pepe',
+			nomUsuario: "pepito123",
+			fnacimiento: "1995-02-26",
+			puntajeTotal: 22,
+			votosTotal: 8,
+			sexo: "no binario",
+			perfil: false,
+			foto: "foto",
+			ubicacion: this.localidades[1]
+		}
+
+
+    this.usuarioForm = this.formBuilder.group({
+      nombre: '',
+      localidad: this.usuario.ubicacion,
+      edad: '',
+      sexo: ''
+    })
+
   }
 
   ngOnInit() {
   }
 
-  localidadChange(value){
-    console.log(value.detail.value);
-  }
+  onSubmit(){
 
-  registrarPerfil(element){
-    console.log(element);
-  }
+    this.usuario.nombre = this.usuarioForm.value.nombre;
+    
+
+    console.log(this.usuario);
+    let usuarioExtra : NavigationExtras = {
+			state: {
+				usuario: this.usuario
+			}
+		}
+		this.router.navigate(['inicio'], usuarioExtra);
+	}
+  
 }

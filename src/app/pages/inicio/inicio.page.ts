@@ -8,8 +8,10 @@ import { Router } from '@angular/router';
 })
 export class InicioPage implements OnInit {
 
-  constructor() {
+  constructor(private router: Router) {
     console.log("Constructor del inicio");
+    console.log(this.router.getCurrentNavigation().extras);
+    console.log(this.router.getCurrentNavigation().extras.state.usuario);
    }
 
   ngOnInit() {
@@ -19,8 +21,4 @@ export class InicioPage implements OnInit {
     // this.usuario = new Usuario(nombre,nomUsuario,edad);
   }
 
-
-  ionViewWillLeave(){
-    console.log("Me fui del inicio");
-  }
 }

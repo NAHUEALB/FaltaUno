@@ -29,7 +29,6 @@ export class PerfilPage implements OnInit {
 		let privateProfile=false;
 		let picUrl='http://tuvieja.com/perfil.png';
 		let geo='La Plata';
-
       
 		this.usuario = {
 			nombre: name,
@@ -84,4 +83,5 @@ export class PerfilPage implements OnInit {
 		}
 		this.router.navigate(['perfil/'+tab], usuarioExtra);
 	}
+
 }

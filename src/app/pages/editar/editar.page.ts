@@ -20,17 +20,19 @@ export class EditarPage implements OnInit {
 			fnacimiento: "1995-02-26",
 			puntajeTotal: 22,
 			votosTotal: 8,
-			sexo: "masculino",
+			sexo: "no binario",
 			perfil: false,
 			foto: "foto",
-			ubicacion: this.localidades[1],
+			ubicacion: this.localidades[1]
 		}
 
     this.usuarioForm = this.formBuilder.group({
       nombre: this.usuario.nombre,
       localidad: this.usuario.ubicacion,
-      edad: this.usuario.fnacimiento
+      edad: this.usuario.fnacimiento,
+      sexo: this.usuario.sexo
     })
+
   }
 
   ngOnInit() {
@@ -42,6 +44,9 @@ export class EditarPage implements OnInit {
   }
 
   onSubmit(){
+    //Esto deberiamos mandarlo a la bd.
+    //En el perfil deberiamos poner que cada vez que se entre, se recargue la informacion de ese usuario
+    //Como saber que usuario es? proponer el uso del DNI.
     console.log(this.usuarioForm.value);
   }
 

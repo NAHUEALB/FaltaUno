@@ -18,7 +18,7 @@ export class AppComponent {
       private router: Router
     ) {
       this.options = [
-        { title: 'Inicio', component: InicioPage, icon:'home' ,  ruta:'inicio' },
+        { title: 'Inicio', component: InicioPage, icon:'home' ,  ruta:'registrar' },
         { title: 'Buscar', component: BuscarPage, icon: 'search',  ruta: 'buscar' },
         { title: 'Perfil', component: TabsPage, icon:'walk-outline',  ruta: 'tabs' }
       ]
