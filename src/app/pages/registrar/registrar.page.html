@@ -9,7 +9,7 @@
 
 <ion-content class="background">
   <h1 class="titulo">Crear Perfil</h1>
-    <img class="img" src="../../../assets/imgs/background/iconoPerfil.jpg" width="150px" height="150px">
+    <center><img src="../../../assets/imgs/background/iconoPerfil.jpg" width="150px" height="150px"></center>
 <form [formGroup]="usuarioForm" (ngSubmit)="onSubmit()">
 
   <ion-item class="box">
@@ -38,7 +38,7 @@
   </ion-item>
 
 
-  <ion-list >
+  <ion-list>
     <ion-radio-group formControlName="sexo">
       <ion-item class="box2">
         <ion-label style="font-family: Josefin Sans">Hombre</ion-label>
