@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { AyudaPage } from '../ayuda/ayuda.page';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-principal',

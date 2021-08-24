@@ -1,0 +1,49 @@
+<ion-header>
+	<ion-toolbar>
+		<ion-buttons slot="start">
+			<ion-menu-button></ion-menu-button>
+		</ion-buttons>
+		<ion-title>Historial</ion-title>
+	</ion-toolbar>
+</ion-header>
+
+<ion-content class="background">
+  <ion-refresher slot="fixed" (ionRefresh)="actualizarListado($event)" >
+    <ion-refresher-content refreshingSpinner="crescent"></ion-refresher-content>
+  </ion-refresher>
+
+  <ng-container>
+    <ion-list>
+      <ion-item *ngFor="let resultado of partidos">
+        <!-- Revisar como hacer la separacion entre "cards" o items mas marcada. item-inner tiene que estar la rta -->
+        <ion-grid>
+          <ion-row class="contenedor">
+            <ion-col class="figure">
+
+                <ion-img src="../../../assets/stadio-sfondo.jpg"></ion-img>
+                <div class="stars">
+                  <div *ngFor="let star of resultado.stars">
+                    <img *ngIf="star === 'full'" class="star" [src]="'/assets/stars/star-full.png'">
+                    
+                    <img *ngIf="star === 'half'" class="star" [src]="'/assets/stars/star-half.png'">
+                    
+                    <img *ngIf="star === 'null'" class="star" [src]="'/assets/stars/star-null.png'">
+                    
+                  </div>
+                  <!-- <span style="font-size: 20px;">({{ valoracion }})</span> -->
+                </div>
+                <div class="ion-text-start ">
+                  <p>{{resultado.partido.resultado}}</p>
+                </div>
+                <div class="ion-text-end fecha">
+                  <p>{{resultado.partido.fecha}}</p>
+              </div>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+    </ion-list>
+  </ng-container>
+
+
+</ion-content>

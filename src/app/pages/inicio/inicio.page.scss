@@ -8,3 +8,50 @@
 .textInicio{
   color: aliceblue;
 }
+
+.titulo{
+  text-align: center;
+  font-size: 45px;
+}
+
+
+.contenedor{
+  display: grid;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.figure{
+  position: relative
+}
+
+img {
+  max-width: 100%;
+  width: 300px;
+  border: 0;
+  height: 154px;
+  border-radius: 20px;
+}
+.figure .texto1{
+  position: absolute;
+  color: white;
+  font-weight: bold;
+  font-size: 30px;
+  text-align: center;
+  top:0;
+  margin-left: 12%;
+  margin-top: 21%;
+}
+
+.figure .texto2{
+  position: absolute;
+  font-weight: bold;
+  color: white;
+  font-size: 30px;
+  text-align: center;
+  top:0;
+  margin-left: 25%;
+  margin-top: 20%;
+  border-radius: 20px;
+}
