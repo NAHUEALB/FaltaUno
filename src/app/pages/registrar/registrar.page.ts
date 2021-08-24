@@ -62,6 +62,6 @@ export class RegistrarPage implements OnInit {
 		const data = this.newJugador;
 		data.id = this.database.createId();
 		const link = 'Jugadores';
-		this.database.createDocument<Jugador>(data, link);
+		this.database.createDocument<Jugador>(data, link, data.id);
 	}
 }

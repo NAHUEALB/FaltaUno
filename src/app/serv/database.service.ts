@@ -16,9 +16,9 @@ export class DatabaseService {
 
 	}
 
-	createDocument<tipo>(data: tipo, link: string) {
+	createDocument<tipo>(data: tipo, link: string, id: string) {
 		const ref = this.FireStore.collection<tipo>(link);
-		return ref.add(data);
+		return ref.doc(id).set(data);
 	}
 	
 	createId() {
