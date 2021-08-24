@@ -12,7 +12,7 @@ import { Usuario } from 'src/app/models/usuario';
 export class RegistrarPage implements OnInit {
   usuarioForm: FormGroup;
   usuario: Usuario;
-  localidades = ["La Plata", "Berazategue", "Tu vieja"];
+  localidades = ["La Plata", "Beriso", "Ensenada"];
 
   constructor(public formBuilder: FormBuilder, private router: Router, public menuCtrl: MenuController) { 
 

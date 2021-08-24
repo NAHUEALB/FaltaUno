@@ -3,9 +3,10 @@
     --background: none;
     background-image: url('../../../assets/imgs/background/f1_grass_background.jpg');
   }
-  // ion-item{
-  //   --background: none;
-  // }
+   ion-item{
+    --background: none;
+  }
+
 }
 
 .titulo{
@@ -18,38 +19,26 @@ form, input, optgroup, select{
 
 }
 
-.box{
+ .box{
   background-color: white;
   border-radius: 10px;
   margin-bottom: 15px; 
-
   height: 40px;
-  width: 80%;
-  margin-left: 40px;
-  line-height: 1;
+  width: 70%;
+  margin-left: 60px;
+  line-height: 0.82;
 }
 
-ion-input{
- display: block;
-  background: transparent;
-  font-family: Josefin Sans;
-  border: none;
-  outline: none;
-  height: 10px;
-  padding: 0 10px 0 13px;
-  font-size: 16px; 
 
-}
 
 .fecha{
   background-color: white;
   border-radius: 10px;
   margin-bottom: 15px; 
-  box-shadow: 0 10px 30px 0px rgba(57, 71, 82, 0.12);
   height: 40px;
-  width: 50%;
-  margin-left: 40px;
+  width: 70%;
   font-family: Josefin Sans;
+  margin-left: 56px;
 }
 
 .label-stacked.sc-ion-label-md-h, .label-floating.sc-ion-label-md-h{
@@ -58,7 +47,6 @@ ion-input{
 ion-datetime{
   font-size: 16px;
   color: black;
-  background: transparent;
   font-family: Josefin Sans;
   line-height: 1.2;
   border: none;
@@ -67,18 +55,46 @@ ion-datetime{
 
 .fechaNaci{
   font-size: 50px;
-  margin-right: 50px
+  margin-right: 55px
 }
 
-// ion-list{
-//   background: transparent;
-// }
 
-ion-radio{
-  margin-left: 40px;
+.radio{
+  font-weight: bold;
+} 
+
+
+
+.city{
+  background-color: white;
+  border-radius: 10px;
+  margin-bottom: 15px; 
+  height: 40px;
+  width: 70%;
+  margin-left: 60px;
+}
+
+.box2{
+  border-radius: 10px;
+  margin-bottom: 15px; 
+  height: 40px;
+  width: 45%;
+  margin-left: 28%;
+  background: transparent;
+  font-weight: bold;
+}
+
+.list-md {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  background: transparent;
+  background-color: transparent;
+} 
+
+ion-button{
   
+  height: 40px;
+  width: 70%;
+  margin-left: 60px;
 }
 
-.img{
-  margin-left: 30%;
-}

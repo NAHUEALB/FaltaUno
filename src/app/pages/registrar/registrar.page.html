@@ -9,10 +9,10 @@
 
 <ion-content class="background">
   <h1 class="titulo">Crear Perfil</h1>
-    <img class="img" src="../../../assets/imgs/background/iconoPerfil.jpg" width="150px" height="150px">
+    <center><img src="../../../assets/imgs/background/iconoPerfil.jpg" width="150px" height="150px"></center>
 <form [formGroup]="usuarioForm" (ngSubmit)="onSubmit()">
 
-  <ion-item>
+  <ion-item class="box">
     <ion-label position="floating">Nombre</ion-label>
     <ion-input formControlName="nombre" type="text" required></ion-input>
   </ion-item>
@@ -31,25 +31,27 @@
   </div>
 
 </ion-row>
-
-  <ion-select formControlName="localidad" placeholder="Seleccionar Localidad">
+  <ion-item class="city">  
+    <ion-select style="font-family: Josefin Sans;" formControlName="localidad" placeholder="Seleccionar Localidad">
     <ion-select-option *ngFor="let localidad of localidades" >{{localidad}}</ion-select-option>
-  </ion-select>
+    </ion-select>
+  </ion-item>
+
 
   <ion-list>
     <ion-radio-group formControlName="sexo">
-      <ion-item>
-        <ion-label>Hombre</ion-label>
+      <ion-item class="box2">
+        <ion-label style="font-family: Josefin Sans">Hombre</ion-label>
         <ion-radio slot="end" value="hombre"></ion-radio>
       </ion-item>
   
-      <ion-item>
-        <ion-label>Mujer</ion-label>
+      <ion-item class="box2">
+        <ion-label style="font-family: Josefin Sans;">Mujer</ion-label>
         <ion-radio slot="end" value="mujer"></ion-radio>
       </ion-item>
   
-      <ion-item>
-        <ion-label>No binario</ion-label>
+      <ion-item class="box2">
+        <ion-label style="font-family: Josefin Sans;">No binario</ion-label>
         <ion-radio slot="end" value="no binario"></ion-radio>
       </ion-item>
     </ion-radio-group>
