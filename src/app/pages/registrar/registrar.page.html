@@ -53,26 +53,17 @@
 		</ion-select>
 	</ion-item>
 
-	<ion-list>
-		<ion-radio-group 
+
+	<ion-item class="city">  
+		<ion-select style="font-family: Josefin Sans;" 
 		formControlName="sexo" 
+		placeholder="Elegir sexo"
 		[(ngModel)]="newJugador.sexo">
-			<ion-item class="box2">
-				<ion-label style="font-family: Josefin Sans">Hombre</ion-label>
-				<ion-radio slot="end" value="hombre"></ion-radio>
-			</ion-item>
-		
-			<ion-item class="box2">
-				<ion-label style="font-family: Josefin Sans;">Mujer</ion-label>
-				<ion-radio slot="end" value="mujer"></ion-radio>
-			</ion-item>
-		
-			<ion-item class="box2">
-				<ion-label style="font-family: Josefin Sans;">No binario</ion-label>
-				<ion-radio slot="end" value="no binario"></ion-radio>
-			</ion-item>
-		</ion-radio-group>
-	</ion-list>
+			<ion-select-option *ngFor="let sexo of sexos" >
+				{{sexo}}
+			</ion-select-option>
+		</ion-select>
+	</ion-item>
 
 	<ion-row>
 

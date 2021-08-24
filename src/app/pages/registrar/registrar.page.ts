@@ -16,6 +16,7 @@ export class RegistrarPage implements OnInit {
 	newJugador: Jugador;
 
 	localidades = ["La Plata", "Berazategue", "Tu vieja"];
+	sexos = ["Elegir sexo...", "Hombre", "Mujer", "No binario"];
 
 	constructor(public formBuilder: FormBuilder, private router: Router, public menuCtrl: MenuController, public database: DatabaseService) { 
 		// this.menuCtrl.enable(false, 'slideMenu');
