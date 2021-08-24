@@ -8,69 +8,85 @@
 </ion-header>
 
 <ion-content class="background">
-  <h1 class="titulo">Crear Perfil</h1>
-    <center><img src="../../../assets/imgs/background/iconoPerfil.jpg" width="150px" height="150px"></center>
-<form [formGroup]="usuarioForm" (ngSubmit)="onSubmit()">
+	<h1 class="titulo">Crear Perfil</h1>
+	<center><img src="../../../assets/imgs/background/iconoPerfil.jpg" width="150px" height="150px"></center>
+<form [formGroup]="jugadorForm" (ngSubmit)="onSubmit()">
 
-  <ion-item class="box">
-    <ion-label position="floating">Nombre</ion-label>
-    <ion-input formControlName="nombre" type="text" required></ion-input>
-  </ion-item>
-<ion-row>
-  <ion-col>
-    <div class="fecha">
-      <ion-datetime 
-      formControlName="edad" required
-      placeholder="Fecha de Nacimiento"
-      display-format="DD/MM/YYYY">
-      </ion-datetime>
-    </div>
-  </ion-col>
-  <div class="fechaNaci">
-    <ion-icon name="calendar-outline"></ion-icon>
-  </div>
+  	<ion-item class="box">
+		<ion-label position="floating">Nombre</ion-label>
+		<ion-input 
+		formControlName="nombre" 
+		type="text" 
+		[(ngModel)]="newJugador.nombre" 
+		required>
+		</ion-input>
+	</ion-item>
 
-</ion-row>
-  <ion-item class="city">  
-    <ion-select style="font-family: Josefin Sans;" formControlName="localidad" placeholder="Seleccionar Localidad">
-    <ion-select-option *ngFor="let localidad of localidades" >{{localidad}}</ion-select-option>
-    </ion-select>
-  </ion-item>
+	<ion-row>
 
+	<ion-col>
+		<div class="fecha">
+			<ion-datetime 
+			formControlName="edad" 
+			placeholder="Fecha de Nacimiento"
+			display-format="DD/MM/YYYY"
+			[(ngModel)]="newJugador.fnacimiento"
+			required>
+		</ion-datetime>
+	</div>
+	</ion-col>
 
-  <ion-list>
-    <ion-radio-group formControlName="sexo">
-      <ion-item class="box2">
-        <ion-label style="font-family: Josefin Sans">Hombre</ion-label>
-        <ion-radio slot="end" value="hombre"></ion-radio>
-      </ion-item>
-  
-      <ion-item class="box2">
-        <ion-label style="font-family: Josefin Sans;">Mujer</ion-label>
-        <ion-radio slot="end" value="mujer"></ion-radio>
-      </ion-item>
-  
-      <ion-item class="box2">
-        <ion-label style="font-family: Josefin Sans;">No binario</ion-label>
-        <ion-radio slot="end" value="no binario"></ion-radio>
-      </ion-item>
-    </ion-radio-group>
-  </ion-list>
+	<div class="fechaNaci">
+		<ion-icon name="calendar-outline"></ion-icon>
+	</div>
 
+	</ion-row>
 
-  <ion-row>
-    <ion-col>
-      <ion-button type="submit" color="danger" expand="block">Submit</ion-button>
-    </ion-col>
-  </ion-row>
+	<ion-item class="city">  
+		<ion-select style="font-family: Josefin Sans;" 
+		formControlName="localidad" 
+		placeholder="Seleccionar Localidad"
+		[(ngModel)]="newJugador.ubicacion">
+			<ion-select-option *ngFor="let localidad of localidades" >
+				{{localidad}}
+			</ion-select-option>
+		</ion-select>
+	</ion-item>
+
+	<ion-list>
+		<ion-radio-group 
+		formControlName="sexo" 
+		[(ngModel)]="newJugador.sexo">
+			<ion-item class="box2">
+				<ion-label style="font-family: Josefin Sans">Hombre</ion-label>
+				<ion-radio slot="end" value="hombre"></ion-radio>
+			</ion-item>
+		
+			<ion-item class="box2">
+				<ion-label style="font-family: Josefin Sans;">Mujer</ion-label>
+				<ion-radio slot="end" value="mujer"></ion-radio>
+			</ion-item>
+		
+			<ion-item class="box2">
+				<ion-label style="font-family: Josefin Sans;">No binario</ion-label>
+				<ion-radio slot="end" value="no binario"></ion-radio>
+			</ion-item>
+		</ion-radio-group>
+	</ion-list>
+
+	<ion-row>
+
+	<ion-col>
+		<ion-button 
+		type="submit" 
+		color="danger" 
+		expand="block">
+			Confirmar
+		</ion-button>
+	</ion-col>
+	
+	</ion-row>
 
 </form>
-
-
-
-
-
-
-
 
 </ion-content>

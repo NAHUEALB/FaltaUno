@@ -2,59 +2,65 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { NavigationExtras, Router } from '@angular/router';
 import { MenuController } from '@ionic/angular';
-import { Usuario } from 'src/app/models/usuario';
+import { Jugador } from 'src/app/models/jugador';
+import { DatabaseService } from 'src/app/serv/database.service';
 
 @Component({
-  selector: 'app-registrar',
-  templateUrl: './registrar.page.html',
-  styleUrls: ['./registrar.page.scss'],
+	selector: 'app-registrar',
+	templateUrl: './registrar.page.html',
+	styleUrls: ['./registrar.page.scss'],
 })
+
 export class RegistrarPage implements OnInit {
-  usuarioForm: FormGroup;
-  usuario: Usuario;
-  localidades = ["La Plata", "Beriso", "Ensenada"];
+	jugadorForm: FormGroup;
+	newJugador: Jugador;
 
-  constructor(public formBuilder: FormBuilder, private router: Router, public menuCtrl: MenuController) { 
+	localidades = ["La Plata", "Berazategue", "Tu vieja"];
 
-    // this.menuCtrl.enable(false, 'slideMenu');
-
-    this.usuario = {
+	constructor(public formBuilder: FormBuilder, private router: Router, public menuCtrl: MenuController, public database: DatabaseService) { 
+		// this.menuCtrl.enable(false, 'slideMenu');
+		this.newJugador = {
+			id: '',
 			nombre: 'Pepe',
-			nomUsuario: "pepito123",
-			fnacimiento: "1995-02-26",
-			puntajeTotal: 22,
-			votosTotal: 8,
+			usuario: "pepito123",
+			fnacimiento: "2000-01-01",
+			puntaje: 0,
+			cvotos: 0,
 			sexo: "no binario",
 			perfil: false,
 			foto: "foto",
-			ubicacion: this.localidades[1]
+			ubicacion: this.localidades[1],
+			html: ''
 		}
 
+		this.jugadorForm = this.formBuilder.group({
+			nombre: '',
+			localidad: this.newJugador.ubicacion,
+			edad: '',
+			sexo: ''
+		})
+	}
 
-    this.usuarioForm = this.formBuilder.group({
-      nombre: '',
-      localidad: this.usuario.ubicacion,
-      edad: '',
-      sexo: ''
-    })
+	ngOnInit() {
+		console.log("Vista de registrar cargada!");
+	}
 
-  }
-
-  ngOnInit() {
-  }
-
-  onSubmit(){
-
-    this.usuario.nombre = this.usuarioForm.value.nombre;
-    
-
-    console.log(this.usuario);
-    let usuarioExtra : NavigationExtras = {
+	onSubmit(){
+		this.newJugador.nombre = this.jugadorForm.value.nombre;
+		let jugadorExtra : NavigationExtras = {
 			state: {
-				usuario: this.usuario
+				jugador: this.newJugador
 			}
 		}
-		this.router.navigate(['inicio'], usuarioExtra);
+		this.router.navigate(['inicio'], jugadorExtra);
+		
+		console.log("vamos a guardar esto: ");
+		console.log(this.newJugador);
+
+
+		const data = this.newJugador;
+		data.id = this.database.createId();
+		const link = 'Jugadores';
+		this.database.createDocument<Jugador>(data, link);
 	}
-  
 }
