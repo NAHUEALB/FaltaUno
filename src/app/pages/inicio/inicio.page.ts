@@ -13,9 +13,13 @@ export class InicioPage implements OnInit {
   constructor(private router: Router) {
     console.log("Constructor del inicio");
     console.log(this.router.getCurrentNavigation().extras);
-    console.log(this.router.getCurrentNavigation().extras.state.usuario);
+    console.log(this.router.getCurrentNavigation().extras.state.jugador);
 
-    this.nombre = this.router.getCurrentNavigation().extras.state.usuario.nombre;
+	try {
+		this.nombre = this.router.getCurrentNavigation().extras.state.jugador.nombre;
+	} catch {
+		console.log("se intentó cargar el nombre siendo usuario indefined")
+	}
 
    }
 
