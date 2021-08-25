@@ -1,3 +1,4 @@
+import { MenuController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -10,10 +11,13 @@ export class InicioPage implements OnInit {
 
   nombre;
 
-  constructor(private router: Router) {
+  constructor(private menuCtrl: MenuController,private router: Router) {
     console.log("Constructor del inicio");
     console.log(this.router.getCurrentNavigation().extras);
     console.log(this.router.getCurrentNavigation().extras.state.jugador);
+
+
+    this.menuCtrl.enable(true);
 
 	try {
 		this.nombre = this.router.getCurrentNavigation().extras.state.jugador.nombre;

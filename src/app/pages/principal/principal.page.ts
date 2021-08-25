@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { ModalController, MenuController } from '@ionic/angular';
 import { AyudaPage } from '../ayuda/ayuda.page';
 import { Router } from '@angular/router';
 
@@ -10,7 +10,8 @@ import { Router } from '@angular/router';
 })
 export class PrincipalPage implements OnInit {
 
-  constructor(private modalController: ModalController){}
+  constructor(private menuCtrl: MenuController, private modalController: ModalController, private router: Router){}
+  
   async abrirModal() {
     const modal = await this.modalController.create({
       component: AyudaPage
@@ -23,6 +24,18 @@ export class PrincipalPage implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+
+  ionViewDidEnter(){
+    this.menuCtrl.enable(false);
+  }
+
+  irAlCrear(){
+    this.router.navigate([`/registrar`]);
+  }
+  login(){
+    this.router.navigate([`/inicio`]);
   }
 
 }

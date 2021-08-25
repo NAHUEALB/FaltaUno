@@ -5,7 +5,6 @@ const routes: Routes = [
   {
     path: '',
     redirectTo: 'principal',
-    // redirectTo: 'registrar',
     pathMatch: 'full'
   },
   {

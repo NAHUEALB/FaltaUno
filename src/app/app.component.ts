@@ -18,8 +18,9 @@ export class AppComponent {
       private router: Router
     ) {
       this.options = [
-        { title: 'Inicio', component: InicioPage, icon:'home' ,  ruta:'registrar' },
+        { title: 'Inicio', component: InicioPage, icon:'home' ,  ruta:'inicio' },
         { title: 'Buscar', component: BuscarPage, icon: 'search',  ruta: 'buscar' },
+        { title: 'Cerrar Sesion', component: InicioPage, icon: 'log-out-outline',  ruta: 'principal' },
         { title: 'Perfil', component: TabsPage, icon:'walk-outline',  ruta: 'tabs' }
       ]
     }
