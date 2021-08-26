@@ -10,7 +10,6 @@ export class AyudaPage implements OnInit {
 
   constructor(private modalController: ModalController){}
   cerrarModal(){
-    console.log("prueba")
     this.modalController.dismiss({
       'dismissed': true
     });

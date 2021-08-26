@@ -11,7 +11,7 @@ export class EditarPage implements OnInit {
 
   usuarioForm: FormGroup;
   usuario: Usuario;
-  localidades = ["La Plata", "Berazategue", "Tu vieja"];
+  localidades = ["La Plata", "Ensenada", "Berisso"];
 
   constructor(public formBuilder: FormBuilder) { 
     this.usuario = {

@@ -18,7 +18,7 @@ export class RegistrarPage implements OnInit {
 	jugadorForm: FormGroup;
 	newJugador: Jugador;
 
-	localidades = ["La Plata", "Berazategue", "Tu vieja"];
+	localidades = ["La Plata", "Ensenada", "Berisso"];
 	sexos = ["No especificado", "Hombre", "Mujer", "No binario"];
 
 	constructor(
