@@ -1,12 +1,14 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>ayuda</ion-title>
+    <ion-title>Ayuda</ion-title>
+      <ion-button slot="end"(click)="cerrarModal()" style="margin-right:10px">
+        <ion-icon slot="icon-only" name="close"></ion-icon>
+      </ion-button>
+    
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="background">
-     <ion-button (click)="cerrarModal()">
-     close
-  </ion-button>
-  <div>El Lorem Ipsum fue concebido como un texto de relleno, formateado de una cierta manera para permitir la presentación de elementos gráficos en documentos, sin necesidad de una copia formal. El uso de Lorem Ipsum permite a los diseñadores reunir los diseños y la forma del contenido antes de que el contenido se haya creado, dando al diseño y al proceso de producción más libertad.</div>
+  <p>El Lorem Ipsum fue concebido como un texto de relleno, formateado de una cierta manera para permitir la presentación de elementos gráficos en documentos, sin necesidad de una copia formal. El uso de Lorem Ipsum permite a los diseñadores reunir los diseños y la forma del contenido antes de que el contenido se haya creado, dando al diseño y al proceso de producción más libertad.</p>
+  <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Amet commodi nemo dolorum quibusdam odit! Similique voluptatem mollitia laborum dolore ipsa unde maxime odio incidunt aliquam ab, saepe, ipsam exercitationem nulla?</p>
 </ion-content>

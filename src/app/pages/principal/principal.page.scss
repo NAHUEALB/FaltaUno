@@ -1,20 +1,36 @@
 :host {
-    ion-content.background{
-      --background: none;
-      background-image: url('../../../assets/imgs/background/f1_grass_background.jpg');
-    }
+  ion-content.background{
+    --background: none;
+    background-image: url('../../../assets/imgs/background/f1_grass_background.jpg');
   }
+}
 
-  .button-pr{
-    border: none;
-    color: white;
-    padding-left: 15%;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-  }
+.button-pr{
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  height: 40px;
+  width: 80%;
+  margin-left: 10%;
+}
 
-  .button-pr2{
-    padding-left: 40%;
-  }
+.button-pr1{
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  height: 40px;
+  width: 35%;
+  font-size: 16px;
+  margin-left: 10%;
+}
+
+
+.button-pr2{
+  margin-left: 37%;
+  height: 40px;
+  font-size: 16px;
+  text-align: center;
+}
