@@ -1,0 +1,53 @@
+<ion-header>
+	<ion-toolbar>
+		<ion-buttons slot="start">
+			<ion-menu-button></ion-menu-button>
+		</ion-buttons>
+		<ion-title>Iniciar Sesión</ion-title>
+	</ion-toolbar>
+</ion-header>
+
+<ion-content class="background">
+<form [formGroup]="jugadorForm" (ngSubmit)="onSubmit()">
+
+  	<ion-item class="box">
+		<ion-label position="floating">Ingresá tu @usuario</ion-label>
+		<ion-input 
+		formControlName="usuario" 
+		type="text" 
+		[(ngModel)]="newJugador.usuario" 
+		required>
+		</ion-input>
+	</ion-item>
+
+	<ion-item class="box">
+		<ion-label position="floating">Tu contraseña</ion-label>
+		<ion-input 
+		formControlName="password" 
+		type="password" 
+		[(ngModel)]="newJugador.password" 
+		required>
+		</ion-input>
+	</ion-item>
+
+	<ion-item class="city">  
+		<ion-select style="font-family: Josefin Sans;" 
+		formControlName="localidad" 
+		placeholder="Seleccionar Localidad"
+		[(ngModel)]="newJugador.ubicacion">
+			<ion-select-option *ngFor="let localidad of localidades" >
+				{{localidad}}
+			</ion-select-option>
+		</ion-select>
+	</ion-item>
+
+	<ion-button 
+	type="submit" 
+	color="danger" 
+	expand="block">
+		Confirmar
+	</ion-button>
+
+</form>
+
+</ion-content>
