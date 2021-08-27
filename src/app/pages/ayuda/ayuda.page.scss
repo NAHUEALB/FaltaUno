@@ -1,6 +1,13 @@
 :host {
-    ion-content.background{
-      --background: none;
-      background-image: url('../../../assets/imgs/background/f1_grass_background.jpg');
-    }
+  ion-content.background{
+    --background: none;
+    background-image: url('../../../assets/imgs/background/f1_grass_background.jpg');
   }
+}
+
+p{
+  font-size: 20px;
+  margin-top: 11px;
+  color: white;
+  text-justify: center;
+}

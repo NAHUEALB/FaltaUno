@@ -14,15 +14,20 @@ export class PrincipalPage implements OnInit {
   
   async abrirModal() {
     const modal = await this.modalController.create({
-      component: AyudaPage
+      component: AyudaPage,
+      cssClass:'modal-css',
+      swipeToClose:true,
+      presentingElement: await this.modalController.getTop()
+
     });
     await modal.present();
     let {data}= await modal.onDidDismiss();
     if(data.dismissed){
       console.log("cerrarModal");
     }
+    
   }
-
+  
   ngOnInit() {
   }
 
