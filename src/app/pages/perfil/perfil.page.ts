@@ -31,6 +31,7 @@ export class PerfilPage implements OnInit {
 		let geo='La Plata';
       
 		this.usuario = {
+			id:"1",
 			nombre: name,
 			nomUsuario: userName,
 			fnacimiento: dateStr,

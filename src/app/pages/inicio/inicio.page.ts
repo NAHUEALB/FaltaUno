@@ -12,19 +12,7 @@ export class InicioPage implements OnInit {
   nombre;
 
   constructor(private menuCtrl: MenuController,private router: Router) {
-    console.log("Constructor del inicio");
-    console.log(this.router.getCurrentNavigation().extras);
-    console.log(this.router.getCurrentNavigation().extras.state.jugador);
-
-
     this.menuCtrl.enable(true);
-
-	try {
-		this.nombre = this.router.getCurrentNavigation().extras.state.jugador.nombre;
-	} catch {
-		console.log("se intentó cargar el nombre siendo usuario indefined")
-	}
-
    }
 
   ngOnInit() {

@@ -1,3 +1,4 @@
+import { FirebaseauthService } from './../../serv/firebaseauth.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { NavigationExtras, Router } from '@angular/router';
@@ -24,7 +25,8 @@ export class LoginPage implements OnInit {
 		public menuCtrl: MenuController, 
 		public database: DatabaseService,
 		public toastController: ToastController,
-		public loadingController: LoadingController){
+		public loadingController: LoadingController,
+		public firebaseauthService: FirebaseauthService){
 
 			this.newJugador = {
 				id: '',
@@ -43,13 +45,36 @@ export class LoginPage implements OnInit {
 			
 			this.jugadorForm = this.formBuilder.group({
 				usuario: '',
-				password: '',
-				localidad: this.localidades[0],
+				contraseña: ''
 			})
 
 	}
 
   ngOnInit() {
   }
+
+  async presentToast(msg: string, time: number) {
+	const toast = await this.toastController.create({
+		message: msg,
+		duration: time,
+	});
+	toast.present();
+}
+
+  login(){
+	  console.log(this.jugadorForm);
+	  this.firebaseauthService.login(this.jugadorForm.value.usuario, this.jugadorForm.value.contraseña)
+		  .then(res => {
+			  console.log("usuario creado");
+			  console.log(res);
+			  
+			  this.router.navigate(["/inicio"]);
+		  })
+		  .catch(err => {
+			  this.presentToast(err,3000)
+			  console.log("error" + err);
+		  })
+  }
+
 
 }

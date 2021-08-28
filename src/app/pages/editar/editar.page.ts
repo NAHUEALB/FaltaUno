@@ -15,6 +15,7 @@ export class EditarPage implements OnInit {
 
   constructor(public formBuilder: FormBuilder) { 
     this.usuario = {
+      id: "1",
 			nombre: 'Pepe',
 			nomUsuario: "pepito123",
 			fnacimiento: "1995-02-26",

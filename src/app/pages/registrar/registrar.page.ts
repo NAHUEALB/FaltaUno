@@ -1,3 +1,4 @@
+import { FirebaseauthService } from './../../serv/firebaseauth.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { NavigationExtras, Router } from '@angular/router';
@@ -27,7 +28,8 @@ export class RegistrarPage implements OnInit {
 		public menuCtrl: MenuController, 
 		public database: DatabaseService,
 		public toastController: ToastController,
-		public loadingController: LoadingController) { 
+		public loadingController: LoadingController,
+		public firebaseauthService: FirebaseauthService) { 
 		// this.menuCtrl.enable(false, 'slideMenu');
 		this.newJugador = {
 			id: '',
@@ -46,12 +48,15 @@ export class RegistrarPage implements OnInit {
 
 		this.jugadorForm = this.formBuilder.group({
 			nombre: '',
-			usuario: ''
+			usuario: '',
+			contraseña:'',
+			edad:'',
+			localidad:'',
+			sexo:''
 		})
 	}
 
 	ngOnInit() {
-		console.log("Vista de registrar cargada!");
 	}
 
 	async onSubmit(){
@@ -97,5 +102,22 @@ export class RegistrarPage implements OnInit {
 	
 		const { role, data } = await loading.onDidDismiss();
 		console.log('Loading dismissed!');
+	  }
+
+
+
+
+	  crearUsuario(){
+			console.log(this.jugadorForm);
+			this.firebaseauthService.registrar(this.jugadorForm.value.usuario,this.jugadorForm.value.contraseña)
+			.then(res => {
+				console.log("usuario creado");
+				console.log(res);
+				this.router.navigate(["/login"]);
+			})
+			.catch(err =>{
+				this.presentToast(err,3000)
+				console.log("error"+ err);
+			})
 	  }
 }
