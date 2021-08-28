@@ -40,7 +40,7 @@ export class PrincipalPage implements OnInit {
     this.router.navigate([`/registrar`]);
   }
   login(){
-    this.router.navigate([`/inicio`]);
+    this.router.navigate([`/login`]);
   }
 
 }

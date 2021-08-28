@@ -31,7 +31,7 @@ export class RegistrarPage implements OnInit {
 		// this.menuCtrl.enable(false, 'slideMenu');
 		this.newJugador = {
 			id: '',
-			nombre: 'Pepe',
+			nombre: '',
 			usuario: "pepito123",
 			fnacimiento: "2000-01-01",
 			puntaje: 0,
@@ -40,14 +40,13 @@ export class RegistrarPage implements OnInit {
 			perfil: false,
 			foto: "foto",
 			ubicacion: this.localidades[1],
-			html: ''
+			html: '',
+			password: ''
 		}
 
 		this.jugadorForm = this.formBuilder.group({
 			nombre: '',
-			localidad: this.newJugador.ubicacion,
-			edad: '',
-			sexo: ''
+			usuario: ''
 		})
 	}
 
