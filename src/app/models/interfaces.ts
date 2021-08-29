@@ -9,3 +9,10 @@ export interface Jugador {
 	foto: string; // guarda link?
 	ubicacion: string;
 }
+
+export interface Prueba{
+	nombre: string;
+	edad:number;
+	localidad: string;
+	sexo: string;
+}

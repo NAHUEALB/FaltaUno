@@ -1,12 +1,14 @@
+import { FirebaseauthService } from './../../serv/firebaseauth.service';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { NavigationExtras, Router } from '@angular/router';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { LoadingController, MenuController } from '@ionic/angular';
 
 import { Jugador } from 'src/app/models/jugador';
 import { DatabaseService } from 'src/app/serv/database.service';
 
 import { ToastController } from '@ionic/angular';
+import { Prueba } from 'src/app/models/interfaces';
 
 @Component({
 	selector: 'app-registrar',
@@ -15,6 +17,7 @@ import { ToastController } from '@ionic/angular';
 })
 
 export class RegistrarPage implements OnInit {
+	enlace = 'prueba';
 	jugadorForm: FormGroup;
 	newJugador: Jugador;
 
@@ -27,11 +30,12 @@ export class RegistrarPage implements OnInit {
 		public menuCtrl: MenuController, 
 		public database: DatabaseService,
 		public toastController: ToastController,
-		public loadingController: LoadingController) { 
-		// this.menuCtrl.enable(false, 'slideMenu');
+		public loadingController: LoadingController,
+		public firebaseauthService: FirebaseauthService) { 
+		// this.menuCtrl.enable(false);
 		this.newJugador = {
 			id: '',
-			nombre: 'Pepe',
+			nombre: '',
 			usuario: "pepito123",
 			fnacimiento: "2000-01-01",
 			puntaje: 0,
@@ -40,45 +44,23 @@ export class RegistrarPage implements OnInit {
 			perfil: false,
 			foto: "foto",
 			ubicacion: this.localidades[1],
-			html: ''
+			html: '',
+			password: ''
 		}
 
 		this.jugadorForm = this.formBuilder.group({
 			nombre: '',
-			localidad: this.newJugador.ubicacion,
-			edad: '',
-			sexo: ''
+			usuario: '',
+			contraseña:new FormControl('', Validators.minLength(7)),
+			edad:'',
+			localidad:'',
+			sexo:''
 		})
 	}
 
 	ngOnInit() {
-		console.log("Vista de registrar cargada!");
 	}
 
-	async onSubmit(){
-		this.presentLoading();
-		this.newJugador.nombre = this.jugadorForm.value.nombre;
-		let jugadorExtra : NavigationExtras = {
-			state: {
-				jugador: this.newJugador
-			}
-		}
-		//console.log("vamos a guardar esto: ");
-		//console.log(this.newJugador);
-		const data = this.newJugador;
-		data.id = this.database.createId();
-		const link = 'Jugadores';
-		await this.database.createDocument<Jugador>(data, link, data.id)
-		.then(() => {
-			this.presentToast("Perfil creado correctamente", 3000);
-			this.router.navigate(['inicio'], jugadorExtra);
-		})
-		.catch((err) => {
-			this.presentToast(err, 3000);
-			this.router.navigate(['principal'], jugadorExtra);
-		})
-			
-	}
 
 	async presentToast(msg: string, time: number) {
 		const toast = await this.toastController.create({
@@ -98,5 +80,34 @@ export class RegistrarPage implements OnInit {
 	
 		const { role, data } = await loading.onDidDismiss();
 		console.log('Loading dismissed!');
+	  }
+
+
+
+
+	  crearUsuario(){
+			console.log(this.jugadorForm);
+			this.firebaseauthService.registrar(this.jugadorForm.value.usuario,this.jugadorForm.value.contraseña)
+			.then(res => {
+				let data = this.cargarJugador();			
+				this.firebaseauthService.createDocument<Prueba>(data, this.enlace, res.user.uid)
+				this.router.navigate(["/login"]);
+			})
+			.catch(err =>{
+				this.presentToast(err,3000)
+				console.log("error"+ err);
+			})
+	  }
+
+
+	  cargarJugador(){
+		  let data: Prueba;
+		  data={
+			edad: this.jugadorForm.value.edad,
+			localidad : this.jugadorForm.value.localidad,
+			nombre : this.jugadorForm.value.nombre,
+		  	sexo : this.jugadorForm.value.sexo
+		  }
+		  return data;
 	  }
 }

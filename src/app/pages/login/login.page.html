@@ -1,0 +1,40 @@
+<ion-header>
+	<ion-toolbar>
+		<ion-buttons slot="start">
+			<ion-back-button></ion-back-button>
+		</ion-buttons>
+		<ion-title>Iniciar Sesión</ion-title>
+	</ion-toolbar>
+  </ion-header>  
+
+<ion-content class="background">
+<form [formGroup]="jugadorForm" (ngSubmit)="login()">
+
+  	<ion-item class="box">
+		<ion-label position="floating">Ingresá tu @usuario</ion-label>
+		<ion-input 
+		formControlName="usuario" 
+		type="text" 
+		required>
+		</ion-input>
+	</ion-item>
+
+	<ion-item class="box">
+		<ion-label position="floating">Tu contraseña</ion-label>
+		<ion-input 
+		formControlName="contraseña" 
+		type="password" 
+		required>
+		</ion-input>
+	</ion-item>
+
+	<ion-button 
+	type="submit" 
+	color="danger" 
+	expand="block">
+		Confirmar
+	</ion-button>
+
+</form>
+
+</ion-content>
