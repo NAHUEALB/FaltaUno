@@ -51,10 +51,10 @@ export class LoginPage implements OnInit {
     console.log(this.jugadorForm);
     this.firebaseauthService.login(this.jugadorForm.value.usuario, this.jugadorForm.value.contraseña)
       .then(res => {
-		this.getDocumentSubscription = this.firebaseauthService.getDocumentById(this.enlace,res.user.uid).subscribe(cc =>{
+		this.getDocumentSubscription = this.firebaseauthService.getDocumentById(this.enlace,res.user.uid).subscribe(document =>{
 			let usuarioExtra : NavigationExtras = {
 				state: {
-					usuario: cc
+					usuario: document
 				}
 			}
 			this.router.navigate(['/inicio'], usuarioExtra);

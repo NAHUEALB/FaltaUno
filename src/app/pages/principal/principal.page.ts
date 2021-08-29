@@ -33,7 +33,7 @@ export class PrincipalPage implements OnInit {
 
 
   ionViewDidEnter(){
-    this.menuCtrl.enable(false);
+    // this.menuCtrl.enable(false);
   }
 
   irAlCrear(){

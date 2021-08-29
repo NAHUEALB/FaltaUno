@@ -24,6 +24,7 @@
 	<ion-item class="box">
 		<ion-label position="floating">Correo</ion-label>
 		<ion-input 
+		[autocomplete]=false
 		formControlName="usuario" 
 		type="email" 
 		minlength="7"
@@ -34,6 +35,7 @@
 	<ion-item class="box">
 		<ion-label position="floating">Contraseña</ion-label>
 		<ion-input 
+		[autocomplete]=false
 		formControlName="contraseña" 
 		type="password"
 		required>
@@ -62,7 +64,8 @@
 	<ion-item class="city">  
 		<ion-select style="font-family: Josefin Sans;" 
 		formControlName="localidad" 
-		placeholder="Seleccionar Localidad">
+		placeholder="Seleccionar Localidad"
+		required>
 			<ion-select-option *ngFor="let localidad of localidades" >
 				{{localidad}}
 			</ion-select-option>
@@ -73,7 +76,8 @@
 	<ion-item class="city">  
 		<ion-select style="font-family: Josefin Sans;" 
 		formControlName="sexo" 
-		placeholder="Elegir sexo">
+		placeholder="Elegir sexo"
+		required>
 			<ion-select-option *ngFor="let sexo of sexos" >
 				{{sexo}}
 			</ion-select-option>
@@ -84,6 +88,7 @@
 
 	<ion-col>
 		<ion-button 
+		[disabled]="!jugadorForm.valid"
 		type="submit" 
 		color="danger" 
 		expand="block">

@@ -1,6 +1,6 @@
 import { FirebaseauthService } from './../../serv/firebaseauth.service';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoadingController, MenuController } from '@ionic/angular';
 
@@ -32,7 +32,7 @@ export class RegistrarPage implements OnInit {
 		public toastController: ToastController,
 		public loadingController: LoadingController,
 		public firebaseauthService: FirebaseauthService) { 
-		// this.menuCtrl.enable(false, 'slideMenu');
+		// this.menuCtrl.enable(false);
 		this.newJugador = {
 			id: '',
 			nombre: '',
@@ -51,7 +51,7 @@ export class RegistrarPage implements OnInit {
 		this.jugadorForm = this.formBuilder.group({
 			nombre: '',
 			usuario: '',
-			contraseña:'',
+			contraseña:new FormControl('', Validators.minLength(7)),
 			edad:'',
 			localidad:'',
 			sexo:''

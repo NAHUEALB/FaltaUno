@@ -21,15 +21,19 @@ export class FirebaseauthService {
   logout(){
     this.auth.signOut();
   }
-
-  //Cargo el usuario en el cloud storage
-
+  
   createDocument<tipo>(data: tipo, link: string, id: string) {
 		const ref = this.fireStore.collection<tipo>(link);
 		return ref.doc(id).set(data);
 	}
 
   getDocumentById(path,id){
-      return this.fireStore.collection(path).doc(id).valueChanges();
-    }
+    return this.fireStore.collection(path).doc(id).valueChanges();
+  }
+
+  getUserCurrent(){
+    return this.auth.user;
+  }
+
+
 }

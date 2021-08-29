@@ -11,7 +11,7 @@ export class InicioPage implements OnInit {
 
   nombre;
   constructor(private menuCtrl: MenuController,private router: Router) {
-    this.menuCtrl.enable(true);
+    // this.menuCtrl.enable(true);
     console.log(this.router.getCurrentNavigation().extras.state.usuario);
    }
 
