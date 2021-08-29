@@ -1,7 +1,7 @@
 :host {
   ion-content.background{
     --background: none;
-    background-image: url('../../../assets/imgs/background/f1_grass_background.jpg');
+    background-image: url('../../../assets/imgs/background/fondo.jpg');
   }
    ion-item{
     --background: none;
@@ -92,9 +92,10 @@ ion-datetime{
 } 
 
 ion-button{
-  
   height: 40px;
   width: 70%;
   margin-left: 60px;
+  font-size: 16px;
 }
+
 

@@ -18,5 +18,11 @@ export class InicioPage implements OnInit {
   ngOnInit() {
     this.nombre = this.router.getCurrentNavigation().extras.state.usuario.nombre;
   }
+  irAlBuscar(){
+    this.router.navigate([`/buscar`]);
+  }
 
+  irAlPerfil(){
+    this.router.navigate([`/tabs`]);
+  }
 }
