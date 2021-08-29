@@ -33,5 +33,11 @@ export class InicioPage implements OnInit {
     // let nombre="Nahuel";
     // this.usuario = new Usuario(nombre,nomUsuario,edad);
   }
+  irAlBuscar(){
+    this.router.navigate([`/buscar`]);
+  }
 
+  irAlPerfil(){
+    this.router.navigate([`/perfil`]);
+  }
 }

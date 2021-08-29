@@ -1,12 +1,8 @@
 :host {
   ion-content.background{
-    --background: none;
-    background-image: url('../../../assets/imgs/background/fondo.jpg');
+    --background:  none;
+   --background: url('../../../assets/imgs/background/fondo.jpg'); 
   }
-}
-
-.textInicio{
-  color: aliceblue;
 }
 
 .titulo{
@@ -14,44 +10,56 @@
   font-size: 45px;
 }
 
+.boton1{
+  width: 70%;
+  margin-left: 15%;
+  height: 15%;
+  margin-top:40px;
+  background: url('../../../assets/imgs/background/fondo.jpg');
 
-.contenedor{
-  display: grid;
-  justify-content: center;
-  align-items: center;
+  background-size: 100% 100%;
+  border: none; 
+  border-radius: 30px;
+} 
 
+.button-outline {
+  --border-color: white;
+  --background: transparent;
+  --color: black;
+  --border-radius: 30px;
 }
 
-.figure{
-  position: relative
+ion-icon{
+  color:white;
+  font-size: 50px;
 }
 
-img {
-  max-width: 100%;
-  width: 300px;
-  border: 0;
-  height: 154px;
-  border-radius: 20px;
-}
-.figure .texto1{
-  position: absolute;
+.boton2{
+  width: 70%;
+  margin-left: 15%;
+  height: 15%;
+  margin-top:40px;
+  background: url('../../../assets/stadio-sfondo.jpg');
+/*   background: url('../../../assets/vestuario.jpg'); */
+  background-size: 100% 100%;
+  border: none;
+  border-radius: 30px;
+} 
+/* .button-solid {
+  --background: transparent;
+  --color: var(--ion-color-primary-contrast, #fff);
+}  */
+
+.texto{
   color: white;
-  font-weight: bold;
-  font-size: 30px;
+  font-size: 16px;
   text-align: center;
-  top:0;
-  margin-left: 12%;
-  margin-top: 21%;
+  font-weight: 900;
 }
 
-.figure .texto2{
-  position: absolute;
-  font-weight: 900;
-  color: black;
-  font-size: 30px;
+h1{
   text-align: center;
-  top:0;
-  margin-left: 19%;
-  margin-top: 20%;
-  border-radius: 20px;
+  color: white;
+  font-size: 16px;
 }
+
