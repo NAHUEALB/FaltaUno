@@ -1,3 +1,4 @@
+import { FirebaseauthService } from './serv/firebaseauth.service';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { BuscarPage } from './pages/buscar/buscar.page';
@@ -14,7 +15,8 @@ export class AppComponent {
 
   options: Array<{ title: string, component: any, icon: string, ruta:string}>;
     constructor(
-      private router: Router
+      private router: Router,
+      public firebaseauthService: FirebaseauthService
     )
     {
       this.options = [
@@ -26,6 +28,9 @@ export class AppComponent {
     }
 
   openOptions(option){
+    if(option.title == 'Cerrar Sesion'){
+      this.firebaseauthService.logout();
+    }
     this.router.navigate([`/${option.ruta}`]);
   }
 

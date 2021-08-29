@@ -1,0 +1,75 @@
+:host {
+	ion-content.background{
+	  --background: none;
+	  background-image: url('../../../assets/imgs/background/f1_grass_background.jpg');
+	}
+	 ion-item{
+	  --background: none;
+	  padding-top: 10px;
+	}
+  
+  }
+  
+  .titulo{
+	text-align: center;
+	font-size: 40px
+  }
+  
+  form, input, optgroup, select{
+	margin-top: 40%;
+  }
+  
+   .box{
+	background-color: white;
+	border-radius: 10px;
+	height: 52px;
+	width: 80%; 
+	margin: auto;
+	margin-bottom: 15px; 
+	line-height: 0.7;
+	text-align: center;
+	font-size: 24px;
+	
+  }
+  
+  
+  .label-stacked.sc-ion-label-md-h, .label-floating.sc-ion-label-md-h{
+	font-family: monospace;
+	font-size: 12px;
+	top: -10px;
+  }
+
+  
+  .city{
+	background-color: white;
+	border-radius: 10px;
+	margin-bottom: 15px; 
+	height: 40px;
+	width: 70%;
+	margin-left: 60px;
+  }
+  
+  .box2{
+	border-radius: 10px;
+	margin-bottom: 15px; 
+	height: 40px;
+	width: 45%;
+	margin-left: 28%;
+	background: transparent;
+	font-weight: bold;
+  }
+  
+  .list-md {
+	padding-top: 8px;
+	padding-bottom: 8px;
+	background: transparent;
+	background-color: transparent;
+  } 
+  
+  ion-button{
+	height: 60px;
+	width: 80%;
+	margin: auto;
+  }
+  
+  

@@ -1,3 +1,5 @@
+import { Prueba } from './../../models/interfaces';
+import { FirebaseauthService } from './../../serv/firebaseauth.service';
 import { Component, OnInit } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
 import { Partido } from 'src/app/models/partido';
@@ -11,14 +13,27 @@ import { Usuario } from 'src/app/models/usuario';
 })
 
 export class PerfilPage implements OnInit {
-
+	enlace = 'prueba/'
 	usuario: Usuario;
 	partido: Partido;
 	edad: number;
 	valoracion: number;
 	stars = [];
+	pruebaUsuario: Prueba;
 
-  	constructor( private router: Router ) { 
+  	constructor( private router: Router, 
+				public firebaseauthService: FirebaseauthService) { 
+		this.firebaseauthService.getUserCurrent().subscribe(res =>{
+			this.firebaseauthService.getDocumentById(this.enlace,res.uid).subscribe((document: any) =>{
+				this.pruebaUsuario = document;
+				console.log(this.pruebaUsuario);
+				this.usuario.nombre = this.pruebaUsuario.nombre;
+			})
+
+		}) ;
+
+
+
 		// lo que deberíamos traer de la db
 		let name = "Pepe"; 
 		let userName="pepito123";
@@ -31,7 +46,8 @@ export class PerfilPage implements OnInit {
 		let geo='La Plata';
       
 		this.usuario = {
-			nombre: name,
+			id:"1",
+			nombre: '',
 			nomUsuario: userName,
 			fnacimiento: dateStr,
 			puntajeTotal: totalPunts,

@@ -1,23 +1,43 @@
 <ion-header>
 	<ion-toolbar>
 		<ion-buttons slot="start">
-			<ion-menu-button></ion-menu-button>
+			<ion-back-button></ion-back-button>
 		</ion-buttons>
 		<ion-title>Registrar</ion-title>
 	</ion-toolbar>
-</ion-header>
+  </ion-header>
 
 <ion-content class="background">
 	<h1 class="titulo">Crear Cuenta</h1>
-	<center><img src="../../../assets/imgs/background/iconoPerfil.jpg" width="150px" height="150px"></center>
-<form [formGroup]="jugadorForm" (ngSubmit)="onSubmit()">
+	<img src="../../../assets/imgs/background/iconoPerfil.jpg" width="150px" height="150px">
+<form [formGroup]="jugadorForm" (ngSubmit)="crearUsuario()">
 
   	<ion-item class="box">
 		<ion-label position="floating">Nombre</ion-label>
 		<ion-input 
 		formControlName="nombre" 
 		type="text" 
-		[(ngModel)]="newJugador.nombre" 
+		required>
+		</ion-input>
+	</ion-item>
+
+	<ion-item class="box">
+		<ion-label position="floating">Correo</ion-label>
+		<ion-input 
+		[autocomplete]=false
+		formControlName="usuario" 
+		type="email" 
+		minlength="7"
+		required>
+		</ion-input>
+	</ion-item>
+
+	<ion-item class="box">
+		<ion-label position="floating">Contraseña</ion-label>
+		<ion-input 
+		[autocomplete]=false
+		formControlName="contraseña" 
+		type="password"
 		required>
 		</ion-input>
 	</ion-item>
@@ -30,7 +50,6 @@
 			formControlName="edad" 
 			placeholder="Fecha de Nacimiento"
 			display-format="DD/MM/YYYY"
-			[(ngModel)]="newJugador.fnacimiento"
 			required>
 		</ion-datetime>
 	</div>
@@ -46,7 +65,7 @@
 		<ion-select style="font-family: Josefin Sans;" 
 		formControlName="localidad" 
 		placeholder="Seleccionar Localidad"
-		[(ngModel)]="newJugador.ubicacion">
+		required>
 			<ion-select-option *ngFor="let localidad of localidades" >
 				{{localidad}}
 			</ion-select-option>
@@ -58,7 +77,7 @@
 		<ion-select style="font-family: Josefin Sans;" 
 		formControlName="sexo" 
 		placeholder="Elegir sexo"
-		[(ngModel)]="newJugador.sexo">
+		required>
 			<ion-select-option *ngFor="let sexo of sexos" >
 				{{sexo}}
 			</ion-select-option>
@@ -69,6 +88,7 @@
 
 	<ion-col>
 		<ion-button 
+		[disabled]="!jugadorForm.valid"
 		type="submit" 
 		color="primary" 
 		expand="block">

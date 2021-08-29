@@ -1,3 +1,4 @@
+import { MenuController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Usuario } from 'src/app/models/usuario';
@@ -13,8 +14,10 @@ export class EditarPage implements OnInit {
   usuario: Usuario;
   localidades = ["La Plata", "Ensenada", "Berisso"];
 
-  constructor(public formBuilder: FormBuilder) { 
+  constructor(public menuCtrl: MenuController, public formBuilder: FormBuilder) { 
+    
     this.usuario = {
+      id: "1",
 			nombre: 'Pepe',
 			nomUsuario: "pepito123",
 			fnacimiento: "1995-02-26",
@@ -36,7 +39,7 @@ export class EditarPage implements OnInit {
   }
 
   ngOnInit() {
-
+    this.menuCtrl.enable(true);
   }
 
   radioChange(value){
