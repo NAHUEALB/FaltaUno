@@ -15,66 +15,61 @@ import { ToastController } from '@ionic/angular';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
-	jugadorForm: FormGroup;
-	newJugador: Jugador;
-	localidades = ["La Plata", "Ensenada", "Berisso"];
+  enlace = 'prueba/';
+  jugadorForm: FormGroup;
+  newJugador: Jugador;
+  localidades = ['La Plata', 'Ensenada', 'Berisso'];
+  getDocumentSubscription;
 
-	constructor(
-		public formBuilder: FormBuilder, 
-		private router: Router, 
-		public menuCtrl: MenuController, 
-		public database: DatabaseService,
-		public toastController: ToastController,
-		public loadingController: LoadingController,
-		public firebaseauthService: FirebaseauthService){
+  constructor(
+    public formBuilder: FormBuilder,
+    private router: Router,
+    public menuCtrl: MenuController,
+    public database: DatabaseService,
+    public toastController: ToastController,
+    public loadingController: LoadingController,
+    public firebaseauthService: FirebaseauthService
+  ) {
 
-			this.newJugador = {
-				id: '',
-				nombre: '',
-				usuario: "",
-				fnacimiento: "",
-				puntaje: 0,
-				cvotos: 0,
-				sexo: "",
-				perfil: false,
-				foto: "",
-				ubicacion: "",
-				html: '',
-				password: ''
-			}
-			
-			this.jugadorForm = this.formBuilder.group({
-				usuario: '',
-				contraseña: ''
-			})
-
-	}
-
-  ngOnInit() {
+    this.jugadorForm = this.formBuilder.group({
+      usuario: '',
+      contraseña: '',
+    });
   }
+
+  ngOnInit() {}
 
   async presentToast(msg: string, time: number) {
-	const toast = await this.toastController.create({
-		message: msg,
-		duration: time,
-	});
-	toast.present();
-}
-
-  login(){
-	  console.log(this.jugadorForm);
-	  this.firebaseauthService.login(this.jugadorForm.value.usuario, this.jugadorForm.value.contraseña)
-		  .then(res => {
-			  console.log("usuario creado");
-			  console.log(res);
-			  
-			  this.router.navigate(["/inicio"]);
-		  })
-		  .catch(err => {
-			  this.presentToast(err,3000)
-			  console.log("error" + err);
-		  })
+    const toast = await this.toastController.create({
+      message: msg,
+      duration: time,
+    });
+    toast.present();
   }
 
+	login() {
+    console.log(this.jugadorForm);
+    this.firebaseauthService.login(this.jugadorForm.value.usuario, this.jugadorForm.value.contraseña)
+      .then(res => {
+		this.getDocumentSubscription = this.firebaseauthService.getDocumentById(this.enlace,res.user.uid).subscribe(cc =>{
+			let usuarioExtra : NavigationExtras = {
+				state: {
+					usuario: cc
+				}
+			}
+			this.router.navigate(['/inicio'], usuarioExtra);
+		})
 
+      })
+      .catch((err) => {
+        this.presentToast(err, 3000);
+        console.log('error' + err);
+      });
+  	}
+
+	ionViewWillLeave(){
+		if(this.getDocumentSubscription){
+			this.getDocumentSubscription.unsubscribe();
+		}
+	}
 }

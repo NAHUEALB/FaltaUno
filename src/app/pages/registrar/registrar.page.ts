@@ -1,13 +1,14 @@
 import { FirebaseauthService } from './../../serv/firebaseauth.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { NavigationExtras, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { LoadingController, MenuController } from '@ionic/angular';
 
 import { Jugador } from 'src/app/models/jugador';
 import { DatabaseService } from 'src/app/serv/database.service';
 
 import { ToastController } from '@ionic/angular';
+import { Prueba } from 'src/app/models/interfaces';
 
 @Component({
 	selector: 'app-registrar',
@@ -16,6 +17,7 @@ import { ToastController } from '@ionic/angular';
 })
 
 export class RegistrarPage implements OnInit {
+	enlace = 'prueba';
 	jugadorForm: FormGroup;
 	newJugador: Jugador;
 
@@ -59,30 +61,6 @@ export class RegistrarPage implements OnInit {
 	ngOnInit() {
 	}
 
-	async onSubmit(){
-		this.presentLoading();
-		this.newJugador.nombre = this.jugadorForm.value.nombre;
-		let jugadorExtra : NavigationExtras = {
-			state: {
-				jugador: this.newJugador
-			}
-		}
-		//console.log("vamos a guardar esto: ");
-		//console.log(this.newJugador);
-		const data = this.newJugador;
-		data.id = this.database.createId();
-		const link = 'Jugadores';
-		await this.database.createDocument<Jugador>(data, link, data.id)
-		.then(() => {
-			this.presentToast("Perfil creado correctamente", 3000);
-			this.router.navigate(['inicio'], jugadorExtra);
-		})
-		.catch((err) => {
-			this.presentToast(err, 3000);
-			this.router.navigate(['principal'], jugadorExtra);
-		})
-			
-	}
 
 	async presentToast(msg: string, time: number) {
 		const toast = await this.toastController.create({
@@ -111,13 +89,25 @@ export class RegistrarPage implements OnInit {
 			console.log(this.jugadorForm);
 			this.firebaseauthService.registrar(this.jugadorForm.value.usuario,this.jugadorForm.value.contraseña)
 			.then(res => {
-				console.log("usuario creado");
-				console.log(res);
+				let data = this.cargarJugador();			
+				this.firebaseauthService.createDocument<Prueba>(data, this.enlace, res.user.uid)
 				this.router.navigate(["/login"]);
 			})
 			.catch(err =>{
 				this.presentToast(err,3000)
 				console.log("error"+ err);
 			})
+	  }
+
+
+	  cargarJugador(){
+		  let data: Prueba;
+		  data={
+			edad: this.jugadorForm.value.edad,
+			localidad : this.jugadorForm.value.localidad,
+			nombre : this.jugadorForm.value.nombre,
+		  	sexo : this.jugadorForm.value.sexo
+		  }
+		  return data;
 	  }
 }

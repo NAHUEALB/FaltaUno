@@ -10,16 +10,13 @@ import { Router } from '@angular/router';
 export class InicioPage implements OnInit {
 
   nombre;
-
   constructor(private menuCtrl: MenuController,private router: Router) {
     this.menuCtrl.enable(true);
+    console.log(this.router.getCurrentNavigation().extras.state.usuario);
    }
 
   ngOnInit() {
-    // let nomUsuario="@roberto";
-    // let edad= 15 ;
-    // let nombre="Nahuel";
-    // this.usuario = new Usuario(nombre,nomUsuario,edad);
+    this.nombre = this.router.getCurrentNavigation().extras.state.usuario.nombre;
   }
 
 }
