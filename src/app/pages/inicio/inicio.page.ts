@@ -23,6 +23,6 @@ export class InicioPage implements OnInit {
   }
 
   irAlPerfil(){
-    this.router.navigate([`/perfil`]);
+    this.router.navigate([`/tabs`]);
   }
 }
