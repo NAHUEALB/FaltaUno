@@ -1,14 +1,14 @@
 import { FirebaseauthService } from './../../serv/firebaseauth.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { NavigationExtras, Router } from '@angular/router';
 import { LoadingController, MenuController } from '@ionic/angular';
 
 import { Jugador } from 'src/app/models/jugador';
 import { DatabaseService } from 'src/app/serv/database.service';
 
 import { ToastController } from '@ionic/angular';
-import { Prueba } from 'src/app/models/interfaces';
+import { Storage } from '@ionic/storage-angular';
 
 @Component({
 	selector: 'app-registrar',
@@ -17,44 +17,46 @@ import { Prueba } from 'src/app/models/interfaces';
 })
 
 export class RegistrarPage implements OnInit {
-	enlace = 'prueba';
+	enlace = 'Jugador';
 	jugadorForm: FormGroup;
-	newJugador: Jugador;
+	jugador: Jugador;
+	getDocumentSubscription;
 
 	localidades = ["La Plata", "Ensenada", "Berisso"];
 	sexos = ["No especificado", "Hombre", "Mujer", "No binario"];
 
 	constructor(
-		public formBuilder: FormBuilder, 
-		private router: Router, 
-		public menuCtrl: MenuController, 
-		public database: DatabaseService,
-		public toastController: ToastController,
-		public loadingController: LoadingController,
-		public firebaseauthService: FirebaseauthService) { 
+	public formBuilder: FormBuilder, 
+	private router: Router, 
+	public menuCtrl: MenuController, 
+	public database: DatabaseService,
+	public toastController: ToastController,
+	public loadingController: LoadingController,
+	public firebaseauthService: FirebaseauthService,
+	private storage: Storage
+	){ 
 		// this.menuCtrl.enable(false);
-		this.newJugador = {
+		this.jugador = {
 			id: '',
 			nombre: '',
-			usuario: "pepito123",
-			fnacimiento: "2000-01-01",
+			usuario: '',
+			fnacimiento: '',
 			puntaje: 0,
 			cvotos: 0,
 			sexo: "no binario",
 			perfil: false,
-			foto: "foto",
+			foto: '',
 			ubicacion: this.localidades[1],
 			html: '',
-			password: ''
 		}
 
 		this.jugadorForm = this.formBuilder.group({
 			nombre: '',
 			usuario: '',
 			contraseña:new FormControl('', Validators.minLength(7)),
-			edad:'',
-			localidad:'',
-			sexo:''
+			fnacimiento:'',
+			ubicacion:'',
+			sexo:'',
 		})
 	}
 
@@ -85,29 +87,60 @@ export class RegistrarPage implements OnInit {
 
 
 
-	  crearUsuario(){
-			console.log(this.jugadorForm);
-			this.firebaseauthService.registrar(this.jugadorForm.value.usuario,this.jugadorForm.value.contraseña)
-			.then(res => {
-				let data = this.cargarJugador();			
-				this.firebaseauthService.createDocument<Prueba>(data, this.enlace, res.user.uid)
-				this.router.navigate(["/login"]);
+	crearJugador(){
+		//console.log(this.jugadorForm);
+		this.firebaseauthService.registrar(this.jugadorForm.value.usuario,this.jugadorForm.value.contraseña)
+		.then(res => {
+			let data = this.cargarJugador();			
+			this.firebaseauthService.createDocument<Jugador>(data, this.enlace, res.user.uid)
+			//this.router.navigate(["/login"]);
+		})
+		.then(res => {
+			let user = this.jugadorForm.value.usuario;
+			let pw = this.jugadorForm.value.contraseña;
+			this.firebaseauthService.login(user, pw)
+			.then(() => {
+				this.firebaseauthService.getUserCurrent().subscribe(res =>{
+					this.firebaseauthService.getDocumentById(this.enlace, res.uid).subscribe((document: any) =>{
+						this.jugador = document;
+						this.storage.set("jugador", document);
+						this.router.navigate(['/inicio']);
+					})
+				});
 			})
-			.catch(err =>{
-				this.presentToast(err,3000)
-				console.log("error"+ err);
-			})
-	  }
+			.catch((err) => {
+				this.presentToast(err, 3000);
+				console.log('error' + err);
+			});
+		})
+		.catch(err =>{
+			this.presentToast(err,3000)
+			console.log("error"+ err);
+		})		
+	}
 
 
-	  cargarJugador(){
-		  let data: Prueba;
-		  data={
-			edad: this.jugadorForm.value.edad,
-			localidad : this.jugadorForm.value.localidad,
+	cargarJugador(){
+		let data: Jugador;
+		data={
+			id : '',
 			nombre : this.jugadorForm.value.nombre,
-		  	sexo : this.jugadorForm.value.sexo
-		  }
-		  return data;
-	  }
+			usuario : '',
+			fnacimiento: this.jugadorForm.value.fnacimiento,
+			puntaje : 0,
+			cvotos : 0,
+			sexo : this.jugadorForm.value.sexo,
+			perfil : true,
+			foto : '',
+			ubicacion : this.jugadorForm.value.ubicacion,
+			html : '',
+		}
+		return data;
+	}
+
+	ionViewWillLeave(){
+		if(this.getDocumentSubscription){
+			this.getDocumentSubscription.unsubscribe();
+		}
+	}
 }

@@ -10,7 +10,7 @@
 <ion-content class="background">
 	<h1 class="titulo">Crear Cuenta</h1>
 	<img src="../../../assets/imgs/background/iconoPerfil.jpg" width="150px" height="150px">
-<form [formGroup]="jugadorForm" (ngSubmit)="crearUsuario()">
+<form [formGroup]="jugadorForm" (ngSubmit)="crearJugador()">
 
   	<ion-item class="box">
 		<ion-label position="floating">Nombre</ion-label>
@@ -47,7 +47,7 @@
 	<ion-col>
 		<div class="fecha">
 			<ion-datetime 
-			formControlName="edad" 
+			formControlName="fnacimiento" 
 			placeholder="Fecha de Nacimiento"
 			display-format="DD/MM/YYYY"
 			required>
@@ -63,8 +63,8 @@
 
 	<ion-item class="city">  
 		<ion-select style="font-family: Josefin Sans;" 
-		formControlName="localidad" 
-		placeholder="Seleccionar Localidad"
+		formControlName="ubicacion" 
+		placeholder="Seleccionar localidad"
 		required>
 			<ion-select-option *ngFor="let localidad of localidades" >
 				{{localidad}}
