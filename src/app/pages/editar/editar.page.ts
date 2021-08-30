@@ -1,56 +1,64 @@
 import { MenuController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Usuario } from 'src/app/models/usuario';
+import { Jugador } from 'src/app/models/jugador';
 
 @Component({
   selector: 'app-editar',
   templateUrl: './editar.page.html',
   styleUrls: ['./editar.page.scss'],
 })
+
 export class EditarPage implements OnInit {
+	jugadorForm: FormGroup;
+	jugador: Jugador;
+	localidades = ["La Plata", "Ensenada", "Berisso"];
+	getDocumentSubscription;
 
-  usuarioForm: FormGroup;
-  usuario: Usuario;
-  localidades = ["La Plata", "Ensenada", "Berisso"];
-
-  constructor(public menuCtrl: MenuController, public formBuilder: FormBuilder) { 
-    
-    this.usuario = {
-      id: "1",
+	constructor(
+	public menuCtrl: MenuController, 
+	public formBuilder: FormBuilder
+	){ 
+		this.jugador = {
+			id: "1",
 			nombre: 'Pepe',
-			nomUsuario: "pepito123",
+			usuario: "pepito123",
 			fnacimiento: "1995-02-26",
-			puntajeTotal: 22,
-			votosTotal: 8,
+			puntaje: 22,
+			cvotos: 8,
 			sexo: "no binario",
 			perfil: false,
 			foto: "foto",
-			ubicacion: this.localidades[1]
+			ubicacion: this.localidades[1],
+			html: ''
 		}
 
-    this.usuarioForm = this.formBuilder.group({
-      nombre: this.usuario.nombre,
-      localidad: this.usuario.ubicacion,
-      edad: this.usuario.fnacimiento,
-      sexo: this.usuario.sexo
-    })
+		this.jugadorForm = this.formBuilder.group({
+			nombre: this.jugador.nombre,
+			localidad: this.jugador.ubicacion,
+			edad: this.jugador.fnacimiento,
+			sexo: this.jugador.sexo
+		})
+	}
 
-  }
+	ngOnInit() {
+		this.menuCtrl.enable(true);
+	}
 
-  ngOnInit() {
-    this.menuCtrl.enable(true);
-  }
+	radioChange(value){
+		console.log(value.detail.value);
+	}
 
-  radioChange(value){
-    console.log(value.detail.value);
-  }
+	onSubmit(){
+		//Esto deberiamos mandarlo a la bd.
+		//En el perfil deberiamos poner que cada vez que se entre, se recargue la informacion de ese jugador
+		//Como saber que jugador es? proponer el uso del DNI.
+		console.log(this.jugadorForm.value);
+	}
 
-  onSubmit(){
-    //Esto deberiamos mandarlo a la bd.
-    //En el perfil deberiamos poner que cada vez que se entre, se recargue la informacion de ese usuario
-    //Como saber que usuario es? proponer el uso del DNI.
-    console.log(this.usuarioForm.value);
-  }
-
+	ionViewWillLeave(){
+		if(this.getDocumentSubscription){
+			this.getDocumentSubscription.unsubscribe();
+		}
+	}
 }

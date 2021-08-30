@@ -54,7 +54,8 @@
 	<ion-col>
 		<div class="fecha">
 			<ion-datetime 
-			formControlName="edad" 
+			formControlName="fnacimiento" 
+			placeholder="Fecha de Nacimiento"
 			display-format="DD/MM/YYYY"
 			placeholder="Fecha de nacimiento"
 			required>
@@ -65,9 +66,9 @@
 	</ion-row>
 
 	<ion-item class="city">  
-		<ion-select
-		formControlName="localidad" 
-		placeholder="Seleccionar Localidad"
+		<ion-select style="font-family: Josefin Sans;" 
+		formControlName="ubicacion" 
+		placeholder="Seleccionar localidad"
 		required>
 			<ion-select-option *ngFor="let localidad of localidades" >
 				{{localidad}}
