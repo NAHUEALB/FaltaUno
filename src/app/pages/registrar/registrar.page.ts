@@ -87,11 +87,13 @@ export class RegistrarPage implements OnInit {
 
 	  crearUsuario(){
 			console.log(this.jugadorForm);
+			const boton = document.getElementById("boton-submit");
+			boton.innerHTML = "Cargando..."
 			this.firebaseauthService.registrar(this.jugadorForm.value.usuario,this.jugadorForm.value.contraseña)
 			.then(res => {
 				let data = this.cargarJugador();			
 				this.firebaseauthService.createDocument<Prueba>(data, this.enlace, res.user.uid)
-				this.router.navigate(["/login"]);
+				this.router.navigate(["/inicio"]);
 			})
 			.catch(err =>{
 				this.presentToast(err,3000)

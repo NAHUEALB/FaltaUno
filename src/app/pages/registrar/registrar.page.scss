@@ -1,4 +1,7 @@
 :host {
+	ion-content {
+	text-align: center;
+}
   ion-content.background{
     --background: none;
     background-image: url('../../../assets/imgs/background/fondo.jpg');
@@ -15,11 +18,10 @@
 }
 
 form, input, optgroup, select{
-  margin-top:7%;
-
+  margin-top:25%
 }
 
- .box{
+.box{
   background-color: white;
   border-radius: 10px;
   margin-bottom: 15px; 
@@ -38,7 +40,7 @@ form, input, optgroup, select{
   height: 40px;
   width: 70%;
   font-family: Josefin Sans;
-  margin-left: 56px;
+  margin-right: 56px;
 }
 
 .label-stacked.sc-ion-label-md-h, .label-floating.sc-ion-label-md-h{
@@ -47,7 +49,6 @@ form, input, optgroup, select{
 ion-datetime{
   font-size: 16px;
   color: black;
-  font-family: Josefin Sans;
   line-height: 1.2;
   border: none;
   outline: none;
@@ -55,7 +56,7 @@ ion-datetime{
 
 .fechaNaci{
   font-size: 50px;
-  margin-right: 55px
+  margin-left: 55px
 }
 
 
