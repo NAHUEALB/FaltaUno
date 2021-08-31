@@ -1,7 +1,14 @@
 import { MenuController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Jugador } from 'src/app/models/jugador';
+
+import { Storage } from '@ionic/storage-angular';
+
+import { FirebaseauthService } from 'src/app/serv/firebaseauth.service';
+import { DatabaseService } from 'src/app/serv/database.service';
 
 @Component({
   selector: 'app-editar',
@@ -13,32 +20,58 @@ export class EditarPage implements OnInit {
 	jugadorForm: FormGroup;
 	jugador: Jugador;
 	localidades = ["La Plata", "Ensenada", "Berisso"];
-	getDocumentSubscription;
+	sexos = ["No binario", "Hombre", "Mujer"];
+	docSubscription;
+	usuarioSubscription;
 
 	constructor(
 	public menuCtrl: MenuController, 
-	public formBuilder: FormBuilder
+	private router: Router,
+	public formBuilder: FormBuilder,
+	public database: DatabaseService,
+	private storage: Storage,
+	public firebaseauthService: FirebaseauthService,
 	){ 
 		this.jugador = {
-			id: "1",
-			nombre: 'Pepe',
-			usuario: "pepito123",
-			fnacimiento: "1995-02-26",
-			puntaje: 22,
-			cvotos: 8,
-			sexo: "no binario",
+			id: "",
+			nombre: '',
+			usuario: "",
+			fnacimiento: "",
+			puntaje: 0,
+			cvotos: 0,
+			sexo: "",
 			perfil: false,
-			foto: "foto",
-			ubicacion: this.localidades[1],
+			foto: "",
+			ubicacion: this.localidades[0],
 			html: ''
 		}
 
 		this.jugadorForm = this.formBuilder.group({
-			nombre: this.jugador.nombre,
-			localidad: this.jugador.ubicacion,
-			edad: this.jugador.fnacimiento,
-			sexo: this.jugador.sexo
+			nombre: '',
+			fnacimiento: '',
+			ubicacion: '',
+			sexo: ''
+		});
+
+		this.storage.get("jugador").then(res => {
+			this.jugador = res;
+
+			let indexSexo = 0; 
+			if (this.jugador.sexo == "Hombre") indexSexo = 1
+			else if (this.jugador.sexo == "Mujer") indexSexo = 2;
+
+			let indexCiudad = 0; 
+			if (this.jugador.ubicacion == "Ensenada") indexCiudad = 1
+			else if (this.jugador.ubicacion == "Berisso") indexCiudad = 2;
+
+			this.jugadorForm = this.formBuilder.group({
+				nombre: this.jugador.nombre,
+				fnacimiento: this.jugador.fnacimiento,
+				ubicacion: '',
+				sexo: ''
+			});
 		})
+
 	}
 
 	ngOnInit() {
@@ -56,9 +89,40 @@ export class EditarPage implements OnInit {
 		console.log(this.jugadorForm.value);
 	}
 
+	editarJugador() {
+		console.log("--- JUGADOR EN storage (editar)");
+		const juga2 = this.storage.get("jugador")
+		.then(res => {
+			console.log(res);
+			console.log("id: " + res.id);
+		})
+
+		/*this.database.firestore()
+		.collection('Jugador')
+		.doc("L52TbHMvBueg0EutDGHYJzIVba12")
+		.update({
+			nombre: this.jugador.nombre,
+			fnacimiento: this.jugador.fnacimiento,
+			ubicacion: this.jugador.ubicacion,
+			sexo: this.jugador.sexo,
+		}).then(() => { console.log("funcionó eaea") });
+		console.log("funcionó?")*/
+		/*.update({
+			nombre: this.jugador.nombre,
+			fnacimiento: this.jugador.fnacimiento,
+			ubicacion: this.jugador.ubicacion,
+			sexo: this.jugador.sexo,
+		}).then(() => {
+			this.storage.set("jugador", document).then(() => {
+				this.router.navigate(['/perfil']);
+			})
+		}).catch(() => {
+			console.log("Error modificando la base de datos de firebase")
+		})*/
+	}
+
 	ionViewWillLeave(){
-		if(this.getDocumentSubscription){
-			this.getDocumentSubscription.unsubscribe();
-		}
+		if(this.docSubscription) this.docSubscription.unsubscribe();
+		if(this.usuarioSubscription) this.usuarioSubscription.unsubscribe();
 	}
 }

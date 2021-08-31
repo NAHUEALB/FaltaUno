@@ -24,7 +24,7 @@ export class RegistrarPage implements OnInit {
 	usuarioSubscription;
 
 	localidades = ["La Plata", "Ensenada", "Berisso"];
-	sexos = ["Hombre", "Mujer", "No binario"];
+	sexos = ["No binario", "Hombre", "Mujer"];
 
 	constructor(
 	public formBuilder: FormBuilder, 
@@ -91,9 +91,13 @@ export class RegistrarPage implements OnInit {
 	crearJugador(){
 		const boton = document.getElementById("boton-submit");
 		boton.innerHTML = "Cargando...";
-		this.firebaseauthService.registrar(this.jugadorForm.value.usuario,this.jugadorForm.value.contraseña)
+		let user= this.jugadorForm.value.usuario;
+		let pw = this.jugadorForm.value.contrareg;
+		console.log(user + ": " + pw);
+		this.firebaseauthService.registrar(user, pw)
 		.then(res => {
-			let data = this.cargarJugador();			
+			let data = this.cargarJugador();
+			data.id = res.user.uid;	
 			this.firebaseauthService.createDocument<Jugador>(data, this.enlace, res.user.uid);
 			let user = this.jugadorForm.value.usuario;
 			let pw = this.jugadorForm.value.contrareg;
@@ -103,9 +107,10 @@ export class RegistrarPage implements OnInit {
 					this.docSubscription = this.firebaseauthService.getDocumentById(this.enlace, res.uid).subscribe((document: any) =>{
 						this.storage.clear();
 						this.jugador = document;
+						console.log("--- JUGADOR EN this.jugador PARA storage (registrar)");
+						console.log(this.jugador);
 						this.storage.set("jugador", document).then(() => {
 							this.router.navigate(['/inicio']);
-
 						})
 					})
 				});

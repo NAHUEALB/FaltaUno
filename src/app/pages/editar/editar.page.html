@@ -8,61 +8,74 @@
 </ion-header>
 
 <ion-content class="background">
-  <ion-grid>
-    <ion-row >
-      <ion-col>
-        <div class="ion-text-center">
-          <h1>Editar Perfil</h1>
-        </div>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col>
-        <ion-item class="ion-text-center">
-          <img  src="../../../assets/imgs/background/iconoPerfil.jpg" width="150px" height="150px">
-        </ion-item>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
 
-<form [formGroup]="usuarioForm" (ngSubmit)="onSubmit()">
+	<form [formGroup]="jugadorForm" (ngSubmit)="editarJugador()">
 
-  <ion-item>
-    <ion-label position="floating">Nombre</ion-label>
-    <ion-input formControlName="nombre" type="text" required></ion-input>
-  </ion-item>
+		<ion-item class="box">
+			<ion-input 
+			autocomplete="off"
+			formControlName="nombre" 
+			type="text"
+			placeholder="Cambiar nombre" 
+			color= "black"
+			clear-input
+			required>
+			</ion-input>
+		</ion-item>
 
-  <ion-select formControlName="localidad">
-    <ion-select-option *ngFor="let localidad of localidades">{{localidad}}</ion-select-option>
-  </ion-select>
+		<ion-row>			
+			<div class="icon">
+				<ion-icon name="calendar-outline"></ion-icon>
+			</div>
 
-  <ion-list>
-    <ion-radio-group formControlName="sexo">
-      <ion-item>
-        <ion-label>Hombre</ion-label>
-        <ion-radio slot="end" value="hombre"></ion-radio>
-      </ion-item>
-  
-      <ion-item>
-        <ion-label>Mujer</ion-label>
-        <ion-radio slot="end" value="mujer"></ion-radio>
-      </ion-item>
-  
-      <ion-item>
-        <ion-label>No binario</ion-label>
-        <ion-radio slot="end" value="no binario"></ion-radio>
-      </ion-item>
-    </ion-radio-group>
-  </ion-list>
+			<ion-col>
+				<div class="box box-fecha">
+					<ion-datetime 
+					formControlName="fnacimiento" 
+					display-format="DD/MM/YYYY"
+					placeholder="Cambiar cumpleaños"
+					required>
+					</ion-datetime>
+				</div>
+			</ion-col>
+		</ion-row>
+
+		<ion-item class="box">  
+			<ion-select
+			formControlName="ubicacion" 
+			placeholder="Cambiar ciudad"
+			required>
+				<ion-select-option *ngFor="let localidad of localidades" >
+					{{localidad}}
+				</ion-select-option>
+			</ion-select>
+		</ion-item>
 
 
-  <ion-row>
-    <ion-col>
-      <ion-button type="submit" color="danger" expand="block">Submit</ion-button>
-    </ion-col>
-  </ion-row>
+		<ion-item class="box">  
+			<ion-select  
+			formControlName="sexo" 
+			placeholder="Cambiar sexo"
+			required>
+				<ion-select-option *ngFor="let sexo of sexos" >
+					{{sexo}}
+				</ion-select-option>
+			</ion-select>
+		</ion-item>
 
-</form>
+		<ion-row>
 
+		<ion-col>
+			<ion-button id="boton-submit"
+			[disabled]="!jugadorForm.valid"
+			type="submit" 
+			color="success" 
+			expand="block">
+				Modificar
+			</ion-button>
+		</ion-col>
+		
+		</ion-row>
 
+	</form>
 </ion-content>
