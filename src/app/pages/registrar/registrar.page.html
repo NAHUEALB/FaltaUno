@@ -8,63 +8,67 @@
   </ion-header>
 
 <ion-content class="background">
-	<h1 class="titulo">Crear Cuenta</h1>
-	<img src="../../../assets/imgs/background/iconoPerfil.jpg" width="150px" height="150px">
-<form [formGroup]="jugadorForm" (ngSubmit)="crearUsuario()">
+	<!-- <h1 class="titulo">Crear Cuenta</h1> -->
+	<!-- <img src="../../../assets/imgs/background/iconoPerfil.jpg" width="150px" height="150px"> -->
+<form [formGroup]="jugadorForm" (ngSubmit)="crearJugador()">
 
   	<ion-item class="box">
-		<ion-label position="floating">Nombre</ion-label>
 		<ion-input 
-		formControlName="nombre" 
-		type="text" 
+		autocomplete="off"
+		formControlName="nombrereg" 
+		type="text"
+		placeholder="Ingresa tu nombre" 
+		color= "black"
+		clear-input
 		required>
 		</ion-input>
 	</ion-item>
 
 	<ion-item class="box">
-		<ion-label position="floating">Correo</ion-label>
 		<ion-input 
-		[autocomplete]=false
 		formControlName="usuario" 
 		type="email" 
-		minlength="7"
+		minlength="10"
+		placeholder="Correo electrónico"
 		required>
 		</ion-input>
 	</ion-item>
 
 	<ion-item class="box">
-		<ion-label position="floating">Contraseña</ion-label>
 		<ion-input 
-		[autocomplete]=false
-		formControlName="contraseña" 
+		autocomplete="off"
+		formControlName="contrareg" 
 		type="password"
+		placeholder= "Contraseña"
+		color= "black"
+		clear-input
 		required>
 		</ion-input>
 	</ion-item>
 
 	<ion-row>
-
-	<ion-col>
-		<div class="fecha">
-			<ion-datetime 
-			formControlName="edad" 
-			placeholder="Fecha de Nacimiento"
-			display-format="DD/MM/YYYY"
-			required>
-		</ion-datetime>
-	</div>
-	</ion-col>
-
-	<div class="fechaNaci">
+		
+	<div class="icon">
 		<ion-icon name="calendar-outline"></ion-icon>
 	</div>
 
+	<ion-col>
+		<div class="box box-fecha">
+			<ion-datetime 
+			formControlName="fnacimiento" 
+			display-format="DD/MM/YYYY"
+			placeholder="Fecha de nacimiento"
+			required>
+			</ion-datetime>
+		</div>
+	</ion-col>
+
 	</ion-row>
 
-	<ion-item class="city">  
-		<ion-select style="font-family: Josefin Sans;" 
-		formControlName="localidad" 
-		placeholder="Seleccionar Localidad"
+	<ion-item class="box">  
+		<ion-select
+		formControlName="ubicacion" 
+		placeholder="Seleccionar localidad"
 		required>
 			<ion-select-option *ngFor="let localidad of localidades" >
 				{{localidad}}
@@ -73,8 +77,8 @@
 	</ion-item>
 
 
-	<ion-item class="city">  
-		<ion-select style="font-family: Josefin Sans;" 
+	<ion-item class="box">  
+		<ion-select  
 		formControlName="sexo" 
 		placeholder="Elegir sexo"
 		required>
@@ -87,12 +91,12 @@
 	<ion-row>
 
 	<ion-col>
-		<ion-button 
+		<ion-button id="boton-submit"
 		[disabled]="!jugadorForm.valid"
 		type="submit" 
-		color="primary" 
+		color="warning" 
 		expand="block">
-			Confirmar
+			Registrar
 		</ion-button>
 	</ion-col>
 	

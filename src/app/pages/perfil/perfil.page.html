@@ -11,9 +11,9 @@
 	<div>
 		<img id="profilePic" [src]="'/assets/perfil.svg'">
 		<div class="datos">
-			<h3>Nombre: <b>{{ usuario.nombre }}</b> (@{{ usuario.nomUsuario }})</h3>
+			<h3>Nombre: <b>{{ jugador.nombre }}</b> (@{{ jugador.usuario }})</h3>
 			<p>Edad: {{ edad }}</p>
-			<p>Sexo: {{usuario.sexo}}</p>
+			<p>Sexo: {{jugador.sexo}}</p>
 		</div>
 	</div>
 
@@ -21,7 +21,7 @@
 	<br>
 	<div class="contenedor">
 		<div class="estadio">
-			<ion-img src="../../../assets/stadio-sfondo.jpg"></ion-img>
+			<ion-img style="height: 50%;" src="../../../assets/stadio-sfondo.jpg"></ion-img>
 			<p id="resultado">{{ partido.resultado }}</p>
 		</div>
 	</div>
@@ -30,11 +30,8 @@
 	<div class="stars">
 		<div *ngFor="let star of stars">
 			<img *ngIf="star === 'full'" class="star" [src]="'/assets/stars/star-full.png'">
-			
 			<img *ngIf="star === 'half'" class="star" [src]="'/assets/stars/star-half.png'">
-			
 			<img *ngIf="star === 'null'" class="star" [src]="'/assets/stars/star-null.png'">
-			
 		</div>
 		<span style="font-size: 20px;">({{ valoracion }})</span>
 	</div>
@@ -43,8 +40,8 @@
 	<div>
 		<h3 class="titulo"><b>Estadisticas</b></h3>
 		<div class="estadisticas">
-			<p>Partidos jugados: 20</p>
-			<p>Votos recibidos: 30</p>
+			<p>Puntaje acumulado: {{ jugador.puntaje }}</p>
+			<p>Votos recibidos: {{ jugador.cvotos }}</p>
 		</div>
 	</div>
 

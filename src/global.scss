@@ -18,3 +18,54 @@
     --height: 72%;
     width: 80%;
 }
+
+ion-content.background{
+	--background: url('assets/imgs/background/ucl-bg.jpg') 0 0/100% 100% no-repeat;
+}
+
+ion-icon{
+	font-size: 45px;
+	margin-left: 55px
+}
+
+ion-content {
+	text-align: center;
+	
+}
+
+ion-button {
+	height: 50px;
+	width: 80%;
+	margin: auto;
+	font-size: 20px;
+	font-weight: bold;
+}
+
+ion-input, ion-item, ion-select, ion-datetime, ion-label {
+	background: none;
+	background-color: transparent;
+	color: rgb(78, 28, 214);
+	opacity: 100%;
+}
+
+.box {
+	background-color: rgb(245, 245, 245);
+	margin: auto;
+	margin-bottom: 10px; 
+	border-radius: 15px;
+	width: 80%;
+	line-height: 1.5;
+	font-size: 16px;
+	font-weight: bold;
+	box-shadow: rgba(66, 56, 0, 0.5) 0px 2px 3px;
+}
+
+.button-medio{
+	display: inline-block;
+	width: 37%;
+}
+
+.box-fecha {
+	margin-right: 13%;
+	line-height: 1.5;
+}

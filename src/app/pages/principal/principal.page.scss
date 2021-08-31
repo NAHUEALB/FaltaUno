@@ -1,36 +1,18 @@
-:host {
-  ion-content.background{
-    --background: none;
-    background-image: url('../../../assets/imgs/background/fondo.jpg');
-  }
+ion-img {
+	height: 50%;
 }
 
-.button-pr{
-  color: white;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  height: 40px;
-  width: 80%;
-  margin-left: 10%;
+.button-left {
+	margin-left: 10%;
+	margin-right: 3%;
 }
 
-.button-pr1{
-  color: white;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  height: 40px;
-  width: 35%;
-  font-size: 16px;
-  margin-left: 10%;
+.button-right{
+	margin-right: 10%;
+	margin-left: 3%;
 }
 
-
-.button-pr2{
-  margin-left: 37%;
-  height: 40px;
-  font-size: 16px;
-  text-align: center;
+.button-ayuda {
+	height: 35px;
+	width: 100px;
 }

@@ -10,5 +10,4 @@ export interface Jugador{
 	foto: string;
 	ubicacion: string;
 	html: string;
-	password: string;
 }
