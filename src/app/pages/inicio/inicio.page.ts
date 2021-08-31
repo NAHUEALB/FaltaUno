@@ -14,7 +14,6 @@ export class InicioPage implements OnInit {
 	enlace: 'Jugador';
 	jugador: Jugador;
 	nombre: string = '';
-	getDocumentSubscription;
 
 	constructor(
 	//private menuCtrl: MenuController, 
@@ -41,6 +40,9 @@ export class InicioPage implements OnInit {
 		this.storage.get("jugador").then(jugadorDelStorage => {
 			this.jugador = jugadorDelStorage;
 			this.nombre = jugadorDelStorage.nombre;
+		})
+		.catch(() => {
+			console.log("No se cargó el storage antes de querer mostrarlo")
 		});
 	}
 
@@ -54,10 +56,4 @@ export class InicioPage implements OnInit {
 	irAlPerfil(){
 		this.router.navigate([`/tabs`]);
 	}
-
-	ionViewWillLeave(){
-		if(this.getDocumentSubscription){
-			this.getDocumentSubscription.unsubscribe();
-		}
-	}	
 }

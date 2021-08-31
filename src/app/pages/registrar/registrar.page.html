@@ -10,22 +10,22 @@
 <ion-content class="background">
 	<!-- <h1 class="titulo">Crear Cuenta</h1> -->
 	<!-- <img src="../../../assets/imgs/background/iconoPerfil.jpg" width="150px" height="150px"> -->
-<form [formGroup]="jugadorForm" (ngSubmit)="crearUsuario()">
+<form [formGroup]="jugadorForm" (ngSubmit)="crearJugador()">
 
   	<ion-item class="box">
-		<!-- <ion-label position="floating">Nombre</ion-label> -->
 		<ion-input 
-		formControlName="nombre" 
+		autocomplete="off"
+		formControlName="nombrereg" 
 		type="text"
 		placeholder="Ingresa tu nombre" 
+		color= "black"
+		clear-input
 		required>
 		</ion-input>
 	</ion-item>
 
 	<ion-item class="box">
-		<!-- <ion-label position="floating">Correo</ion-label> -->
 		<ion-input 
-		[autocomplete]=false
 		formControlName="usuario" 
 		type="email" 
 		minlength="10"
@@ -35,27 +35,27 @@
 	</ion-item>
 
 	<ion-item class="box">
-		<!-- <ion-label position="floating">Contraseña</ion-label> -->
 		<ion-input 
-		[autocomplete]=false
-		formControlName="contraseña" 
+		autocomplete="off"
+		formControlName="contrareg" 
 		type="password"
 		placeholder= "Contraseña"
+		color= "black"
+		clear-input
 		required>
 		</ion-input>
 	</ion-item>
 
 	<ion-row>
 		
-	<div class="fechaNaci">
+	<div class="icon">
 		<ion-icon name="calendar-outline"></ion-icon>
 	</div>
 
 	<ion-col>
-		<div class="fecha">
+		<div class="box box-fecha">
 			<ion-datetime 
 			formControlName="fnacimiento" 
-			placeholder="Fecha de Nacimiento"
 			display-format="DD/MM/YYYY"
 			placeholder="Fecha de nacimiento"
 			required>
@@ -65,8 +65,8 @@
 
 	</ion-row>
 
-	<ion-item class="city">  
-		<ion-select style="font-family: Josefin Sans;" 
+	<ion-item class="box">  
+		<ion-select
 		formControlName="ubicacion" 
 		placeholder="Seleccionar localidad"
 		required>
@@ -77,7 +77,7 @@
 	</ion-item>
 
 
-	<ion-item class="city">  
+	<ion-item class="box">  
 		<ion-select  
 		formControlName="sexo" 
 		placeholder="Elegir sexo"
@@ -94,9 +94,9 @@
 		<ion-button id="boton-submit"
 		[disabled]="!jugadorForm.valid"
 		type="submit" 
-		color="primary" 
+		color="warning" 
 		expand="block">
-			Confirmar
+			Registrar
 		</ion-button>
 	</ion-col>
 	

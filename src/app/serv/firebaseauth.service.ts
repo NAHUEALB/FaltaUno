@@ -1,14 +1,17 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { Storage } from '@ionic/storage-angular';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FirebaseauthService {
 
-  constructor(public auth: AngularFireAuth,
-              public fireStore: AngularFirestore) { }
+  constructor(
+	public auth: AngularFireAuth,          
+	public fireStore: AngularFirestore,
+	private storage: Storage) { }
 
   login(email, pass){
     return this.auth.signInWithEmailAndPassword(email,pass);
@@ -19,6 +22,7 @@ export class FirebaseauthService {
   }
 
   logout(){
+	this.storage.clear();
     this.auth.signOut();
   }
   

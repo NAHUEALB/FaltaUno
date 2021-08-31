@@ -11,26 +11,27 @@
 <form [formGroup]="jugadorForm" (ngSubmit)="login()">
 
   	<ion-item class="box">
-		<ion-label position="floating">Ingresá tu @usuario</ion-label>
 		<ion-input 
 		formControlName="usuario" 
-		type="text" 
+		type="email" 
+		placeholder="Ingresa tu correo"
 		required>
 		</ion-input>
 	</ion-item>
 
 	<ion-item class="box">
-		<ion-label position="floating">Tu contraseña</ion-label>
 		<ion-input 
 		formControlName="contraseña" 
 		type="password" 
+		placeholder="Contraseña"
 		required>
 		</ion-input>
 	</ion-item>
 
 	<ion-button 
 	type="submit" 
-	color="danger" 
+	[disabled]="!jugadorForm.valid"
+	color="warning" 
 	expand="block">
 		Confirmar
 	</ion-button>

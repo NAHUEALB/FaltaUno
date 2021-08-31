@@ -1,102 +1,16 @@
-:host {
-	ion-content {
-	text-align: center;
-}
-  ion-content.background{
-    --background: none;
-    background-image: url('../../../assets/imgs/background/fondo.jpg');
-  }
-   ion-item{
-    --background: none;
-  }
-
-}
-
-.titulo{
-  text-align: center;
-  font-size: 40px
-}
-
-form, input, optgroup, select{
-  margin-top:25%
-}
-
-.box{
-  background-color: white;
-  border-radius: 10px;
-  margin-bottom: 15px; 
-  height: 40px;
-  width: 70%;
-  margin-left: 60px;
-  line-height: 0.82;
-}
-
-
-
-.fecha{
-  background-color: white;
-  border-radius: 10px;
-  margin-bottom: 15px; 
-  height: 40px;
-  width: 70%;
-  font-family: Josefin Sans;
-  margin-right: 56px;
+form {
+	margin-top:22%
 }
 
 .label-stacked.sc-ion-label-md-h, .label-floating.sc-ion-label-md-h{
-  font-family: Josefin Sans;
-}
-ion-datetime{
-  font-size: 16px;
-  color: black;
-  line-height: 1.2;
-  border: none;
-  outline: none;
-}
-
-.fechaNaci{
-  font-size: 50px;
-  margin-left: 55px
-}
-
-
-.radio{
-  font-weight: bold;
-} 
-
-
-
-.city{
-  background-color: white;
-  border-radius: 10px;
-  margin-bottom: 15px; 
-  height: 40px;
-  width: 70%;
-  margin-left: 60px;
-}
-
-.box2{
-  border-radius: 10px;
-  margin-bottom: 15px; 
-  height: 40px;
-  width: 45%;
-  margin-left: 28%;
-  background: transparent;
-  font-weight: bold;
+  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
 }
 
 .list-md {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  background: transparent;
-  background-color: transparent;
+  padding-top: 10px;
+  padding-bottom: 10px;
 } 
 
-ion-button{
-  height: 40px;
-  width: 70%;
-  margin-left: 60px;
-  font-size: 16px;
-}
+
 
 

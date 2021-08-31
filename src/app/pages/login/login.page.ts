@@ -1,6 +1,6 @@
 import { FirebaseauthService } from './../../serv/firebaseauth.service';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoadingController, MenuController } from '@ionic/angular';
 
@@ -23,7 +23,8 @@ export class LoginPage implements OnInit {
 	jugador: Jugador; 
 	jugadorExtra: Jugador;
 	localidades = ['La Plata', 'Ensenada', 'Berisso'];
-	getDocumentSubscription;
+	docSubscription;
+	usuarioSubscription;
 
 	constructor(
 	public formBuilder: FormBuilder,
@@ -51,7 +52,7 @@ export class LoginPage implements OnInit {
 
 		this.jugadorForm = this.formBuilder.group({
 			usuario: '',
-			contraseña: '',
+			contraseña: new FormControl('', Validators.minLength(7)),
 		});
   	}
 
@@ -70,8 +71,8 @@ export class LoginPage implements OnInit {
 		let pw = this.jugadorForm.value.contraseña;
     	this.firebaseauthService.login(user, pw)
 		.then(() => {
-			this.firebaseauthService.getUserCurrent().subscribe(res =>{
-				this.firebaseauthService.getDocumentById(this.enlace, res.uid).subscribe((document: any) =>{
+			this.usuarioSubscription = this.firebaseauthService.getUserCurrent().subscribe(res =>{
+				this.docSubscription = this.firebaseauthService.getDocumentById(this.enlace, res.uid).subscribe((document: any) =>{
 					this.jugador = document;
 					this.storage.set("jugador", document);
 					this.router.navigate(['/inicio']);
@@ -85,8 +86,7 @@ export class LoginPage implements OnInit {
   	}
 
 	ionViewWillLeave(){
-		if(this.getDocumentSubscription){
-			this.getDocumentSubscription.unsubscribe();
-		}
+		if(this.docSubscription) this.docSubscription.unsubscribe();
+		if(this.usuarioSubscription) this.usuarioSubscription.unsubscribe();
 	}
 }

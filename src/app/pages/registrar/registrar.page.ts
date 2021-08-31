@@ -1,7 +1,7 @@
 import { FirebaseauthService } from './../../serv/firebaseauth.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { NavigationExtras, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { LoadingController, MenuController } from '@ionic/angular';
 
 import { Jugador } from 'src/app/models/jugador';
@@ -20,10 +20,11 @@ export class RegistrarPage implements OnInit {
 	enlace = 'Jugador';
 	jugadorForm: FormGroup;
 	jugador: Jugador;
-	getDocumentSubscription;
+	docSubscription;
+	usuarioSubscription;
 
 	localidades = ["La Plata", "Ensenada", "Berisso"];
-	sexos = ["No especificado", "Hombre", "Mujer", "No binario"];
+	sexos = ["Hombre", "Mujer", "No binario"];
 
 	constructor(
 	public formBuilder: FormBuilder, 
@@ -43,7 +44,7 @@ export class RegistrarPage implements OnInit {
 			fnacimiento: '',
 			puntaje: 0,
 			cvotos: 0,
-			sexo: "no binario",
+			sexo: "",
 			perfil: false,
 			foto: '',
 			ubicacion: this.localidades[1],
@@ -51,12 +52,12 @@ export class RegistrarPage implements OnInit {
 		}
 
 		this.jugadorForm = this.formBuilder.group({
-			nombre: '',
+			nombrereg: '',
 			usuario: '',
-			contraseña:new FormControl('', Validators.minLength(7)),
+			contrareg:new FormControl('', Validators.minLength(7)),
 			fnacimiento:'',
-			ubicacion:'',
-			sexo:'',
+			ubicacion: this.localidades[0],
+			sexo: this.sexos[0],
 		})
 	}
 
@@ -76,36 +77,36 @@ export class RegistrarPage implements OnInit {
 		const loading = await this.loadingController.create({
 			cssClass: 'my-custom-class',
 			message: 'Por favor, espere',
-			duration: 2000
+			duration: 10000
 		});
 		await loading.present();
 	
 		const { role, data } = await loading.onDidDismiss();
 		console.log('Loading dismissed!');
-	  }
+	}
 
 
 
 
 	crearJugador(){
 		const boton = document.getElementById("boton-submit");
-		boton.innerHTML = "Cargando..."
+		boton.innerHTML = "Cargando...";
 		this.firebaseauthService.registrar(this.jugadorForm.value.usuario,this.jugadorForm.value.contraseña)
 		.then(res => {
 			let data = this.cargarJugador();			
-			this.firebaseauthService.createDocument<Jugador>(data, this.enlace, res.user.uid)
-			//this.router.navigate(["/login"]);
-		})
-		.then(res => {
+			this.firebaseauthService.createDocument<Jugador>(data, this.enlace, res.user.uid);
 			let user = this.jugadorForm.value.usuario;
-			let pw = this.jugadorForm.value.contraseña;
+			let pw = this.jugadorForm.value.contrareg;
 			this.firebaseauthService.login(user, pw)
 			.then(() => {
-				this.firebaseauthService.getUserCurrent().subscribe(res =>{
-					this.firebaseauthService.getDocumentById(this.enlace, res.uid).subscribe((document: any) =>{
+				this.usuarioSubscription = this.firebaseauthService.getUserCurrent().subscribe(res =>{
+					this.docSubscription = this.firebaseauthService.getDocumentById(this.enlace, res.uid).subscribe((document: any) =>{
+						this.storage.clear();
 						this.jugador = document;
-						this.storage.set("jugador", document);
-						this.router.navigate(['/inicio']);
+						this.storage.set("jugador", document).then(() => {
+							this.router.navigate(['/inicio']);
+
+						})
 					})
 				});
 			})
@@ -125,7 +126,7 @@ export class RegistrarPage implements OnInit {
 		let data: Jugador;
 		data={
 			id : '',
-			nombre : this.jugadorForm.value.nombre,
+			nombre : this.jugadorForm.value.nombrereg,
 			usuario : '',
 			fnacimiento: this.jugadorForm.value.fnacimiento,
 			puntaje : 0,
@@ -140,8 +141,7 @@ export class RegistrarPage implements OnInit {
 	}
 
 	ionViewWillLeave(){
-		if(this.getDocumentSubscription){
-			this.getDocumentSubscription.unsubscribe();
-		}
+		if(this.docSubscription) this.docSubscription.unsubscribe();
+		if(this.usuarioSubscription) this.usuarioSubscription.unsubscribe();
 	}
 }
