@@ -1,65 +1,57 @@
-:host {
-  ion-content.background{
-    --background:  none;
-   --background: url('../../../assets/imgs/background/fondo.jpg'); 
-  }
+.titulo{
+	text-align: center;
+	padding: 20px 0px 10px 0px;
+	font-size: 25px;
+	color: white;
+	text-shadow: black 0px 0px 5px;
 }
 
-.titulo{
-  text-align: center;
-  font-size: 45px;
+.boton-inicio {
+	height: 80px;
+	margin: 10px 0px 10px 0px;
+	--box-shadow: 0 0px 0px 0px;
+	--border-radius: 15px;
+}
+
+ion-content.background{
+	//--background: url('../../../assets/imgs/background/ucl-bg.jpg') 0 0/100% 100% no-repeat;
+	--background: rgb(0,0,0);
+	--background: linear-gradient(150deg, rgba(0,0,0,1) 0%, rgba(41,0,97,1) 12%, rgba(0,0,0,1) 26%, rgba(23,0,55,1) 35%, rgba(0,0,0,1) 44%, rgba(36,4,84,1) 59%, rgba(0,0,0,1) 72%, rgba(18,0,55,1) 85%, rgba(0,0,0,1) 100%);
 }
 
 .boton1{
-  width: 70%;
-  margin-left: 15%;
-  height: 15%;
-  margin-top:40px;
-  background: url('../../../assets/imgs/background/fondo.jpg');
+  --background: url('../../../assets/imgs/background/cesped-bg.jpg') 0 0/100% 100% no-repeat;
+} 
 
-  background-size: 100% 100%;
-  border: none; 
-  border-radius: 30px;
+.boton2{
+  --background: url('../../../assets/imgs/background/boton-madera.jpg') 0 0/100% 100% no-repeat;
 } 
 
 .button-outline {
-  --border-color: white;
-  --background: transparent;
-  --color: black;
-  --border-radius: 30px;
+  --border-width: 0;
 }
 
 ion-icon{
-  color:white;
-  font-size: 50px;
+	color:white;
+	font-size: 45px;
+	margin-left: 0;
+	padding-right: 15px;
 }
 
-.boton2{
-  width: 70%;
-  margin-left: 15%;
-  height: 15%;
-  margin-top:40px;
-  background: url('../../../assets/stadio-sfondo.jpg');
-/*   background: url('../../../assets/vestuario.jpg'); */
-  background-size: 100% 100%;
-  border: none;
-  border-radius: 30px;
-} 
 /* .button-solid {
   --background: transparent;
   --color: var(--ion-color-primary-contrast, #fff);
 }  */
 
 .texto{
-  color: white;
-  font-size: 16px;
-  text-align: center;
-  font-weight: 900;
+	color: white;
+	font-size: 24px;
+	font-weight: 500;
+	letter-spacing: 3px;
 }
 
 h1{
-  text-align: center;
-  color: white;
-  font-size: 16px;
+	color: white;
+	font-size: 16px;
 }
 
