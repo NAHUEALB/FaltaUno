@@ -10,7 +10,9 @@ import { Router } from '@angular/router';
 })
 export class PrincipalPage implements OnInit {
 
-  constructor(private menuCtrl: MenuController, private modalController: ModalController, private router: Router){ }
+  constructor(private menuCtrl: MenuController, private modalController: ModalController, private router: Router){
+    this.menuCtrl.enable(false);
+   }
   
   async abrirModal() {
     const modal = await this.modalController.create({

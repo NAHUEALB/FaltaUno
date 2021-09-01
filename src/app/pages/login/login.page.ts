@@ -68,11 +68,11 @@ export class LoginPage implements OnInit {
 	}
 
 	login() {
+		Utilities.presentLoading(this.loadingController, this.msj);
 		let user = this.jugadorForm.value.usuario;
 		let pw = this.jugadorForm.value.contraseña;
     	this.firebaseauthService.login(user, pw)
 		.then(() => {
-			Utilities.presentLoading(this.loadingController, this.msj);
 			this.usuarioSubscription = this.firebaseauthService.getUserCurrent().subscribe(res =>{
 				this.docSubscription = this.firebaseauthService.getDocumentById(this.enlace, res.uid).subscribe((document: any) =>{
 					this.jugador = document;

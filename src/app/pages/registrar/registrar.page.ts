@@ -81,6 +81,7 @@ export class RegistrarPage implements OnInit {
 		let user= this.jugadorForm.value.usuario;
 		let pw = this.jugadorForm.value.contrareg;
 		console.log(user + ": " + pw);
+		Utilities.presentLoading(this.loadingController, this.msj);
 		this.firebaseauthService.registrar(user, pw)
 		.then(res => {
 			let data = this.cargarJugador();
@@ -90,7 +91,6 @@ export class RegistrarPage implements OnInit {
 			let pw = this.jugadorForm.value.contrareg;
 			this.firebaseauthService.login(user, pw)
 			.then(() => {
-				Utilities.presentLoading(this.loadingController, this.msj);
 				this.usuarioSubscription = this.firebaseauthService.getUserCurrent().subscribe(res =>{
 					this.docSubscription = this.firebaseauthService.getDocumentById(this.enlace, res.uid).subscribe((document: any) =>{
 						this.storage.clear();
