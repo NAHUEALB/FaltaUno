@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 })
 export class PrincipalPage implements OnInit {
 
-  constructor(private menuCtrl: MenuController, private modalController: ModalController, private router: Router){}
+  constructor(private menuCtrl: MenuController, private modalController: ModalController, private router: Router){ }
   
   async abrirModal() {
     const modal = await this.modalController.create({
@@ -29,11 +29,6 @@ export class PrincipalPage implements OnInit {
   }
   
   ngOnInit() {
-  }
-
-
-  ionViewDidEnter(){
-    // this.menuCtrl.enable(false);
   }
 
   irAlCrear(){

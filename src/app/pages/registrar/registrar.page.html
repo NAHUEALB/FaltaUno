@@ -14,7 +14,7 @@
 
   	<ion-item class="box">
 		<ion-input 
-		autocomplete="off"
+		pattern="[a-zA-Z ]*"
 		formControlName="nombrereg" 
 		type="text"
 		placeholder="Ingresa tu nombre" 
@@ -36,7 +36,6 @@
 
 	<ion-item class="box">
 		<ion-input 
-		autocomplete="off"
 		formControlName="contrareg" 
 		type="password"
 		placeholder= "Contraseña"
@@ -70,7 +69,7 @@
 		formControlName="ubicacion" 
 		placeholder="Seleccionar localidad"
 		required>
-			<ion-select-option *ngFor="let localidad of localidades" >
+			<ion-select-option *ngFor="let localidad of localidades">
 				{{localidad}}
 			</ion-select-option>
 		</ion-select>

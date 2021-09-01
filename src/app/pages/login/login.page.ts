@@ -10,6 +10,7 @@ import { Jugador } from 'src/app/models/jugador';
 import { DatabaseService } from 'src/app/serv/database.service';
 
 import { ToastController } from '@ionic/angular';
+import { Utilities } from 'src/app/utilities/utils';
 
 @Component({
 	selector: 'app-login',
@@ -25,7 +26,7 @@ export class LoginPage implements OnInit {
 	localidades = ['La Plata', 'Ensenada', 'Berisso'];
 	docSubscription;
 	usuarioSubscription;
-
+	msj = 'Cargando informacion de usuario';
 	constructor(
 	public formBuilder: FormBuilder,
 	private router: Router,
@@ -51,7 +52,7 @@ export class LoginPage implements OnInit {
 		}
 
 		this.jugadorForm = this.formBuilder.group({
-			usuario: '',
+			usuario: new FormControl('', Validators.email),
 			contraseña: new FormControl('', Validators.minLength(7)),
 		});
   	}
@@ -66,16 +67,19 @@ export class LoginPage implements OnInit {
 		toast.present();
 	}
 
-	async login() {
+	login() {
 		let user = this.jugadorForm.value.usuario;
 		let pw = this.jugadorForm.value.contraseña;
     	this.firebaseauthService.login(user, pw)
 		.then(() => {
+			Utilities.presentLoading(this.loadingController, this.msj);
 			this.usuarioSubscription = this.firebaseauthService.getUserCurrent().subscribe(res =>{
 				this.docSubscription = this.firebaseauthService.getDocumentById(this.enlace, res.uid).subscribe((document: any) =>{
 					this.jugador = document;
-					this.storage.set("jugador", document);
-					this.router.navigate(['/inicio']);
+					this.storage.set("jugador", document).then(()=>{
+						this.loadingController.dismiss();
+						this.router.navigate(['/inicio']);
+					})
 				})
 			});
 		})

@@ -1,3 +1,4 @@
+import { MenuController } from '@ionic/angular';
 import { FirebaseauthService } from './serv/firebaseauth.service';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
@@ -18,6 +19,7 @@ export class AppComponent {
 
   options: Array<{ title: string, component: any, icon: string, ruta:string}>;
 	constructor(
+	public menuCtrl: MenuController,
 	private router: Router,
 	public firebaseauthService: FirebaseauthService,
 	public storage: Storage,
@@ -31,7 +33,10 @@ export class AppComponent {
     }
 
 	openOptions(option){
-		if(option.title == 'Cerrar Sesion')	this.firebaseauthService.logout();
+		if(option.title == 'Cerrar Sesion'){
+			this.menuCtrl.enable(false);
+			this.firebaseauthService.logout();
+		}
 		this.router.navigate([`/${option.ruta}`]);
 	}
 

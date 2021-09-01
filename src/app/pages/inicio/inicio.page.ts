@@ -1,5 +1,5 @@
 import { FirebaseauthService } from './../../serv/firebaseauth.service';
-//import { MenuController } from '@ionic/angular';
+import { MenuController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Jugador } from 'src/app/models/jugador';
@@ -16,12 +16,12 @@ export class InicioPage implements OnInit {
 	nombre: string = '';
 
 	constructor(
-	//private menuCtrl: MenuController, 
+	private menuCtrl: MenuController, 
 	private router: Router, 
 	public firebaseauthService: FirebaseauthService,
 	private storage: Storage
 	){
-		// this.menuCtrl.enable(true);
+		this.menuCtrl.enable(true);
 		
 		this.jugador = {
 			id:"0",
@@ -41,7 +41,8 @@ export class InicioPage implements OnInit {
 			this.jugador = jugadorDelStorage;
 			this.nombre = jugadorDelStorage.nombre;
 		})
-		.catch(() => {
+		.catch((error) => {
+			console.log(error);
 			console.log("No se cargó el storage antes de querer mostrarlo")
 		});
 	}

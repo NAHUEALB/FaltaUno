@@ -53,11 +53,11 @@ export class RegistrarPage implements OnInit {
 
 		this.jugadorForm = this.formBuilder.group({
 			nombrereg: '',
-			usuario: '',
+			usuario: new FormControl('', Validators.email),
 			contrareg:new FormControl('', Validators.minLength(7)),
 			fnacimiento:'',
-			ubicacion: this.localidades[0],
-			sexo: this.sexos[0],
+			ubicacion: '',
+			sexo: '',
 		})
 	}
 
@@ -72,21 +72,6 @@ export class RegistrarPage implements OnInit {
 		});
 		toast.present();
 	}
-
-	async presentLoading() {
-		const loading = await this.loadingController.create({
-			cssClass: 'my-custom-class',
-			message: 'Por favor, espere',
-			duration: 10000
-		});
-		await loading.present();
-	
-		const { role, data } = await loading.onDidDismiss();
-		console.log('Loading dismissed!');
-	}
-
-
-
 
 	crearJugador(){
 		const boton = document.getElementById("boton-submit");
