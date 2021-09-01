@@ -9,6 +9,7 @@ import { DatabaseService } from 'src/app/serv/database.service';
 
 import { ToastController } from '@ionic/angular';
 import { Storage } from '@ionic/storage-angular';
+import { Utilities } from 'src/app/utilities/utils';
 
 @Component({
 	selector: 'app-registrar',
@@ -22,6 +23,7 @@ export class RegistrarPage implements OnInit {
 	jugador: Jugador;
 	docSubscription;
 	usuarioSubscription;
+	msj="Cargando usuario"
 
 	localidades = ["La Plata", "Ensenada", "Berisso"];
 	sexos = ["No binario", "Hombre", "Mujer"];
@@ -88,13 +90,13 @@ export class RegistrarPage implements OnInit {
 			let pw = this.jugadorForm.value.contrareg;
 			this.firebaseauthService.login(user, pw)
 			.then(() => {
+				Utilities.presentLoading(this.loadingController, this.msj);
 				this.usuarioSubscription = this.firebaseauthService.getUserCurrent().subscribe(res =>{
 					this.docSubscription = this.firebaseauthService.getDocumentById(this.enlace, res.uid).subscribe((document: any) =>{
 						this.storage.clear();
 						this.jugador = document;
-						console.log("--- JUGADOR EN this.jugador PARA storage (registrar)");
-						console.log(this.jugador);
 						this.storage.set("jugador", document).then(() => {
+							this.loadingController.dismiss();
 							this.router.navigate(['/inicio']);
 						})
 					})
