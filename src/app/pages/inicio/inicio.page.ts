@@ -13,7 +13,7 @@ import { Storage } from '@ionic/storage-angular';
 export class InicioPage implements OnInit {
 	enlace: 'Jugador';
 	jugador: Jugador;
-	nombre: string = '';
+	nombre: string = ''; 
 
 	constructor(
 	//private menuCtrl: MenuController, 
@@ -36,17 +36,11 @@ export class InicioPage implements OnInit {
 			ubicacion: '',
 			html: '',
 		}
-
-		this.storage.get("jugador").then(jugadorDelStorage => {
-			this.jugador = jugadorDelStorage;
-			this.nombre = jugadorDelStorage.nombre;
-		})
-		.catch(() => {
-			console.log("No se cargó el storage antes de querer mostrarlo")
-		});
+		
 	}
 
 	ngOnInit() {
+		
 	}
 
 	irAlBuscar(){
@@ -55,5 +49,19 @@ export class InicioPage implements OnInit {
 
 	irAlPerfil(){
 		this.router.navigate([`/tabs`]);
+	}
+
+	ionViewWillEnter() {
+		this.storage.get("jugador").then(jugadorDelStorage => {
+			this.jugador = jugadorDelStorage;
+			this.nombre = " " + jugadorDelStorage.nombre;
+		})
+		.catch(() => {
+			console.log("No se cargó el storage antes de querer mostrarlo")
+		});
+	}
+
+	ionViewWillLeave() {
+		this.nombre = "";
 	}
 }
