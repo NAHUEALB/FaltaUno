@@ -1,19 +1,21 @@
 :host {
   ion-content.background{
     --background: none;
-    background-image: url('../../../assets/imgs/background/fondo.jpg');
+    background: url('../../../assets/imgs/background/ucl-bg.jpg') 0/100% 100% no-repeat;
   }
 }
 
+
 h1{
-  font-size: 25px;
-  margin-top: 11px;
-  text-align: center;
   color: white;
+  font-weight: bold;
 }
+
 p{
   font-size: 20px;
   color: white;
+  text-align:center;
   text-justify: center;
-  text-align: center;
+  font-weight: bold;
 }
+

@@ -15,7 +15,7 @@
 
 .modal-css .modal-wrapper{
     --border-radius: 10px; 
-    --height: 72%;
+    --height: 75%;
     width: 80%;
 }
 
@@ -23,23 +23,29 @@ ion-content.background{
 	--background: url('assets/imgs/background/ucl-bg.jpg') 0 0/100% 100% no-repeat;
 }
 
-ion-icon{
-	font-size: 45px;
-	margin-left: 55px
-}
 
 ion-content {
 	text-align: center;
-	
 }
 
-ion-button {
+
+
+.boton{
+	width: 70px;
+	margin: auto;
+	height: 40px;
+	font-weight: bold;
+	--background: var(--ion-color-danger, #eb445a);
+}
+
+
+ ion-button {
 	height: 50px;
 	width: 80%;
 	margin: auto;
 	font-size: 20px;
 	font-weight: bold;
-}
+} 
 
 ion-input, ion-item, ion-select, ion-datetime, ion-label {
 	background: none;
