@@ -1,0 +1,81 @@
+<ion-header>
+	<ion-toolbar>
+		<ion-buttons slot="start">
+			<ion-menu-button></ion-menu-button>
+		</ion-buttons>
+		<ion-title>Editar</ion-title>
+	</ion-toolbar>
+</ion-header>
+
+<ion-content class="background">
+
+	<form [formGroup]="jugadorForm" (ngSubmit)="editarJugador()">
+
+		<ion-item class="box">
+			<ion-input 
+			autocomplete="off"
+			formControlName="nombre" 
+			type="text"
+			placeholder="Cambiar nombre" 
+			color= "black"
+			clear-input
+			required>
+			</ion-input>
+		</ion-item>
+
+		<ion-row>			
+			<div class="icon">
+				<ion-icon name="calendar-outline"></ion-icon>
+			</div>
+
+			<ion-col>
+				<div class="box box-fecha">
+					<ion-datetime 
+					formControlName="fnacimiento" 
+					display-format="DD/MM/YYYY"
+					placeholder="Cambiar cumpleaños"
+					required>
+					</ion-datetime>
+				</div>
+			</ion-col>
+		</ion-row>
+
+		<ion-item class="box">  
+			<ion-select
+			formControlName="ubicacion" 
+			placeholder="Cambiar ciudad"
+			required>
+				<ion-select-option *ngFor="let localidad of localidades" >
+					{{localidad}}
+				</ion-select-option>
+			</ion-select>
+		</ion-item>
+
+
+		<ion-item class="box">  
+			<ion-select  
+			formControlName="sexo" 
+			placeholder="Cambiar sexo"
+			required>
+				<ion-select-option *ngFor="let sexo of sexos" >
+					{{sexo}}
+				</ion-select-option>
+			</ion-select>
+		</ion-item>
+
+		<ion-row>
+
+		<ion-col>
+			<ion-button id="boton-submit"
+			[disabled]="!jugadorForm.valid"
+			type="submit" 
+			color="success" 
+			expand="block">
+				Modificar
+			</ion-button>
+		</ion-col>
+		
+		</ion-row>
+
+	</form>
+</ion-content>

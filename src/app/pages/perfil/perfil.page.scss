@@ -4,3 +4,59 @@
     background-image: url('../../../assets/imgs/background/f1_grass_background.jpg');
   }
 }
+
+.stars{
+  display: flex;
+  padding-left: 25%;
+}
+
+.datos{
+  margin-bottom: 0px;
+  margin-left: 50%;
+  margin-top: 10%;
+  font-size: 20px;
+}
+
+.star {
+	width: 30px;
+  text-align: center;
+}
+
+#profilePic {
+	width: 30%;
+  float: left;
+  margin-left: 30px;
+}
+.contenedor{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+} 
+
+.estadio{
+  position:relative;
+  height: 100%;
+  width: 90%;
+  border-radius: 10px;
+}
+
+#resultado{
+  position: absolute;
+  top: 0;
+  visibility: visible;
+  color: white;
+  margin-top: 25%;
+  margin-bottom: 15px;
+  margin-left: 35%;
+  font-size: 40px;
+}
+
+.titulo{
+  font-size: 30px;
+  text-align: center;
+}
+
+.estadisticas{
+  text-align: center;
+  font-size: 20px;
+}

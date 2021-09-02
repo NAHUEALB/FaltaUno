@@ -1,5 +1,9 @@
+import { FirebaseauthService } from './../../serv/firebaseauth.service';
+import { MenuController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Jugador } from 'src/app/models/jugador';
+import { Storage } from '@ionic/storage-angular';
 
 @Component({
   selector: 'app-inicio',
@@ -7,16 +11,57 @@ import { Router } from '@angular/router';
   styleUrls: ['./inicio.page.scss'],
 })
 export class InicioPage implements OnInit {
+	enlace: 'Jugador';
+	jugador: Jugador;
+	nombre: string = ''; 
 
-  constructor() {
-    console.log("Constructor del inicio");
-   }
+	constructor(
+	private menuCtrl: MenuController, 
+	private router: Router, 
+	public firebaseauthService: FirebaseauthService,
+	private storage: Storage
+	){
+		this.menuCtrl.enable(true);
+		
+		this.jugador = {
+			id:"0",
+			nombre: '',
+			usuario: '',
+			fnacimiento: '',
+			puntaje: 0,
+			cvotos: 0,
+			sexo: '',
+			perfil: false,
+			foto: '',
+			ubicacion: '',
+			html: '',
+		}
+		
+	}
 
-  ngOnInit() {
-  }
+	ngOnInit() {
+		
+	}
 
+	irAlBuscar(){
+		this.router.navigate([`/buscar`]);
+	}
 
-  ionViewWillLeave(){
-    console.log("Me fui del inicio");
-  }
+	irAlPerfil(){
+		this.router.navigate([`/tabs`]);
+	}
+
+	ionViewWillEnter() {
+		this.storage.get("jugador").then(jugadorDelStorage => {
+			this.jugador = jugadorDelStorage;
+			this.nombre = " " + jugadorDelStorage.nombre;
+		})
+		.catch(() => {
+			console.log("No se cargó el storage antes de querer mostrarlo")
+		});
+	}
+
+	ionViewWillLeave() {
+		this.nombre = "";
+	}
 }

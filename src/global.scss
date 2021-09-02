@@ -13,7 +13,69 @@
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
 
+.modal-css .modal-wrapper{
+    --border-radius: 10px; 
+    --height: 75%;
+    width: 80%;
+}
 
-.title{
-    text-align: center;
+ion-content.background{
+	--background: url('assets/imgs/background/ucl-bg.jpg') 0 0/100% 100% no-repeat;
+}
+
+ion-icon{
+	font-size: 35px;
+	margin-left: 15px;
+}
+
+ion-content {
+	text-align: center;
+}
+
+
+
+.boton{
+	width: 70px;
+	margin: auto;
+	height: 40px;
+	font-weight: bold;
+	--background: var(--ion-color-danger, #eb445a);
+}
+
+
+ ion-button {
+	height: 50px;
+	width: 80%;
+	font-size: 20px;
+	font-weight: bold;
+	margin: auto;
+}
+
+ion-input, ion-item, ion-select, ion-datetime, ion-label {
+	background: none;
+	background-color: transparent;
+	color: rgb(78, 28, 214);
+	opacity: 100%;
+}
+
+.box {
+	background-color: rgb(245, 245, 245);
+	margin: auto;
+	margin-bottom: 10px; 
+	border-radius: 15px;
+	width: 80%;
+	line-height: 1.5;
+	font-size: 16px;
+	font-weight: bold;
+	box-shadow: rgba(66, 56, 0, 0.5) 0px 2px 3px;
+}
+
+.button-medio{
+	display: inline-block;
+	width: 37%;
+}
+
+.box-fecha {
+	margin-right: 13%;
+	line-height: 1.5;
 }

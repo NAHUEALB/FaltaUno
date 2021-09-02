@@ -1,10 +1,57 @@
-:host {
-  ion-content.background{
-    --background: none;
-    background-image: url('../../../assets/imgs/background/f1_grass_background.jpg');
-  }
+.titulo{
+	text-align: center;
+	padding: 20px 0px 10px 0px;
+	font-size: 25px;
+	color: white;
+	text-shadow: black 0px 0px 5px;
 }
 
-.textInicio{
-  color: aliceblue;
+.boton-inicio {
+	height: 80px;
+	margin: 10px 0px 10px 0px;
+	--box-shadow: 0 0px 0px 0px;
+	--border-radius: 15px;
 }
+
+ion-content.background{
+	//--background: url('../../../assets/imgs/background/ucl-bg.jpg') 0 0/100% 100% no-repeat;
+	--background: rgb(0,0,0);
+	--background: linear-gradient(150deg, rgba(0,0,0,1) 0%, rgba(41,0,97,1) 12%, rgba(0,0,0,1) 26%, rgba(23,0,55,1) 35%, rgba(0,0,0,1) 44%, rgba(36,4,84,1) 59%, rgba(0,0,0,1) 72%, rgba(18,0,55,1) 85%, rgba(0,0,0,1) 100%);
+}
+
+.boton1{
+  --background: url('../../../assets/imgs/background/cesped-bg.jpg') 0 0/100% 100% no-repeat;
+} 
+
+.boton2{
+  --background: url('../../../assets/imgs/background/boton-madera.jpg') 0 0/100% 100% no-repeat;
+} 
+
+.button-outline {
+  --border-width: 0;
+}
+
+ion-icon{
+	color:white;
+	font-size: 45px;
+	margin-left: 0;
+	padding-right: 15px;
+}
+
+/* .button-solid {
+  --background: transparent;
+  --color: var(--ion-color-primary-contrast, #fff);
+}  */
+
+.texto{
+	color: white;
+	font-size: 24px;
+	font-weight: 500;
+	letter-spacing: 3px;
+}
+
+h1{
+	color: white;
+	font-size: 16px;
+}
+

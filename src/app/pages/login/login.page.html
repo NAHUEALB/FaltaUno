@@ -1,0 +1,41 @@
+<ion-header>
+	<ion-toolbar>
+		<ion-buttons slot="start">
+			<ion-back-button></ion-back-button>
+		</ion-buttons>
+		<ion-title>Iniciar Sesión</ion-title>
+	</ion-toolbar>
+  </ion-header>  
+
+<ion-content class="background">
+<form [formGroup]="jugadorForm" (ngSubmit)="login()">
+
+  	<ion-item class="box">
+		<ion-input 
+		formControlName="usuario" 
+		type="email" 
+		placeholder="Ingresa tu correo"
+		required>
+		</ion-input>
+	</ion-item>
+
+	<ion-item class="box">
+		<ion-input 
+		formControlName="contraseña" 
+		type="password" 
+		placeholder="Contraseña"
+		required>
+		</ion-input>
+	</ion-item>
+
+	<ion-button 
+	type="submit" 
+	[disabled]="!jugadorForm.valid"
+	color="warning" 
+	expand="block">
+		Confirmar
+	</ion-button>
+
+</form>
+
+</ion-content>

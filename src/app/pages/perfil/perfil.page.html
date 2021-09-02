@@ -1,12 +1,48 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
-    </ion-buttons>
-    <ion-title>Perfil</ion-title>
-  </ion-toolbar>
+	<ion-toolbar>
+		<ion-buttons slot="start">
+			<ion-menu-button></ion-menu-button>
+		</ion-buttons>
+		<ion-title>Perfil</ion-title>
+	</ion-toolbar>
 </ion-header>
 
 <ion-content class="background">
-  <h1 class="title">Hola Aby</h1>
+	<div>
+		<img id="profilePic" [src]="'/assets/perfil.svg'">
+		<div class="datos">
+			<h3>Nombre: <b>{{ jugador.nombre }}</b> (@{{ jugador.usuario }})</h3>
+			<p>Edad: {{ edad }}</p>
+			<p>Sexo: {{jugador.sexo}}</p>
+		</div>
+	</div>
+
+	<h3 class="titulo"><b>Último partido</b></h3>
+	<br>
+	<div class="contenedor">
+		<div class="estadio">
+			<ion-img style="height: 50%;" src="../../../assets/stadio-sfondo.jpg"></ion-img>
+			<p id="resultado">{{ partido.resultado }}</p>
+		</div>
+	</div>
+	<br>
+	<h3 class="titulo"><b>Valoración</b></h3>
+	<div class="stars">
+		<div *ngFor="let star of stars">
+			<img *ngIf="star === 'full'" class="star" [src]="'/assets/stars/star-full.png'">
+			<img *ngIf="star === 'half'" class="star" [src]="'/assets/stars/star-half.png'">
+			<img *ngIf="star === 'null'" class="star" [src]="'/assets/stars/star-null.png'">
+		</div>
+		<span style="font-size: 20px;">({{ valoracion }})</span>
+	</div>
+
+	<br>
+	<div>
+		<h3 class="titulo"><b>Estadisticas</b></h3>
+		<div class="estadisticas">
+			<p>Puntaje acumulado: {{ jugador.puntaje }}</p>
+			<p>Votos recibidos: {{ jugador.cvotos }}</p>
+		</div>
+	</div>
+
 </ion-content>

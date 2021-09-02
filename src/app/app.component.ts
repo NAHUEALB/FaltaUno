@@ -1,8 +1,13 @@
+import { MenuController } from '@ionic/angular';
+import { FirebaseauthService } from './serv/firebaseauth.service';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { BuscarPage } from './pages/buscar/buscar.page';
 import { InicioPage } from './pages/inicio/inicio.page';
-import { PerfilPage } from './pages/perfil/perfil.page';
+import { TabsPage } from './pages/tabs/tabs.page';
+
+import { Storage } from '@ionic/storage-angular';
+
 
 @Component({
   selector: 'app-root',
@@ -13,18 +18,30 @@ import { PerfilPage } from './pages/perfil/perfil.page';
 export class AppComponent {
 
   options: Array<{ title: string, component: any, icon: string, ruta:string}>;
-    constructor(
-      private router: Router
-    ) {
-      this.options = [
-        { title: 'Inicio', component: InicioPage, icon:'home' ,  ruta:'inicio' },
-        { title: 'Buscar', component: BuscarPage, icon: 'search',  ruta: 'buscar' },
-        { title: 'Perfil', component: PerfilPage, icon:'walk-outline',  ruta: 'perfil' }
-      ]
+	constructor(
+	public menuCtrl: MenuController,
+	private router: Router,
+	public firebaseauthService: FirebaseauthService,
+	public storage: Storage,
+	){
+		this.options = [
+			{ title: 'Inicio', component: InicioPage, icon:'home' ,  ruta:'inicio' },
+			{ title: 'Buscar', component: BuscarPage, icon: 'search',  ruta: 'buscar' },
+			{ title: 'Perfil', component: TabsPage, icon:'walk-outline',  ruta: 'tabs' },
+			{ title: 'Cerrar Sesion', component: InicioPage, icon: 'log-out-outline',  ruta: 'principal' }
+		]
     }
 
-  openOptions(option){
-    this.router.navigate([`/${option.ruta}`]);
-  }
+	openOptions(option){
+		if(option.title == 'Cerrar Sesion'){
+			this.menuCtrl.enable(false);
+			this.firebaseauthService.logout();
+		}
+		this.router.navigate([`/${option.ruta}`]);
+	}
+
+	async ngOnInit() {
+		await this.storage.create();
+	}
 
 }
