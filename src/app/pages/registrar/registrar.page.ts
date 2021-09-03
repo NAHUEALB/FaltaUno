@@ -23,7 +23,9 @@ export class RegistrarPage implements OnInit {
 	jugador: Jugador;
 	docSubscription;
 	usuarioSubscription;
-	msj="Cargando usuario"
+	msj="Cargando usuario";
+
+	cargando: boolean;
 
 	localidades = ["La Plata", "Ensenada", "Berisso"];
 	sexos = ["No binario", "Hombre", "Mujer"];
@@ -38,7 +40,6 @@ export class RegistrarPage implements OnInit {
 	public firebaseauthService: FirebaseauthService,
 	private storage: Storage
 	){ 
-		// this.menuCtrl.enable(false);
 		this.jugador = {
 			id: '',
 			nombre: '',
@@ -61,11 +62,16 @@ export class RegistrarPage implements OnInit {
 			ubicacion: '',
 			sexo: '',
 		})
+		
 	}
 
 	ngOnInit() {
 	}
 
+	ionViewWillEnter(){
+		this.cargando = false;
+		this.jugadorForm.reset();
+	}
 
 	async presentToast(msg: string, time: number) {
 		const toast = await this.toastController.create({
@@ -76,8 +82,7 @@ export class RegistrarPage implements OnInit {
 	}
 
 	crearJugador(){
-		const boton = document.getElementById("boton-submit");
-		boton.innerHTML = "Cargando...";
+		this.cargando = true;
 		let user= this.jugadorForm.value.usuario;
 		let pw = this.jugadorForm.value.contrareg;
 		console.log(user + ": " + pw);
@@ -103,13 +108,32 @@ export class RegistrarPage implements OnInit {
 				});
 			})
 			.catch((err) => {
-				this.presentToast(err, 3000);
-				console.log('error' + err);
+				this.loadingController.dismiss();
+				this.cargando = false;
+				let codigo: string = err.code;
+				if(codigo.includes("auth/user-not-found")){
+					this.presentToast("Usuario ingresado no existe", 3000);
+				}else{
+					if(codigo.includes("auth/wrong-password")){
+						this.presentToast("Contraseña incorrecta", 3000);
+					}else{
+						this.presentToast(err, 3000);
+					}
+				}
 			});
 		})
 		.catch(err =>{
-			this.presentToast(err,3000)
-			console.log("error"+ err);
+			this.cargando = false;
+			this.loadingController.dismiss();
+			if(err.code.includes("auth/email-already-in-use")){
+				this.presentToast("Correo electronico ya registrado", 3000);
+			}else{
+				if("auth/invalid-email"){
+					this.presentToast("Correo electronico con formato incorrecto", 3000);
+				}else{
+					this.presentToast(err, 3000);
+				}
+			}
 		})		
 	}
 
