@@ -38,7 +38,8 @@ ion-content {
 }
 
 
- ion-button {
+
+ion-button {
 	height: 50px;
 	width: 80%;
 	font-size: 20px;
@@ -46,7 +47,7 @@ ion-content {
 	margin: auto;
 }
 
-ion-input, ion-item, ion-select, ion-datetime, ion-label {
+ion-input, ion-item, ion-select, ion-label {
 	background: none;
 	background-color: transparent;
 	color: rgb(78, 28, 214);
@@ -62,7 +63,7 @@ ion-input, ion-item, ion-select, ion-datetime, ion-label {
 	line-height: 1.5;
 	font-size: 16px;
 	font-weight: bold;
-	box-shadow: rgba(66, 56, 0, 0.5) 0px 2px 3px;
+	color: gray;
 }
 
 .button-medio{
