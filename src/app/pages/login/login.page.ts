@@ -27,6 +27,9 @@ export class LoginPage implements OnInit {
 	docSubscription;
 	usuarioSubscription;
 	msj = 'Cargando informacion de usuario';
+
+	USUARIO_NO_EXISTE: string = "auth/user-not-found"
+
 	constructor(
 	public formBuilder: FormBuilder,
 	private router: Router,
@@ -84,8 +87,29 @@ export class LoginPage implements OnInit {
 			});
 		})
 		.catch((err) => {
-			this.presentToast(err, 3000);
-			console.log('!!!error!!!:' + err);
+			this.loadingController.dismiss();
+			let codigo: string = err.code;
+
+			//No se porque no funciona
+			// switch(codigo){
+			// 	case this.USUARIO_NO_EXISTE:{
+			// 		this.presentToast("Usuario ingresado no existe", 3000);
+			// 	}
+			// 	case "auth/wrong-password":{
+			// 		this.presentToast("Contraseña incorrecta", 3000);	
+			// 	}
+			// }
+
+			if(codigo.includes("auth/user-not-found")){
+				this.presentToast("Usuario ingresado no existe", 3000);
+			}else{
+				if(codigo.includes("auth/wrong-password")){
+					this.presentToast("Contraseña incorrecta", 3000);
+				}else{
+					this.presentToast(err, 3000);
+				}
+			}
+			
 		});				
   	}
 

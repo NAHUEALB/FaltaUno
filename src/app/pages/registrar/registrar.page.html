@@ -90,13 +90,11 @@
 	<ion-row>
 
 	<ion-col>
-		<ion-button id="boton-submit"
+		<ion-button
 		[disabled]="!jugadorForm.valid"
 		type="submit" 
 		color="warning" 
-		expand="block">
-			Registrar
-		</ion-button>
+		expand="block">	{{cargando ? "CARGANDO..." : "REGISTRAR" }}</ion-button>
 	</ion-col>
 	
 	</ion-row>
