@@ -1,13 +1,15 @@
 <ion-content class="background">
-	<ion-img id="flama" src="../assets/flames.gif"></ion-img>
-	<ion-img src="../assets/imgs/logo/escudo4.png"></ion-img>
+	<ion-img class="logo" id="flama" src="../assets/flames.gif"></ion-img>
+	<ion-img class="logo" src="../assets/imgs/logo/escudo4.png"></ion-img>
 		<br>
 		<ion-button class="box" size="large" color="warning" (click)="login()">Iniciar sesion</ion-button> 
 		<br>
 		<br>
 		<div class="registroGoogle">
 		<ion-button class="box button-medio button-left" size="large" color="primary" (click)="irAlCrear()">Registro</ion-button> 
-		<ion-button class="box button-medio button-right" size="large" color="danger" (click)="irAlCrear()">Google</ion-button>
+		<ion-button color="light" class="box button-medio button-right" size="large" (click)="irAlCrear()">
+			<ion-img id="icon-google" src="..\assets\imgs\icon\icon-google.png"></ion-img>
+		</ion-button>
 		</div>
 		<br>
     <ion-button (click)="abrirModal()" color="dark" class="box button-ayuda" size="medium">Ayuda</ion-button>  
