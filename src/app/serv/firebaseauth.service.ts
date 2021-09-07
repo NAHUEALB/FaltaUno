@@ -17,13 +17,21 @@ export class FirebaseauthService {
   login(email, pass){
     return this.auth.signInWithEmailAndPassword(email,pass);
   }
+  
+  async loginGoogle() {
+    try {
+      return this.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider);
+    } catch (err) {
+      console.log("Detalles: " + err);
+    }
+  }
 
   registrar(email, pass){
     return this.auth.createUserWithEmailAndPassword(email,pass);
   }
 
   logout(){
-	this.storage.clear();
+	  this.storage.clear();
     this.auth.signOut();
   }
   
@@ -40,12 +48,4 @@ export class FirebaseauthService {
     return this.auth.user;
   }
 
-  async loginGoogle() {
-    try {
-      return this.auth.signInWithRedirect(new firebase.auth.GoogleAuthProvider);
-    } catch (err) {
-      console.log("Error en el loginGoogle de firebaseauth.service.ts");
-      console.log("Detalles: " + err);
-    }
-  }
 }
