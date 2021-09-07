@@ -15,9 +15,9 @@
 }
 
 ion-content.background{
-	//--background: url('../../../assets/imgs/background/ucl-bg.jpg') 0 0/100% 100% no-repeat;
-	--background: rgb(0,0,0);
-	--background: linear-gradient(150deg, rgba(0,0,0,1) 0%, rgba(41,0,97,1) 12%, rgba(0,0,0,1) 26%, rgba(23,0,55,1) 35%, rgba(0,0,0,1) 44%, rgba(36,4,84,1) 59%, rgba(0,0,0,1) 72%, rgba(18,0,55,1) 85%, rgba(0,0,0,1) 100%);
+	--background: url('../../../assets/imgs/background/inicio-bg.jpg') 0 0/100% 100% no-repeat;
+	//--background: rgb(0,0,0); 
+	//--background: linear-gradient(150deg, rgba(0,0,0,1) 0%, rgba(41,0,97,1) 12%, rgba(0,0,0,1) 26%, rgba(23,0,55,1) 35%, rgba(0,0,0,1) 44%, rgba(36,4,84,1) 59%, rgba(0,0,0,1) 72%, rgba(18,0,55,1) 85%, rgba(0,0,0,1) 100%);
 }
 
 .boton1{
@@ -61,7 +61,8 @@ h1{
 #block-noticia {
 	margin-top: 10%;
 	padding: 10px 20px 30px 20px;
-	background-color: rgb(8, 0, 44);
+	background-color: rgba(30, 68, 20, 0.5);
+	box-shadow: rgba(8, 146, 8, 0.45) 0px 0px 15px;
 }
 
 .titulo-noticias {
