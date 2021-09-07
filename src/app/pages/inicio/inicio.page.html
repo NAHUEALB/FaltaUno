@@ -9,19 +9,26 @@
 
   
 <ion-content class="background">
-  <h3 class="titulo">¡Hola{{nombre}}!</h3>
+  	<h3 class="titulo">¡Hola{{nombre}}!</h3>
 
-  <ion-button class="boton-inicio boton1" (click)="irAlBuscar()">
+	<ion-button class="boton-inicio boton1" (click)="irAlBuscar()">
 		<ion-icon name="search"></ion-icon>
 		<p class="texto"> salas</p>
-  </ion-button>
+	</ion-button>
  
-  <ion-button class="boton-inicio boton2" (click)="irAlPerfil()">
+	<ion-button class="boton-inicio boton2" (click)="irAlPerfil()">
 		<ion-icon name="person"></ion-icon>
 		<p class="texto">perfil</p>
-  </ion-button>
+	</ion-button>
   
-   <h3 class="titulo">Noticias</h3>
-  <h1>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis quod eum adipisci facere, officiis cupiditate numquam inventore ipsa. Ex, molestiae culpa blanditiis incidunt minima sint. Molestiae nisi velit eum dolor, quos voluptate deserunt ullam, consequuntur voluptatibus perspiciatis nostrum quas? Cum veniam, ipsa, eos quos molestias dicta, ea repellendus suscipit reprehenderit asperiores laudantium repellat iure impedit aliquid tenetur nulla facilis. Magnam amet repellat nam quidem corrupti animi ea, officia modi consequuntur voluptatibus dolores nihil dolorum eaque consectetur maxime maiores expedita iste fugiat ipsum itaque accusamus deserunt similique? Mollitia, blanditiis! Accusantium dolor rem accusamus totam quasi voluptates sit id et cumque autem provident ducimus, porro quam officia rerum quaerat necessitatibus non</h1>
+	<div id="block-noticia">
+		<h3 class="titulo-noticias">Noticias</h3>
+		<div id="block-text">
+			<ion-text id="text-noticia">
+				{{noticia}}
+			</ion-text>
+		</div>
+	</div>
+
 
 </ion-content>

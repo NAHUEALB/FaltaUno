@@ -14,6 +14,15 @@ export class InicioPage implements OnInit {
 	enlace: 'Jugador';
 	jugador: Jugador;
 	nombre: string = ''; 
+	enlaceNoticia = 'Noticia';
+	noticias = [
+		"Buscá partidos cerca de tu zona, encontrá amigos, y participá de la comunidad de fútbol platense más grande del condado", 
+		"Si te falta un jugador, siempre podés acudir a nuestra app para encontrar a ese que falta, por más que se haga rogar", 
+		"Recordá invitar a tus amigos para que la comunidad crezca cada vez más y nadie se quede con las ganas de jugar", 
+		"Planeamos estar operativos a fin de año, así que andá lustrando esos botines que juegan de titulares dentro de poco"];
+	noticia = "Cargando noticias...";
+	indexNoticia = 0;
+	blockNoticia = document.getElementById("text-noticia");
 
 	constructor(
 	private menuCtrl: MenuController, 
@@ -40,7 +49,7 @@ export class InicioPage implements OnInit {
 	}
 
 	ngOnInit() {
-		
+		this.nextNoticia();
 	}
 
 	irAlBuscar(){
@@ -63,5 +72,21 @@ export class InicioPage implements OnInit {
 
 	ionViewWillLeave() {
 		this.nombre = "";
+	}
+
+	nextNoticia() {
+		let blockNoticia = document.getElementById("text-noticia");
+		this.indexNoticia++;
+		if (this.indexNoticia == 4) {
+			this.indexNoticia = 0;
+		}
+		this.noticia = this.noticias[this.indexNoticia];
+		setTimeout(() => {
+			blockNoticia.classList.add('hide');
+		}, 9000);
+		setTimeout(() => { 
+			blockNoticia.classList.remove('hide');
+			this.nextNoticia(); 
+		}, 10000 );
 	}
 }
