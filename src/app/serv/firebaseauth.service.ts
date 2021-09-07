@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Storage } from '@ionic/storage-angular';
+import firebase from 'firebase/app';
 
 @Injectable({
   providedIn: 'root'
@@ -39,5 +40,12 @@ export class FirebaseauthService {
     return this.auth.user;
   }
 
-
+  async loginGoogle() {
+    try {
+      return this.auth.signInWithRedirect(new firebase.auth.GoogleAuthProvider);
+    } catch (err) {
+      console.log("Error en el loginGoogle de firebaseauth.service.ts");
+      console.log("Detalles: " + err);
+    }
+  }
 }
