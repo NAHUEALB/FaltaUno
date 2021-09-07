@@ -5,7 +5,8 @@ import { Router } from '@angular/router';
 import { BuscarPage } from './pages/buscar/buscar.page';
 import { InicioPage } from './pages/inicio/inicio.page';
 import { TabsPage } from './pages/tabs/tabs.page';
-
+import { AyudaPage } from './pages/ayuda/ayuda.page';
+import { ModalController } from '@ionic/angular';
 import { Storage } from '@ionic/storage-angular';
 
 
@@ -20,6 +21,7 @@ export class AppComponent {
   options: Array<{ title: string, component: any, icon: string, ruta:string}>;
 	constructor(
 	public menuCtrl: MenuController,
+	private modalController: ModalController,
 	private router: Router,
 	public firebaseauthService: FirebaseauthService,
 	public storage: Storage,
@@ -31,6 +33,25 @@ export class AppComponent {
 			{ title: 'Cerrar Sesion', component: InicioPage, icon: 'log-out-outline',  ruta: 'principal' }
 		]
     }
+
+
+	async abrirModal() {
+		this.menuCtrl.close();
+		const modal = await this.modalController.create({
+		  component: AyudaPage,
+		  cssClass:'modal-css',
+		  swipeToClose:true,
+		  presentingElement: await this.modalController.getTop()
+
+		});
+		await modal.present();
+		let {data}= await modal.onDidDismiss();
+		if(data.dismissed){
+		  console.log("cerrarModal");
+		}
+
+	}
+
 
 	openOptions(option){
 		if(option.title == 'Cerrar Sesion'){
