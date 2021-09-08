@@ -23,6 +23,7 @@ export class InicioPage implements OnInit {
 	noticia = "Cargando noticias...";
 	indexNoticia = 0;
 	blockNoticia = document.getElementById("text-noticia");
+	mostrarNoticias: boolean;
 
 	constructor(
 	private menuCtrl: MenuController, 
@@ -49,6 +50,7 @@ export class InicioPage implements OnInit {
 	}
 
 	ngOnInit() {
+		this.mostrarNoticias = true;
 		this.nextNoticia();
 	}
 
@@ -72,6 +74,7 @@ export class InicioPage implements OnInit {
 
 	ionViewWillLeave() {
 		this.nombre = "";
+		this.mostrarNoticias = false;
 	}
 
 	nextNoticia() {
@@ -86,7 +89,7 @@ export class InicioPage implements OnInit {
 		}, 9000);
 		setTimeout(() => { 
 			blockNoticia.classList.remove('hide');
-			this.nextNoticia(); 
+			if (this.mostrarNoticias) this.nextNoticia(); 
 		}, 10000 );
 	}
 }

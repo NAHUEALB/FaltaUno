@@ -2,14 +2,13 @@ import { FirebaseauthService } from './../../serv/firebaseauth.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { LoadingController, MenuController } from '@ionic/angular';
+import { MenuController } from '@ionic/angular';
 
 import { Jugador } from 'src/app/models/jugador';
 import { DatabaseService } from 'src/app/serv/database.service';
 
 import { ToastController } from '@ionic/angular';
 import { Storage } from '@ionic/storage-angular';
-import { Utilities } from 'src/app/utilities/utils';
 
 @Component({
 	selector: 'app-registrar',
@@ -36,7 +35,6 @@ export class RegistrarPage implements OnInit {
 	public menuCtrl: MenuController, 
 	public database: DatabaseService,
 	public toastController: ToastController,
-	public loadingController: LoadingController,
 	public firebaseauthService: FirebaseauthService,
 	private storage: Storage
 	){ 
@@ -86,7 +84,6 @@ export class RegistrarPage implements OnInit {
 		let user= this.jugadorForm.value.usuario;
 		let pw = this.jugadorForm.value.contrareg;
 		console.log(user + ": " + pw);
-		Utilities.presentLoading(this.loadingController, this.msj);
 		this.firebaseauthService.registrar(user, pw)
 		.then(res => {
 			let data = this.cargarJugador();
@@ -101,14 +98,12 @@ export class RegistrarPage implements OnInit {
 						this.storage.clear();
 						this.jugador = document;
 						this.storage.set("jugador", document).then(() => {
-							this.loadingController.dismiss();
 							this.router.navigate(['/inicio']);
 						})
 					})
 				});
 			})
 			.catch((err) => {
-				this.loadingController.dismiss();
 				this.cargando = false;
 				let codigo: string = err.code;
 				if(codigo.includes("auth/user-not-found")){
@@ -124,7 +119,6 @@ export class RegistrarPage implements OnInit {
 		})
 		.catch(err =>{
 			this.cargando = false;
-			this.loadingController.dismiss();
 			if(err.code.includes("auth/email-already-in-use")){
 				this.presentToast("Correo electronico ya registrado", 3000);
 			}else{
