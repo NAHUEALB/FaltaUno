@@ -50,8 +50,7 @@ export class InicioPage implements OnInit {
 	}
 
 	ngOnInit() {
-		this.mostrarNoticias = true;
-		this.nextNoticia();
+		
 	}
 
 	irAlBuscar(){
@@ -70,6 +69,9 @@ export class InicioPage implements OnInit {
 		.catch(() => {
 			console.log("No se cargó el storage antes de querer mostrarlo")
 		});
+
+		this.mostrarNoticias = true;
+		this.nextNoticia();
 	}
 
 	ionViewWillLeave() {

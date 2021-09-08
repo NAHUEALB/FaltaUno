@@ -5,7 +5,6 @@ import { Router } from '@angular/router';
 
 import { ToastController } from '@ionic/angular';
 import { Storage } from '@ionic/storage-angular';
-import { Utilities } from 'src/app/utilities/utils';
 
 import { FirebaseauthService } from 'src/app/serv/firebaseauth.service';
 import { Jugador } from 'src/app/models/jugador';
