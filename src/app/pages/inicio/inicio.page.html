@@ -11,16 +11,6 @@
 <ion-content class="background">
   	<h3 class="titulo">¡Hola{{nombre}}!</h3>
 
-	<ion-button class="boton-inicio boton1" (click)="irAlBuscar()">
-		<ion-icon name="search"></ion-icon>
-		<p class="texto"> salas</p>
-	</ion-button>
- 
-	<ion-button class="boton-inicio boton2" (click)="irAlPerfil()">
-		<ion-icon name="person"></ion-icon>
-		<p class="texto">perfil</p>
-	</ion-button>
-  
 	<div id="block-noticia">
 		<h3 class="titulo-noticias">Noticias</h3>
 		<div id="block-text">
@@ -29,6 +19,17 @@
 			</ion-text>
 		</div>
 	</div>
+
+	<ion-button color="transparent" fill="clear" class="boton-inicio boton1" (click)="irAlBuscar()">
+		<ion-icon name="search"></ion-icon>
+		<p class="texto"> salas</p>
+	</ion-button>
+ 
+	<ion-button color="transparent" fill="clear" class="boton-inicio boton2" (click)="irAlPerfil()">
+		<ion-icon name="person"></ion-icon>
+		<p class="texto">perfil</p>
+	</ion-button>
+  
 
 
 </ion-content>

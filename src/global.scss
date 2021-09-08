@@ -13,17 +13,21 @@
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
 
+@import url('https://fonts.googleapis.com/css2?family=Rubik&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Karla:wght@300&display=swap');
+
 .modal-css .modal-wrapper{
     --border-radius: 10px; 
     --height: 75%;
-    width: 80%;
+    width: 90%;
 }
 
 ion-content.background{
-	--background: url('assets/imgs/background/ucl-bg.jpg') 0 0/100% 100% no-repeat;
+	--background: url('assets/imgs/background/dot-blue-bg.jpg') 0 0/100% 100% no-repeat;
 }
 
 ion-content {
+	font-family: "Karla", Verdana, Geneva, Tahoma, sans-serif;
 	text-align: center;
 }
 
@@ -42,9 +46,9 @@ ion-content {
 ion-button {
 	height: 50px;
 	width: 80%;
-	font-size: 20px;
-	font-weight: bold;
+	font-size: 24px;
 	margin: auto;
+	font-family: 'Rubik', sans-serif;
 }
 
 ion-input, ion-item, ion-select, ion-label,ion-datetime {

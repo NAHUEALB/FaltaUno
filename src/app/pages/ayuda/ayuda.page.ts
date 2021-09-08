@@ -4,7 +4,7 @@ import { ModalController } from '@ionic/angular';
 @Component({
   selector: 'app-ayuda',
   templateUrl: './ayuda.page.html',
-  styleUrls: ['./ayuda.page.scss'],
+  styleUrls: ['./ayuda.page.scss', '../../../global-modal-ayuda.scss'],
 })
 export class AyudaPage implements OnInit {
 
