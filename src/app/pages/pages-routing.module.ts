@@ -7,7 +7,11 @@ const routes: Routes = [
   {
     path: '',
     component: PagesPage
+  },  {
+    path: 'ayuda-menu-lateral',
+    loadChildren: () => import('./ayuda-menu-lateral/ayuda-menu-lateral.module').then( m => m.AyudaMenuLateralPageModule)
   }
+
 ];
 
 @NgModule({

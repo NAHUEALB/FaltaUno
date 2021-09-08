@@ -5,10 +5,9 @@ import { Router } from '@angular/router';
 import { BuscarPage } from './pages/buscar/buscar.page';
 import { InicioPage } from './pages/inicio/inicio.page';
 import { TabsPage } from './pages/tabs/tabs.page';
-import { AyudaPage } from './pages/ayuda/ayuda.page';
+import { AyudaMenuLateralPage } from './pages/ayuda-menu-lateral/ayuda-menu-lateral.page';
 import { ModalController } from '@ionic/angular';
 import { Storage } from '@ionic/storage-angular';
-
 
 @Component({
   selector: 'app-root',
@@ -38,7 +37,7 @@ export class AppComponent {
 	async abrirModal() {
 		this.menuCtrl.close();
 		const modal = await this.modalController.create({
-		  component: AyudaPage,
+		  component: AyudaMenuLateralPage,
 		  cssClass:'modal-css',
 		  swipeToClose:true,
 		  presentingElement: await this.modalController.getTop()
