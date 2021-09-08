@@ -23,6 +23,7 @@ export class InicioPage implements OnInit {
 	noticia = "Cargando noticias...";
 	indexNoticia = 0;
 	blockNoticia = document.getElementById("text-noticia");
+	mostrarNoticias: boolean;
 
 	constructor(
 	private menuCtrl: MenuController, 
@@ -49,7 +50,7 @@ export class InicioPage implements OnInit {
 	}
 
 	ngOnInit() {
-		this.nextNoticia();
+		
 	}
 
 	irAlBuscar(){
@@ -68,10 +69,14 @@ export class InicioPage implements OnInit {
 		.catch(() => {
 			console.log("No se cargó el storage antes de querer mostrarlo")
 		});
+
+		this.mostrarNoticias = true;
+		this.nextNoticia();
 	}
 
 	ionViewWillLeave() {
 		this.nombre = "";
+		this.mostrarNoticias = false;
 	}
 
 	nextNoticia() {
@@ -86,7 +91,7 @@ export class InicioPage implements OnInit {
 		}, 9000);
 		setTimeout(() => { 
 			blockNoticia.classList.remove('hide');
-			this.nextNoticia(); 
+			if (this.mostrarNoticias) this.nextNoticia(); 
 		}, 10000 );
 	}
 }
