@@ -47,10 +47,11 @@ ion-button {
 	margin: auto;
 }
 
-ion-input, ion-item, ion-select, ion-label {
+ion-input, ion-item, ion-select, ion-label,ion-datetime {
 	background: none;
 	background-color: transparent;
-	color: rgb(78, 28, 214);
+	/* color: rgb(78, 28, 214); */
+	color: blue;
 	opacity: 100%;
 }
 
