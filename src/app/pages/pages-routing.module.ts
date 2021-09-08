@@ -10,6 +10,10 @@ const routes: Routes = [
   },  {
     path: 'ayuda-menu-lateral',
     loadChildren: () => import('./ayuda-menu-lateral/ayuda-menu-lateral.module').then( m => m.AyudaMenuLateralPageModule)
+  },
+  {
+    path: 'registro-google',
+    loadChildren: () => import('./registro-google/registro-google.module').then( m => m.RegistroGooglePageModule)
   }
 
 ];

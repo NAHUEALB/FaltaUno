@@ -43,8 +43,12 @@ const routes: Routes = [
     path: 'login',
     loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule)
   },
+  {
+    path: 'registroGoogle',
+    loadChildren: () => import('./pages/registro-google/registro-google.module').then( m => m.RegistroGooglePageModule)
+  },
 
-
+  
 
 ];
 
