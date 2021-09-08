@@ -4,7 +4,7 @@ import { ModalController } from '@ionic/angular';
 @Component({
   selector: 'app-ayuda-menu-lateral',
   templateUrl: './ayuda-menu-lateral.page.html',
-  styleUrls: ['./ayuda-menu-lateral.page.scss'],
+  styleUrls: ['./ayuda-menu-lateral.page.scss', '../../../global-modal-ayuda.scss'],
 })
 export class AyudaMenuLateralPage implements OnInit {
 
