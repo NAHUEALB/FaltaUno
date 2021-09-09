@@ -52,12 +52,7 @@ export class PrincipalPage implements OnInit {
 			swipeToClose: true,
 			presentingElement: await this.modalController.getTop()
 		});
-
 		await modal.present();
-		let { data } = await modal.onDidDismiss();
-		if (data.dismissed) {
-			console.log("cerrarModal");
-		}
 	}
 
 	ngOnInit() {

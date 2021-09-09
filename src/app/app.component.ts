@@ -44,11 +44,6 @@ export class AppComponent {
 
 		});
 		await modal.present();
-		let {data}= await modal.onDidDismiss();
-		if(data.dismissed){
-		  console.log("cerrarModal");
-		}
-
 	}
 
 
