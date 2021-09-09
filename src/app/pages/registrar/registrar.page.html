@@ -8,11 +8,9 @@
   </ion-header>
 
 <ion-content class="background">
-	<!-- <h1 class="titulo">Crear Cuenta</h1> -->
-	<!-- <img src="../../../assets/imgs/background/iconoPerfil.jpg" width="150px" height="150px"> -->
 <form [formGroup]="jugadorForm" (ngSubmit)="crearJugador()">
 
-  	<ion-item class="box">
+  	<ion-item class="i-text">
 		<ion-input 
 		pattern="[a-zA-Z ]*"
 		formControlName="nombrereg" 
@@ -23,7 +21,7 @@
 		</ion-input>
 	</ion-item>
 
-	<ion-item class="box">
+	<ion-item class="i-text">
 		<ion-input 
 		formControlName="usuario" 
 		type="email" 
@@ -34,7 +32,7 @@
 		</ion-input>
 	</ion-item>
 
-	<ion-item class="box">
+	<ion-item class="i-text">
 		<ion-input 
 		formControlName="contrareg" 
 		type="password"
@@ -44,29 +42,19 @@
 		</ion-input>
 	</ion-item>
 
-	<ion-row>
-		
-	<div class="icon">
-		<ion-icon name="calendar-outline"></ion-icon>
+	<div class="i-text" id="input-fecha">
+		<ion-datetime
+		formControlName="fnacimiento" 
+		display-format="DD/MM/YYYY"
+		placeholder="📅 Fecha de nacimiento"
+		required>
+		</ion-datetime>
 	</div>
 
-	<ion-col>
-		<div class="box box-fecha">
-			<ion-datetime
-			formControlName="fnacimiento" 
-			display-format="DD/MM/YYYY"
-			placeholder="Fecha de nacimiento"
-			required>
-			</ion-datetime>
-		</div>
-	</ion-col>
-
-	</ion-row>
-
-	<ion-item class="box">  
+	<ion-item class="i-text">  
 		<ion-select
 		formControlName="ubicacion" 
-		placeholder="Seleccionar localidad"
+		placeholder="🔻 Seleccionar localidad"
 		required>
 			<ion-select-option *ngFor="let localidad of localidades">
 				{{localidad}}
@@ -75,10 +63,10 @@
 	</ion-item>
 
 
-	<ion-item class="box">  
+	<ion-item class="i-text">  
 		<ion-select  
 		formControlName="sexo" 
-		placeholder="Elegir sexo"
+		placeholder="🔻 Elegir sexo"
 		required>
 			<ion-select-option *ngFor="let sexo of sexos" >
 				{{sexo}}
@@ -87,15 +75,17 @@
 	</ion-item>
 
 	<ion-row>
-
-	<ion-col>
-		<ion-button
-		[disabled]="!jugadorForm.valid"
-		type="submit" 
-		color="warning" 
-		expand="block">	{{cargando ? "CARGANDO..." : "REGISTRAR" }}</ion-button>
-	</ion-col>
-	
+		<ion-col>
+			<ion-button 
+				class="bt-round bt-up bt-text" 
+				id="bt-submit"
+				type="submit"
+				[disabled]="!jugadorForm.valid"
+				color="transparent"
+				fill="clear">
+				{{cargando ? "Cargando..." : "Registrar" }}
+			</ion-button>
+		</ion-col>
 	</ion-row>
 
 </form>

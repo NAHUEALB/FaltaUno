@@ -1,16 +1,48 @@
 <ion-content class="background">
-	<ion-img class="logo" id="flama" src="../assets/flames.gif"></ion-img>
-	<ion-img class="logo" src="../assets/imgs/logo/escudo4.png"></ion-img>
-		<br>
-		<ion-button class="box" size="large" color="warning" (click)="login()">Iniciar sesion</ion-button> 
-		<br>
-		<br>
-		<div class="registroGoogle">
-		<ion-button class="box button-medio button-left" size="large" color="primary" (click)="irAlCrear()">Registro</ion-button> 
-		<ion-button color="light" class="box button-medio button-right" size="large" (click)="onLoginGoogle()">
+
+	<ion-img class="logo" id="flama" 
+		src="../assets/flames.gif">
+	</ion-img>
+	<ion-img class="logo" 
+		src="../assets/imgs/logo/escudo4.png">
+	</ion-img>
+	
+	<ion-button 
+		class="bt-round bt-up bt-text" 
+		id="bt-iniciar"
+		(click)="login()" 
+		color="transparent"
+		fill="clear">
+		Iniciar sesión
+	</ion-button> 
+
+	<ion-button 
+		class="bt-round bt-up bt-text" 
+		id="bt-registrar"
+		(click)="irAlCrear()" 
+		color="transparent"
+		fill="clear">
+		Registrarse
+	</ion-button>
+
+	<div>
+		<ion-button 
+			class="bt-round bt-half bt-up bt-left bt-text" 
+			id="bt-ayuda" 
+			(click)="abrirModal()" 
+			color="transparent"
+			fill="clear">
+			Ayuda
+		</ion-button> 
+
+		<ion-button 
+			class="bt-round bt-half bt-up bt-right bt-text" 
+			id="bt-google" 
+			(click)="onLoginGoogle()" 
+			color="transparent"
+			fill="clear">
 			<ion-img id="icon-google" src="..\assets\imgs\icon\icon-google.png"></ion-img>
 		</ion-button>
-		</div>
-		<br>
-    <ion-button (click)="abrirModal()" color="dark" class="box button-ayuda" size="medium">Ayuda</ion-button>  
+	</div>
+
 </ion-content>

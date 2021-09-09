@@ -8,9 +8,12 @@
   </ion-header>  
 
 <ion-content class="background">
+<ion-img id="dios" 
+	src="../assets/imgs/dios.png">
+</ion-img>
 <form [formGroup]="jugadorForm" (ngSubmit)="login()">
 
-  	<ion-item class="box">
+  	<ion-item class="i-text">
 		<ion-input 
 		formControlName="usuario" 
 		type="email" 
@@ -20,7 +23,7 @@
 		</ion-input>
 	</ion-item>
 
-	<ion-item class="box">
+	<ion-item class="i-text">
 		<ion-input 
 		formControlName="contraseña" 
 		type="password" 
@@ -31,10 +34,12 @@
 	</ion-item>
 
 	<ion-button 
-	type="submit" 
-	[disabled]="!jugadorForm.valid"
-	color="warning" 
-	expand="block">
+		class="bt-round bt-up bt-text" 
+		id="bt-submit"
+		type="submit"
+		[disabled]="!jugadorForm.valid"
+		color="transparent"
+		fill="clear">
 		Confirmar
 	</ion-button>
 

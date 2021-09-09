@@ -16,10 +16,10 @@ export class InicioPage implements OnInit {
 	nombre: string = ''; 
 	enlaceNoticia = 'Noticia';
 	noticias = [
-		"Buscá partidos cerca de tu zona, encontrá amigos, y participá de la comunidad de fútbol platense más grande del condado", 
-		"Si te falta un jugador, siempre podés acudir a nuestra app para encontrar a ese que falta, por más que se haga rogar", 
+		"Buscá partidos cerca de tu zona, encontrá amigos, y participá de la comunidad más grande del condado", 
+		"Si te falta un jugador, siempre podés acudir a nosotros para encontrar al que falta y que no se haga rogar", 
 		"Recordá invitar a tus amigos para que la comunidad crezca cada vez más y nadie se quede con las ganas de jugar", 
-		"Planeamos estar operativos a fin de año, así que andá lustrando esos botines que juegan de titulares dentro de poco"];
+		"Planeamos estar operativos a fin de año, así que andá lustrando esos botines que juegan de titulares en poco"];
 	noticia = "Cargando noticias...";
 	indexNoticia = 0;
 	blockNoticia = document.getElementById("text-noticia");

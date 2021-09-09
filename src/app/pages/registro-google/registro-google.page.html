@@ -5,60 +5,56 @@
 		</ion-buttons>
 		<ion-title>Registrar</ion-title>
 	</ion-toolbar>
-  </ion-header>
+</ion-header>
 
 <ion-content class="background">
-  <form [formGroup]="jugadorForm" (ngSubmit)="crearJugador()">
-    <ion-row>
-    <div class="icon">
-      <ion-icon name="calendar-outline"></ion-icon>
-    </div>
-  
-    <ion-col>
-      <div class="box box-fecha">
-        <ion-datetime
-        formControlName="fnacimiento" 
-        display-format="DD/MM/YYYY"
-        placeholder="Fecha de nacimiento"
-        required>
-        </ion-datetime>
-      </div>
-    </ion-col>
-  
-    </ion-row>
-  
-    <ion-item class="box">  
-      <ion-select
-      formControlName="ubicacion" 
-      placeholder="Seleccionar localidad"
-      required>
-        <ion-select-option *ngFor="let localidad of localidades">
-          {{localidad}}
-        </ion-select-option>
-      </ion-select>
-    </ion-item>
-  
-  
-    <ion-item class="box">  
-      <ion-select  
-      formControlName="sexo" 
-      placeholder="Elegir sexo"
-      required>
-        <ion-select-option *ngFor="let sexo of sexos" >
-          {{sexo}}
-        </ion-select-option>
-      </ion-select>
-    </ion-item>
+<form [formGroup]="jugadorForm" (ngSubmit)="crearJugador()">
+
+	<div class="i-text" id="input-fecha">
+		<ion-datetime
+		formControlName="fnacimiento" 
+		display-format="DD/MM/YYYY"
+		placeholder="📅 Fecha de nacimiento"
+		required>
+		</ion-datetime>
+	</div>
+
+	<ion-item class="i-text">  
+		<ion-select
+		formControlName="ubicacion" 
+		placeholder="🔻 Seleccionar localidad"
+		required>
+		<ion-select-option *ngFor="let localidad of localidades">
+			{{localidad}}
+		</ion-select-option>
+		</ion-select>
+	</ion-item>
 
 
-    <ion-col>
-      <ion-button
-      [disabled]="!jugadorForm.valid"
-      type="submit" 
-      color="warning" 
-      expand="block">	ENVIAR</ion-button>
-    </ion-col>
+	<ion-item class="i-text">  
+		<ion-select  
+		formControlName="sexo" 
+		placeholder="🔻 Elegir sexo"
+		required>
+		<ion-select-option *ngFor="let sexo of sexos" >
+			{{sexo}}
+		</ion-select-option>
+		</ion-select>
+	</ion-item>
 
-  </form>
+	<ion-row>
+		<ion-col>
+		<ion-button 
+			class="bt-round bt-up bt-text" 
+			id="bt-submit"
+			type="submit"
+			[disabled]="!jugadorForm.valid"
+			color="transparent"
+			fill="clear">
+			{{cargando ? "Cargando..." : "Registrar" }}
+		</ion-button>
+		</ion-col>
+	</ion-row>
 
+</form>
 </ion-content>

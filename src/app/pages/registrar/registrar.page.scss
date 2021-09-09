@@ -1,34 +1,10 @@
 form {
-	margin-top:22%
+	margin-top:20%
 }
 
-.label-stacked.sc-ion-label-md-h, .label-floating.sc-ion-label-md-h{
-  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+#input-fecha {
+	margin-right: 0%;
+	line-height: 1.7;
+  width: 87%;
+  text-align: left;
 }
-
-.list-md {
-  padding-top: 10px;
-  padding-bottom: 10px;
-} 
-
-ion-datetime{
-  height: 50px;
-  padding-right:10%;
-}
-ion-datetime::part(placeholder){
-  opacity: 0.5;
-  padding-top: 5px;
-}
-
-ion-datetime::part(text){
-  opacity: 1;
-  padding-top: 5px;
-}
-
-
-.icon{
-  font-size: 60px;
-  margin-left: 10%;
-  color: rgb(238, 213, 70);
-}
-

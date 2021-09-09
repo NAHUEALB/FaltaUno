@@ -6,25 +6,17 @@
 #flama {
 	position: absolute;
 	transform: rotate(-45deg);
+	width: 200px;
 	top: -110px;
-	left: -35px;
+	left: -25px;
 }
 
 #icon-google {
 	height: 32px;
 }
 
-.button-left {
-	margin-left: 10%;
-	margin-right: 3%;
-}
-
-.button-right{
-	margin-right: 10%;
-	margin-left: 3%;
-}
-
-.button-ayuda {
-	height: 35px;
-	width: 100px;
+#bt-ayuda {
+	font-size: 16px;
+	color: rgb(255, 255, 255);
+	letter-spacing: 1px;
 }

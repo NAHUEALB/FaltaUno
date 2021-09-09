@@ -1,6 +1,4 @@
 @import "~@ionic/angular/css/core.css";
-
-/* Basic CSS for apps built with Ionic */
 @import "~@ionic/angular/css/normalize.css";
 @import "~@ionic/angular/css/structure.css";
 @import "~@ionic/angular/css/typography.css";
@@ -13,70 +11,123 @@
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
 
+/* Fonts very piolas to stylize the wea */
 @import url('https://fonts.googleapis.com/css2?family=Rubik&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Karla:wght@300&display=swap');
 
-.modal-css .modal-wrapper{
-    --border-radius: 10px; 
-    --height: 75%;
-    width: 90%;
-}
+/* Variables de la paleta de colores */
+$yellow-text: rgba(255, 253, 116, 0.8);
+$bt-sh-yellow: rgba(255, 251, 0, 0.3); 
+$bt-sh-black: rgba(60, 60, 60, 0.6);
 
-ion-content.background{
-	--background: url('assets/imgs/background/dot-blue-bg.jpg') 0 0/100% 100% no-repeat;
-}
 
 ion-content {
 	font-family: "Karla", Verdana, Geneva, Tahoma, sans-serif;
 	text-align: center;
+
+	&.background{
+		--background: url('assets/imgs/background/dot-blue-bg.jpg') 0 0/100% 100% no-repeat;
+	}
+
+	&.inner-background{
+		--background: rgba(44, 44, 44, 1);
+	}
 }
 
 
 
-.boton{
-	width: 70px;
-	margin: auto;
-	height: 40px;
-	font-weight: bold;
-	--background: var(--ion-color-danger, #eb445a);
+
+
+
+
+// SECCIÓN PARA LOS MODALS DE AYUDA
+
+.modal-css .modal-wrapper{
+	--border-radius: 20px; 
+	--height: 75%;
+	width: 90%;
+}
+
+
+// SECCIÓN PARA LAS CLASES DE LOS INPUTS 
+
+.i-text {
+	border-radius: 25px;
+	margin: 10px 10%;
+	font-family: 'Rubik';
+	color: black;
+}
+
+:root {
+	// check https://ionicframework.com/docs/api/input#css-custom-properties
+	ion-input, ion-datetime, ion-select {
+		--placeholder-color: rgba(0, 0, 0, 0.5);
+		--placeholder-opacity: 1;
+		font-family: 'Karla';
+		font-size: 18px;
+	}
+
+	ion-datetime{
+		height: 50px;
+		margin: 0 8% 0 0;
+		background: white;
+		border-radius: 25px;
+	}
 }
 
 
 
-ion-button {
+
+
+
+
+
+
+// SECCIÓN PARA LAS CLASES DE LOS BOTONES
+
+.bt-round { // forma redondeada genérica
 	height: 50px;
 	width: 80%;
-	font-size: 24px;
-	margin: auto;
+	margin: 10px 0px 10px 0px;
+    border-radius: 24px;
+	background: rgba(255, 255, 255, 0.05);
+	backdrop-filter: blur(2px) saturate(0%);
+    -webkit-backdrop-filter: blur(2px) saturate(0%);
+}
+
+.bt-half { // comparte fila con otro botón
+	width: 36%;
+}
+
+.bt-up { // aplica sombra principal arriba
+	box-shadow: -2px -2px 2px 0 $bt-sh-yellow, 
+	2px 2px 4px 0 $bt-sh-black;
+}
+
+.bt-down { // aplica sombra principal abajo
+	box-shadow: -2px -2px 4px 0 $bt-sh-black, 
+	2px 2px 2px 0 $bt-sh-yellow;
+}
+
+.bt-left { // separación al margen izquierdo
+	margin-left: 8%;
+	margin-right: 3%;
+}
+
+.bt-right{ // separación al margen derecho
+	margin-right: 8%;
+	margin-left: 3%;
+}
+
+.bt-text{ // texto interno del botón
+	color: white;
+	font-size: 22px;
 	font-family: 'Rubik', sans-serif;
+	letter-spacing: 3px;
 }
 
-ion-input, ion-item, ion-select, ion-label,ion-datetime {
-	background: none;
-	background-color: transparent;
-	/* color: rgb(78, 28, 214); */
-	color: blue;
-	opacity: 100%;
-}
-
-.box {
-	background-color: rgb(245, 245, 245);
-	margin: auto;
-	margin-bottom: 10px; 
-	border-radius: 15px;
-	width: 80%;
-	line-height: 1.5;
-	font-size: 16px;
-	font-weight: bold;
-
-}
-
-.button-medio{
-	display: inline-block;
-	width: 37%;
-}
-
-.box-fecha {
-	margin-right: 13%;
-	line-height: 1.5;
+.bt-icon{ // icono que acompaña texto del botón
+	color:white;
+	font-size: 38px;
+	padding-right: 15px;
 }

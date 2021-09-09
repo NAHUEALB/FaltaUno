@@ -1,92 +1,43 @@
-// Colors
-$bg-color: #010101;
-$button-color: #beffaa;
+$yellow-text: rgba(255, 253, 116, 0.8);
+$noticias-bg: rgba(255, 255, 255, 0.2);
 
-// Dimensions
-$dot-size: 2px;
-$dot-space: 12px;
 
-.titulo{
-	margin-top: 5%;
-	margin-bottom: 8%;
+#saludo{
 	text-align: center;
-	padding: 20px 0px 10px 0px;
-	font-size: 25px;
+	margin: 24px 7px;
+	font-size: 32px;
 	color: white;
-	text-shadow: black 0px 0px 5px;
+	text-shadow: black 0px 0px 2px;
+	display: -webkit-box;
+	-webkit-line-clamp: 1;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
 }
 
-.boton-inicio {
-	height: 80px;
-	margin: 10px 0px 10px 0px;
-	background: rgba(0, 0, 0, 0.15);
-    border-radius: 40px;
-	backdrop-filter: blur( 2px );
-	-webkit-backdrop-filter: blur( 2px );
-}
-
-.boton2 {
-	box-shadow: -2px -2px 4px 0 rgba(60, 60, 60, 0.6), 
-	2px 2px 2px 0 rgba(0, 255, 89, 0.3);
-}
-
-.boton1 {
-	box-shadow: -2px -2px 2px 0 rgba(0, 255, 89, 0.3), 
-	2px 2px 4px 0 rgba(60, 60, 60, 0.6);
-}
-
-ion-content.background{
-	--background: #2c2c2c;
-	//--background: rgb(0,0,0);
-	//--background: radial-gradient(circle, rgba(0,0,0,1) 0%, rgb(18, 24, 26) 66%, rgba(0,0,0,1) 100%);
-    //--background: url('../../../assets/imgs/background/dot-blue-bg.jpg') 0 0/100% 100% no-repeat;
-}
-
-.button-outline {
-  --border-width: 0;
-}
-
-ion-icon{
-	color:white;
-	font-size: 45px;
-	padding-right: 15px;
-}
-
-.texto{
-	color: white;
-	font-size: 28px;
-	font-family: 'Rubik', sans-serif;
-	letter-spacing: 3px;
-}
-
-h1{
-	color: white;
-	font-size: 16px;
+#titulo-noticias {
+	font-size: 24px;
+	color: rgb(255, 255, 255);
+	text-shadow: black 0px 0px 4px;
 }
 
 #text-noticia {
 	font-size: 18px;
-	color: $button-color;
+	color: $yellow-text;
 	opacity: 1;
-    transition: opacity 0.35s;
+	transition: opacity 0.35s;
 }
 
 #block-noticia {
-	margin-top: 8%;
-	margin-bottom: 10%;
-	height: 170px;
-	padding: 10px 20px 30px 20px;
-	background: rgba( 255, 255, 255, 0.2 );
+	margin-top: 12%;
+	margin-bottom: 12%;
+	height: 160px;
+	padding: 5px 20px 30px 20px;
+	background: $noticias-bg;
 	backdrop-filter: blur( 2px );
 	-webkit-backdrop-filter: blur( 2px );
 }
 
-.titulo-noticias {
-	font-size: 25px;
-	color: white;
-}
-
 .hide {
-    opacity: 0 !important;
+	opacity: 0 !important;
 }
 
