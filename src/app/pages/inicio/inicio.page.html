@@ -3,14 +3,74 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>Inicio</ion-title>
+    <ion-title>¡Hola{{nombre}}!</ion-title>
   </ion-toolbar>
 </ion-header>
 
   
-<ion-content class="inner-background">
-  	<h3 id="saludo">¡Hola{{nombre}}!</h3>
-	<div id="block-noticia">
+<ion-content class="background">
+	
+	<div class="blk-card">
+		<h3>Descubrí partidos</h3>
+		<div id="cancha-container">
+			<div class="opcion-cancha">
+				<ion-icon class="cancha-icon" name="football"></ion-icon>
+				<div>
+					<p>Cancha: Estadio 7 (6 y 58)</p>
+					<p>Horario: 17:00</p>
+					<p>Jugadores: 7/10</p>
+				</div>
+			</div>
+			<div class="opcion-cancha">
+				<ion-icon class="cancha-icon" name="football"></ion-icon>
+				<div>
+					<p>Cancha: MegaEstadio (1 y 64)</p>
+					<p>Horario: 19:00</p>
+					<p>Jugadores: 9/10</p>
+				</div>
+			</div>
+			<div class="opcion-ver-mas">
+				<p>Buscar <ion-icon name="add-circle-outline"></ion-icon> partidos</p>
+			</div>
+		</div>
+	</div>
+	
+	<div class="blk-card">
+		<h3>Tu perfil</h3>
+		<div id="perfil-container">
+			<div class="opcion-perfil">
+				<ion-icon class="perfil-icon" name="person-outline"></ion-icon>
+				<p>Perfil</p>
+			</div>
+			<div class="opcion-perfil">
+				<ion-icon class="perfil-icon" name="football"></ion-icon>
+				<p>Historial</p>
+			</div>
+			<div class="opcion-perfil">
+				<ion-icon class="perfil-icon" name="list-circle-outline"></ion-icon>
+				<p>Editar</p>
+			</div>
+		</div>
+	</div>
+
+	<div class="blk-card">
+		<h3>Noticias</h3>
+		<div>
+			<ul class="slider">
+				<li id="slide1"><img src="https://imagenes.elpais.com/resizer/LeKkwyXnqIv2TNvonzOgwJN1reY=/1200x0/ep01.epimg.net/tecnologia/imagenes/2017/08/04/actualidad/1501842915_812099_1502215531_noticia_fotograma.jpg" alt=""></li>
+				<li id="slide2"><img src="https://i.pinimg.com/originals/fc/db/e1/fcdbe161f4cdef336fb28cb7117004e0.jpg" alt=""></li>
+				<li id="slide3"><img src="https://st.depositphotos.com/2309453/2710/i/950/depositphotos_27100099-stock-photo-two-young-soccer-players-running.jpg" alt=""></li>
+			</ul>
+			<ul class="numerador">
+				<li><a id="numerador1" href="#slide1">●</a></li>
+				<li><a id="numerador2" href="#slide2">●</a></li>
+				<li><a id="numerador3" href="#slide3">●</a></li>
+			</ul>
+		</div>
+	</div>
+	
+
+	<!--<div id="block-noticia">
 		<h3 id="titulo-noticias">Consejos diarios</h3>
 		<div id="block-text">
 			<ion-text id="text-noticia">
@@ -18,7 +78,7 @@
 			</ion-text>
 		</div>
 	</div>
-
+	
 	<ion-button fill="clear" class="bt-round bt-up" (click)="irAlBuscar()">
 		<ion-icon class="bt-icon" name="search"></ion-icon>
 		<p class="bt-text">  salas</p>
@@ -27,6 +87,6 @@
 	<ion-button fill="clear" class="bt-round bt-down" (click)="irAlPerfil()">
 		<ion-icon class="bt-icon" name="person"></ion-icon>
 		<p class="bt-text">  perfil</p>
-	</ion-button>
+	</ion-button>-->
   
 </ion-content>

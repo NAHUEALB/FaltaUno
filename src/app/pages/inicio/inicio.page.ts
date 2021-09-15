@@ -15,15 +15,9 @@ export class InicioPage implements OnInit {
 	jugador: Jugador;
 	nombre: string = ''; 
 	enlaceNoticia = 'Noticia';
-	noticias = [
-		"Buscá partidos cerca de tu zona, encontrá amigos, y participá de la comunidad más grande del condado", 
-		"Si te falta un jugador, siempre podés acudir a nosotros para encontrar al que falta y que no se haga rogar", 
-		"Recordá invitar a tus amigos para que la comunidad crezca cada vez más y nadie se quede con las ganas de jugar", 
-		"Planeamos estar operativos a fin de año, así que andá lustrando esos botines que juegan de titulares en poco"];
-	noticia = "Cargando noticias...";
-	indexNoticia = 0;
-	blockNoticia = document.getElementById("text-noticia");
-	mostrarNoticias: boolean;
+	indexNumerador = 1;
+	mostrarNoticias = false;
+	delayEntreNoticias = 12000;
 
 	constructor(
 	private menuCtrl: MenuController, 
@@ -45,12 +39,11 @@ export class InicioPage implements OnInit {
 			foto: '',
 			ubicacion: '',
 			html: '',
-		}
-		
+		}	
 	}
 
 	ngOnInit() {
-		
+		this.mostrarNoticias = true;
 	}
 
 	irAlBuscar(){
@@ -62,6 +55,7 @@ export class InicioPage implements OnInit {
 	}
 
 	ionViewWillEnter() {
+		this.mostrarNoticias = true;
 		this.storage.get("jugador").then(jugadorDelStorage => {
 			this.jugador = jugadorDelStorage;
 			this.nombre = " " + this.jugador.nombre;
@@ -71,7 +65,6 @@ export class InicioPage implements OnInit {
 			console.log("No se cargó el storage antes de querer mostrarlo")
 		});
 
-		this.mostrarNoticias = true;
 		this.nextNoticia();
 	}
 
@@ -81,18 +74,22 @@ export class InicioPage implements OnInit {
 	}
 
 	nextNoticia() {
-		let blockNoticia = document.getElementById("text-noticia");
-		this.indexNoticia++;
-		if (this.indexNoticia == 4) {
-			this.indexNoticia = 0;
-		}
-		this.noticia = this.noticias[this.indexNoticia];
+		// nahu hacé todo el refactor que quieras jajsdjkas
+		let oldSlider = document.getElementById("slide"+this.indexNumerador);
+		let oldNumerador = document.getElementById("numerador"+this.indexNumerador);
+
+		this.indexNumerador++;
+		if (this.indexNumerador == 4) this.indexNumerador = 1;
+
+		let newSlider = document.getElementById("slide"+this.indexNumerador);
+		let newNumerador = document.getElementById("numerador"+this.indexNumerador);
+
 		setTimeout(() => {
-			blockNoticia.classList.add('hide');
-		}, 9000);
-		setTimeout(() => { 
-			blockNoticia.classList.remove('hide');
+			oldSlider.style.opacity = "0";
+			newSlider.style.opacity = "1";
+			oldNumerador.style.color = "white";
+			newNumerador.style.color = "orangered";
 			if (this.mostrarNoticias) this.nextNoticia(); 
-		}, 10000 );
+		}, this.delayEntreNoticias);
 	}
 }

@@ -1,7 +1,190 @@
 $yellow-text: rgba(255, 253, 116, 0.8);
 $noticias-bg: rgba(255, 255, 255, 0.2);
 
+.blk-card {
+	margin: 10px 4%;
+	padding: 5px 0px;
+	background: rgb(180,180,180);
+	background: linear-gradient(0deg, rgb(212, 212, 212) 0%, rgba(255,255,255,1) 100%);
+	border-radius: 5px;
+}
 
+.blk-card h3 {
+	margin: 0;
+	padding: 5px 0px 5px 25px;
+	font-weight: bold;
+	text-align: left;
+}
+
+#perfil-container {
+	display: flex;
+	padding: 10px 8px;
+}
+
+.opcion-perfil {
+	box-shadow: 2px 2px 8px rgba(131, 63, 0, 0.4);
+	width: 28%;
+	margin: auto;
+	justify-content: space-between;
+	padding: 5px;
+	border-radius: 10px;
+}
+
+.opcion-perfil p {
+	padding: 0;
+	margin: 0;
+	font-size: 18px;
+}
+
+.perfil-icon {
+	width: 40px;
+	height: 40px;
+	padding: 0;
+}
+
+
+
+
+
+#cancha-container {
+	padding: 10px 8px;
+}
+
+.opcion-cancha {
+	box-shadow: 2px 2px 8px rgba(131, 63, 0, 0.4);
+	width: 95%;
+	margin: auto;
+	margin-bottom: 10px;
+	padding: 5px;
+	border-radius: 10px;
+	display: flex;
+}
+
+.opcion-cancha p {
+	padding: 0;
+	margin: 0;
+	text-align: left;
+}
+
+.opcion-ver-mas {
+	background-color: #222;
+	box-shadow: 2px 2px 8px rgba(131, 63, 0, 0.4);
+	width: 95%;
+	margin: auto;
+	border-radius: 10px;
+}
+
+.opcion-ver-mas p {
+	display: inline-block;
+	color: rgb(255, 240, 28);
+	padding: 15px 0px;
+	text-align: center;
+	font-size: 24px;
+	font-weight: bold;
+	margin: auto;
+}
+
+.cancha-icon {
+	width: 40px;
+	height: 40px;
+	padding: 0px 10px;
+	margin: auto 0px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// TUTO PARA SLIDERS: https://www.youtube.com/watch?v=i9Yut6Dm9pI
+
+ul, li {
+	margin: auto;
+	padding: 0 2px;
+	list-style: none;
+}
+
+ul.slider {
+	position: relative;
+	width: 100%;
+	height: 150px;
+}
+
+ul.slider li {
+	position: absolute;
+	left: 0;
+	top: 0;
+	opacity: 0;
+	width: inherit;
+	height: inherit;
+	transition: opacity .5s;
+}
+
+ul.slider li img {
+	width: 100%;
+	height: 150px;
+	object-fit: cover;
+}
+
+ul.slider li:first-child {
+	opacity: 1;
+}
+
+.numerador li {
+	display: inline-block;
+}
+
+.numerador li a {
+	text-decoration: none;
+	color: white;
+	display: inline-block;
+	transition: color .5s;
+}
+
+#numerador1 {
+	color: orangered;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
 #saludo{
 	text-align: center;
 	margin: 24px 7px;
@@ -39,5 +222,5 @@ $noticias-bg: rgba(255, 255, 255, 0.2);
 
 .hide {
 	opacity: 0 !important;
-}
+}*/
 

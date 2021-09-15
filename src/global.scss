@@ -35,14 +35,11 @@ ion-content {
 	}
 }
 
-:root {
-
-	ion-toolbar {
-		--background: #222;
-		--color: white;
-		--border-width: 1px;
-		--border-color: #222;
-	}
+ion-toolbar {
+	--background: #222;
+	--color: white;
+	--border-width: 1px;
+	--border-color: #222;
 }
 
 hr {
@@ -84,13 +81,12 @@ hr {
 		border-radius: 5px;
 		line-height: 1.7;
 	}
-
-	.i-text {
-		border-radius: 5px;
-		margin: 10px 5%;
-	}
 }
 
+.i-text {
+	border-radius: 5px;
+	margin: 10px 5%;
+}
 
 
 
