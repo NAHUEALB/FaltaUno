@@ -7,42 +7,49 @@
 		src="../assets/imgs/logo/escudo4.png">
 	</ion-img>
 	
+<hr>
 	<ion-button 
-		class="bt-round bt-up bt-text" 
+		class="bt-modern bt-text" 
 		id="bt-iniciar"
 		(click)="login()" 
 		color="transparent"
 		fill="clear">
 		Iniciar sesión
 	</ion-button> 
-
+<hr>
 	<ion-button 
-		class="bt-round bt-up bt-text" 
+		class="bt-modern bt-text" 
 		id="bt-registrar"
 		(click)="irAlCrear()" 
 		color="transparent"
 		fill="clear">
 		Registrarse
 	</ion-button>
-
+<hr>
 	<div>
 		<ion-button 
-			class="bt-round bt-half bt-up bt-left bt-text" 
+			class="bt-round bt-half bt-text" 
 			id="bt-ayuda" 
 			(click)="abrirModal()" 
 			color="transparent"
 			fill="clear">
 			Ayuda
 		</ion-button> 
-
 		<ion-button 
-			class="bt-round bt-half bt-up bt-right bt-text" 
-			id="bt-google" 
+			class="bt-round bt-half bt-text" 
+			id="bt-social" 
+			(click)="onLoginFacebook()" 
+			color="transparent"
+			fill="clear">
+			<ion-img id="bt-facebook" src="..\assets\imgs\icon\icon-facebook.png"></ion-img>
+		</ion-button>
+		<ion-button 
+			class="bt-round bt-half bt-text" 
+			id="bt-social" 
 			(click)="onLoginGoogle()" 
 			color="transparent"
 			fill="clear">
-			<ion-img id="icon-google" src="..\assets\imgs\icon\icon-google.png"></ion-img>
+			<ion-img id="bt-google" src="..\assets\imgs\icon\icon-google.png"></ion-img>
 		</ion-button>
 	</div>
-
 </ion-content>
