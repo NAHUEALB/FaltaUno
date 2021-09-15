@@ -51,6 +51,7 @@ export class PerfilPage implements OnInit {
 			this.edad = this.getEdad(this.jugador.fnacimiento);
 			this.valoracion = this.getValoracion(this.jugador.puntaje, this.jugador.cvotos);
 			this.fillStars(this.valoracion);
+			this.showSexo();
 		});
 	}
 
@@ -86,6 +87,21 @@ export class PerfilPage implements OnInit {
 			}
 		}
 		this.router.navigate(['perfil/'+tab], jugadorExtra);
+	}
+
+	showSexo() {
+		console.log(this.jugador.sexo);
+		switch (this.jugador.sexo) {
+			case " Hombre ": 
+				document.getElementById("icon-hombre").style.display = "block";
+				break;
+			case " Mujer ": 
+				document.getElementById("icon-mujer").style.display = "block";
+				break;
+			case " No binario ": 
+				document.getElementById("icon-nobin").style.display = "block";
+				break;
+		}
 	}
 
 	ionViewWillLeave(){

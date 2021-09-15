@@ -7,42 +7,53 @@
 	</ion-toolbar>
 </ion-header>
 
-<ion-content class="inner-background">
-	<div>
-		<img id="profilePic" [src]="'/assets/perfil.svg'">
-		<div class="datos">
-			<h3>Nombre: <b>{{ jugador.nombre }}</b> (@{{ jugador.usuario }})</h3>
-			<p>Edad: {{ edad }}</p>
-			<p>Sexo: {{jugador.sexo}}</p>
+<ion-content class="background">
+
+	<div class="blk-crest-pic">
+		<ion-icon id="perfil-pic" name="person-circle-outline"></ion-icon>
+	</div>
+	<div class="blk-crest-body">
+		<div>
+			<h3><b>{{ jugador.nombre }}</b></h3>
+			<hr>
+			<h3>{{ edad }} años</h3>
+			<hr>
+			<div class="blk-crest-body-sexo">
+				<h3>{{ jugador.sexo }}</h3>
+				<ion-icon class="sexo-pic" id="icon-hombre" style="display: none;" name="male-outline"></ion-icon>
+				<ion-icon class="sexo-pic" id="icon-mujer" style="display: none;" name="female-outline"></ion-icon>
+				<ion-icon class="sexo-pic" id="icon-nobin" style="display: none;" name="male-female-outline"></ion-icon>
+			</div>
 		</div>
 	</div>
 
-	<h3 class="titulo"><b>Último partido</b></h3>
-	<br>
-	<div class="contenedor">
-		<div class="estadio">
-			<ion-img style="height: 50%;" src="../../../assets/stadio-sfondo.jpg"></ion-img>
-			<p id="resultado">{{ partido.resultado }}</p>
-		</div>
+	<div class="blk-card">
+		<h3>Último partido</h3>
+		<h3 id="last-resultado">{{ partido.resultado }}</h3>
 	</div>
-	<br>
-	<h3 class="titulo"><b>Valoración</b></h3>
-	<div class="stars">
-		<div *ngFor="let star of stars">
-			<img *ngIf="star === 'full'" class="star" [src]="'/assets/stars/star-full.png'">
-			<img *ngIf="star === 'half'" class="star" [src]="'/assets/stars/star-half.png'">
-			<img *ngIf="star === 'null'" class="star" [src]="'/assets/stars/star-null.png'">
+	
+	<div class="blk-card valoracion">
+		<h3>Valoración</h3>
+		<div class="stars">
+			<div *ngFor="let star of stars">
+				<img *ngIf="star === 'full'" class="star" [src]="'/assets/stars/star-full.png'">
+				<img *ngIf="star === 'half'" class="star" [src]="'/assets/stars/star-half.png'">
+				<img *ngIf="star === 'null'" class="star" [src]="'/assets/stars/star-null.png'">
+			</div>
+			<span class="valoracion">({{ valoracion }})</span>
 		</div>
-		<span style="font-size: 20px;">({{ valoracion }})</span>
-	</div>
-
-	<br>
-	<div>
-		<h3 class="titulo"><b>Estadisticas</b></h3>
-		<div class="estadisticas">
-			<p>Puntaje acumulado: {{ jugador.puntaje }}</p>
-			<p>Votos recibidos: {{ jugador.cvotos }}</p>
-		</div>
+		<p>Partidos jugados: 17</p>
+		<p>Votos recibidos: {{ jugador.cvotos }}</p>
 	</div>
 
+	<div id="perfil-container">
+		<div class="opcion-perfil">
+			<ion-icon class="perfil-icon" name="list-circle"></ion-icon>
+			<p>Historial</p>
+		</div>
+		<div class="opcion-perfil">
+			<ion-icon class="perfil-icon" name="brush"></ion-icon>
+			<p>Editar</p>
+		</div>
+	</div>
 </ion-content>
