@@ -29,7 +29,6 @@
 	padding: 0;
 	margin: 0;
 }
-
 .blk-crest-body-sexo {
 	display: flex; 
 	justify-content: space-evenly; 
@@ -54,6 +53,7 @@ hr {
 
 
 
+// SECCIÓN DE ÚLTIMO PARTIDO Y VALORACIÓN
 
 #last-resultado {
 	text-align: center;
@@ -63,25 +63,15 @@ hr {
 	font-family: 'Rubik', sans-serif;
 }
 
-
-
-
-
-
-
-
-
 .stars{
 	display: flex;
 	padding: 0px 15%;
 	justify-content: space-around;
 }
-
 .star {
 	width: 30px;
   	text-align: center;
 }
-
 .valoracion {
 	font-size: 24px;
 	background: rgb(153, 153, 153);
