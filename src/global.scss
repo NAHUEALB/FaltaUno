@@ -24,14 +24,9 @@ $bt-sh-black: rgba(60, 60, 60, 0.6);
 ion-content {
 	font-family: "Karla", Verdana, Geneva, Tahoma, sans-serif;
 	text-align: center;
-	
 	&.background{
 		//--background: url('assets/imgs/background/dot-blue-bg.jpg') 0 0/100% 100% no-repeat;
-		--background: #222222;
-	}
-	
-	&.inner-background{
-		--background: rgba(44, 44, 44, 0);
+		--background: #222;
 	}
 }
 

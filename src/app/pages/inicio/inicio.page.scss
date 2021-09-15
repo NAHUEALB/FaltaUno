@@ -16,40 +16,42 @@ $noticias-bg: rgba(255, 255, 255, 0.2);
 	text-align: left;
 }
 
+
+
+// SECCIÓN PARA LOS ACCESOS DEL PERFIL
+
 #perfil-container {
 	display: flex;
-	padding: 10px 8px;
+	padding: 1% 2%;
 }
-
 .opcion-perfil {
+	background: azure;
 	box-shadow: 2px 2px 8px rgba(131, 63, 0, 0.4);
-	width: 28%;
+	width: 45%;
 	margin: auto;
 	justify-content: space-between;
 	padding: 5px;
 	border-radius: 10px;
 }
-
 .opcion-perfil p {
 	padding: 0;
 	margin: 0;
 	font-size: 18px;
 }
-
 .perfil-icon {
 	width: 40px;
 	height: 40px;
 	padding: 0;
+	color: #222;
 }
 
 
 
-
+// SECCIÓN PARA LA LISTA PREVIA DE CANCHAS
 
 #cancha-container {
 	padding: 10px 8px;
 }
-
 .opcion-cancha {
 	box-shadow: 2px 2px 8px rgba(131, 63, 0, 0.4);
 	width: 95%;
@@ -59,22 +61,19 @@ $noticias-bg: rgba(255, 255, 255, 0.2);
 	border-radius: 10px;
 	display: flex;
 }
-
 .opcion-cancha p {
 	padding: 0;
 	margin: 0;
 	text-align: left;
 }
-
-.opcion-ver-mas {
+.opcion-mas {
 	background-color: #222;
 	box-shadow: 2px 2px 8px rgba(131, 63, 0, 0.4);
 	width: 95%;
 	margin: auto;
 	border-radius: 10px;
 }
-
-.opcion-ver-mas p {
+.opcion-mas p {
 	display: inline-block;
 	color: rgb(255, 240, 28);
 	padding: 15px 0px;
@@ -83,7 +82,6 @@ $noticias-bg: rgba(255, 255, 255, 0.2);
 	font-weight: bold;
 	margin: auto;
 }
-
 .cancha-icon {
 	width: 40px;
 	height: 40px;
@@ -93,39 +91,19 @@ $noticias-bg: rgba(255, 255, 255, 0.2);
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+// SECCIÓN PARA SLIDERS DE NOTICIAS
 
 // TUTO PARA SLIDERS: https://www.youtube.com/watch?v=i9Yut6Dm9pI
-
 ul, li {
 	margin: auto;
 	padding: 0 2px;
 	list-style: none;
 }
-
 ul.slider {
 	position: relative;
 	width: 100%;
 	height: 150px;
 }
-
 ul.slider li {
 	position: absolute;
 	left: 0;
@@ -133,94 +111,25 @@ ul.slider li {
 	opacity: 0;
 	width: inherit;
 	height: inherit;
-	transition: opacity .5s;
+	transition: opacity 1s;
 }
-
 ul.slider li img {
 	width: 100%;
 	height: 150px;
 	object-fit: cover;
 }
-
 ul.slider li:first-child {
 	opacity: 1;
 }
-
 .numerador li {
 	display: inline-block;
 }
-
 .numerador li a {
 	text-decoration: none;
 	color: white;
 	display: inline-block;
-	transition: color .5s;
+	transition: color 1s;
 }
-
 #numerador1 {
 	color: orangered;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-#saludo{
-	text-align: center;
-	margin: 24px 7px;
-	font-size: 32px;
-	color: white;
-	text-shadow: black 0px 0px 2px;
-	display: -webkit-box;
-	-webkit-line-clamp: 1;
-	-webkit-box-orient: vertical;
-	overflow: hidden;
-}
-
-#titulo-noticias {
-	font-size: 24px;
-	color: rgb(255, 255, 255);
-	text-shadow: black 0px 0px 4px;
-}
-
-#text-noticia {
-	font-size: 18px;
-	color: $yellow-text;
-	opacity: 1;
-	transition: opacity 0.35s;
-}
-
-#block-noticia {
-	margin-top: 12%;
-	margin-bottom: 12%;
-	height: 160px;
-	padding: 5px 20px 30px 20px;
-	background: $noticias-bg;
-	backdrop-filter: blur( 2px );
-	-webkit-backdrop-filter: blur( 2px );
-}
-
-.hide {
-	opacity: 0 !important;
-}*/
-
