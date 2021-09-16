@@ -1,10 +1,10 @@
+import { PerfilPage } from './pages/perfil/perfil.page';
 import { MenuController } from '@ionic/angular';
 import { FirebaseauthService } from './serv/firebaseauth.service';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { BuscarPage } from './pages/buscar/buscar.page';
 import { InicioPage } from './pages/inicio/inicio.page';
-import { TabsPage } from './pages/tabs/tabs.page';
 import { AyudaMenuLateralPage } from './pages/ayuda-menu-lateral/ayuda-menu-lateral.page';
 import { ModalController } from '@ionic/angular';
 import { Storage } from '@ionic/storage-angular';
@@ -28,7 +28,7 @@ export class AppComponent {
 		this.options = [
 			{ title: 'Inicio', component: InicioPage, icon:'home' ,  ruta:'inicio' },
 			{ title: 'Buscar', component: BuscarPage, icon: 'search',  ruta: 'buscar' },
-			{ title: 'Perfil', component: TabsPage, icon:'walk-outline',  ruta: 'tabs' },
+			{ title: 'Perfil', component: PerfilPage, icon:'walk-outline',  ruta: 'perfil' },
 			{ title: 'Cerrar Sesion', component: InicioPage, icon: 'log-out-outline',  ruta: 'principal' }
 		]
     }
