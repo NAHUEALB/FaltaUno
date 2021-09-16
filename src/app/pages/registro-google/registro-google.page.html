@@ -10,14 +10,14 @@
 <ion-content class="background">
 <form [formGroup]="jugadorForm" (ngSubmit)="crearJugador()">
 
-	<div class="i-text">
+	<ion-item class="i-text">
 		<ion-datetime
 		formControlName="fnacimiento" 
 		display-format="DD/MM/YYYY"
 		placeholder="📅 Fecha de nacimiento"
 		required>
 		</ion-datetime>
-	</div>
+	</ion-item>
 
 	<ion-item class="i-text">  
 		<ion-select

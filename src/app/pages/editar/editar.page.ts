@@ -75,7 +75,7 @@ export class EditarPage implements OnInit {
 	}
 
 	ngOnInit() {
-		this.menuCtrl.enable(true);
+		//this.menuCtrl.enable(true);
 	}
 
 	radioChange(value){
@@ -121,6 +121,10 @@ export class EditarPage implements OnInit {
 		}).catch(() => {
 			console.log("Error modificando la base de datos de firebase")
 		})*/
+	}
+
+	ionViewWillEnter() {
+		this.menuCtrl.enable(true);
 	}
 
 	ionViewWillLeave(){
