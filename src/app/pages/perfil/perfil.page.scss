@@ -17,6 +17,12 @@
 	border-radius: 50%;
 }
 
+.sexo-pic{
+	height: 30px;
+	width: 30px;
+	display: block;
+}
+
 
 .blk-crest-body {
 	margin: 0px 4% 10px 4%;
@@ -42,10 +48,6 @@ hr {
 	box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.45);
 }
 
-#icon-hombre, #icon-mujer, #icon-nobin {
-	height: 30px;
-	width: 30px;
-}
 #icon-hombre { color: rgb(80, 172, 80); }
 #icon-mujer { color: #ff8737; }
 #icon-nobin { color: #b452b4; }

@@ -20,6 +20,8 @@ export class PerfilPage implements OnInit {
 	valoracion: number;
 	stars = [];
 	getDocumentSubscription;
+	nameIcon: String;
+	idColor: String;
 
   	constructor( 
 	private router: Router, 
@@ -90,16 +92,18 @@ export class PerfilPage implements OnInit {
 	}
 
 	showSexo() {
-		console.log(this.jugador.sexo);
 		switch (this.jugador.sexo) {
 			case " Hombre ": 
-				document.getElementById("icon-hombre").style.display = "block";
+				this.nameIcon = "male-outline";
+				this.idColor = "icon-hombre";
 				break;
 			case " Mujer ": 
-				document.getElementById("icon-mujer").style.display = "block";
+				this.nameIcon = "female-outline";
+				this.idColor = "icon-mujer";
 				break;
 			case " No binario ": 
-				document.getElementById("icon-nobin").style.display = "block";
+				this.nameIcon = "male-female-outline";
+				this.idColor = "icon-nobin";
 				break;
 		}
 	}

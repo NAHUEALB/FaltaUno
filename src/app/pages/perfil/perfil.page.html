@@ -20,9 +20,7 @@
 			<hr>
 			<div class="blk-crest-body-sexo">
 				<h3>{{ jugador.sexo }}</h3>
-				<ion-icon class="sexo-pic" id="icon-hombre" style="display: none;" name="male-outline"></ion-icon>
-				<ion-icon class="sexo-pic" id="icon-mujer" style="display: none;" name="female-outline"></ion-icon>
-				<ion-icon class="sexo-pic" id="icon-nobin" style="display: none;" name="male-female-outline"></ion-icon>
+				<ion-icon class="sexo-pic" [name]="nameIcon" [id]="idColor" ></ion-icon>
 			</div>
 		</div>
 	</div>
