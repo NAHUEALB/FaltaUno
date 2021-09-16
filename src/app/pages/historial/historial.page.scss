@@ -1,55 +1,11 @@
-:host {
-    
-    ion-content.background{
-      --background: url('../../../assets/imgs/background/inicio-bg.jpg') 0 0/100% 100% no-repeat;
-      //--background: rgb(0,0,0); 
-      //--background: linear-gradient(150deg, rgba(0,0,0,1) 0%, rgba(41,0,97,1) 12%, rgba(0,0,0,1) 26%, rgba(23,0,55,1) 35%, rgba(0,0,0,1) 44%, rgba(36,4,84,1) 59%, rgba(0,0,0,1) 72%, rgba(18,0,55,1) 85%, rgba(0,0,0,1) 100%);
-    }
-    ion-item{
-      --background: none;
-    }
-  }
-
-ion-list{
-  background: none;
-}
-
-.titulo{
-  text-align: center;
-  font-size: 40px
-}
-.contenedor{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.figure{
-  position:relative;
-  height: 100%;
-  width: 100%;
-  border-radius: 20px;
-}
-
 .ion-text-start{
-  position: absolute;
-  top: 0;
-  visibility: visible;
   text-align: center;
-  color: white;
-  margin-top: 50px;
-  margin-bottom: 15px;
-  margin-left: 30px;
+  color: #222;
   font-size: 40px;
 }
 
 .fecha{
-  color: yellow;
-  position: absolute;
-  top: 0;
-  margin-top: 40%;
-  margin-left: 60%;
-  margin-bottom: 20px;
+  color: #222;
   font-size: 20px;
 }
 .star {
