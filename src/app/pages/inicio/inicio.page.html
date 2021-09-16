@@ -13,11 +13,11 @@
 	<!--div class="blk-card"-->
 		<!--h3>Tu perfil</h3-->
 		<div id="perfil-container">
-			<div class="opcion-perfil">
-				<ion-icon class="perfil-icon" name="person"></ion-icon>
+			<div class="opcion-perfil" (click)="irAlPerfil()">
+				<ion-icon class="perfil-icon"  name="person"></ion-icon>
 				<p>Perfil</p>
 			</div>
-			<div class="opcion-perfil">
+			<div class="opcion-perfil" (click)="irAlHistorial()">
 				<ion-icon class="perfil-icon" name="list-circle"></ion-icon>
 				<p>Historial</p>
 			</div>

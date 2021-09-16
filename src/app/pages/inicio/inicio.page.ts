@@ -46,12 +46,12 @@ export class InicioPage implements OnInit {
 		this.mostrarNoticias = true;
 	}
 
-	irAlBuscar(){
-		this.router.navigate([`/buscar`]);
+	irAlHistorial(){
+		this.router.navigate([`/historial`]);
 	}
 
 	irAlPerfil(){
-		this.router.navigate([`/tabs`]);
+		this.router.navigate([`/perfil`]);
 	}
 
 	ionViewWillEnter() {

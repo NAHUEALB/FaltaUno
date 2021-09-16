@@ -109,4 +109,13 @@ export class PerfilPage implements OnInit {
 			this.getDocumentSubscription.unsubscribe();
 		}
 	}
+
+
+	irAlEditar(){
+		this.router.navigate(['/editar']);
+	}
+
+	irAlHistorial(){
+		this.router.navigate([`/historial`]);
+	}
 }

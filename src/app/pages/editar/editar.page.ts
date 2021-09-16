@@ -91,11 +91,13 @@ export class EditarPage implements OnInit {
 
 	editarJugador() {
 		console.log("--- JUGADOR EN storage (editar)");
-		const juga2 = this.storage.get("jugador")
-		.then(res => {
-			console.log(res);
-			console.log("id: " + res.id);
-		})
+		// const juga2 = this.storage.get("jugador")
+		// .then(res => {
+		// 	console.log(res);
+		// 	console.log("id: " + res.id);
+		// })
+
+		this.router.navigate(["/perfil"]);
 
 		/*this.database.firestore()
 		.collection('Jugador')
