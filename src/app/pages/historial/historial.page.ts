@@ -19,11 +19,15 @@ export class HistorialPage implements OnInit {
 
   ionViewWillEnter(){
     this.partidos=[];
-    for(let i=1; i < 10 ; i++){
+    let cantidad = Math.floor(Math.random() * (10 - 1)) + 1;
+    for(let i=1; i < cantidad; i++){
+      let golesEquipo = Math.floor(Math.random() * 20);
+      let golesRival = Math.floor(Math.random() * 20);
+      let puntuacion = (Math.random() * (5)).toFixed(2);
       this.partido = {
-        resultado : i+" - 2",
-        fecha: i*2+"/"+i*3+"/"+i*4,
-        valoracion: parseFloat((22 / 8).toFixed(2))
+        resultado : golesEquipo + " - " + golesRival,
+        fecha: "2" + i + "/09/2020",
+        valoracion: parseFloat(puntuacion)
       }
 
       let resultado = {
@@ -46,7 +50,7 @@ export class HistorialPage implements OnInit {
     setTimeout(() =>{
       console.info("Cerrar refresh");
       value.target.complete();
-    }, 1000);
+    }, 3000);
   }
 
 }
