@@ -123,6 +123,10 @@ export class EditarPage implements OnInit {
 		})*/
 	}
 
+	irAlPerfil(){
+		this.router.navigate([`/perfil`]);
+	}
+
 	ionViewWillEnter() {
 		this.menuCtrl.enable(true);
 	}

@@ -122,10 +122,16 @@ hr {
 	background: none;
 }
 
+.bt-triple { // comparte fila con 2 botones más
+	height: 50px;
+	margin: 4% 2%;
+	width: 25%;
+}
+
 .bt-half { // comparte fila con otro botón
 	height: 50px;
 	margin: 4% 2%;
-	width: 24%;
+	width: 75%;
 }
 
 .bt-text{ // texto interno del botón
@@ -133,6 +139,13 @@ hr {
 	font-size: 24px;
 	font-family: 'Rubik', sans-serif;
 	letter-spacing: 3px;
+}
+
+.bt-text-half{ // texto interno del botón
+	color: rgb(255, 255, 255);
+	font-size: 18px;
+	font-family: 'Rubik', sans-serif;
+	letter-spacing: 2px;
 }
 
 .bt-icon{ // icono que acompaña texto del botón
