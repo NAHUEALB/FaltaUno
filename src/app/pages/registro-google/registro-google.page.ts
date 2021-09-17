@@ -6,23 +6,24 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-registro-google',
-  templateUrl: './registro-google.page.html',
-  styleUrls: ['./registro-google.page.scss'],
+	selector: 'app-registro-google',
+	templateUrl: './registro-google.page.html',
+	styleUrls: ['./registro-google.page.scss'],
 })
 export class RegistroGooglePage implements OnInit {
-  enlace = 'Jugador';
-  jugadorForm: FormGroup;
-  jugador: Jugador;
-  docSubscription;
-  localidades = ["La Plata", "Ensenada", "Berisso"];
+	enlace = 'Jugador';
+	jugadorForm: FormGroup;
+	jugador: Jugador;
+	docSubscription;
+	localidades = ["La Plata", "Ensenada", "Berisso"];
 	sexos = ["No binario", "Hombre", "Mujer"];
+	cargando = false;
 
-  constructor(public formBuilder: FormBuilder,
+  	constructor(public formBuilder: FormBuilder,
 	private router: Router,
 	public firebaseauthService: FirebaseauthService,
 	private storage: Storage) { 
-    this.jugador = {
+    	this.jugador = {
 			id: '',
 			nombre: '',
 			usuario: '',
@@ -42,33 +43,33 @@ export class RegistroGooglePage implements OnInit {
 			sexo: '',
 		});
 		this.jugador = this.router.getCurrentNavigation().extras.state.data;
-		console.log(this.jugador);	
-  }
+	}
 
-  ngOnInit() {
-	  
-  }
+	ngOnInit() {
+		
+	}
 
   
-  crearJugador(){
-	  this.jugador.fnacimiento = this.jugadorForm.value.fnacimiento;
-	  this.jugador.ubicacion = this.jugadorForm.value.ubicacion;
-	  this.jugador.sexo = this.jugadorForm.value.sexo;
-
-	  this.firebaseauthService.createDocument<Jugador>(this.jugador, this.enlace, this.jugador.id);
-	  this.docSubscription = this.firebaseauthService.getDocumentById(this.enlace, this.jugador.id).subscribe((document: any) =>{
-		this.storage.clear();
-		console.log(document);
-		this.jugador = document;
-		this.storage.set("jugador", document).then(() => {
-			this.router.navigate(['/inicio']);
+	crearJugador(){
+		this.cargando = true;
+		this.jugador.fnacimiento = this.jugadorForm.value.fnacimiento;
+		this.jugador.ubicacion = this.jugadorForm.value.ubicacion;
+		this.jugador.sexo = this.jugadorForm.value.sexo;
+		this.firebaseauthService.createDocument<Jugador>(this.jugador, this.enlace, this.jugador.id);
+		this.docSubscription = this.firebaseauthService.getDocumentById(this.enlace, this.jugador.id).subscribe((document: any) =>{
+			this.storage.clear();
+			console.log(document);
+			this.jugador = document;
+			this.storage.set("jugador", document).then(() => {
+				this.router.navigate(['/inicio']);
+			})
 		})
-	})
-  }
+	}
 
-  ionViewWillLeave() {
-	if (this.docSubscription) this.docSubscription.unsubscribe();
-  }
+	ionViewWillLeave() {
+		this.cargando = false;
+		if (this.docSubscription) this.docSubscription.unsubscribe();
+	}
 
 
 }

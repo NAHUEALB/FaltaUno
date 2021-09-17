@@ -22,9 +22,7 @@ export class RegistrarPage implements OnInit {
 	jugador: Jugador;
 	docSubscription;
 	usuarioSubscription;
-	msj="Cargando usuario";
-
-	cargando: boolean;
+	cargando = false;
 
 	localidades = ["La Plata", "Ensenada", "Berisso"];
 	sexos = ["No binario", "Hombre", "Mujer"];
@@ -83,7 +81,6 @@ export class RegistrarPage implements OnInit {
 		this.cargando = true;
 		let user= this.jugadorForm.value.usuario;
 		let pw = this.jugadorForm.value.contrareg;
-		console.log(user + ": " + pw);
 		this.firebaseauthService.registrar(user, pw)
 		.then(res => {
 			let data = this.cargarJugador();

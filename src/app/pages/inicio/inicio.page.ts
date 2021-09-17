@@ -59,7 +59,6 @@ export class InicioPage implements OnInit {
 		this.storage.get("jugador").then(jugadorDelStorage => {
 			this.jugador = jugadorDelStorage;
 			this.nombre = " " + this.jugador.nombre;
-			console.log(this.jugador);
 		})
 		.catch(() => {
 			console.log("No se cargó el storage antes de querer mostrarlo")

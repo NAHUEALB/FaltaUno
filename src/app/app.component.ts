@@ -9,6 +9,8 @@ import { AyudaMenuLateralPage } from './pages/ayuda-menu-lateral/ayuda-menu-late
 import { ModalController } from '@ionic/angular';
 import { Storage } from '@ionic/storage-angular';
 
+import { ToastController } from '@ionic/angular';
+
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -24,6 +26,7 @@ export class AppComponent {
 	private router: Router,
 	public firebaseauthService: FirebaseauthService,
 	public storage: Storage,
+	public toastController: ToastController
 	){
 		this.options = [
 			{ title: 'Inicio', component: InicioPage, icon:'home' ,  ruta:'inicio' },
@@ -51,12 +54,22 @@ export class AppComponent {
 		if(option.title == 'Cerrar Sesion'){
 			this.menuCtrl.enable(false);
 			this.firebaseauthService.logout();
-		}
-		this.router.navigate([`/${option.ruta}`]);
+			this.router.navigate([`/principal`]);
+			this.presentToast("Sesión cerrada con éxito", 3000);
+		} else this.router.navigate([`/${option.ruta}`]);
+		
 	}
 
 	async ngOnInit() {
 		await this.storage.create();
+	}
+
+	async presentToast(msg: string, time: number) {
+		const toast = await this.toastController.create({
+			message: msg,
+			duration: time,
+		});
+		toast.present();
 	}
 
 }

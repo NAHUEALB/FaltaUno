@@ -69,37 +69,30 @@ export class PrincipalPage implements OnInit {
 	async onLoginGoogle() {
 		try {
 			this.authService.loginGoogle()
-				.then(res => {
-					let existe = false;
-					console.log(res.user.uid);
-					this.usuarioSubscription = this.authService.getUserCurrent().subscribe(res => {
-						this.docSubscription = this.authService.getDocumentById(this.enlace, res.uid).subscribe((document: any) => {
-							console.log(document);
-							if (document) {
-								existe = true;
+			.then(() => {
+				this.usuarioSubscription = this.authService.getUserCurrent().subscribe(res => {
+					this.docSubscription = this.authService.getDocumentById(this.enlace, res.uid).subscribe((document: any) => {
+						if (document) {
+							this.storage.clear();
+							this.jugador = document;
+							this.storage.set("jugador", document).then(() => {
+								this.router.navigate(['/inicio']);
+								this.presentToast(this.msj, 3000);
+							});
+						} else {
+							let data = this.cargarJugador();
+							data.id = res.uid;
+							data.nombre = res.displayName.split(" ")[0];
+							let authGoogle : NavigationExtras = {
+								state: {
+									data: data
+								}
 							}
-							if (!existe) {
-								let data = this.cargarJugador();
-								data.id = res.uid;
-								data.nombre = res.displayName.split(" ")[0];
-									let authGoogle : NavigationExtras = {
-												state: {
-													data: data
-												}
-											}
-									this.router.navigate(['registroGoogle'], authGoogle);
-											// this.presentToast(this.msj, 3000);
-							} else {
-										this.storage.clear();
-										this.jugador = document;
-										this.storage.set("jugador", document).then(() => {
-											this.router.navigate(['/inicio']);
-											this.presentToast(this.msj, 3000);
-										})
-							}
-						})
+							this.router.navigate(['registroGoogle'], authGoogle);
+						}
 					})
 				})
+			})
 		} catch (err) {
 			console.log("Detalles: " + err);
 		}
@@ -132,9 +125,7 @@ export class PrincipalPage implements OnInit {
 	}
 
 	ionViewWillLeave() {
-		if (this.docSubscription) {
-			this.docSubscription.unsubscribe()
-		};
+		if (this.docSubscription) this.docSubscription.unsubscribe();
 		if (this.usuarioSubscription) this.usuarioSubscription.unsubscribe();
 	}
 }

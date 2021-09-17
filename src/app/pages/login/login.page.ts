@@ -26,6 +26,7 @@ export class LoginPage implements OnInit {
 	docSubscription;
 	usuarioSubscription;
 	msj = 'Cargando informacion de usuario';
+	cargando = false;
 
 	constructor(
 	public formBuilder: FormBuilder,
@@ -67,6 +68,7 @@ export class LoginPage implements OnInit {
 	}
 
 	login() {
+		this.cargando = true;
 		let user = this.jugadorForm.value.usuario;
 		let pw = this.jugadorForm.value.contraseña;
     	this.firebaseauthService.login(user, pw)
@@ -81,8 +83,8 @@ export class LoginPage implements OnInit {
 			});
 		})
 		.catch((err) => {
+			this.cargando = false;
 			let codigo: string = err.code;
-
 			switch(codigo){
 				case "auth/user-not-found":{
 					this.presentToast("Usuario ingresado no existe", 3000);
@@ -96,8 +98,7 @@ export class LoginPage implements OnInit {
 					this.presentToast(err, 3000);
 					break;
 				}
-			}
-			
+			}	
 		});				
   	}
 
