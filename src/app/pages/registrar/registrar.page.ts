@@ -81,51 +81,58 @@ export class RegistrarPage implements OnInit {
 		this.cargando = true;
 		let user= this.jugadorForm.value.usuario;
 		let pw = this.jugadorForm.value.contrareg;
-		this.firebaseauthService.registrar(user, pw)
-		.then(res => {
-			let data = this.cargarJugador();
-			data.id = res.user.uid;	
-			this.firebaseauthService.createDocument<Jugador>(data, this.enlace, res.user.uid);
-			let user = this.jugadorForm.value.usuario;
-			let pw = this.jugadorForm.value.contrareg;
-			this.firebaseauthService.login(user, pw)
-			.then(() => {
-				this.usuarioSubscription = this.firebaseauthService.getUserCurrent().subscribe(res =>{
-					this.docSubscription = this.firebaseauthService.getDocumentById(this.enlace, res.uid).subscribe((document: any) =>{
-						this.storage.clear();
-						this.jugador = document;
-						this.storage.set("jugador", document).then(() => {
-							this.router.navigate(['/inicio']);
+		document.getElementById('bt-registrar').classList.add('bt-clicked');
+		setTimeout(() => {
+			this.firebaseauthService.registrar(user, pw)
+			.then(res => {
+				let data = this.cargarJugador();
+				data.id = res.user.uid;	
+				this.firebaseauthService.createDocument<Jugador>(data, this.enlace, res.user.uid);
+				let user = this.jugadorForm.value.usuario;
+				let pw = this.jugadorForm.value.contrareg;
+				this.firebaseauthService.login(user, pw)
+				.then(() => {
+					this.usuarioSubscription = this.firebaseauthService.getUserCurrent().subscribe(res =>{
+						this.docSubscription = this.firebaseauthService.getDocumentById(this.enlace, res.uid).subscribe((document: any) =>{
+							this.storage.clear();
+							this.jugador = document;
+							this.storage.set("jugador", document).then(() => {
+								this.router.navigate(['/inicio']);
+								document.getElementById('bt-registrar').classList.remove('bt-clicked');
+							})
 						})
-					})
+					});
+				})
+				.catch((err) => {
+					this.cargando = false;
+					let codigo: string = err.code;
+					if(codigo.includes("auth/user-not-found")){
+						this.presentToast("Usuario ingresado no existe", 3000);
+					}else{
+						if(codigo.includes("auth/wrong-password")){
+							this.presentToast("Contraseña incorrecta", 3000);
+						}else{
+							this.presentToast(err, 3000);
+						}
+					}
+					document.getElementById('bt-registrar').classList.remove('bt-clicked');
 				});
 			})
-			.catch((err) => {
+			.catch(err =>{
 				this.cargando = false;
-				let codigo: string = err.code;
-				if(codigo.includes("auth/user-not-found")){
-					this.presentToast("Usuario ingresado no existe", 3000);
+				if(err.code.includes("auth/email-already-in-use")){
+					this.presentToast("Correo electronico ya registrado", 3000);
 				}else{
-					if(codigo.includes("auth/wrong-password")){
-						this.presentToast("Contraseña incorrecta", 3000);
+					if("auth/invalid-email"){
+						this.presentToast("Correo electronico con formato incorrecto", 3000);
 					}else{
 						this.presentToast(err, 3000);
 					}
 				}
-			});
-		})
-		.catch(err =>{
-			this.cargando = false;
-			if(err.code.includes("auth/email-already-in-use")){
-				this.presentToast("Correo electronico ya registrado", 3000);
-			}else{
-				if("auth/invalid-email"){
-					this.presentToast("Correo electronico con formato incorrecto", 3000);
-				}else{
-					this.presentToast(err, 3000);
-				}
-			}
-		})		
+				document.getElementById('bt-registrar').classList.remove('bt-clicked');
+			})		
+		}, 300);
+
 	}
 
 

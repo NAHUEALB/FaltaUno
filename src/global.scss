@@ -158,3 +158,8 @@ hr {
 	font-size: 38px;
 	padding-right: 15px;
 }
+
+.bt-clicked {
+	//background: linear-gradient(0deg, rgba(0,0,0,0) 0%, rgba(77,255,53,0.2497373949579832) 50%, rgba(0,0,0,0) 100%);
+	background: radial-gradient(circle, rgba(77,255,53,0.2) 30%, rgba(0,0,0,0) 100%);
+}

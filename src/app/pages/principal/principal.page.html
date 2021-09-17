@@ -9,9 +9,9 @@
 	
 <hr>
 	<ion-button 
-		class="bt-modern bt-text" 
+		class="bt-modern bt-text bt-noclicked" 
 		id="bt-iniciar"
-		(click)="login()" 
+		(click)="irAlLogin()" 
 		color="transparent"
 		fill="clear">
 		INICIAR SESIÓN
@@ -20,7 +20,7 @@
 	<ion-button 
 		class="bt-modern bt-text" 
 		id="bt-registrar"
-		(click)="irAlCrear()" 
+		(click)="irAlRegistrar()" 
 		color="transparent"
 		fill="clear">
 		REGISTRARSE
@@ -38,7 +38,7 @@
 		<ion-button 
 			class="bt-round bt-triple bt-text" 
 			id="bt-social" 
-			(click)="onLoginFacebook()" 
+			(click)="irAlLoginFacebook()" 
 			color="transparent"
 			fill="clear">
 			<ion-img id="bt-facebook" src="..\assets\imgs\icon\icon-facebook.png"></ion-img>
@@ -46,7 +46,7 @@
 		<ion-button 
 			class="bt-round bt-triple bt-text" 
 			id="bt-social" 
-			(click)="onLoginGoogle()" 
+			(click)="irAlLoginGoogle()" 
 			color="transparent"
 			fill="clear">
 			<ion-img id="bt-google" src="..\assets\imgs\icon\icon-google.png"></ion-img>

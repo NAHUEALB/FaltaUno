@@ -58,15 +58,23 @@ export class PrincipalPage implements OnInit {
 	ngOnInit() {
 	}
 
-	irAlCrear() {
-		this.router.navigate([`/registrar`]);
+	irAlRegistrar() {
+		document.getElementById('bt-registrar').classList.add('bt-clicked');
+		setTimeout(() => {
+			this.router.navigate([`/registrar`]);
+			document.getElementById('bt-registrar').classList.remove('bt-clicked');
+		}, 300);
 	}
 
-	login() {
-		this.router.navigate([`/login`]);
+	irAlLogin() {
+		document.getElementById('bt-iniciar').classList.add('bt-clicked');
+		setTimeout(() => {
+			this.router.navigate([`/login`]);
+			document.getElementById('bt-iniciar').classList.remove('bt-clicked');
+		}, 300);
 	}
 
-	async onLoginGoogle() {
+	async irAlLoginGoogle() {
 		try {
 			this.authService.loginGoogle()
 			.then(() => {
@@ -96,6 +104,10 @@ export class PrincipalPage implements OnInit {
 		} catch (err) {
 			console.log("Detalles: " + err);
 		}
+	}
+
+	irAlLoginFacebook() {
+		console.log("ajsdkjasjkd te la CREISTE WEEEE JASKDJAKJSDKAJSD");
 	}
 
 	cargarJugador() {
