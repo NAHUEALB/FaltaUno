@@ -1,9 +1,10 @@
+import { Events } from './../../serv/events.service';
+import { Jugador } from './../../models/jugador';
 import { MenuController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Jugador } from 'src/app/models/jugador';
 
 import { Storage } from '@ionic/storage-angular';
 
@@ -23,6 +24,9 @@ export class EditarPage implements OnInit {
 	sexos = ["No binario", "Hombre", "Mujer"];
 	docSubscription;
 	usuarioSubscription;
+	cargando = false;
+	enlace = 'Jugador';
+	ACTUALIZAR_STORAGE = "actualizar:storage";
 
 	constructor(
 	public menuCtrl: MenuController, 
@@ -31,6 +35,7 @@ export class EditarPage implements OnInit {
 	public database: DatabaseService,
 	private storage: Storage,
 	public firebaseauthService: FirebaseauthService,
+	private events: Events
 	){ 
 		this.jugador = {
 			id: "",
@@ -53,51 +58,48 @@ export class EditarPage implements OnInit {
 			sexo: ''
 		});
 
-		this.storage.get("jugador").then(res => {
-			this.jugador = res;
-
-			let indexSexo = 0; 
-			if (this.jugador.sexo == "Hombre") indexSexo = 1
-			else if (this.jugador.sexo == "Mujer") indexSexo = 2;
-
-			let indexCiudad = 0; 
-			if (this.jugador.ubicacion == "Ensenada") indexCiudad = 1
-			else if (this.jugador.ubicacion == "Berisso") indexCiudad = 2;
-
-			this.jugadorForm = this.formBuilder.group({
-				nombre: this.jugador.nombre,
-				fnacimiento: this.jugador.fnacimiento,
-				ubicacion: '',
-				sexo: ''
-			});
-		})
 
 	}
 
 	ngOnInit() {
-		//this.menuCtrl.enable(true);
-	}
-
-	radioChange(value){
-		console.log(value.detail.value);
+		this.storage.get("jugador").then(res => {
+			this.jugador = res;
+			this.jugadorForm.patchValue({nombre: this.jugador.nombre,
+										fnacimiento: this.jugador.fnacimiento,
+										ubicacion: this.jugador.ubicacion,
+										sexo: this.jugador.sexo})
+		})
 	}
 
 	onSubmit(){
 		//Esto deberiamos mandarlo a la bd.
 		//En el perfil deberiamos poner que cada vez que se entre, se recargue la informacion de ese jugador
 		//Como saber que jugador es? proponer el uso del DNI.
-		console.log(this.jugadorForm.value);
+		// console.log(this.jugadorForm.value);
 	}
 
 	editarJugador() {
-		console.log("--- JUGADOR EN storage (editar)");
+		this.cargando = true;
+		
+		this.jugador.nombre = this.jugadorForm.value.nombre;
+		this.jugador.fnacimiento = this.jugadorForm.value.fnacimiento;
+		this.jugador.ubicacion = this.jugadorForm.value.ubicacion;
+		this.jugador.sexo = this.jugadorForm.value.sexo;
+		
+		this.firebaseauthService.updateDocument(this.enlace, this.jugador).then(res => {
+			// this.events.publish("actualizar:storage", false);
+			this.storage.set("jugador", this.jugador).then(()=>{
+				this.router.navigate(["/perfil"]);
+			})
+		});
+
 		// const juga2 = this.storage.get("jugador")
 		// .then(res => {
 		// 	console.log(res);
 		// 	console.log("id: " + res.id);
 		// })
 
-		this.router.navigate(["/perfil"]);
+		
 
 		/*this.database.firestore()
 		.collection('Jugador')

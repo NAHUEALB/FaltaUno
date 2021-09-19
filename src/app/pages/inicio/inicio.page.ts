@@ -22,7 +22,7 @@ export class InicioPage implements OnInit {
 	constructor(
 	private menuCtrl: MenuController, 
 	private router: Router, 
-	public firebaseauthService: FirebaseauthService,
+	// public firebaseauthService: FirebaseauthService,
 	private storage: Storage
 	){
 		this.menuCtrl.enable(true);
@@ -59,7 +59,6 @@ export class InicioPage implements OnInit {
 		this.storage.get("jugador").then(jugadorDelStorage => {
 			this.jugador = jugadorDelStorage;
 			this.nombre = " " + this.jugador.nombre;
-			console.log(this.jugador);
 		})
 		.catch(() => {
 			console.log("No se cargó el storage antes de querer mostrarlo")
