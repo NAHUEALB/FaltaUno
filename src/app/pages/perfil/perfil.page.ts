@@ -1,3 +1,4 @@
+import { Events } from './../../serv/events.service';
 import { FirebaseauthService } from './../../serv/firebaseauth.service';
 import { Component, OnInit } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
@@ -19,14 +20,14 @@ export class PerfilPage implements OnInit {
 	edad: number;
 	valoracion: number;
 	stars = [];
-	getDocumentSubscription;
 	nameIcon: String;
 	idColor: String;
+	ACTUALIZAR_STORAGE = "actualizar:storage";
 
   	constructor( 
 	private router: Router, 
-	public firebaseauthService: FirebaseauthService,
-	private storage: Storage
+	private storage: Storage,
+	// private events: Events
 	){ 		
 		this.jugador = {
 			id:"0",
@@ -48,6 +49,13 @@ export class PerfilPage implements OnInit {
 			valoracion:12
 		}
 		
+
+	}
+
+
+  	ngOnInit() {}
+
+	ionViewWillEnter(){
 		this.storage.get("jugador").then(jugadorDelStorage => {
 			this.jugador = jugadorDelStorage;
 			this.edad = this.getEdad(this.jugador.fnacimiento);
@@ -56,10 +64,6 @@ export class PerfilPage implements OnInit {
 			this.showSexo();
 		});
 	}
-
-
-  	ngOnInit() {
-  	}
 
 	getEdad(dateNacimiento) {
 		let newDate = new Date(dateNacimiento);
@@ -108,11 +112,9 @@ export class PerfilPage implements OnInit {
 		}
 	}
 
-	ionViewWillLeave(){
-		if(this.getDocumentSubscription){
-			this.getDocumentSubscription.unsubscribe();
-		}
-	}
+	// ionViewWillLeave(){
+	// 	this.events.destroy(this.ACTUALIZAR_STORAGE);
+	// }
 
 
 	irAlEditar(){

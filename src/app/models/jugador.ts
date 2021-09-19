@@ -1,4 +1,4 @@
-export interface Jugador{
+export class Jugador{
 	id: string;
     nombre: string;
     usuario: string;
