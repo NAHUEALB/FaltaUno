@@ -34,7 +34,8 @@
 	<ion-item class="i-text">  
 		<ion-select
 		formControlName="ubicacion" 
-		placeholder="🔻 Editar ciudad">
+		placeholder="🔻 Editar ciudad"
+		required>
 			<ion-select-option *ngFor="let localidad of localidades">
 				{{localidad}}
 			</ion-select-option>
@@ -44,7 +45,8 @@
 	<ion-item class="i-text">  
 		<ion-select  
 		formControlName="sexo" 
-		placeholder="🔻 Editar sexo">
+		placeholder="🔻 Editar sexo"
+		required>
 			<ion-select-option *ngFor="let sexo of sexos" >
 				{{sexo}}
 			</ion-select-option>

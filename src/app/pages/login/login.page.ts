@@ -79,7 +79,9 @@ export class LoginPage implements OnInit {
 					this.storage.set("jugador", document).then(()=>{
 						this.router.navigate(['/inicio']);
 					})
+					this.docSubscription.unsubscribe();
 				})
+				this.usuarioSubscription.unsubscribe();
 			});
 		})
 		.catch((err) => {
@@ -101,9 +103,4 @@ export class LoginPage implements OnInit {
 			}	
 		});				
   	}
-
-	ionViewWillLeave(){
-		if(this.docSubscription) this.docSubscription.unsubscribe();
-		if(this.usuarioSubscription) this.usuarioSubscription.unsubscribe();
-	}
 }

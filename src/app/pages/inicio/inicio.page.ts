@@ -22,7 +22,7 @@ export class InicioPage implements OnInit {
 	constructor(
 	private menuCtrl: MenuController, 
 	private router: Router, 
-	public firebaseauthService: FirebaseauthService,
+	// public firebaseauthService: FirebaseauthService,
 	private storage: Storage
 	){
 		this.menuCtrl.enable(true);

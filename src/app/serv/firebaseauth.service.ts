@@ -1,3 +1,4 @@
+import { Jugador } from './../models/jugador';
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
@@ -46,6 +47,20 @@ export class FirebaseauthService {
 
   getUserCurrent(){
     return this.auth.user;
+  }
+
+  updateDocument(path,data: Jugador){
+    return this.fireStore.collection(path).doc(data.id).set({'nombre': data.nombre,
+                                                                    'cvotos': data.cvotos,
+                                                                    'fnacimiento': data.fnacimiento,
+                                                                    'foto': data.foto,
+                                                                    'id': data.id,
+                                                                    'html': data.html,
+                                                                    'puntaje': data.puntaje,
+                                                                    'sexo': data.sexo,
+                                                                    'perfil': data.perfil,
+                                                                    'ubicacion': data.ubicacion,
+                                                                    'usuario': data.usuario });
   }
 
 }
