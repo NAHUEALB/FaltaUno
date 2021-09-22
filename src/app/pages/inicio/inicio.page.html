@@ -10,19 +10,20 @@
   
 <ion-content class="background">
 	
-	<!--div class="blk-card"-->
-		<!--h3>Tu perfil</h3-->
-		<div id="perfil-container">
-			<div class="opcion-perfil" (click)="irAlPerfil()">
-				<ion-icon class="perfil-icon"  name="person"></ion-icon>
-				<p>Perfil</p>
-			</div>
-			<div class="opcion-perfil" (click)="irAlHistorial()">
-				<ion-icon class="perfil-icon" name="list-circle"></ion-icon>
-				<p>Historial</p>
-			</div>
+	<div id="perfil-container">
+		<div class="opcion-card" (click)="irAlModalAyuda()">
+			<ion-icon class="perfil-icon" name="help-circle"></ion-icon>
+			<p>Ayuda</p>
 		</div>
-	<!--/div-->
+		<div class="opcion-card" (click)="irAlPerfil()">
+			<ion-icon class="perfil-icon" name="person"></ion-icon>
+			<p>Perfil</p>
+		</div>
+		<div class="opcion-card" (click)="irAlHistorial()">
+			<ion-icon class="perfil-icon" name="list-circle"></ion-icon>
+			<p>Historial</p>
+		</div>
+	</div>
 
 	<div class="blk-card">
 		<h3>Descubrí partidos</h3>
@@ -69,25 +70,5 @@
 			</ul>
 		</div>
 	</div>
-	
-
-	<!--<div id="block-noticia">
-		<h3 id="titulo-noticias">Consejos diarios</h3>
-		<div id="block-text">
-			<ion-text id="text-noticia">
-				{{ noticia }}
-			</ion-text>
-		</div>
-	</div>
-	
-	<ion-button fill="clear" class="bt-round bt-up" (click)="irAlBuscar()">
-		<ion-icon class="bt-icon" name="search"></ion-icon>
-		<p class="bt-text">  salas</p>
-	</ion-button>
- 
-	<ion-button fill="clear" class="bt-round bt-down" (click)="irAlPerfil()">
-		<ion-icon class="bt-icon" name="person"></ion-icon>
-		<p class="bt-text">  perfil</p>
-	</ion-button>-->
   
 </ion-content>

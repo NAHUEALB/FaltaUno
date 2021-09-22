@@ -124,4 +124,8 @@ export class PerfilPage implements OnInit {
 	irAlHistorial(){
 		this.router.navigate([`/historial`]);
 	}
+
+	irAlInicio(){
+		this.router.navigate([`/inicio`]);
+	}
 }

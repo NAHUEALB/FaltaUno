@@ -16,11 +16,14 @@
 		<div>
 			<h3><b>{{ jugador.nombre }}</b></h3>
 			<hr>
-			<h3>{{ edad }} años</h3>
+			<div class="blk-crest-body-icon">
+				<ion-icon class="icon" [name]="nameIcon" [id]="idColor" ></ion-icon>
+				<h3>{{ edad }} años </h3>
+			</div>
 			<hr>
-			<div class="blk-crest-body-sexo">
-				<h3>{{ jugador.sexo }}</h3>
-				<ion-icon class="sexo-pic" [name]="nameIcon" [id]="idColor" ></ion-icon>
+			<div class="blk-crest-body-icon">
+				<ion-icon class="icon" name="location"></ion-icon>
+				<h3>{{ jugador.ubicacion }}</h3>
 			</div>
 		</div>
 	</div>
@@ -45,11 +48,15 @@
 	</div>
 
 	<div id="perfil-container">
-		<div class="opcion-perfil" (click)="irAlHistorial()">
+		<div class="opcion-card" (click)="irAlHistorial()">
 			<ion-icon class="perfil-icon" name="list-circle"></ion-icon>
 			<p>Historial</p>
 		</div>
-		<div class="opcion-perfil" (click)="irAlEditar()">
+		<div class="opcion-card" (click)="irAlInicio()">
+			<ion-icon class="perfil-icon" name="home"></ion-icon>
+			<p>Inicio</p>
+		</div>
+		<div class="opcion-card" (click)="irAlEditar()">
 			<ion-icon class="perfil-icon" name="brush"></ion-icon>
 			<p>Editar</p>
 		</div>

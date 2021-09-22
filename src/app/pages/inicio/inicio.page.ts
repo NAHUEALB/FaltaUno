@@ -54,6 +54,10 @@ export class InicioPage implements OnInit {
 		this.router.navigate([`/perfil`]);
 	}
 
+	irAlModalAyuda() {
+		console.log("Debería abrir el modal de ayuda")
+	}
+
 	ionViewWillEnter() {
 		this.mostrarNoticias = true;
 		this.storage.get("jugador").then(jugadorDelStorage => {

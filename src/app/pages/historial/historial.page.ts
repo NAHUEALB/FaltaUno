@@ -19,7 +19,7 @@ export class HistorialPage implements OnInit {
 
   ionViewWillEnter(){
     this.partidos=[];
-    let cantidad = Math.floor(Math.random() * (10 - 1)) + 1;
+    let cantidad = Math.floor(Math.random() * (10 - 4)) + 4;
     for(let i=1; i < cantidad; i++){
       let golesEquipo = Math.floor(Math.random() * 20);
       let golesRival = Math.floor(Math.random() * 20);

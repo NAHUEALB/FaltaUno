@@ -53,36 +53,32 @@
 		</ion-select>
 	</ion-item>
 
-	<ion-row class="buttons-flex">
-		<div>
-			<hr id="hr-descartar">
-			<ion-col>
-				<ion-button 
-					class="bt-half bt-text-half" 
-					id=""
-					(click)="irAlPerfil()"
-					color="transparent"
-					fill="clear">
-					DESCARTAR
-				</ion-button>
-			</ion-col>
-			<hr id="hr-descartar">
-		</div>
-		<div>
-			<hr id="hr-confirmar">
-			<ion-col>
-				<ion-button 
-					class="bt-half bt-text-half" 
-					id=""
-					type="submit"
-					[disabled]="!jugadorForm.valid"
-					color="transparent"
-					fill="clear">
-					{{cargando ? "CARGANDO..." : "CONFIRMAR" }}
-				</ion-button>
-			</ion-col>
-			<hr id="hr-confirmar">
-		</div>
-	</ion-row>
+	<hr id="hr-cancel">
+	<ion-col>
+		<ion-button 
+			class="bt-modern bt-text" 
+			id=""
+			(click)="irAlPerfil()"
+			color="transparent"
+			fill="clear">
+			DESCARTAR
+		</ion-button>
+	</ion-col>
+	<hr id="hr-cancel">
+
+	<hr id="hr-ok">
+	<ion-col>
+		<ion-button 
+			class="bt-modern bt-text" 
+			id=""
+			type="submit"
+			[disabled]="!jugadorForm.valid"
+			color="transparent"
+			fill="clear">
+			{{cargando ? "CARGANDO..." : "CONFIRMAR" }}
+		</ion-button>
+	</ion-col>
+	<hr id="hr-ok">
+	
 </form>
 </ion-content>
