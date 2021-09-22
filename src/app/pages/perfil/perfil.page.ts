@@ -22,6 +22,7 @@ export class PerfilPage implements OnInit {
 	stars = [];
 	nameIcon: String;
 	idColor: String;
+	imgUrl: String;
 	ACTUALIZAR_STORAGE = "actualizar:storage";
 
   	constructor( 
@@ -62,6 +63,7 @@ export class PerfilPage implements OnInit {
 			this.valoracion = this.getValoracion(this.jugador.puntaje, this.jugador.cvotos);
 			this.fillStars(this.valoracion);
 			this.showSexo();
+			this.showFotoCiudad();
 		});
 	}
 
@@ -108,6 +110,30 @@ export class PerfilPage implements OnInit {
 			case " No binario ": 
 				this.nameIcon = "male-female-outline";
 				this.idColor = "icon-nobin";
+				break;
+		}
+	}
+
+	showFotoCiudad() {
+		const headerParaImagen = document.getElementById("blk-crest-header")
+		switch (this.jugador.ubicacion) {
+			case " La Plata ":
+				headerParaImagen.classList.add("bg-laplata");
+				headerParaImagen.classList.remove("bg-berisso");
+				headerParaImagen.classList.remove("bg-ensenada");
+				this.imgUrl = '../../../assets/imgs/localidades/01-la_plata.jpg'; 
+				break;
+			case " Berisso ":
+				headerParaImagen.classList.add("bg-berisso");
+				headerParaImagen.classList.remove("bg-laplata");
+				headerParaImagen.classList.remove("bg-ensenada");
+				this.imgUrl = '../../../assets/imgs/localidades/02-berisso.jpg'; 
+				break;
+			case " Ensenada ": 
+				headerParaImagen.classList.add("bg-ensenada");
+				headerParaImagen.classList.remove("bg-laplata");
+				headerParaImagen.classList.remove("bg-berisso");
+				this.imgUrl = '../../../assets/imgs/localidades/03-ensenada.jpg'; 
 				break;
 		}
 	}

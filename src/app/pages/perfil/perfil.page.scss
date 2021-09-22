@@ -1,18 +1,35 @@
 // SECCIÓN PARA CARD DEL PERFIL DEL JUGADOR
 
+.circle-4-crest {
+	color: #222;
+	position: absolute;
+	font-size: 135px;
+	top: -25px;
+}
+#circle-left {
+	left: -55px;
+} 
+#circle-right {
+	right: -55px;
+}
+
 .blk-crest-pic {
 	display: flex;
 	justify-content: space-around;
     margin: 10px 4% 0px 4%;
-    padding: 5px 0px;
-    background: rgb(180,180,180);
+    padding: 1rem 0;
     background: linear-gradient(0deg, rgb(212, 212, 212) 0%, rgba(255,255,255,1) 100%);
-    border-radius: 50px 50px 0 0;
+    border-radius: 50% 50% 0 0;
 }
+
+.bg-laplata { background: url('../../../assets/imgs/localidades/01-la_plata.jpg') 0 0/100% 100% no-repeat; }
+.bg-berisso { background: url('../../../assets/imgs/localidades/02-berisso.jpg') 0 0/100% 100% no-repeat; }
+.bg-ensenada { background: url('../../../assets/imgs/localidades/03-ensenada.jpg') 0 0/100% 100% no-repeat; }
+
 #perfil-pic {
 	display: inline-block;
-	width: 100px;
-	height: 100px;
+	width: 150px;
+	height: 150px;
 	color: #222;
 	border-radius: 50%;
 }
@@ -28,7 +45,7 @@
 .blk-crest-body {
 	margin: 0px 4% 10px 4%;
 	padding: 5px 0px;
-	background: rgb(206, 192, 132);
+	background: rgb(244, 255, 183);
 	font-weight: bold;
 	border-radius: 0 0 5px 5px;
 }
@@ -95,4 +112,59 @@ hr {
 	height: 40px;
 	padding: 0;
 	color: #222;
+}
+
+
+
+
+
+
+
+
+
+
+$color1: #e1c072;
+$color2: #fdeaa7;
+$color3: #725b16;
+
+
+#card {
+	position: relative;
+	color: $color3;
+	width: 70%;
+	height: 430px;
+	background: #ddd;
+	margin: auto;
+	clip-path: url("#svgPath");
+	display: block;
+	opacity: 1;
+	#card-inner {
+		position: absolute;
+		top: 0;
+		left: 0;
+		background: #aaa;
+		height: 100%;
+		width: 100%;
+		#card-top {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 54%;
+			background: $color1;
+			overflow: hidden;
+			background: linear-gradient(135deg, $color2 0%, darken($color1, 10%)100%);
+		}
+		#card-bottom {
+			display: none;
+			position: absolute;
+			overflow: hidden;
+			bottom: 0;
+			left: 0;
+			width: 100%;
+			height: 46%;
+			background: $color2;
+			background: linear-gradient(135deg, $color2 0%, darken($color2, 10%)100%);
+		}
+	}
 }
