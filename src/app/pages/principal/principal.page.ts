@@ -59,19 +59,11 @@ export class PrincipalPage implements OnInit {
 	}
 
 	irAlRegistrar() {
-		document.getElementById('bt-registrar').classList.add('bt-clicked');
-		setTimeout(() => {
-			this.router.navigate([`/registrar`]);
-			document.getElementById('bt-registrar').classList.remove('bt-clicked');
-		}, 300);
+		this.router.navigate([`/registrar`]);
 	}
 
 	irAlLogin() {
-		document.getElementById('bt-iniciar').classList.add('bt-clicked');
-		setTimeout(() => {
-			this.router.navigate([`/login`]);
-			document.getElementById('bt-iniciar').classList.remove('bt-clicked');
-		}, 300);
+		this.router.navigate([`/login`]);
 	}
 
 	async irAlLoginGoogle() {

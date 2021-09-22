@@ -81,7 +81,6 @@ export class RegistrarPage implements OnInit {
 		this.cargando = true;
 		let user= this.jugadorForm.value.usuario;
 		let pw = this.jugadorForm.value.contrareg;
-		document.getElementById('bt-registrar').classList.add('bt-clicked');
 		setTimeout(() => {
 			this.firebaseauthService.registrar(user, pw)
 			.then(res => {
@@ -98,7 +97,6 @@ export class RegistrarPage implements OnInit {
 							this.jugador = document;
 							this.storage.set("jugador", document).then(() => {
 								this.router.navigate(['/inicio']);
-								document.getElementById('bt-registrar').classList.remove('bt-clicked');
 							})
 						})
 					});
@@ -115,7 +113,6 @@ export class RegistrarPage implements OnInit {
 							this.presentToast(err, 3000);
 						}
 					}
-					document.getElementById('bt-registrar').classList.remove('bt-clicked');
 				});
 			})
 			.catch(err =>{
@@ -129,7 +126,6 @@ export class RegistrarPage implements OnInit {
 						this.presentToast(err, 3000);
 					}
 				}
-				document.getElementById('bt-registrar').classList.remove('bt-clicked');
 			})		
 		}, 300);
 
