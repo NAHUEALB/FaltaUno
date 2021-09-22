@@ -1,13 +1,25 @@
 <ion-header class="ion-no-border">
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
-    </ion-buttons>
-    <ion-title>Buscar</ion-title>
-  </ion-toolbar>
+	<ion-toolbar>
+		<ion-buttons slot="start">
+			<ion-back-button></ion-back-button>
+		</ion-buttons>
+		<ion-title>Partidos disponibles</ion-title>
+	</ion-toolbar>
 </ion-header>
 
-
-<ion-content class="inner-background">
-  <h1 class="title">Buscar</h1>
+<ion-content class="background">
+  <table>
+    <th>
+      <td>Cancha</td>
+      <td>Hora</td>
+      <td>Slots</td>
+      <td>Sexo</td>
+    </th>
+    <tr *ngFor="let partido of partidos" class="blk-card">
+      <td>{{ partido.cancha }} ({{ partido.direccion }})</td>
+      <td>{{ partido.hora }}</td>
+      <td>{{ partido.slotsOcupados }} / {{ partido.slotsTotales }}</td>
+      <td>{{ partido.sexo }}</td>
+    </tr>
+  </table>
 </ion-content>

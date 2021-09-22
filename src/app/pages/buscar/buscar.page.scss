@@ -1,8 +1,10 @@
-:host {
-  
-  ion-content.background{
-    --background: url('../../../assets/imgs/background/inicio-bg.jpg') 0 0/100% 100% no-repeat;
-    //--background: rgb(0,0,0); 
-    //--background: linear-gradient(150deg, rgba(0,0,0,1) 0%, rgba(41,0,97,1) 12%, rgba(0,0,0,1) 26%, rgba(23,0,55,1) 35%, rgba(0,0,0,1) 44%, rgba(36,4,84,1) 59%, rgba(0,0,0,1) 72%, rgba(18,0,55,1) 85%, rgba(0,0,0,1) 100%);
-  }
+.match-data-container {
+  padding: 10px 0px;
+  display: flex;
+}
+
+.match-data-container h3 {
+  font-family: 'Rubik', sans-serif;
+  text-align: center;
+  margin: auto;
 }
