@@ -8,18 +8,33 @@
 </ion-header>
 
 <ion-content class="background">
-  <table>
-    <th>
-      <td>Cancha</td>
-      <td>Hora</td>
-      <td>Slots</td>
-      <td>Sexo</td>
-    </th>
+  <table class="table-data-container">
+    <tr class="t-header">
+      <th>Canchas</th>
+      <th>Info</th>
+      <th>Sexo</th>
+    </tr>
     <tr *ngFor="let partido of partidos" class="blk-card">
-      <td>{{ partido.cancha }} ({{ partido.direccion }})</td>
-      <td>{{ partido.hora }}</td>
-      <td>{{ partido.slotsOcupados }} / {{ partido.slotsTotales }}</td>
-      <td>{{ partido.sexo }}</td>
+      <td><b class="nombre-cancha">{{ partido.cancha }}</b> <br>
+        ({{ partido.direccion }})</td>
+      <td>{{ partido.hora }}<br>
+        {{ partido.slotsOcupados }}/{{ partido.slotsTotales }}</td>
+      <td><ion-icon class="icon" [name]="partido.iconName" [id]="iconColor" ></ion-icon></td>
     </tr>
   </table>
+
+  <div id="perfil-container">
+		<div class="opcion-card" (click)="irAlHistorial()">
+			<ion-icon class="perfil-icon" name="map"></ion-icon>
+			<p>Ver en mapa</p>
+		</div>
+		<div class="opcion-card" (click)="irAlInicio()">
+			<ion-icon class="perfil-icon bt-enabled" name="home"></ion-icon>
+			<p>Mismo sexo</p>
+		</div>
+		<div class="opcion-card" (click)="irAlEditar()">
+			<ion-icon class="perfil-icon" name="refresh-circle"></ion-icon>
+			<p>Recargar</p>
+		</div>
+	</div>
 </ion-content>

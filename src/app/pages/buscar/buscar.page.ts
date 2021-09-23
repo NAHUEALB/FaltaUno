@@ -7,6 +7,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BuscarPage implements OnInit {
 
+	iconName: String;
+	iconColor: String;
+
 	partidos = [
 		{
 			cancha: "Megastadio",
@@ -14,7 +17,7 @@ export class BuscarPage implements OnInit {
 			slotsOcupados: 7,
 			slotsTotales: 10,
 			hora: "16:00",
-			sexo: "Masculino"
+			sexo: " Masculino ",
 		},
 		{
 			cancha: "Estadio 7",
@@ -22,7 +25,7 @@ export class BuscarPage implements OnInit {
 			slotsOcupados: 3,
 			slotsTotales: 10,
 			hora: "17:00",
-			sexo: "Mixto"
+			sexo: " Mixto "
 		},
 		{
 			cancha: "Megastadio",
@@ -30,7 +33,7 @@ export class BuscarPage implements OnInit {
 			slotsOcupados: 5,
 			slotsTotales: 10,
 			hora: "17:00",
-			sexo: "Femenino"
+			sexo: " Femenino "
 		},
 		{
 			cancha: "Cancha Loca",
@@ -38,7 +41,7 @@ export class BuscarPage implements OnInit {
 			slotsOcupados: 2,
 			slotsTotales: 10,
 			hora: "19:00",
-			sexo: "Masculino"
+			sexo: " Masculino "
 		}
 	]
 
@@ -47,6 +50,24 @@ export class BuscarPage implements OnInit {
 	}
 
 	ngOnInit() {
+		this.partidos.forEach(unPartido => this.asignarIcon(unPartido));
+	}
+
+	asignarIcon(elem) {
+		switch (elem.sexo) {
+			case " Masculino ": 
+				elem.iconName = "male-outline";
+				elem.iconColor = "icon-hombre";
+				break;
+			case " Femenino ": 
+				elem.iconName = "female-outline";
+				elem.iconColor = "icon-mujer";
+				break;
+			case " Mixto ": 
+				elem.iconName = "male-female-outline";
+				elem.iconColor = "icon-nobin";
+				break;
+		}
 	}
 
 }
