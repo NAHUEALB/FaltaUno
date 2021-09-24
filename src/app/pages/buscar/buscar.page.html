@@ -8,7 +8,31 @@
 </ion-header>
 
 <ion-content class="background">
-	<ion-list class="blk-card lista-partidos" lines="none">
+
+	<div id="perfil-container">
+		<div class="opcion-card" id="perfil-icon-a-mapa" (click)="swapAMapa()">
+			<ion-icon class="perfil-icon" name="map"></ion-icon>
+			<p>Ver mapa</p>
+		</div>
+		<div class="opcion-card" id="perfil-icon-a-lista" (click)="swapALista()">
+			<ion-icon class="perfil-icon" name="list-circle"></ion-icon>
+			<p>Ver lista</p>
+		</div>
+		<div class="opcion-card" (click)="irAlInicio()">
+			<ion-icon class="perfil-icon bt-enabled" name="home"></ion-icon>
+			<p>Inicio</p>
+		</div>
+		<div class="opcion-card" (click)="irAlEditar()">
+			<ion-icon class="perfil-icon" name="refresh-circle"></ion-icon>
+			<p>Recargar</p>
+		</div>
+	</div>
+
+	<ion-item id="blk-mapa" class="blk-card">
+		<img src="../../assets/imgs/gmaps.jpg"/>
+	</ion-item>
+
+	<ion-list id="blk-lista" class="blk-card lista-partidos" lines="none">
 		<ion-item-sliding *ngFor="let partido of partidos">
 
 			<ion-item-options side="start"><ion-item-option color="primary" (click)="irALaSala()" expandable>Unirse</ion-item-option></ion-item-options>
@@ -31,20 +55,4 @@
 
 		</ion-item-sliding>
 	</ion-list>
-
-  	<div id="perfil-container">
-		<div class="opcion-card" (click)="irAlHistorial()">
-			<ion-icon class="perfil-icon" name="map"></ion-icon>
-			<p>Ver en mapa</p>
-		</div>
-		<div class="opcion-card" (click)="irAlInicio()">
-			<ion-icon class="perfil-icon bt-enabled" name="home"></ion-icon>
-			<p>Mismo sexo</p>
-		</div>
-		<div class="opcion-card" (click)="irAlEditar()">
-			<ion-icon class="perfil-icon" name="refresh-circle"></ion-icon>
-			<p>Recargar</p>
-		</div>
-	</div>
-
 </ion-content>

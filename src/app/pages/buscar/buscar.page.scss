@@ -18,6 +18,7 @@
 #perfil-container {
 	display: flex;
 	padding: 1% 2%;
+  bottom: 100px;
 }
 
 .perfil-icon {
@@ -25,4 +26,22 @@
 	height: 40px;
 	padding: 0;
 	color: #222;
+}
+
+#blk-lista {
+  display: block;
+  height: 75%;
+}
+
+#blk-mapa {
+  display: none;
+  height: 75%;
+}
+
+#perfil-icon-a-lista {
+  display: none;
+}
+
+#perfil-icon-a-map {
+  display: block;
 }

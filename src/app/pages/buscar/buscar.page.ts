@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
 	selector: 'app-buscar',
@@ -79,7 +80,7 @@ export class BuscarPage implements OnInit {
 		}
 	]
 
-	constructor() {
+	constructor(private router: Router) {
 		console.log("Constructor del buscar");
 	}
 
@@ -88,6 +89,10 @@ export class BuscarPage implements OnInit {
 			this.asignarSexo(unPartido)
 			this.asignarColorSlot(unPartido)
 		});
+	}
+
+	irAlInicio() {
+		this.router.navigate([`/inicio`]);
 	}
 
 	asignarSexo(elem) {
@@ -115,6 +120,20 @@ export class BuscarPage implements OnInit {
 		} else {
 			elem.slotColor = "slot-ocupado";
 		}
+	}
+
+	swapAMapa() {
+		document.getElementById("perfil-icon-a-mapa").style.display = "none";
+		document.getElementById("perfil-icon-a-lista").style.display = "block";
+		document.getElementById("blk-lista").style.display = "none";
+		document.getElementById("blk-mapa").style.display = "block";
+	}
+
+	swapALista() {
+		document.getElementById("perfil-icon-a-mapa").style.display = "block";
+		document.getElementById("perfil-icon-a-lista").style.display = "none";
+		document.getElementById("blk-lista").style.display = "block";
+		document.getElementById("blk-mapa").style.display = "none";
 	}
 
 }
