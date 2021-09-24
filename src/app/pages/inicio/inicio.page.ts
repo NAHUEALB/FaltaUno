@@ -53,6 +53,10 @@ export class InicioPage implements OnInit {
 	irAlPerfil(){
 		this.router.navigate([`/perfil`]);
 	}
+	
+	irAlBuscar() {
+		this.router.navigate([`/buscar`]);
+	}
 
 	irAlModalAyuda() {
 		console.log("Debería abrir el modal de ayuda")
