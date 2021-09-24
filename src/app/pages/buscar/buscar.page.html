@@ -8,22 +8,35 @@
 </ion-header>
 
 <ion-content class="background">
-  <table class="table-data-container">
-    <tr class="t-header">
-      <th>Canchas</th>
-      <th>Info</th>
-      <th>Sexo</th>
-    </tr>
-    <tr *ngFor="let partido of partidos" class="blk-card">
-      <td><b class="nombre-cancha">{{ partido.cancha }}</b> <br>
-        ({{ partido.direccion }})</td>
-      <td>{{ partido.hora }}<br>
-        {{ partido.slotsOcupados }}/{{ partido.slotsTotales }}</td>
-      <td><ion-icon class="icon" [name]="partido.iconName" [id]="iconColor" ></ion-icon></td>
-    </tr>
-  </table>
+	<div class="blk-card">
+		<div *ngFor="let partido of partidos" class="opcion-cancha">
+			<ion-icon class="cancha-icon c-icon-ball" name="football"></ion-icon>
+			<ion-icon class="cancha-icon c-icon-sexo" [name]="partido.iconName" [id]="iconColor" ></ion-icon>
+			<div class="c-data">
+				<p>{{ partido.cancha }}</p>
+				<p>{{ partido.hora }}</p>
+				<p>{{ partido.slotsOcupados }}/{{ partido.slotsTotales }}</p>
+			</div>
+			<ion-icon class="cancha-icon bt-okngo" name="caret-forward-outline"></ion-icon>
+		</div>
+	</div>
+	
+	<table class="table-data-container">
+		<tr class="t-header">
+		<th>Canchas</th>
+		<th>Info</th>
+		<th>Sexo</th>
+		</tr>
+					<tr *ngFor="let partido of partidos" class="blk-card">
+						<td><b class="nombre-cancha">{{ partido.cancha }}</b> <br>
+							({{ partido.direccion }})</td>
+						<td>{{ partido.hora }}<br>
+							{{ partido.slotsOcupados }}/{{ partido.slotsTotales }}</td>
+						<td><ion-icon class="icon" [name]="partido.iconName" [id]="iconColor" ></ion-icon></td>
+					</tr>
+	</table>
 
-  <div id="perfil-container">
+  	<div id="perfil-container">
 		<div class="opcion-card" (click)="irAlHistorial()">
 			<ion-icon class="perfil-icon" name="map"></ion-icon>
 			<p>Ver en mapa</p>

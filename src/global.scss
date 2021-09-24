@@ -182,3 +182,60 @@ hr {
 	margin: 0;
 	font-size: 18px;
 }
+
+
+
+
+// SECCIÓN PARA LAS CARDS DE LOS PARTIDOS
+
+.opcion-cancha {
+	box-shadow: 2px 2px 8px rgba(131, 63, 0, 0.4);
+	width: 95%;
+	height: 72px;
+	margin: auto;
+	margin-bottom: 10px;
+	padding: 5px;
+	border-radius: 10px;
+	display: flex;
+}
+.opcion-cancha p {
+	padding: 0;
+	margin: 0;
+	text-align: left;
+}
+
+.cancha-icon {
+	width: 40px;
+	height: 40px;
+	padding: 0px 10px;
+	margin: auto 0px;
+}
+
+.bt-okngo {
+	color: white;
+	background-color: rgba(0, 255, 0, 0.3);
+	box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.15);
+	border-radius: 50%;
+	padding: 1px 0 1px 4px;
+	margin-top: 8px;
+	position: absolute;
+	right: 40px;
+}
+
+.c-icon-ball {
+	position: absolute;
+	left: 5%;
+	margin-top: 8px;
+}
+
+.c-icon-sexo  {
+	position: absolute;
+	left: 15%;
+	margin-top: 8px;
+}
+
+.c-data {
+	position: absolute;
+	left: 30%;
+	margin-top: 2px;
+}

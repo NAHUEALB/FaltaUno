@@ -32,20 +32,7 @@
 #cancha-container {
 	padding: 10px 8px;
 }
-.opcion-cancha {
-	box-shadow: 2px 2px 8px rgba(131, 63, 0, 0.4);
-	width: 95%;
-	margin: auto;
-	margin-bottom: 10px;
-	padding: 5px;
-	border-radius: 10px;
-	display: flex;
-}
-.opcion-cancha p {
-	padding: 0;
-	margin: 0;
-	text-align: left;
-}
+
 .opcion-mas {
 	background-color: #222;
 	box-shadow: 2px 2px 8px rgba(131, 63, 0, 0.4);
@@ -61,12 +48,6 @@
 	font-size: 24px;
 	font-weight: bold;
 	margin: auto;
-}
-.cancha-icon {
-	width: 40px;
-	height: 40px;
-	padding: 0px 10px;
-	margin: auto 0px;
 }
 
 
