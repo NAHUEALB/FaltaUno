@@ -30,7 +30,7 @@ export class BuscarPage implements OnInit {
 		{
 			cancha: "Megastadio",
 			direccion: "Calle 1 y 64",
-			slotsOcupados: 5,
+			slotsOcupados: 9,
 			slotsTotales: 10,
 			hora: "17:00",
 			sexo: " Femenino "
@@ -38,9 +38,43 @@ export class BuscarPage implements OnInit {
 		{
 			cancha: "Cancha Loca",
 			direccion: "Calle 22 y Palermo",
-			slotsOcupados: 2,
+			slotsOcupados: 9,
 			slotsTotales: 10,
 			hora: "19:00",
+			sexo: " Masculino "
+		},
+
+
+		{
+			cancha: "Cancha La Lora",
+			direccion: "Calle 44 y 5",
+			slotsOcupados: 6,
+			slotsTotales: 10,
+			hora: "19:00",
+			sexo: " Masculino "
+		},
+		{
+			cancha: "Cancha La Lora",
+			direccion: "Calle 44 y 5",
+			slotsOcupados: 5,
+			slotsTotales: 10,
+			hora: "20:00",
+			sexo: " Femenino "
+		},
+		{
+			cancha: "Megastadio",
+			direccion: "Calle 1 y 64",
+			slotsOcupados: 9,
+			slotsTotales: 10,
+			hora: "20:00",
+			sexo: " Mixto "
+		},
+		{
+			cancha: "Estadio 7",
+			direccion: "Calle 6 y 59",
+			slotsOcupados: 8,
+			slotsTotales: 10,
+			hora: "21:00",
 			sexo: " Masculino "
 		}
 	]
@@ -50,10 +84,13 @@ export class BuscarPage implements OnInit {
 	}
 
 	ngOnInit() {
-		this.partidos.forEach(unPartido => this.asignarIcon(unPartido));
+		this.partidos.forEach(unPartido => {
+			this.asignarSexo(unPartido)
+			this.asignarColorSlot(unPartido)
+		});
 	}
 
-	asignarIcon(elem) {
+	asignarSexo(elem) {
 		switch (elem.sexo) {
 			case " Masculino ": 
 				elem.iconName = "male-outline";
@@ -67,6 +104,16 @@ export class BuscarPage implements OnInit {
 				elem.iconName = "male-female-outline";
 				elem.iconColor = "icon-nobin";
 				break;
+		}
+	}
+	
+	asignarColorSlot(elem) {
+		if (elem.slotsOcupados < 5) {
+			elem.slotColor = "slot-disponible";
+		} else if (elem.slotsOcupados < 9) {
+			elem.slotColor = "slot-popular";
+		} else {
+			elem.slotColor = "slot-ocupado";
 		}
 	}
 
