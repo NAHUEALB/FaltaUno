@@ -203,17 +203,24 @@ export class BuscarPage implements OnInit {
 	}
 
 	setOrden(elem) {
-		elem.orden = 0;
 		let now = new Date();
 		let horaNow = now.getHours();
 		let horaPartido = elem.hora.split(":")[0] - 0;
-		elem.orden += Math.floor(Math.max(0, horaPartido - horaNow)/2);
-		elem.orden += (10 - elem.slotsOcupados) + 1;
-		elem.orden += Math.floor(this.distancias[elem.cancha]/2);
+
+		let tiempo = Math.max(0, Math.floor(horaPartido - horaNow));
+		let slots = Math.floor(10 - elem.slotsOcupados);
+		let distancia = Math.floor(this.distancias[elem.cancha]*(4/3));
+
+		elem.orden = tiempo + slots + distancia;
+
+		console.log(elem.cancha+", "+elem.hora+"hs, "+elem.slotsOcupados+"/10, "+this.distancias[elem.cancha]+"km: "
+		+tiempo+"+"+slots+"+"+distancia+" = "+elem.orden);
 	}
 
 	ordenarPartidos(partidos) {
-		partidos.sort(function(a, b){return a.orden-b.orden});
+		partidos.sort(function(a, b){
+			return a.orden-b.orden
+		});
 	}
 
 	swapAMapa() {
