@@ -222,6 +222,7 @@ hr {
 	height: 40px;
 	padding: 0px 0px 0px 20px;
 	margin: auto 0px;
+	z-index: 5;
 }
 .cancha-data {
 	position: absolute;
@@ -251,7 +252,7 @@ hr {
 
 .bt-okngo {
 	//color: rgb(196, 255, 168);
-	color: rgba(199, 199, 199, 0.575);
+	color: rgba(199, 199, 199, 0);
 	padding: 1px 0 1px 4px;
 	margin-top: 5px;
 	position: absolute;

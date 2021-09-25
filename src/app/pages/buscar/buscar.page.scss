@@ -55,3 +55,15 @@ ion-content {
 #perfil-icon-a-map {
   display: block;
 }
+
+.flamas {
+	position: absolute;
+	transform: rotate(270deg);
+	width: 200px;
+	left: 120px;
+	opacity: 0;
+}
+
+#flama {
+	opacity: 0.15;
+}
