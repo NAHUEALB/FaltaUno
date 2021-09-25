@@ -1,3 +1,13 @@
+ion-content {
+	font-family: "Karla", Verdana, Geneva, Tahoma, sans-serif;
+	text-align: center;
+	&.background{
+		//--background: url('assets/imgs/background/dot-blue-bg.jpg') 0 0/100% 100% no-repeat;
+		--background: #242;
+    --background: linear-gradient(0deg, #242 60%, rgba(0,0,0,1) 100%);
+	}
+}
+
 #icon-hombre { color: rgb(80, 172, 80); }
 #icon-mujer { color: #d86315; }
 #icon-nobin { color: #b452b4; }

@@ -27,27 +27,22 @@
 
 	<div class="blk-card">
 		<h3>Descubrí partidos</h3>
-		<div id="cancha-container">
-			<div class="opcion-cancha">
-				<ion-icon class="cancha-icon" name="football"></ion-icon>
-				<div>
-					<p>Cancha: Estadio 7 (6 y 58)</p>
-					<p>Horario: 17:00</p>
-					<p>Jugadores: 7/10</p>
-				</div>
+		<ion-item color="transparent" class="opcion-cancha" *ngFor="let partido of partidos" lines="none">
+			<ion-icon class="cancha-icon bt-backngo" name="caret-back-outline"></ion-icon>
+			<ion-icon class="cancha-icon" name="football" [id]="partido.iconColor" ></ion-icon>
+			<div class="cancha-data">
+				<p id="cancha-nombre">{{ partido.cancha }}</p>
+				<p id="cancha-details">
+					{{ partido.hora }}  -  
+					<b [id]="partido.slotColor">{{ partido.slotsOcupados }}</b>/<b>{{ partido.slotsTotales }} </b> 
+					<ion-icon class="ic-sexo" [name]="partido.iconName" [id]="partido.iconColor" ></ion-icon>
+				</p>
 			</div>
-			<div class="opcion-cancha">
-				<ion-icon class="cancha-icon" name="football"></ion-icon>
-				<div>
-					<p>Cancha: MegaEstadio (1 y 64)</p>
-					<p>Horario: 19:00</p>
-					<p>Jugadores: 9/10</p>
-				</div>
-			</div>
-			<ion-button color="transparent" class="opcion-mas" (click)="irAlBuscar()">
-				<p>Mostrar más</p>
-			</ion-button>
-		</div>
+			<ion-icon class="cancha-icon bt-okngo" name="caret-forward-outline"></ion-icon>
+		</ion-item>
+		<ion-button color="transparent" class="opcion-mas" (click)="irAlBuscar()">
+			<p>Mostrar más</p>
+		</ion-button>
 	</div>
 
 	<div class="blk-card">

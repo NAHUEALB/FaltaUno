@@ -1,3 +1,11 @@
+#icon-hombre { color: rgb(80, 172, 80); }
+#icon-mujer { color: #d86315; }
+#icon-nobin { color: #b452b4; }
+
+#slot-disponible { color: rgb(80, 172, 80); }
+#slot-popular { color: #eba930; }
+#slot-ocupado { color: red; }
+
 // SECCIÓN PARA LOS ACCESOS DEL PERFIL
 
 #perfil-container {
@@ -34,22 +42,22 @@
 }
 
 .opcion-mas {
-	background-color: #222;
-	width: 95%;
-	height: 50px;
+	background-color: #242;
+	width: 98%;
+	height: 4rem;
 	margin: auto;
-	border-radius: 10px;
+	border-radius: 5px;
 	--background: rgba(0,0,0,0);
-	--box-shadow: 0 0 0 rgba(0,0,0,0);
+	box-shadow: -1px 1px 1px rgba(0, 0, 0, 0.1);
 }
 .opcion-mas p {
 	display: inline-block;
-	color: rgb(255, 240, 28);
+	color: #aaffff;
 	padding: 15px 0px;
 	text-align: center;
-	font-size: 24px;
-	font-weight: bold;
-	font-family: 'Rubik', sans-serif;
+	font-size: 28px;
+	font-weight: 700;
+	font-family: 'Karla', sans-serif;
 	text-transform: capitalize;
 	margin: auto;
 }
