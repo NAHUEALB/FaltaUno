@@ -14,6 +14,10 @@ const routes: Routes = [
   {
     path: 'registro-google',
     loadChildren: () => import('./registro-google/registro-google.module').then( m => m.RegistroGooglePageModule)
+  },
+  {
+    path: 'mapa',
+    loadChildren: () => import('./mapa/mapa.module').then( m => m.MapaPageModule)
   }
 
 ];

@@ -5,13 +5,12 @@
 export const environment = {
   production: false,
   firebaseConfig: {
-	apiKey: "AIzaSyBwyUBCBgn39-u2a81EazNruO9n5vJtr7c",
-	authDomain: "fenixalpha1-0.firebaseapp.com",
-	projectId: "fenixalpha1-0",
-	storageBucket: "fenixalpha1-0.appspot.com",
-	messagingSenderId: "950961474171",
-	appId: "1:950961474171:web:27c6ada7d2d929c92430de",
-	measurementId: "G-54PJFGBF6H"
+	apiKey: "AIzaSyDNe6cPwTn9dk4JZCbYIG8rLKYnEaS0sss",
+	authDomain: "falta1-3af4b.firebaseapp.com",
+	projectId: "falta1-3af4b",
+	storageBucket: "falta1-3af4b.appspot.com",
+	messagingSenderId: "203613899646",
+	appId: "1:203613899646:web:6196a141e190d7a6f0412f"
   }
 };
 

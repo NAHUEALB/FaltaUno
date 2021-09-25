@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
-
+import { GoogleMaps } from '@ionic-native/google-maps/ngx';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
@@ -32,6 +32,7 @@ import { IonicStorageModule } from '@ionic/storage-angular';
 	],
 	providers: [
 		Storage,
+		GoogleMaps,
 		{provide: RouteReuseStrategy, useClass: IonicRouteStrategy},
 	],
 	schemas: [CUSTOM_ELEMENTS_SCHEMA],

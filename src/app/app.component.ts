@@ -1,3 +1,4 @@
+import { MapaPage } from './pages/mapa/mapa.page';
 import { PerfilPage } from './pages/perfil/perfil.page';
 import { MenuController } from '@ionic/angular';
 import { FirebaseauthService } from './serv/firebaseauth.service';
@@ -32,7 +33,8 @@ export class AppComponent {
 			{ title: 'Inicio', component: InicioPage, icon:'home' ,  ruta:'inicio' },
 			{ title: 'Buscar', component: BuscarPage, icon: 'search',  ruta: 'buscar' },
 			{ title: 'Perfil', component: PerfilPage, icon:'walk-outline',  ruta: 'perfil' },
-			{ title: 'Cerrar Sesion', component: InicioPage, icon: 'log-out-outline',  ruta: 'principal' }
+			{ title: 'Cerrar Sesion', component: InicioPage, icon: 'log-out-outline',  ruta: 'principal' },
+			{ title: 'Mapa', component: MapaPage, icon: 'log-out-outline',  ruta: 'mapa' }
 		]
     }
 
