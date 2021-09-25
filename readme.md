@@ -3,18 +3,18 @@
 Es una aplicación que ofrece una plataforma para facilitar la creación, organización y pago de encuentros deportivos, por el momento específicamente de fútbol 5 en la localidad de La Plata
 
 ## Entrega 1
-- [v] Diseño de la UI principal
-- [v] Ventanas de ayuda al usuario
-- [v] Poder registrarse como usuario
-- [v] Poder logearse como usuario
-- [v] Poder ingresar con una RRSS
-- [v] Diseño de la UI del home del usuario
+- [x] Diseño de la UI principal
+- [x] Ventanas de ayuda al usuario
+- [x] Poder registrarse como usuario
+- [x] Poder logearse como usuario
+- [x] Poder ingresar con una RRSS
+- [x] Diseño de la UI del home del usuario
 
 ## Entrega 2
-- [v] Diseño de la UI de usuario
-- [v] Funcionalidad para editar datos de usuario
-- [v] Diseño de la UI de búsqueda de partidos
-- [v] Listado de partidos disponibles
+- [x] Diseño de la UI de usuario
+- [x] Funcionalidad para editar datos de usuario
+- [x] Diseño de la UI de búsqueda de partidos
+- [x] Listado de partidos disponibles
 - [ ] Mapa con los partidos disponibles
 - [ ] Invitación mediante RRSS
 - [ ] Implementación de un método de pago
