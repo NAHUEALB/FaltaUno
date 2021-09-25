@@ -213,8 +213,7 @@ export class BuscarPage implements OnInit {
 
 		elem.orden = tiempo + slots + distancia;
 
-		console.log(elem.cancha+", "+elem.hora+"hs, "+elem.slotsOcupados+"/10, "+this.distancias[elem.cancha]+"km: "
-		+tiempo+"+"+slots+"+"+distancia+" = "+elem.orden);
+		//console.log(elem.cancha+", "+elem.hora+"hs, "+elem.slotsOcupados+"/10, "+this.distancias[elem.cancha]+"km: "+tiempo+"+"+slots+"+"+distancia+" = "+elem.orden);
 	}
 
 	ordenarPartidos(partidos) {
