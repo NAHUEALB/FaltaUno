@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { GoogleMaps, GoogleMap, GoogleMapOptions, GoogleMapsEvent } from '@ionic-native/google-maps/ngx';
 import { Component, OnInit } from '@angular/core';
 
@@ -9,13 +10,18 @@ import { Component, OnInit } from '@angular/core';
 export class MapaPage implements OnInit {
 
   map: GoogleMap;
-  latitud
-  longitud
-  calle = "calle 7";
-  
-  constructor() { 
-    this.latitud= -34.919550;
-    this.longitud= -57.943218;
+  latitud;
+  longitud;
+  calle = "";
+  nombreCancha = "";
+
+  constructor(private router: Router) { 
+    console.log(this.router.getCurrentNavigation().extras.state.cancha);
+    let cancha = this.router.getCurrentNavigation().extras.state.cancha;
+    this.nombreCancha = cancha.cancha;
+    this.latitud= cancha.latitud;
+    this.longitud= cancha.longitud;
+    this.calle = cancha.direccion;
   }
 
   ionViewWillLeave(){
@@ -50,7 +56,7 @@ export class MapaPage implements OnInit {
       });
       
       this.map.addMarker({
-        title:'Cancha: Estadio 7',
+        title:this.nombreCancha,
         icon:'red',
         animation:'BOUNCE',
         position:{

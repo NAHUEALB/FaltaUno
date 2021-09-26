@@ -35,7 +35,7 @@
 	<ion-list id="blk-lista" class="blk-card lista-partidos" lines="none">
 		<ion-item-sliding *ngFor="let partido of partidos">
 
-			<ion-item-options side="start"><ion-item-option color="primary" (click)="irALaSala()" expandable>Unirse</ion-item-option></ion-item-options>
+			<ion-item-options side="start"><ion-item-option color="primary" (click)="mostrarMapa(partido)" expandable>Unirse</ion-item-option></ion-item-options>
 		
 			<ion-item color="transparent" class="opcion-cancha">
 				<ion-icon class="cancha-icon bt-backngo" name="caret-back-outline"></ion-icon>
