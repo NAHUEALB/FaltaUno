@@ -8,6 +8,22 @@
 </ion-header>
 
 <ion-content class="background">
+
+	<div id="perfil-container">
+		<div class="opcion-card" (click)="irAlEditar()">
+			<ion-icon class="perfil-icon" name="brush"></ion-icon>
+			<p>Editar</p>
+		</div>
+		<div class="opcion-card" (click)="irAlInicio()">
+			<ion-icon class="perfil-icon" name="home"></ion-icon>
+			<p>Inicio</p>
+		</div>
+		<div class="opcion-card" (click)="irAlHistorial()">
+			<ion-icon class="perfil-icon" name="list-circle"></ion-icon>
+			<p>Historial</p>
+		</div>
+	</div>
+
 	<ion-icon class="circle-4-crest" id="circle-left" name="ellipse"></ion-icon>
 	<ion-icon class="circle-4-crest" id="circle-right" name="ellipse"></ion-icon>
 
@@ -16,7 +32,7 @@
 	</div>
 	<div class="blk-crest-body">
 		<div>
-			<h2><b>{{ jugador.nombre }}</b></h2>
+			<h2 class="blk-crest-nombre"><b>{{ jugador.nombre }}</b></h2>
 			<hr>
 			<div class="blk-crest-body-icon">
 				<ion-icon class="icon" [name]="nameIcon" [id]="idColor" ></ion-icon>
@@ -30,12 +46,9 @@
 		</div>
 	</div>
 
-	<div class="blk-card">
+	<div class="blk-card blk-last">
 		<h3>Último partido</h3>
 		<h3 id="last-resultado">{{ partido.resultado }}</h3>
-	</div>
-	
-	<div class="blk-card valoracion">
 		<h3>Valoración</h3>
 		<div class="stars">
 			<div *ngFor="let star of stars">
@@ -45,22 +58,7 @@
 			</div>
 			<span class="valoracion">({{ valoracion }})</span>
 		</div>
-		<p>Partidos jugados: 17</p>
-		<p>Votos recibidos: {{ jugador.cvotos }}</p>
 	</div>
 
-	<div id="perfil-container">
-		<div class="opcion-card" (click)="irAlHistorial()">
-			<ion-icon class="perfil-icon" name="list-circle"></ion-icon>
-			<p>Historial</p>
-		</div>
-		<div class="opcion-card" (click)="irAlInicio()">
-			<ion-icon class="perfil-icon" name="home"></ion-icon>
-			<p>Inicio</p>
-		</div>
-		<div class="opcion-card" (click)="irAlEditar()">
-			<ion-icon class="perfil-icon" name="brush"></ion-icon>
-			<p>Editar</p>
-		</div>
-	</div>
+	
 </ion-content>

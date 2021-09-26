@@ -52,8 +52,7 @@ hr {
 .blk-card {
 	margin: 10px 4%;
 	padding: 5px 0px;
-	background: rgb(180,180,180);
-	background: linear-gradient(0deg, rgb(212, 212, 212) 0%, rgba(255,255,255,1) 100%);
+	background: rgb(224, 224, 224);
 	border-radius: 5px;
 }
 
@@ -98,6 +97,16 @@ hr {
 		background: white;
 		border-radius: 5px;
 		line-height: 1.7;
+	}
+	
+	ion-item {
+		border-color: red;
+	}
+
+	ion-item-options {
+		margin-top: 2%;
+		height: 82%;
+		width: 4.5rem;
 	}
 }
 
@@ -153,7 +162,6 @@ hr {
 }
 
 .bt-icon{ // icono que acompaña texto del botón
-	color:white;
 	font-size: 38px;
 	padding-right: 15px;
 }
@@ -181,4 +189,78 @@ hr {
 	padding: 0;
 	margin: 0;
 	font-size: 18px;
+}
+
+
+
+
+// SECCIÓN PARA LAS CARDS DE LOS PARTIDOS
+
+.lista-partidos {
+	height: 82%;
+	overflow: scroll;
+}
+.opcion-cancha {
+	background: url('/assets/imgs/background/bt-bg-png.png') 0 0/100% 100% no-repeat;
+	//background: white;
+	box-shadow: -2px 2px 2px rgba(0, 0, 0, 0.1);
+	width: 98%;
+	height: 4rem;
+	margin: 5px auto;
+	padding: 0;
+	border-radius: 5px;
+	display: flex;
+}
+.opcion-cancha p {
+	padding: 0;
+	margin: 0;
+	text-align: left;
+	font-size: 20px;
+}
+.cancha-icon {
+	width: 40px;
+	height: 40px;
+	padding: 0px 0px 0px 20px;
+	margin: auto 0px;
+	z-index: 5;
+}
+.cancha-data {
+	position: absolute;
+	left: 5rem;
+	margin-top: 6px;
+}
+#cancha-nombre {
+	font-weight: 900;
+	font-family: 'Karla', Verdana, sans-serif;
+}
+#cancha-details {
+	letter-spacing: 3pt;
+	color: #777;
+}
+#slots-ocupados {
+	color: red;
+}
+
+.bt-backngo {
+	//color: rgb(255, 214, 214);
+	color: rgba(126, 255, 244, 0);
+	padding: 1px 0 1px 4px;
+	margin-top: 5px;
+	position: absolute;
+	left: -1rem;
+}
+
+.bt-okngo {
+	//color: rgb(196, 255, 168);
+	color: rgba(199, 199, 199, 0);
+	padding: 1px 0 1px 4px;
+	margin-top: 5px;
+	position: absolute;
+	right: 1rem;
+}
+
+.ic-sexo  {
+	position: absolute;
+	left: -1.9rem;
+	margin-top: 0px;
 }

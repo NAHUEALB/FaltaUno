@@ -1,1 +1,0 @@
-q onda perris ak el nik probando un pushardo

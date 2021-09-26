@@ -1,3 +1,11 @@
+#icon-hombre { color: rgb(80, 172, 80); }
+#icon-mujer { color: #d86315; }
+#icon-nobin { color: #b452b4; }
+
+#slot-disponible { color: rgb(80, 172, 80); }
+#slot-popular { color: #eba930; }
+#slot-ocupado { color: red; }
+
 // SECCIÓN PARA LOS ACCESOS DEL PERFIL
 
 #perfil-container {
@@ -32,41 +40,26 @@
 #cancha-container {
 	padding: 10px 8px;
 }
-.opcion-cancha {
-	box-shadow: 2px 2px 8px rgba(131, 63, 0, 0.4);
-	width: 95%;
-	margin: auto;
-	margin-bottom: 10px;
-	padding: 5px;
-	border-radius: 10px;
-	display: flex;
-}
-.opcion-cancha p {
-	padding: 0;
-	margin: 0;
-	text-align: left;
-}
+
 .opcion-mas {
-	background-color: #222;
-	box-shadow: 2px 2px 8px rgba(131, 63, 0, 0.4);
-	width: 95%;
+	background-color: #242;
+	width: 98%;
+	height: 4rem;
 	margin: auto;
-	border-radius: 10px;
+	border-radius: 5px;
+	--background: rgba(0,0,0,0);
+	box-shadow: -1px 1px 1px rgba(0, 0, 0, 0.1);
 }
 .opcion-mas p {
 	display: inline-block;
-	color: rgb(255, 240, 28);
+	color: #aaffff;
 	padding: 15px 0px;
 	text-align: center;
-	font-size: 24px;
-	font-weight: bold;
+	font-size: 28px;
+	font-weight: 700;
+	font-family: 'Karla', sans-serif;
+	text-transform: capitalize;
 	margin: auto;
-}
-.cancha-icon {
-	width: 40px;
-	height: 40px;
-	padding: 0px 10px;
-	margin: auto 0px;
 }
 
 

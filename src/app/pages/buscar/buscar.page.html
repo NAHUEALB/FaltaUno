@@ -1,13 +1,59 @@
 <ion-header class="ion-no-border">
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
-    </ion-buttons>
-    <ion-title>Buscar</ion-title>
-  </ion-toolbar>
+	<ion-toolbar>
+		<ion-buttons slot="start">
+			<ion-back-button></ion-back-button>
+		</ion-buttons>
+		<ion-title>Partidos disponibles</ion-title>
+	</ion-toolbar>
 </ion-header>
 
+<ion-content class="background">
 
-<ion-content class="inner-background">
-  <h1 class="title">Buscar</h1>
+	<div id="perfil-container">
+		<div class="opcion-card" id="perfil-icon-a-mapa" (click)="swapAMapa()">
+			<ion-icon class="perfil-icon" name="map"></ion-icon>
+			<p>Ver mapa</p>
+		</div>
+		<div class="opcion-card" id="perfil-icon-a-lista" (click)="swapALista()">
+			<ion-icon class="perfil-icon" name="list-circle"></ion-icon>
+			<p>Ver lista</p>
+		</div>
+		<div class="opcion-card" (click)="irAlInicio()">
+			<ion-icon class="perfil-icon bt-enabled" name="home"></ion-icon>
+			<p>Inicio</p>
+		</div>
+		<div class="opcion-card" (click)="irAlEditar()">
+			<ion-icon class="perfil-icon" name="refresh-circle"></ion-icon>
+			<p>Recargar</p>
+		</div>
+	</div>
+
+	<ion-item id="blk-mapa" class="blk-card">
+		<img src="../../assets/imgs/gmaps.jpg"/>
+	</ion-item>
+
+	<ion-list id="blk-lista" class="blk-card lista-partidos" lines="none">
+		<ion-item-sliding *ngFor="let partido of partidos">
+
+			<ion-item-options side="start"><ion-item-option color="primary" (click)="irALaSala()" expandable>Unirse</ion-item-option></ion-item-options>
+		
+			<ion-item color="transparent" class="opcion-cancha">
+				<ion-icon class="cancha-icon bt-backngo" name="caret-back-outline"></ion-icon>
+				<ion-icon class="cancha-icon" name="football" [id]="partido.iconColor" ></ion-icon>
+				<ion-img class="flamas" [id]="partido.optionFlama" src="../assets/flames.gif"></ion-img>
+				<div class="cancha-data">
+					<p id="cancha-nombre">{{ partido.cancha }}</p>
+					<p id="cancha-details">
+						{{ partido.hora }}  -  
+						<b [id]="partido.slotColor">{{ partido.slotsOcupados }}</b>/<b>{{ partido.slotsTotales }} </b> 
+						<ion-icon class="ic-sexo" [name]="partido.iconName" [id]="partido.iconColor" ></ion-icon>
+					</p>
+				</div>
+				<ion-icon class="cancha-icon bt-okngo" name="caret-forward-outline"></ion-icon>
+			</ion-item>
+
+			<ion-item-options side="end"><ion-item-option color="danger" (click)="dejarDeMostrarSala()" expandable>Ignorar</ion-item-option></ion-item-options>
+
+		</ion-item-sliding>
+	</ion-list>
 </ion-content>

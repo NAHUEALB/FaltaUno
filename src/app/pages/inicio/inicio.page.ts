@@ -19,6 +19,25 @@ export class InicioPage implements OnInit {
 	mostrarNoticias = false;
 	delayEntreNoticias = 12000;
 
+	partidos = [
+		{
+			cancha: "Megastadio",
+			direccion: "Calle 1 y 64",
+			slotsOcupados: 7,
+			slotsTotales: 10,
+			hora: "16:00",
+			sexo: " Masculino ",
+		},
+		{
+			cancha: "Estadio 7",
+			direccion: "Calle 6 y 59",
+			slotsOcupados: 3,
+			slotsTotales: 10,
+			hora: "17:00",
+			sexo: " Mixto "
+		}
+	]
+
 	constructor(
 	private menuCtrl: MenuController, 
 	private router: Router, 
@@ -44,6 +63,10 @@ export class InicioPage implements OnInit {
 
 	ngOnInit() {
 		this.mostrarNoticias = true;
+		this.partidos.forEach(unPartido => {
+			this.asignarSexo(unPartido)
+			this.asignarColorSlot(unPartido)
+		});
 	}
 
 	irAlHistorial(){
@@ -52,6 +75,10 @@ export class InicioPage implements OnInit {
 
 	irAlPerfil(){
 		this.router.navigate([`/perfil`]);
+	}
+	
+	irAlBuscar() {
+		this.router.navigate([`/buscar`]);
 	}
 
 	irAlModalAyuda() {
@@ -94,5 +121,32 @@ export class InicioPage implements OnInit {
 			newNumerador.style.color = "orangered";
 			if (this.mostrarNoticias) this.nextNoticia(); 
 		}, this.delayEntreNoticias);
+	}
+
+	asignarSexo(elem) {
+		switch (elem.sexo) {
+			case " Masculino ": 
+				elem.iconName = "male-outline";
+				elem.iconColor = "icon-hombre";
+				break;
+			case " Femenino ": 
+				elem.iconName = "female-outline";
+				elem.iconColor = "icon-mujer";
+				break;
+			case " Mixto ": 
+				elem.iconName = "male-female-outline";
+				elem.iconColor = "icon-nobin";
+				break;
+		}
+	}
+	
+	asignarColorSlot(elem) {
+		if (elem.slotsOcupados < 5) {
+			elem.slotColor = "slot-disponible";
+		} else if (elem.slotsOcupados < 9) {
+			elem.slotColor = "slot-popular";
+		} else {
+			elem.slotColor = "slot-ocupado";
+		}
 	}
 }
