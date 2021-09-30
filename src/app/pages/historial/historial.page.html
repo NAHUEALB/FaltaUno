@@ -12,7 +12,7 @@
 		<ion-refresher-content refreshingSpinner="crescent"></ion-refresher-content>
 	</ion-refresher-->
 
-	<ion-item *ngFor="let resultado of partidos" class="blk-card">
+	<ion-item *ngFor="let resultado of partidos" class="blk-card historial">
 		<div *ngFor="let star of resultado.stars">
 			<img *ngIf="star === 'full'" class="star" [src]="'/assets/stars/star-full.png'">
 			<img *ngIf="star === 'half'" class="star" [src]="'/assets/stars/star-half.png'">
