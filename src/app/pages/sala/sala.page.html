@@ -1,9 +1,63 @@
-<ion-header>
+<ion-header class="ion-no-border">
   <ion-toolbar>
     <ion-title>sala</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="background">
+	
+  <ion-row class="lists-container">
+    <ion-col>
+      <ion-list class="blk-halfcard" lines="none">
+        <ion-item class="hc-left" *ngFor="let jugador of equipoRed">
+          <div>
+            <div>
+              {{ jugador.nombre }}
+            </div>
+            <div class="stars">
+              <div *ngFor="let star of jugador.stars">
+                <img *ngIf="star === 'full'" class="star" [src]="'/assets/stars/star-full.png'">
+                <img *ngIf="star === 'half'" class="star" [src]="'/assets/stars/star-half.png'">
+                <img *ngIf="star === 'null'" class="star" [src]="'/assets/stars/star-null.png'">
+              </div>
+            </div>
+          </div>  
+        </ion-item>
+      </ion-list>
+    </ion-col>
+    <ion-col>
+      <ion-list class="blk-halfcard"lines="none">
+        <ion-item class="hc-right" *ngFor="let jugador of equipoBlue">
+          <div>
+            <div>
+              {{ jugador.nombre }}
+            </div>
+            <div class="stars">
+              <div *ngFor="let star of jugador.stars">
+                <img *ngIf="star === 'full'" class="star" [src]="'/assets/stars/star-full.png'">
+                <img *ngIf="star === 'half'" class="star" [src]="'/assets/stars/star-half.png'">
+                <img *ngIf="star === 'null'" class="star" [src]="'/assets/stars/star-null.png'">
+              </div>
+            </div>
+          </div> 
+        </ion-item>
+      </ion-list>
+    </ion-col>
+  </ion-row>
+
+	<div class="perfil-container">
+		<div class="opcion-card" (click)="abrirModal()">
+			<ion-icon class="perfil-icon" name="help"></ion-icon>
+			<p>Ayuda</p>
+		</div>
+		<div class="opcion-card" (click)="irAlPerfil()">
+			<ion-icon class="perfil-icon" name="person"></ion-icon>
+			<p>Perfil</p>
+		</div>
+		<div class="opcion-card" (click)="irAlHistorial()">
+			<ion-icon class="perfil-icon" name="list"></ion-icon>
+			<p>Historial</p>
+		</div>
+	</div>
 
 </ion-content>

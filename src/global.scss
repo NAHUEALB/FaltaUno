@@ -70,6 +70,38 @@ hr {
 	font-size: 20px;
 }
 
+.blk-halfcard {
+	background: none;
+	align-items: center;
+	width: 100%;
+	margin: 0 auto;
+	padding: 5px 1%;
+} 
+
+.lists-container {
+	margin: 0 auto;
+}
+
+.hc-left {
+	background: rgb(255, 129, 129);
+	margin: 0 0 5px 15px;
+	padding: 2px 0;
+	font-family: 'Gemunu Libre', 'Karla', sans-serif;
+	font-size: 20px;
+	font-weight: bold;
+	border-radius: 5px;
+}
+
+.hc-right {
+	background: rgb(163, 163, 255);
+	margin: 0 15px 5px 0;
+	padding: 2px 0;
+	font-family: 'Gemunu Libre', 'Karla', sans-serif;
+	font-size: 20px;
+	font-weight: bold;
+	border-radius: 5px;
+}
+
 
 
 
@@ -276,4 +308,13 @@ hr {
 
 #flama {
 	opacity: 0.15;
+}
+
+.stars {
+	display: flex;
+}
+
+.star {
+	height: 20px;
+	width: 20px;
 }
