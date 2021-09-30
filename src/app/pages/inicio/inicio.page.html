@@ -11,7 +11,7 @@
 <ion-content class="background">
 	
 	<div class="perfil-container">
-		<div class="opcion-card" (click)="irAlModalAyuda()">
+		<div class="opcion-card" (click)="abrirModal()">
 			<ion-icon class="perfil-icon" name="help"></ion-icon>
 			<p>Ayuda</p>
 		</div>
@@ -44,6 +44,7 @@
 
 			<ion-item-options side="end"><ion-item-option color="danger" (click)="dejarDeMostrarSala()" expandable>Ignorar</ion-item-option></ion-item-options>
 		</ion-item-sliding>
+		<hr>
 		<ion-button 
 			class="bt-modern bt-text" 
 			id="bt-mostrar-mas"

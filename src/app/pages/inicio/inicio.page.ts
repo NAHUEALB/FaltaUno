@@ -1,9 +1,11 @@
 import { FirebaseauthService } from './../../serv/firebaseauth.service';
-import { MenuController } from '@ionic/angular';
+import { ModalController, MenuController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Jugador } from 'src/app/models/jugador';
 import { Storage } from '@ionic/storage-angular';
+
+import { AyudaPage } from '../ayuda/ayuda.page';
 
 @Component({
   selector: 'app-inicio',
@@ -42,7 +44,8 @@ export class InicioPage implements OnInit {
 	private menuCtrl: MenuController, 
 	private router: Router, 
 	// public firebaseauthService: FirebaseauthService,
-	private storage: Storage
+	private storage: Storage,
+	private modalController: ModalController,
 	){
 		this.menuCtrl.enable(true);
 		
@@ -79,10 +82,6 @@ export class InicioPage implements OnInit {
 	
 	irAlBuscar() {
 		this.router.navigate([`/buscar`]);
-	}
-
-	irAlModalAyuda() {
-		console.log("Debería abrir el modal de ayuda")
 	}
 
 	ionViewWillEnter() {
@@ -150,5 +149,15 @@ export class InicioPage implements OnInit {
 			elem.optionFlama = "flama";
 			elem.slotColor = "slot-ocupado";
 		}
+	}
+
+	async abrirModal() {
+		const modal = await this.modalController.create({
+			component: AyudaPage,
+			cssClass: 'modal-css',
+			swipeToClose: true,
+			presentingElement: await this.modalController.getTop()
+		});
+		await modal.present();
 	}
 }

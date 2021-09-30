@@ -130,7 +130,8 @@ hr {
 .bt-modern {
 	height: 60px;
 	margin: 0;
-	background: none;
+	background: radial-gradient(circle, rgba(90, 89, 30, 0.2) 60%, #222 100%);
+	border-radius: 5px;
 }
 
 .bt-triple { // comparte fila con 2 botones más
