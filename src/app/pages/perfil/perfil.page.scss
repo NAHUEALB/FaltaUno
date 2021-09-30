@@ -14,11 +14,11 @@
 }
 
 .blk-crest-pic {
-	height: 30%;
+	height: 10rem;
 	display: flex;
 	justify-content: space-around;
-    margin: 10px 4% 0px 4%;
-    padding: 1rem 0;
+    margin: 0 4%;
+    padding: 0 0;
     background: linear-gradient(0deg, rgb(212, 212, 212) 0%, rgba(255,255,255,1) 100%);
     border-radius: 50% 50% 0 0;
 }
@@ -29,8 +29,8 @@
 
 #perfil-pic {
 	display: inline-block;
-	width: 150px;
-	height: 150px;
+	height: 9rem;
+	width: 9rem;
 	color: #222;
 	border-radius: 50%;
 }
@@ -44,10 +44,10 @@
 
 
 .blk-crest-body {
-	height: 25%;
-	margin: 0px 4% 0 4%;
-	padding: 5px 0px;
-	background: rgb(244, 255, 183);
+	height: 8rem;
+	margin: auto 4%;
+	padding: auto 0px;
+	background: radial-gradient(circle, rgb(255, 239, 188) 30%, rgb(241, 255, 162) 80%);
 	font-weight: bold;
 	border-radius: 0;
 }
@@ -56,12 +56,12 @@
 	margin: 0;
 }
 .blk-crest-nombre{
-	font-size: 1.5rem;
+	font-size: 1.8rem;
 }
 .blk-crest-body-icon {
 	display: flex; 
 	justify-content: space-evenly; 
-	padding: 0px 30%;
+	padding: 0px 26%;
 }
 
 hr {
@@ -81,18 +81,18 @@ hr {
 // SECCIÓN DE ÚLTIMO PARTIDO Y VALORACIÓN
 
 .blk-last {
-	height: 27%;
+	height: 11rem;
 	margin: 0 4% 0 4%;
     padding: 1% 0 0 0;
 	font-size: 20px;
-	background: rgb(153, 153, 153);
+	background: radial-gradient(circle, #555 30%, #373737 90%);
 	border-radius: 0px 0px 5px 5px;
 }
 #last-resultado {
 	text-align: center;
 	margin: 0;
 	padding: 0;
-	font-size: 24px;
+	font-size: 2.5rem;
 	font-family: 'Rubik', sans-serif;
 }
 
@@ -105,23 +105,4 @@ hr {
 	width: 30px;
   	text-align: center;
 }
-
-
-
-
-// SECCIÓN PARA LOS ACCESOS DEL PERFIL
-
-#perfil-container {
-	display: flex;
-	padding: 1% 2%;
-}
-
-.perfil-icon {
-	width: 40px;
-	height: 40px;
-	padding: 0;
-	color: #222;
-}
-
-
 

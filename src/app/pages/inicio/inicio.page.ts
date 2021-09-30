@@ -25,7 +25,7 @@ export class InicioPage implements OnInit {
 			direccion: "Calle 1 y 64",
 			slotsOcupados: 7,
 			slotsTotales: 10,
-			hora: "16:00",
+			hora: "12:00",
 			sexo: " Masculino ",
 		},
 		{
@@ -33,7 +33,7 @@ export class InicioPage implements OnInit {
 			direccion: "Calle 6 y 59",
 			slotsOcupados: 3,
 			slotsTotales: 10,
-			hora: "17:00",
+			hora: "12:00",
 			sexo: " Mixto "
 		}
 	]
@@ -64,8 +64,8 @@ export class InicioPage implements OnInit {
 	ngOnInit() {
 		this.mostrarNoticias = true;
 		this.partidos.forEach(unPartido => {
-			this.asignarSexo(unPartido)
-			this.asignarColorSlot(unPartido)
+			this.setSexo(unPartido)
+			this.setColorSlot(unPartido)
 		});
 	}
 
@@ -123,7 +123,7 @@ export class InicioPage implements OnInit {
 		}, this.delayEntreNoticias);
 	}
 
-	asignarSexo(elem) {
+	setSexo(elem) {
 		switch (elem.sexo) {
 			case " Masculino ": 
 				elem.iconName = "male-outline";
@@ -140,12 +140,14 @@ export class InicioPage implements OnInit {
 		}
 	}
 	
-	asignarColorSlot(elem) {
+	setColorSlot(elem) {
+		elem.optionFlama = "";
 		if (elem.slotsOcupados < 5) {
 			elem.slotColor = "slot-disponible";
-		} else if (elem.slotsOcupados < 9) {
+		} else if (elem.slotsOcupados < 8) {
 			elem.slotColor = "slot-popular";
 		} else {
+			elem.optionFlama = "flama";
 			elem.slotColor = "slot-ocupado";
 		}
 	}

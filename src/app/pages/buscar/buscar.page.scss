@@ -16,28 +16,6 @@ ion-content {
 #slot-popular { color: #eba930; }
 #slot-ocupado { color: red; }
 
-.icon {
-  font-size: 30px;
-}
-
-#refresh-icon {
-  font-size: 40px;
-  color: lime;
-}
-
-#perfil-container {
-	display: flex;
-	padding: 1% 2%;
-  bottom: 100px;
-}
-
-.perfil-icon {
-	width: 40px;
-	height: 40px;
-	padding: 0;
-	color: #222;
-}
-
 #blk-lista {
   display: block;
   height: 75%;
@@ -54,6 +32,16 @@ ion-content {
 
 #perfil-icon-a-map {
   display: block;
+}
+
+#refresh-icon {
+  font-size: 40px;
+  color: lime;
+}
+
+
+.icon {
+  font-size: 30px;
 }
 
 .flamas {
