@@ -55,7 +55,14 @@ const routes: Routes = [
     path: 'sala',
     loadChildren: () => import('./pages/sala/sala.module').then( m => m.SalaPageModule)
   },
-
+  {
+    path: 'mapa',
+    loadChildren: () => import('./pages/mapa/mapa.module').then( m => m.MapaPageModule)
+  },
+  {
+    path: 'ayuda-menu-lateral',
+    loadChildren: () => import('./pages/ayuda-menu-lateral/ayuda-menu-lateral.module').then( m => m.AyudaMenuLateralPageModule)
+  }
   
 
 ];

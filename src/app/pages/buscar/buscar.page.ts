@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationExtras, Router } from '@angular/router';
 
 @Component({
 	selector: 'app-buscar',
@@ -11,62 +11,77 @@ export class BuscarPage implements OnInit {
 	iconName: String;
 	iconColor: String;
 
-	partidos = [
+partidos = [
 		{
-			cancha: "Megastadio",
+			cancha: "Los Robus",
 			direccion: "Calle 1 y 64",
 			slotsOcupados: 7,
 			slotsTotales: 10,
 			hora: "12:00",
 			sexo: " Masculino ",
+			latitud: -34.8699655,
+			longitud: -57.8790419
 		},
 		{
-			cancha: "Estadio 7",
+			cancha: "Maracaná",
 			direccion: "Calle 6 y 59",
 			slotsOcupados: 3,
 			slotsTotales: 10,
 			hora: "12:00",
-			sexo: " Mixto "
+			sexo: " Mixto ",
+			latitud: -34.8743378,
+			longitud: -57.8700375
+
 		},
 		{
-			cancha: "Megastadio",
+			cancha: "Cancha Del Monte",
 			direccion: "Calle 1 y 64",
 			slotsOcupados: 9,
 			slotsTotales: 10,
 			hora: "13:00",
-			sexo: " Femenino "
+			sexo: " Femenino ",
+			latitud: -34.8743378 ,
+			longitud: -57.8700375
 		},
 		{
-			cancha: "Cancha Loca",
+			cancha: "Fútbol 5 tiro Federal",
 			direccion: "Calle 22 y Palermo",
 			slotsOcupados: 9,
 			slotsTotales: 10,
 			hora: "13:00",
-			sexo: " Masculino "
+			sexo: " Masculino ",
+			latitud: -34.8941002,
+			longitud: -57.913749
 		},
 		{
-			cancha: "Cancha La Lora",
+			cancha: "Canchas de Fútbol",
 			direccion: "Calle 44 y 5",
 			slotsOcupados: 6,
 			slotsTotales: 10,
 			hora: "13:00",
-			sexo: " Masculino "
+			sexo: " Masculino ",
+			latitud: -34.901619,
+			longitud: -57.9218867
 		},
 		{
-			cancha: "Cancha La Lora",
+			cancha: "Club Santa Teresita",
 			direccion: "Calle 44 y 5",
 			slotsOcupados: 5,
 			slotsTotales: 10,
 			hora: "14:00",
-			sexo: " Femenino "
+			sexo: " Femenino ",
+			latitud: -34.8875259,
+			longitud:-57.8478191
 		},
 		{
-			cancha: "Megastadio",
+			cancha: "Calle 55 F.C",
 			direccion: "Calle 1 y 64",
 			slotsOcupados: 9,
 			slotsTotales: 10,
 			hora: "14:00",
-			sexo: " Mixto "
+			sexo: " Mixto ",
+			latitud: -34.9231194,
+			longitud: -57.951446
 		},
 		{
 			cancha: "Estadio 7",
@@ -74,81 +89,101 @@ export class BuscarPage implements OnInit {
 			slotsOcupados: 8,
 			slotsTotales: 10,
 			hora: "14:00",
-			sexo: " Masculino "
+			sexo: " Masculino ",
+			latitud: -34.926258,
+			longitud: -57.963309
 		},
 		{
-			cancha: "Megastadio",
+			cancha: "Garra Charrua",
 			direccion: "Calle 1 y 64",
 			slotsOcupados: 7,
 			slotsTotales: 10,
 			hora: "15:00",
-			sexo: " Mixto "
+			sexo: " Mixto ",
+			latitud: -34.926258,
+			longitud: -57.963309
 		},
 		{
-			cancha: "Estadio 7",
+			cancha: "Camp Nou",
 			direccion: "Calle 6 y 59",
 			slotsOcupados: 3,
 			slotsTotales: 10,
 			hora: "15:00",
-			sexo: " Mixto "
+			sexo: " Mixto ",
+			latitud: -34.9332215,
+			longitud: -57.9522312
 		},
 		{
-			cancha: "Cancha Loca",
+			cancha: "Mega Estadio",
 			direccion: "Calle 22 y Palermo",
 			slotsOcupados: 9,
 			slotsTotales: 10,
 			hora: "15:00",
-			sexo: " Masculino "
+			sexo: " Masculino ",
+			latitud: -34.9255513,
+			longitud:-57.9469955
 		},
 		{
-			cancha: "Megastadio",
+			cancha: "Complejo Sport",
 			direccion: "Calle 1 y 64",
 			slotsOcupados: 2,
 			slotsTotales: 10,
 			hora: "16:00",
-			sexo: " Masculino "
+			sexo: " Masculino ",
+			latitud: -34.9210431,
+			longitud: -57.940258
 		},
 		{
-			cancha: "Estadio 7",
+			cancha: "Complejo 62 Fútbol 5",
 			direccion: "Calle 6 y 59",
 			slotsOcupados: 2,
 			slotsTotales: 10,
 			hora: "16:00",
-			sexo: " Mixto "
+			sexo: " Mixto ",
+			latitud: -34.9210431,
+			longitud: -57.940258
 		},
 		{
-			cancha: "Cancha Loca",
+			cancha: "Ttu Fútbol 5",
 			direccion: "Calle 22 y Palermo",
 			slotsOcupados: 7,
 			slotsTotales: 10,
 			hora: "16:00",
-			sexo: " Mixto "
+			sexo: " Mixto ",
+			latitud: -34.9210431,
+			longitud: -57.940258
 		},
 		{
-			cancha: "Megastadio",
+			cancha: "Fútbol 5 La Rambla",
 			direccion: "Calle 1 y 64",
 			slotsOcupados: 3,
 			slotsTotales: 10,
 			hora: "17:00",
-			sexo: " Mixto "
+			sexo: " Mixto ",
+			latitud: -34.9336092,
+			longitud: -57.9694005
 		},
 		{
-			cancha: "Estadio 7",
+			cancha: "Complejo Mash Fútbol 5",
 			direccion: "Calle 6 y 59",
 			slotsOcupados: 2,
 			slotsTotales: 10,
 			hora: "17:00",
-			sexo: " Femenino "
+			sexo: " Femenino ",
+			latitud: -34.9230396,
+			longitud: -57.9687499
 		},
 		{
-			cancha: "Cancha La Lora",
+			cancha: "Cancha 42 - Fútbol 5",
 			direccion: "Calle 44 y 5",
 			slotsOcupados: 9,
 			slotsTotales: 10,
 			hora: "18:00",
-			sexo: " Femenino "
-		},
-	];
+			sexo: " Femenino ",
+			latitud: -34.9230396,
+			longitud: -57.9687499
+		}
+];
 
 	distancias = {
 		"Megastadio" : 3,
@@ -234,6 +269,20 @@ export class BuscarPage implements OnInit {
 		document.getElementById("perfil-icon-a-lista").style.display = "none";
 		document.getElementById("blk-lista").style.display = "block";
 		document.getElementById("blk-mapa").style.display = "none";
+	}
+
+	mostrarMapa(partidoSeleccionado){
+		let canchaExtra : NavigationExtras = {
+			state: {
+				cancha: partidoSeleccionado
+			}
+		}
+		this.router.navigate(['mapa'], canchaExtra);
+	}
+
+
+	irALaSala(){
+		this.router.navigate(['sala']);
 	}
 
 }
