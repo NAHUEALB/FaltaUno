@@ -1,3 +1,4 @@
+import { GoogleMaps } from '@ionic-native/google-maps/ngx';
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
@@ -32,6 +33,7 @@ import { IonicStorageModule } from '@ionic/storage-angular';
 	],
 	providers: [
 		Storage,
+		GoogleMaps,
 		{provide: RouteReuseStrategy, useClass: IonicRouteStrategy},
 	],
 	schemas: [CUSTOM_ELEMENTS_SCHEMA],
