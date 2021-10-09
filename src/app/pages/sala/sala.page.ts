@@ -16,62 +16,72 @@ export class SalaPage implements OnInit {
 		nombre: "Juan",
 		puntaje: 15,
 		cvotos: 4,
+		pagado: true,
 		stars: []
 		},
 		{
 		nombre: "Pedro",
 		puntaje: 21,
 		cvotos: 7,
+		pagado: false,
 		stars: []
 		},
 		{
-		nombre: "Jesus",
+		nombre: "Jesus de nazaret del señor",
 		puntaje: 18,
 		cvotos: 8,
+		pagado: false,
 		stars: []
 		},
 		{
-		nombre: "Esperando...",
+		nombre: " (vacío) ",
 		puntaje: 0,
 		cvotos: 0,
+		pagado: false,
 		stars: []
 		},
 		{
-		nombre: "Esperando...",
+		nombre: " (vacío) ",
 		puntaje: 0,
 		cvotos: 0,
+		pagado: false,
 		stars: []
 		},
 	];
 	equipoBlue = [
 		{
-		nombre: "Johana",
+		nombre: "Johana de los ángeles crecidos del monte",
 		puntaje: 30,
 		cvotos: 8,
+		pagado: false,
 		stars: []
 		},
 		{
 		nombre: "Paula",
 		puntaje: 22,
 		cvotos: 5,
+		pagado: true,
 		stars: []
 		},
 		{
 		nombre: "Marcos",
 		puntaje: 11,
 		cvotos: 5,
+		pagado: false,
 		stars: []
 		},
 		{
-		nombre: "Esperando...",
+		nombre: " (vacío) ",
 		puntaje: 0,
 		cvotos: 0,
+		pagado: false,
 		stars: []
 		},
 		{
-		nombre: "Esperando...",
+		nombre: " (vacío) ",
 		puntaje: 0,
 		cvotos: 0,
+		pagado: false,
 		stars: []
 		},
 	];

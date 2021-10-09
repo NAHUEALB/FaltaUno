@@ -1,0 +1,53 @@
+
+.lists-container {
+	margin: 0 auto;
+	justify-content: center;
+}
+
+.halflist {
+	padding: 3px 0;
+	font-family: 'Karla', sans-serif;
+	font-size: 20px;
+	font-weight: bold;
+	border-radius: 5px;
+    //text-align: center;
+}
+
+.hl-left {
+	background: rgb(255, 129, 129);
+	margin: 4% 0 4% 12%;
+}
+
+.hl-right {
+	background: rgb(163, 163, 255);
+	margin: 4% 12% 4% 0;
+}
+
+#nombre-jugador {
+    width: 7rem;
+	height: 24px;
+	display: -webkit-box;
+	-webkit-line-clamp: 1;
+	overflow: hidden;
+    //text-align: center;
+}
+
+.jugador-vacio {
+    color: rgb(161, 161, 161);
+}
+
+#logo-usd {
+    color: lime;
+}
+
+.paycheck {
+    font-size: 20px;
+    border-radius: 50%;
+    background-color: rgb(223, 223, 223);
+    color: rgb(182, 182, 182);
+}
+
+.pay-correct {
+    background-color: lime;
+    color: yellow;
+}

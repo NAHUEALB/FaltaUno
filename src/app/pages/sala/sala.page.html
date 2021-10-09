@@ -12,9 +12,9 @@
   <ion-row class="lists-container">
     <ion-col>
       <ion-list class="blk-halfcard" lines="none">
-        <ion-item class="hc-left" *ngFor="let jugador of equipoRed">
+        <ion-item class="halflist hl-left" *ngFor="let jugador of equipoRed">
           <div>
-            <div>
+            <div [class.jugador-vacio]="jugador.nombre == ' (vacío) '" id="nombre-jugador">
               {{ jugador.nombre }}
             </div>
             <div class="stars">
@@ -23,6 +23,11 @@
                 <img *ngIf="star === 'half'" class="star" [src]="'/assets/stars/star-half.png'">
                 <img *ngIf="star === 'null'" class="star" [src]="'/assets/stars/star-null.png'">
               </div>
+              <ion-icon 
+                class="paycheck"
+                [class.pay-correct]="jugador.pagado == true"
+                name="logo-usd">
+              </ion-icon>
             </div>
           </div>  
         </ion-item>
@@ -30,9 +35,9 @@
     </ion-col>
     <ion-col>
       <ion-list class="blk-halfcard"lines="none">
-        <ion-item class="hc-right" *ngFor="let jugador of equipoBlue">
+        <ion-item class="halflist hl-right" *ngFor="let jugador of equipoBlue">
           <div>
-            <div>
+            <div [class.jugador-vacio]="jugador.nombre == ' (vacío) '" id="nombre-jugador">
               {{ jugador.nombre }}
             </div>
             <div class="stars">
@@ -41,6 +46,11 @@
                 <img *ngIf="star === 'half'" class="star" [src]="'/assets/stars/star-half.png'">
                 <img *ngIf="star === 'null'" class="star" [src]="'/assets/stars/star-null.png'">
               </div>
+              <ion-icon 
+                class="paycheck"
+                [class.pay-correct]="jugador.pagado == true"
+                name="logo-usd">
+              </ion-icon>
             </div>
           </div> 
         </ion-item>
@@ -49,18 +59,36 @@
   </ion-row>
 
 	<div class="perfil-container">
-		<div class="opcion-card" (click)="abrirModal()">
-			<ion-icon class="perfil-icon" name="help"></ion-icon>
-			<p>Ayuda</p>
+		<div class="opcion-card" (click)="irAlEditarSala()">
+			<ion-icon class="perfil-icon" name="brush"></ion-icon>
+			<p>Editar</p>
 		</div>
-		<div class="opcion-card" (click)="irAlPerfil()">
-			<ion-icon class="perfil-icon" name="person"></ion-icon>
-			<p>Perfil</p>
+		<div class="opcion-card" (click)="irAlPago()">
+			<ion-icon class="perfil-icon" id="logo-usd" name="logo-usd"></ion-icon>
+			<p>Pagar</p>
 		</div>
-		<div class="opcion-card" (click)="irAlHistorial()">
-			<ion-icon class="perfil-icon" name="list"></ion-icon>
-			<p>Historial</p>
+		<div class="opcion-card" (click)="mezclarEquipos()">
+			<ion-icon class="perfil-icon" name="dice"></ion-icon>
+			<p>Mezclar</p>
 		</div>
 	</div>
+
+  <ion-list class="blk-halfcard"lines="none">
+    <ion-item class="halflist hl-right" *ngFor="let spec of espectadores">
+      <div>
+        <div>
+          {{ spec.nombre }}
+        </div>
+        <div class="stars">
+          <div *ngFor="let star of spec.stars">
+            <img *ngIf="star === 'full'" class="star" [src]="'/assets/stars/star-full.png'">
+            <img *ngIf="star === 'half'" class="star" [src]="'/assets/stars/star-half.png'">
+            <img *ngIf="star === 'null'" class="star" [src]="'/assets/stars/star-null.png'">
+          </div>
+          <ion-icon class="paycheck" name="logo-usd"></ion-icon>
+        </div>
+      </div> 
+    </ion-item>
+  </ion-list>
 
 </ion-content>
