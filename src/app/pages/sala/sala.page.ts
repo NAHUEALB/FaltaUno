@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
+import { FirebaseauthService } from './../../serv/firebaseauth.service';
+import { Jugador } from 'src/app/models/jugador';
+
 @Component({
 	selector: 'app-sala',
 	templateUrl: './sala.page.html',
@@ -7,6 +10,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SalaPage implements OnInit {
 
+	enlace = 'Jugador';
+	docSubscription;
+	usuarioSubscription;
+	cargando = false;
 	canchaNombre = "HARDCODED_CANCHA";
 	canchaDireccion = "HC DIRE 123";
 	canchaHora = "12:34";
@@ -87,7 +94,7 @@ export class SalaPage implements OnInit {
 	];
 	stars: any[];
 
-	constructor() { }
+	constructor(public firebaseauthService: FirebaseauthService) {}
 
 	ngOnInit() {}
 
@@ -112,4 +119,46 @@ export class SalaPage implements OnInit {
 		}
 	}
 
+	crearSalaNueva() {
+		var arrNombresCanchas = ["Megastadio", "Cancha La Lora", "Estadio 7", "SportCenter", "Camp Nou", "Bernabeu", "Old Trafford", "Canchgym"]
+		let randSexo = ' Mixto '
+		if (Math.random() > 0.8) randSexo = ' Femenino '
+		else if (Math.random() < 0.5) randSexo = ' Masculino '
+		let data = {
+			nombre: arrNombresCanchas[Math.floor(Math.random() * arrNombresCanchas.length + 1)],
+			hora: Math.floor(Math.random() * 10 + 12) + ":00",
+			sexo: randSexo,
+			lat: 0,
+			lon: 0,
+			equipoRed: [],
+			equipoBlue: [],
+		}
+		let id = String(Math.ceil(Math.random() * 99999 + 1))
+		this.firebaseauthService.createDocument(data, 'Salas', id);
+	}
+
+	crearFirebaseBot() {
+		var arrNombres = ["Adrián", "Agustín", "Alberto", "Alejandro", "Alexander", "Alexis", "Alonso", "Andrés Felipe", "Ángel", "Anthony", "Antonio", "Bautista", "Benicio", "Benjamín", "Carlos", "Carlos Alberto", "Carlos Eduardo", "Carlos Roberto", "César", "Cristóbal", "Daniel", "David", "Diego", "Dylan", "Eduardo", "Emiliano", "Emmanuel", "Enrique", "Erik", "Ernesto", "Ethan", "Fabián", "Facundo", "Felipe", "Félix", "Félix María", "Fernando", "Francisco", "Francisco Javier", "Gabriel", "Gaspar", "Gustavo Adolfo", "Hugo", "Ian", "Iker", "Isaac", "Jacob", "Javier", "Jayden", "Jeremy", "Jerónimo", "Jesús", "Jesús Antonio", "Jesús Víctor", "Joaquín", "Jorge", "Jorge  Alberto", "Jorge Luis", "José", "José Antonio", "José Daniel", "José David", "José Francisco", "José Gregorio", "José Luis", "José Manuel", "José Pablo", "Josué", "Juan", "Juan Ángel", "Juan Carlos", "Juan David", "Juan Esteban", "Juan Ignacio", "Juan José", "Juan Manuel", "Juan Pablo", "Juan Sebastián", "Julio", "Julio Cesar", "Justin", "Kevin", "Lautaro", "Liam", "Lian", "Lorenzo", "Lucas", "Luis", "Luis Alberto", "Luis Emilio", "Luis Fernando", "Manuel", "Manuel Antonio", "Marco Antonio", "Mario", "Martín", "Mateo", "Matías", "Maximiliano", "Maykel", "Miguel", "Miguel  ngel", "Nelson", "Noah", "Oscar", "Pablo", "Pedro", "Rafael", "Ramón", "Raúl", "Ricardo", "Rigoberto", "Roberto", "Rolando", "Samuel", "Samuel David", "Santiago", "Santino", "Santos", "Sebastián", "Thiago", "Thiago Benjamín", "Tomás", "Valentino", "Vicente", "Víctor", "Víctor Hugo"];
+		let fakeUser = arrNombres[Math.floor(Math.random() * arrNombres.length + 1)].split(" ")[0]
+		let fakeMail = fakeUser + "@gmail.com"
+		let fakePass = "asdasdasd"
+		this.firebaseauthService.registrar(fakeMail, fakePass)
+		.then(res => {
+			let isPagado = (Math.random() > 0.7) ? true : false
+			let data = {
+				nombre: fakeUser,
+				pagado: isPagado,
+				puntaje: Math.random() * 15 + 20,
+				cvotos: Math.random() * 4 + 7,
+				stars: [],
+				id: ""
+			};
+			data.id = res.user.uid;	
+			this.firebaseauthService.createDocument(data, this.enlace, res.user.uid);
+		})
+		.catch(err =>{
+			this.cargando = false;
+			console.log(err)
+		})
+	}
 }
