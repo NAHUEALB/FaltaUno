@@ -62,7 +62,11 @@ const routes: Routes = [
   {
     path: 'ayuda-menu-lateral',
     loadChildren: () => import('./pages/ayuda-menu-lateral/ayuda-menu-lateral.module').then( m => m.AyudaMenuLateralPageModule)
+  },  {
+    path: 'editar-sala',
+    loadChildren: () => import('./pages/editar-sala/editar-sala.module').then( m => m.EditarSalaPageModule)
   }
+
   
 
 ];

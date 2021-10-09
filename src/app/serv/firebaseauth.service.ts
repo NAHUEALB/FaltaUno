@@ -4,6 +4,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Storage } from '@ionic/storage-angular';
 import firebase from 'firebase/app';
+import { Sala } from '../models/sala';
 
 @Injectable({
   providedIn: 'root'
@@ -50,17 +51,26 @@ export class FirebaseauthService {
   }
 
   updateDocument(path,data: Jugador){
-    return this.fireStore.collection(path).doc(data.id).set({'nombre': data.nombre,
-                                                                    'cvotos': data.cvotos,
-                                                                    'fnacimiento': data.fnacimiento,
-                                                                    'foto': data.foto,
-                                                                    'id': data.id,
-                                                                    'html': data.html,
-                                                                    'puntaje': data.puntaje,
-                                                                    'sexo': data.sexo,
-                                                                    'perfil': data.perfil,
-                                                                    'ubicacion': data.ubicacion,
-                                                                    'usuario': data.usuario });
+    return this.fireStore.collection(path).doc(data.id).set({
+      'nombre': data.nombre,
+      'cvotos': data.cvotos,
+      'fnacimiento': data.fnacimiento,
+      'foto': data.foto,
+      'id': data.id,
+      'html': data.html,
+      'puntaje': data.puntaje,
+      'sexo': data.sexo,
+      'perfil': data.perfil,
+      'ubicacion': data.ubicacion,
+      'usuario': data.usuario });
+  }
+
+  updateSala(path,data: Sala){
+    return this.fireStore.collection(path).doc(data.id).set({
+      'id': data.id,
+      'nombre': data.nombre,
+      'sexo': data.sexo,
+      'estado': data.estado });
   }
 
 }

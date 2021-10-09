@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
 	selector: 'app-sala',
@@ -87,7 +88,7 @@ export class SalaPage implements OnInit {
 	];
 	stars: any[];
 
-	constructor() { }
+	constructor(private router: Router) { }
 
 	ngOnInit() {}
 
@@ -112,4 +113,7 @@ export class SalaPage implements OnInit {
 		}
 	}
 
+	irAlEditarSala() {
+		this.router.navigate([`/editar-sala`]);
+	}
 }
