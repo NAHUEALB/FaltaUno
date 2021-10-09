@@ -1,4 +1,5 @@
-import { NgModule } from '@angular/core';
+import { MapaPageModule } from './../mapa/mapa.module';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
@@ -13,8 +14,10 @@ import { SalaPage } from './sala.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    SalaPageRoutingModule
+    SalaPageRoutingModule,
+    MapaPageModule
   ],
-  declarations: [SalaPage]
+  declarations: [SalaPage],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class SalaPageModule {}

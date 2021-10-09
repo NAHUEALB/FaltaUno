@@ -271,18 +271,13 @@ partidos = [
 		document.getElementById("blk-mapa").style.display = "none";
 	}
 
-	mostrarMapa(partidoSeleccionado){
+	irALaSala(partidoSeleccionado){
 		let canchaExtra : NavigationExtras = {
 			state: {
 				cancha: partidoSeleccionado
 			}
 		}
-		this.router.navigate(['mapa'], canchaExtra);
-	}
-
-
-	irALaSala(){
-		this.router.navigate(['sala']);
+		this.router.navigate(['sala'], canchaExtra);
 	}
 
 }

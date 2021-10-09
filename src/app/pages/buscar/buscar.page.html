@@ -35,10 +35,10 @@
 	<ion-list id="blk-lista" class="blk-card lista-partidos" lines="none">
 		<ion-item-sliding *ngFor="let partido of partidos">
 
-			<ion-item-options side="start"><ion-item-option color="primary" (click)="irALaSala()" expandable>Unirse</ion-item-option></ion-item-options>
-			<!-- <ion-item-options side="start"><ion-item-option color="primary" (click)="mostrarMapa(partido)" expandable>Unirse</ion-item-option></ion-item-options> -->
+			<ion-item-options side="start"><ion-item-option color="primary" (click)="irALaSala(partido)" expandable>Unirse</ion-item-option></ion-item-options>
+			<!-- <ion-item-options side="start"><ion-item-option color="primary" (click)="irALaSala(partido)" expandable>Unirse</ion-item-option></ion-item-options> -->
 		
-			<ion-item (click)="irALaSala()" color="transparent" class="opcion-cancha">
+			<ion-item (click)="irALaSala(partido)" color="transparent" class="opcion-cancha">
 				<ion-icon class="cancha-icon" name="football" [id]="partido.iconColor" ></ion-icon>
 				<ion-img class="flamas" [id]="partido.optionFlama" src="../assets/flames.gif"></ion-img>
 				<div class="cancha-data">
