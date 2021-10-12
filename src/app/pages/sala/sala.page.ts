@@ -112,6 +112,7 @@ export class SalaPage implements OnInit {
 	irAlEditarSala() {
 		this.router.navigate([`/editar-sala`]);
 	}
+	
 	mezclarEquipos(arr1, arr2) {
 		console.log(arr1, arr2)
 		let arrAux = [
@@ -434,6 +435,15 @@ export class SalaPage implements OnInit {
 			lon: -57.9133312,
 			equipoRed: [], equipoBlue: []
 		}, enlace, String(++id));
+	}
+
+	preloadFirestorePuentes() {
+		let enlace = 'Puentes';
+		this.firebaseauthService.createDocument({
+			canchasLP: [1901, 1902, 1903, 1904, 1905, 1906, 1907, 1908, 1909, 1910, 1911, 1912, 1913, 1914, 1915, 1916, 1917],
+			canchasBE: [3901, 3902, 3903, 3904, 3905, 3906, 3907],
+			canchasEN: [5901, 5902, 5903, 5904, 5905, 5906]
+		}, enlace, 'bridge-canchas');
 	}
 }
 
