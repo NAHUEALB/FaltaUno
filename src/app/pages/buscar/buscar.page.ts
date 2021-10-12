@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
+import { Storage } from '@ionic/storage-angular';
 
 @Component({
 	selector: 'app-buscar',
@@ -192,7 +193,11 @@ partidos = [
 		"Cancha Loca" : 5
 	}
 
-	constructor(private router: Router) {
+	constructor(
+		private router: Router,
+		private storage: Storage
+	){
+
 	}
 
 	ngOnInit() {
@@ -282,7 +287,13 @@ partidos = [
 
 
 	irALaSala(){
-		this.router.navigate(['sala']);
+		this.storage.set("sala", {
+			nombre: 'asd',
+			sexo: ' No binario ',
+			estado: 'Sala pública'
+		}).then(()=>{
+			this.router.navigate(["/sala"]);
+		})
 	}
 
 }

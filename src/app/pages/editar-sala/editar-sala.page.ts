@@ -13,15 +13,15 @@ import { FirebaseauthService } from 'src/app/serv/firebaseauth.service';
 import { DatabaseService } from 'src/app/serv/database.service';
 
 @Component({
-  selector: 'app-editar-sala',
-  templateUrl: './editar-sala.page.html',
-  styleUrls: ['./editar-sala.page.scss'],
+	selector: 'app-editar-sala',
+	templateUrl: './editar-sala.page.html',
+	styleUrls: ['./editar-sala.page.scss'],
 })
 export class EditarSalaPage implements OnInit {
-  salaForm: FormGroup;
+  	salaForm: FormGroup;
 	sala: Sala;
 	sexos = ["No binario", "Hombre", "Mujer"];
-  estados = ["Sala pública", "Sala privada"]
+  	estados = ["Sala pública", "Sala privada"]
 	docSubscription;
 	usuarioSubscription;
 	cargando = false;
@@ -38,7 +38,7 @@ export class EditarSalaPage implements OnInit {
 	private events: Events
 	){ 
 		this.sala = {
-      id: '',
+      		id: '',
 			nombre: '',
 			sexo: "",
 			estado: ''
@@ -47,17 +47,19 @@ export class EditarSalaPage implements OnInit {
 		this.salaForm = this.formBuilder.group({
 			nombre: '',
 			sexo: '',
-      estado: '',
+      		estado: '',
 		});
 	}
 
 	ngOnInit() {
 		this.storage.get("sala").then(res => {
+			console.log(res)
 			this.sala = res;
 			this.salaForm.patchValue({
-        nombre: this.sala.nombre,
-        sexo: this.sala.sexo,
-        estado: this.sala.estado})
+				nombre: this.sala.nombre,
+				sexo: this.sala.sexo,
+				estado: this.sala.estado
+			})
 		})
 	}
 
@@ -69,7 +71,7 @@ export class EditarSalaPage implements OnInit {
 		
 		this.sala.nombre = this.salaForm.value.nombre;
 		this.sala.sexo = this.salaForm.value.sexo;
-    this.sala.estado = this.salaForm.value.estado;
+    	this.sala.estado = this.salaForm.value.estado;
 		
 		this.firebaseauthService.updateSala(this.enlace, this.sala).then(res => {
 			// this.events.publish("actualizar:storage", false);

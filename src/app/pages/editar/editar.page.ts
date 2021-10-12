@@ -64,18 +64,13 @@ export class EditarPage implements OnInit {
 	ngOnInit() {
 		this.storage.get("jugador").then(res => {
 			this.jugador = res;
-			this.jugadorForm.patchValue({nombre: this.jugador.nombre,
-										fnacimiento: this.jugador.fnacimiento,
-										ubicacion: this.jugador.ubicacion,
-										sexo: this.jugador.sexo})
+			this.jugadorForm.patchValue({
+				nombre: this.jugador.nombre,
+				fnacimiento: this.jugador.fnacimiento,
+				ubicacion: this.jugador.ubicacion,
+				sexo: this.jugador.sexo
+			})
 		})
-	}
-
-	onSubmit(){
-		//Esto deberiamos mandarlo a la bd.
-		//En el perfil deberiamos poner que cada vez que se entre, se recargue la informacion de ese jugador
-		//Como saber que jugador es? proponer el uso del DNI.
-		// console.log(this.jugadorForm.value);
 	}
 
 	editarJugador() {
