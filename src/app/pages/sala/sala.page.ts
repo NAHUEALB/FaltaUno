@@ -11,6 +11,14 @@ export class SalaPage implements OnInit {
 	canchaDireccion = "HC DIRE 123";
 	canchaHora = "12:34";
 	canchaPrecio = "$199";
+	
+	jugadorVacio = {
+		nombre: " (vacío) ",
+		puntaje: 0,
+		cvotos: 0,
+		pagado: false,
+		stars: []
+	}
 	equipoRed = [
 		{
 		nombre: "Juan",
@@ -33,24 +41,12 @@ export class SalaPage implements OnInit {
 		pagado: false,
 		stars: []
 		},
-		{
-		nombre: " (vacío) ",
-		puntaje: 0,
-		cvotos: 0,
-		pagado: false,
-		stars: []
-		},
-		{
-		nombre: " (vacío) ",
-		puntaje: 0,
-		cvotos: 0,
-		pagado: false,
-		stars: []
-		},
+		this.jugadorVacio,
+		this.jugadorVacio,
 	];
 	equipoBlue = [
 		{
-		nombre: "Johana de los ángeles crecidos del monte",
+		nombre: "Johana de los ángeles crec",
 		puntaje: 30,
 		cvotos: 8,
 		pagado: false,
@@ -70,20 +66,8 @@ export class SalaPage implements OnInit {
 		pagado: false,
 		stars: []
 		},
-		{
-		nombre: " (vacío) ",
-		puntaje: 0,
-		cvotos: 0,
-		pagado: false,
-		stars: []
-		},
-		{
-		nombre: " (vacío) ",
-		puntaje: 0,
-		cvotos: 0,
-		pagado: false,
-		stars: []
-		},
+		this.jugadorVacio,
+		this.jugadorVacio,
 	];
 	stars: any[];
 
@@ -110,6 +94,37 @@ export class SalaPage implements OnInit {
 			else if (value - .25 >= i) player.stars.push("half")
 			else player.stars.push("null");
 		}
+	}
+
+	mezclarEquipos(arr1, arr2) {
+		console.log(arr1, arr2)
+		let arrAux = [
+			...arr1.filter(e => e.nombre != " (vacío) "), 
+			...arr2.filter(e => e.nombre != " (vacío) ")
+		];
+		var currentIndex = arrAux.length, temporaryValue, randomIndex
+		while (0 !== currentIndex) {
+			randomIndex = Math.floor(Math.random() * currentIndex)
+			currentIndex -= 1
+			temporaryValue = arrAux[currentIndex]
+			arrAux[currentIndex] = arrAux[randomIndex]
+			arrAux[randomIndex] = temporaryValue
+		}
+		// Ahora en arrAux están todos los jugadores mezclados
+		for (let i = 0; i <= 10 - arrAux.length + 2; i++) arrAux.push(this.jugadorVacio)
+		this.equipoRed = []
+		this.equipoBlue = []
+		for (let i = 0; i < 5; i++) {
+			if (Math.random() > 0.5) {
+				this.equipoRed.push(arrAux[2*i])
+				this.equipoBlue.push(arrAux[2*i + 1])
+			} else {
+				this.equipoBlue.push(arrAux[2*i])
+				this.equipoRed.push(arrAux[2*i + 1])
+			}
+		}
+		console.log(arrAux)
+		return arrAux
 	}
 
 }
