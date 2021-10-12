@@ -63,7 +63,10 @@
 			<ion-icon class="perfil-icon" name="brush"></ion-icon>
 			<p>Editar</p>
 		</div>
-		<div class="opcion-card" (click)="crearSalaNueva()">
+		<div class="opcion-card" 
+      (click)="preloadCanchasLaPlata(); 
+        preloadCanchasBerisso();
+        preloadCanchasEnsenada();">
 			<ion-icon class="perfil-icon" id="logo-usd" name="logo-usd"></ion-icon>
 			<p>Pagar</p>
 		</div>

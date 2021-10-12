@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { FirebaseauthService } from './../../serv/firebaseauth.service';
 import { Jugador } from 'src/app/models/jugador';
+import { Cancha } from 'src/app/models/cancha';
 
 @Component({
 	selector: 'app-sala',
@@ -11,6 +12,7 @@ import { Jugador } from 'src/app/models/jugador';
 export class SalaPage implements OnInit {
 
 	enlace = 'Jugador';
+	enlaceCanchasLP = 'CanchasLP';
 	docSubscription;
 	usuarioSubscription;
 	cargando = false;
@@ -133,8 +135,6 @@ export class SalaPage implements OnInit {
 			equipoRed: [],
 			equipoBlue: [],
 		}
-		let id = String(Math.ceil(Math.random() * 99999 + 1))
-		this.firebaseauthService.createDocument(data, 'Salas', id);
 	}
 
 	crearFirebaseBot() {
@@ -161,4 +161,257 @@ export class SalaPage implements OnInit {
 			console.log(err)
 		})
 	}
+
+	preloadCanchasLaPlata() {
+		let id = 1900;
+		let enlace = "CanchasLP";
+		this.firebaseauthService.createDocument({
+			nombre: 'Calle 55 FC',
+			direccion: '55 entre 11 y 12',
+			lat: -34.9231194,
+			lon: -57.951446,
+			equipoRed: [], equipoBlue: []
+		}, enlace, String(++id));
+
+		this.firebaseauthService.createDocument({
+			nombre: 'Estadio 7',
+			direccion: '6 entre 58 y 59',
+			lat: -34.926258,
+			lon: -57.963309,
+			equipoRed: [], equipoBlue: []
+		}, enlace, String(++id));
+
+		this.firebaseauthService.createDocument({
+			nombre: 'Garra Charrua',
+			direccion: '64 entre 7 y 8',
+			lat: -34.926258,
+			lon: -57.963309,
+			equipoRed: [], equipoBlue: []
+		}, enlace, String(++id));
+
+		this.firebaseauthService.createDocument({
+			nombre: 'Camp Nou',
+			direccion: '69 entre 12 y 13',
+			lat: -34.9332215,
+			lon: -57.9522312,
+			equipoRed: [], equipoBlue: []
+		}, enlace, String(++id));
+
+		this.firebaseauthService.createDocument({
+			nombre: 'Mega Estadio',
+			direccion: 'Av 1 entre 62 y 63',
+			lat: -34.9255513,
+			lon: -57.9469955,
+			equipoRed: [], equipoBlue: []
+		}, enlace, String(++id));
+
+		this.firebaseauthService.createDocument({
+			nombre: 'Complejo Sport',
+			direccion: 'Av 1 entre 60 y 61',
+			lat: -34.9210431,
+			lon: -57.940258,
+			equipoRed: [], equipoBlue: []
+		}, enlace, String(++id));
+
+		this.firebaseauthService.createDocument({
+			nombre: 'Complejo 62',
+			direccion: '62 entre 1 y 115',
+			lat: -34.9210431,
+			lon: -57.940258,
+			equipoRed: [], equipoBlue: []
+		}, enlace, String(++id));
+
+		this.firebaseauthService.createDocument({
+			nombre: 'Tu Futbol 5',
+			direccion: '66 entre 117 y 118',
+			lat: -34.9210431,
+			lon: -57.940258,
+			equipoRed: [], equipoBlue: []
+		}, enlace, String(++id));
+
+		this.firebaseauthService.createDocument({
+			nombre: 'F5 La Rambla',
+			direccion: '74 entre 118 y 119',
+			lat: -34.9336092,
+			lon: -57.9694005,
+			equipoRed: [], equipoBlue: []
+		}, enlace, String(++id));
+
+		this.firebaseauthService.createDocument({
+			nombre: 'Complejo Mash',
+			direccion: '45 entre 16 y 17',
+			lat: -34.9230396,
+			lon: -57.9687499,
+			equipoRed: [], equipoBlue: []
+		}, enlace, String(++id));
+
+		this.firebaseauthService.createDocument({
+			nombre: 'Cancha 42',
+			direccion: '42 entre 12 y 13',
+			lat: -34.9230396,
+			lon: -57.9687499,
+			equipoRed: [], equipoBlue: []
+		}, enlace, String(++id));
+
+		this.firebaseauthService.createDocument({
+			nombre: 'Siempre al diez',
+			direccion: '24 entre 34 y 35',
+			lat: -34.9287177,
+			lon: -57.9778608,
+			equipoRed: [], equipoBlue: []
+		}, enlace, String(++id));
+
+		this.firebaseauthService.createDocument({
+			nombre: 'La Rambla F5',
+			direccion: 'Blvd. 82 entre 36 y 37',
+			lat: -34.9263779,
+			lon: -57.9878999,
+			equipoRed: [], equipoBlue: []
+		}, enlace, String(++id));
+
+		this.firebaseauthService.createDocument({
+			nombre: 'Heroes F5',
+			direccion: '60 entre 133 y 134',
+			lat: -34.9543973,
+			lon: -57.9712958,
+			equipoRed: [], equipoBlue: []
+		}, enlace, String(++id));
+
+		this.firebaseauthService.createDocument({
+			nombre: 'Challenger F5',
+			direccion: '137 entre 38 y 39',
+			lat: -34.9378136,
+			lon: -57.9912585,
+			equipoRed: [], equipoBlue: []
+		}, enlace, String(++id));
+
+		this.firebaseauthService.createDocument({
+			nombre: 'El Desafio',
+			direccion: 'Av. 32 y 135',
+			lat: -34.9414456,
+			lon: -58.0063454,
+			equipoRed: [], equipoBlue: []
+		}, enlace, String(++id));
+
+		this.firebaseauthService.createDocument({
+			nombre: 'Stadium',
+			direccion: '23 entre 70 y 71',
+			lat: -34.9506873,
+			lon: -57.9561478,
+			equipoRed: [], equipoBlue: []
+		}, enlace, String(++id));
+	}
+
+	preloadCanchasBerisso() {
+		let id = 3900;
+		let enlace = 'CanchasBE';
+		this.firebaseauthService.createDocument({
+			nombre: 'Los Robus',
+			direccion: 'Atenas e/ Islas Malvinas y 14',
+			lat: -34.8699655,
+			lon: -57.8790419,
+			equipoRed: [], equipoBlue: []
+		}, enlace, String(++id));
+
+		this.firebaseauthService.createDocument({
+			nombre: 'Spartak',
+			direccion: 'Av. Montevideo e/ Edgar Aschieri y Progreso',
+			lat: -34.8699655,
+			lon: -57.8790419,
+			equipoRed: [], equipoBlue: []
+		}, enlace, String(++id));
+
+		this.firebaseauthService.createDocument({
+			nombre: 'Maracana',
+			direccion: 'Progreso e/ Av. Montevideo y Ucrania',
+			lat: -34.8743378,
+			lon: -57.8700375,
+			equipoRed: [], equipoBlue: []
+		}, enlace, String(++id));
+
+		this.firebaseauthService.createDocument({
+			nombre: 'Cancha Del Monte',
+			direccion: 'Grecia y calle 173',
+			lat: -34.8743378,
+			lon: -57.8700375,
+			equipoRed: [], equipoBlue: []
+		}, enlace, String(++id));
+
+		this.firebaseauthService.createDocument({
+			nombre: 'Tiro Federal',
+			direccion: 'Av. del Petroleo Argentino 1455',
+			lat: -34.8941002,
+			lon: -57.913749,
+			equipoRed: [], equipoBlue: []
+		}, enlace, String(++id));
+
+		this.firebaseauthService.createDocument({
+			nombre: 'Canchas de Futbol',
+			direccion: '128 entre 60 y 61',
+			lat: -34.901619,
+			lon: -57.9218867,
+			equipoRed: [], equipoBlue: []
+		}, enlace, String(++id));
+
+		this.firebaseauthService.createDocument({
+			nombre: 'Club Santa Teresita',
+			direccion: '171 y 45',
+			lat: -34.8875259,
+			lon: -57.8478191,
+			equipoRed: [], equipoBlue: []
+		}, enlace, String(++id));
+	}
+	
+	preloadCanchasEnsenada() {
+		let id = 5900;
+		let enlace = 'CanchasEN';
+		this.firebaseauthService.createDocument({
+			nombre: 'Club Porteño Ensenada',
+			direccion: '899 Herminio Masantonio 851',
+			lat: -34.8706441,
+			lon: -57.9111863,
+			equipoRed: [], equipoBlue: []
+		}, enlace, String(++id));
+
+		this.firebaseauthService.createDocument({
+			nombre: 'Bombonera de Progreso',
+			direccion: '300 González Pacheco 252',
+			lat: -34.8715366,
+			lon: -57.9127813,
+			equipoRed: [], equipoBlue: []
+		}, enlace, String(++id));
+
+		this.firebaseauthService.createDocument({
+			nombre: 'Horizonte',
+			direccion: 'Saenz Peña 400-352',
+			lat: -34.8714038,
+			lon: -57.91558,
+			equipoRed: [], equipoBlue: []
+		}, enlace, String(++id));
+
+		this.firebaseauthService.createDocument({
+			nombre: 'Polideportivo La Inmaculada',
+			direccion: 'Eva Perón entre Av. Horacio Cestino y Alberdi',
+			lat: -34.8691935,
+			lon: -57.9115421,
+			equipoRed: [], equipoBlue: []
+		}, enlace, String(++id));
+
+		this.firebaseauthService.createDocument({
+			nombre: 'El Estadio',
+			direccion: 'San Martin e/ Chile y Bolivia',
+			lat: -34.8613055,
+			lon: -57.9157214,
+			equipoRed: [], equipoBlue: []
+		}, enlace, String(++id));
+
+		this.firebaseauthService.createDocument({
+			nombre: 'La Sede',
+			direccion: 'Sidotti e/ Chile y Bolivia',
+			lat: -34.8556692,
+			lon: -57.9133312,
+			equipoRed: [], equipoBlue: []
+		}, enlace, String(++id));
+	}
 }
+
