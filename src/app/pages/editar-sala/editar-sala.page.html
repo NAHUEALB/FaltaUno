@@ -1,0 +1,75 @@
+<ion-header class="ion-no-border">
+	<ion-toolbar>
+		<ion-buttons slot="start">
+			<ion-back-button></ion-back-button>
+		</ion-buttons>
+		<ion-title>Editar info de la sala</ion-title>
+	</ion-toolbar>
+  </ion-header>  
+
+<ion-content class="background">
+
+<form [formGroup]="salaForm" (ngSubmit)="editarSala()">
+
+	<ion-item class="i-text">
+		<ion-input 
+		pattern="[a-zA-Záéíóú ]*"
+		formControlName="nombre" 
+		type="text"
+		placeholder="Cambiar nombre" 
+		clear-input
+		required>
+		</ion-input>
+	</ion-item>
+
+	<ion-item class="i-text">  
+		<ion-select  
+		formControlName="sexo" 
+		placeholder="🔻 Editar sexo"
+		required>
+			<ion-select-option *ngFor="let sexo of sexos" >
+				{{sexo}}
+			</ion-select-option>
+		</ion-select>
+	</ion-item>
+
+  <ion-item class="i-text">  
+		<ion-select  
+		formControlName="estado" 
+		placeholder="🔻 Modo privacidad"
+		required>
+			<ion-select-option *ngFor="let estado of estados" >
+				{{estado}}
+			</ion-select-option>
+		</ion-select>
+	</ion-item>
+
+	<hr id="hr-cancel">
+	<ion-col>
+		<ion-button 
+			class="bt-modern bt-text" 
+			id=""
+			(click)="irALaSala()"
+			color="transparent"
+			fill="clear">
+			DESCARTAR
+		</ion-button>
+	</ion-col>
+	<hr id="hr-cancel">
+
+	<hr id="hr-ok">
+	<ion-col>
+		<ion-button 
+			class="bt-modern bt-text" 
+			id=""
+			type="submit"
+			[disabled]="!salaForm.valid"
+			color="transparent"
+			fill="clear">
+			{{cargando ? "CARGANDO..." : "CONFIRMAR" }}
+		</ion-button>
+	</ion-col>
+	<hr id="hr-ok">
+	
+</form>
+</ion-content>

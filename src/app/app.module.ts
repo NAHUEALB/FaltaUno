@@ -15,6 +15,7 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 
 import { IonicStorageModule } from '@ionic/storage-angular';
+import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -29,11 +30,14 @@ import { IonicStorageModule } from '@ionic/storage-angular';
 		AngularFirestoreModule,
 		AngularFireAuthModule,
 		AngularFireDatabaseModule,
-		IonicStorageModule.forRoot()
+		IonicStorageModule.forRoot(),
+		ReactiveFormsModule
 	],
 	providers: [
 		Storage,
 		GoogleMaps,
+		FormBuilder,
+		FormsModule,
 		{provide: RouteReuseStrategy, useClass: IonicRouteStrategy},
 	],
 	schemas: [CUSTOM_ELEMENTS_SCHEMA],
