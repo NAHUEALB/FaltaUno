@@ -131,13 +131,55 @@ export class BuscarPage implements OnInit {
 	}
 
 
-	irALaSala(){
-		this.storage.set("sala", {
-			nombre: 'asd',
-			sexo: ' Mixto ',
-			estado: 'Sala pública'
-		}).then(()=>{
-			this.router.navigate(["/sala"]);
+	irALaSala(idSala){
+		this.storage.get("jugador").then(jugador => {
+			let ciudadDelJugador = jugador.ubicacion;
+
+			this.docSubscription = this.firebaseauthService.getDocumentById('Puentes', 'bridge-canchas').subscribe((document: any) =>{
+				let puentes;	
+				switch (ciudadDelJugador) {
+					case ' La Plata ':
+						puentes = document.canchasLP;
+						break;
+					case ' Berisso ':
+						puentes = document.canchasBE;
+						break;
+					case ' Ensenada ':
+						puentes = document.canchasEN;
+						break;
+					default: 
+						console.log("Error preguntando la ciudad del jugador"); 
+						break;
+				}
+
+				puentes.forEach(idCancha => {
+					console.log(idCancha)
+					this.canchaSubscription = this.firebaseauthService.getDocumentById('CanchasLP', String(idCancha)).subscribe((canchaDocument: any) =>{
+						let cancha: Cancha = canchaDocument;
+						cancha.salas.forEach(e => {
+							if (e.id == idSala) {
+								this.storage.set("sala", {
+									id: e.id,
+									nombre: e.nombre,
+									hora: e.hora,
+									estado: e.estado,
+									slotsOcupados: e.slotsOcupados,
+									slotsTotales: e.slotsTotales,
+									sexo: e.sexo,
+									equipoRed: e.equipoRed,
+									equipoBlue: e.equipoBlue,
+								}).then(()=>{
+									console.log(e)
+									this.router.navigate(["/sala"]);
+								})
+							}
+						})
+						this.canchaSubscription.unsubscribe();
+					})
+				});
+
+				this.docSubscription.unsubscribe();
+			})
 		})
 	}
 
