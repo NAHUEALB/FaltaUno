@@ -5,6 +5,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { Storage } from '@ionic/storage-angular';
 import firebase from 'firebase/app';
 import { Sala } from '../models/sala';
+import { Cancha } from '../models/cancha';
 
 @Injectable({
   providedIn: 'root'
@@ -62,7 +63,8 @@ export class FirebaseauthService {
       'sexo': data.sexo,
       'perfil': data.perfil,
       'ubicacion': data.ubicacion,
-      'usuario': data.usuario });
+      'usuario': data.usuario 
+    });
   }
 
   updateSala(path,data: Sala){
@@ -70,7 +72,19 @@ export class FirebaseauthService {
       'id': data.id,
       'nombre': data.nombre,
       'sexo': data.sexo,
-      'estado': data.estado });
+      'estado': data.estado 
+    });
   }
 
+  updateCancha(path,data: Cancha) {
+    return this.fireStore.collection(path).doc(String(data.id)).set({
+      'id': String(data.id),
+      'nombre': data.nombre,
+      'direccion': data.direccion,
+      'lat': data.lat,
+      'lon' : data.lon,
+      'precio' : data.precio,
+      'salas' : data.salas
+    });
+  }
 }

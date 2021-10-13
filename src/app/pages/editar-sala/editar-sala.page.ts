@@ -41,7 +41,10 @@ export class EditarSalaPage implements OnInit {
       		id: '',
 			nombre: '',
 			sexo: "",
-			estado: ''
+			estado: '',
+			hora: '',
+			equipoRed: [],
+			equipoBlue: []
 		}
 
 		this.salaForm = this.formBuilder.group({

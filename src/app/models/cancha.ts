@@ -1,9 +1,11 @@
+import { Sala } from "./sala";
+
 export class Cancha {
-    id: number;
+    id: string;
     nombre: string;
     direccion: string;
     lat: number;
     lon: number;
-    equipoRed: []; 
-    equipoBlue: [];
+    precio: number;
+    salas: Sala[] = [];
 }
