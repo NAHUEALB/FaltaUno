@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Storage } from '@ionic/storage-angular';
 
 import { FirebaseauthService } from './../../serv/firebaseauth.service';
 import { Jugador } from 'src/app/models/jugador';
@@ -85,16 +86,29 @@ export class SalaPage implements OnInit {
 
 	constructor(
 		private router: Router,
-		public firebaseauthService: FirebaseauthService
+		public firebaseauthService: FirebaseauthService,
+		private storage: Storage
 	) {}
 
 	ngOnInit() {}
 
 	ionViewWillEnter() {
-		this.equipoRed.concat(this.equipoBlue).forEach(p => {
-			let valoracion = this.getValoracion(p.puntaje, p.cvotos);
-			this.fillStars(p, valoracion);
-		});
+		this.storage.get("sala").then(sala => {
+			this.equipoRed = sala.equipoRed;
+			this.equipoBlue = sala.equipoBlue;
+			
+			this.storage.get("jugador").then(jugador => {
+				(Math.random() > 0.5) ? this.equipoRed.push(jugador) : this.equipoBlue.push(jugador)
+				
+				for (let i=this.equipoRed.length; i<5; i++) this.equipoRed.push(this.jugadorVacio)
+				for (let i=this.equipoBlue.length; i<5; i++) this.equipoBlue.push(this.jugadorVacio)
+
+				this.equipoRed.concat(this.equipoBlue).forEach(p => {
+					let valoracion = this.getValoracion(p.puntaje, p.cvotos);
+					this.fillStars(p, valoracion);
+				});
+			})
+		})
 	}
 
 	getValoracion(puntos, votos) {
@@ -142,22 +156,6 @@ export class SalaPage implements OnInit {
 			}
 		}
 		return arrAux
-	}
-
-	crearSalaNueva() {
-		var arrNombresCanchas = ["Megastadio", "Cancha La Lora", "Estadio 7", "SportCenter", "Camp Nou", "Bernabeu", "Old Trafford", "Canchgym"]
-		let randSexo = ' Mixto '
-		if (Math.random() > 0.8) randSexo = ' Femenino '
-		else if (Math.random() < 0.5) randSexo = ' Masculino '
-		let data = {
-			nombre: arrNombresCanchas[Math.floor(Math.random() * arrNombresCanchas.length + 1)],
-			hora: Math.floor(Math.random() * 10 + 12) + ":00",
-			sexo: randSexo,
-			lat: 0,
-			lon: 0,
-			equipoRed: [],
-			equipoBlue: [],
-		}
 	}
 
 	crearFirebaseBot() {
@@ -513,6 +511,10 @@ export class SalaPage implements OnInit {
 			
 			this.docSubscription.unsubscribe();
 		})
+	}
+
+	preloadBotsOnSalas() {
+		return false;
 	}
 }
 
