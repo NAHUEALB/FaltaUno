@@ -6,6 +6,7 @@ import { Storage } from '@ionic/storage-angular';
 import firebase from 'firebase/app';
 import { Sala } from '../models/sala';
 import { Cancha } from '../models/cancha';
+import { BridgeJugadores } from '../models/bridgeJugadores';
 
 @Injectable({
   providedIn: 'root'
@@ -85,6 +86,13 @@ export class FirebaseauthService {
       'lon' : data.lon,
       'precio' : data.precio,
       'salas' : data.salas
+    });
+  }
+
+  updateBridgeJugadores(data: BridgeJugadores){
+    return this.fireStore.collection('Puentes').doc('bridge-jugadores').set({
+      'id': data.id,
+      'jugadores': data.jugadores,
     });
   }
 }

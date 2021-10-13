@@ -19,11 +19,12 @@ export class SalaPage implements OnInit {
 	docSubscription;
 	canchaSubscription;
 	usuarioSubscription;
+	jugadoresSubscription;
+	jugSubscription;
 	cargando = false;
-	canchaNombre = "HARDCODED_CANCHA";
-	canchaDireccion = "HC DIRE 123";
-	canchaHora = "12:34";
-	canchaPrecio = "$199";
+
+	idsFirebaseBots = [];
+	arrJugadores: Jugador[] = [];
 	
 	jugadorVacio = {
 		nombre: " (vacío) ",
@@ -99,7 +100,7 @@ export class SalaPage implements OnInit {
 			
 			this.storage.get("jugador").then(jugador => {
 				(Math.random() > 0.5) ? this.equipoRed.push(jugador) : this.equipoBlue.push(jugador)
-				
+
 				for (let i=this.equipoRed.length; i<5; i++) this.equipoRed.push(this.jugadorVacio)
 				for (let i=this.equipoBlue.length; i<5; i++) this.equipoBlue.push(this.jugadorVacio)
 
@@ -109,6 +110,7 @@ export class SalaPage implements OnInit {
 				});
 			})
 		})
+		this.descargarJugadores()
 	}
 
 	getValoracion(puntos, votos) {
@@ -158,29 +160,63 @@ export class SalaPage implements OnInit {
 		return arrAux
 	}
 
-	crearFirebaseBot() {
-		var arrNombres = ["Adrián", "Agustín", "Alberto", "Alejandro", "Alexander", "Alexis", "Alonso", "Andrés Felipe", "Ángel", "Anthony", "Antonio", "Bautista", "Benicio", "Benjamín", "Carlos", "Carlos Alberto", "Carlos Eduardo", "Carlos Roberto", "César", "Cristóbal", "Daniel", "David", "Diego", "Dylan", "Eduardo", "Emiliano", "Emmanuel", "Enrique", "Erik", "Ernesto", "Ethan", "Fabián", "Facundo", "Felipe", "Félix", "Félix María", "Fernando", "Francisco", "Francisco Javier", "Gabriel", "Gaspar", "Gustavo Adolfo", "Hugo", "Ian", "Iker", "Isaac", "Jacob", "Javier", "Jayden", "Jeremy", "Jerónimo", "Jesús", "Jesús Antonio", "Jesús Víctor", "Joaquín", "Jorge", "Jorge  Alberto", "Jorge Luis", "José", "José Antonio", "José Daniel", "José David", "José Francisco", "José Gregorio", "José Luis", "José Manuel", "José Pablo", "Josué", "Juan", "Juan Ángel", "Juan Carlos", "Juan David", "Juan Esteban", "Juan Ignacio", "Juan José", "Juan Manuel", "Juan Pablo", "Juan Sebastián", "Julio", "Julio Cesar", "Justin", "Kevin", "Lautaro", "Liam", "Lian", "Lorenzo", "Lucas", "Luis", "Luis Alberto", "Luis Emilio", "Luis Fernando", "Manuel", "Manuel Antonio", "Marco Antonio", "Mario", "Martín", "Mateo", "Matías", "Maximiliano", "Maykel", "Miguel", "Miguel  ngel", "Nelson", "Noah", "Oscar", "Pablo", "Pedro", "Rafael", "Ramón", "Raúl", "Ricardo", "Rigoberto", "Roberto", "Rolando", "Samuel", "Samuel David", "Santiago", "Santino", "Santos", "Sebastián", "Thiago", "Thiago Benjamín", "Tomás", "Valentino", "Vicente", "Víctor", "Víctor Hugo"];
-		let fakeUser = arrNombres[Math.floor(Math.random() * arrNombres.length + 1)].split(" ")[0]
-		let fakeMail = fakeUser + "@gmail.com"
-		let fakePass = "asdasdasd"
-		this.firebaseauthService.registrar(fakeMail, fakePass)
-		.then(res => {
-			let isPagado = (Math.random() > 0.7) ? true : false
-			let data = {
-				nombre: fakeUser,
-				pagado: isPagado,
-				puntaje: Math.random() * 15 + 20,
-				cvotos: Math.random() * 4 + 7,
-				stars: [],
-				id: ""
-			};
-			data.id = res.user.uid;	
-			this.firebaseauthService.createDocument(data, this.enlace, res.user.uid);
+	crearFirebaseBot(cantidad) {
+		var arrNombres = ["Adrián", "Agustín", "Alberto", "Alejandro", "Alexander", "Alexis", "Alonso", "Ángel", "Anthony", "Antonio", "Bautista", "Benicio", "Benjamín", "Carlos", "César", "Cristóbal", "Daniel", "David", "Diego", "Dylan", "Eduardo", "Emiliano", "Emmanuel", "Enrique", "Erik", "Ernesto", "Ethan", "Fabián", "Facundo", "Felipe", "Félix", "Fernando", "Francisco", "Gabriel", "Gaspar", "Hugo", "Ian", "Iker", "Isaac", "Jacob", "Javier", "Jayden", "Jeremy", "Jerónimo", "Jesús", "Joaquín", "Jorge", "José", "José Antonio", "Josué", "Juan", "Julio", "Justin", "Kevin", "Lautaro", "Liam", "Lian", "Lorenzo", "Lucas", "Luis", "Manuel", "Mario", "Martín", "Mateo", "Matías", "Maximiliano", "Maykel", "Miguel", "Miguel  ngel", "Nelson", "Noah", "Oscar", "Pablo", "Pedro", "Rafael", "Ramón", "Raúl", "Ricardo", "Rigoberto", "Roberto", "Rolando", "Samuel", "Santiago", "Santino", "Santos", "Sebastián", "Thiago", "Tomás", "Valentino", "Vicente", "Víctor"];
+		this.docSubscription = this.firebaseauthService.getDocumentById('Puentes', 'bridge-jugadores').subscribe((document: any) =>{
+			let bridge = document
+			for (let i=0; i<cantidad; i++) {
+				let index = Math.floor(Math.random() * arrNombres.length)
+				let fakeUser = arrNombres[index]
+				let fakeMail = fakeUser + "@gmail.com"
+				let fakePass = "asdasdasd"
+				this.firebaseauthService.registrar(fakeMail, fakePass)
+				.then(res => {
+					let isPagado = (Math.random() > 0.7) ? true : false
+					let data = {
+						nombre: fakeUser,
+						pagado: isPagado,
+						puntaje: Math.floor(Math.random() * 15 + 20),
+						cvotos: Math.floor(Math.random() * 4 + 7),
+						stars: [],
+						id: ""
+					};
+					data.id = res.user.uid;	
+					bridge.jugadores.push(data.id)
+					this.idsFirebaseBots.push(data.id);
+					this.firebaseauthService.createDocument(data, this.enlace, res.user.uid);
+					this.firebaseauthService.updateBridgeJugadores(bridge);
+				})
+				.catch(err =>{
+					this.cargando = false;
+					console.log(err)
+				})
+			}
+			this.docSubscription.unsubscribe();
 		})
-		.catch(err =>{
-			this.cargando = false;
-			console.log(err)
+	}
+
+	descargarJugadores() {
+		this.arrJugadores = [];
+		this.jugadoresSubscription = this.firebaseauthService.getDocumentById('Puentes', 'bridge-jugadores').subscribe((idsJugadores: any) =>{
+			for (let i in idsJugadores.jugadores) {
+				this.jugSubscription = this.firebaseauthService.getDocumentById('Jugador', idsJugadores.jugadores[i]).subscribe((jugDocument: any) =>{
+					this.arrJugadores.push(jugDocument)
+					this.jugSubscription.unsubscribe()
+				})
+			}
+			this.jugadoresSubscription.unsubscribe();
 		})
+	}
+
+	crearEquipoRedYBlue() {
+		let redPlayers: Jugador[] = []
+		let bluePlayers: Jugador[] = []
+		for (let i=0; i<Math.ceil(Math.random()*9+1); i++) {
+			let indexP = Math.floor(Math.random()*40)
+			if (i % 2 == 0) redPlayers.push(this.arrJugadores[indexP])
+			else bluePlayers.push(this.arrJugadores[indexP])
+		}
+		return [redPlayers, bluePlayers]
 	}
 
 	preloadCanchasLaPlata() {
@@ -479,42 +515,48 @@ export class SalaPage implements OnInit {
 					let sexo = ' Mixto ';
 					if (Math.random() < 0.5) sexo = ' Masculino '
 					else if (Math.random() > 0.75) sexo = ' Femenino ';
+					let equipos = this.crearEquipoRedYBlue()
 					let sala1: Sala = {
 						id: String(++id),
 						nombre: cancha.nombre,
 						sexo: sexo,
 						hora: Math.ceil(Math.random() * 8 + 11) + ":00",
 						estado: 'Sala pública',
-						slotsOcupados: Math.floor(Math.random() * 10 + 1),
 						slotsTotales: 10,
-						equipoRed: [],
-						equipoBlue: []
+						equipoRed: equipos[0],
+						equipoBlue: equipos[1],
+						slotsOcupados: Number(equipos[0].length) + Number(equipos[1].length),
 					}
+
 					cancha.salas.push(sala1)
+
+					sexo = ' Mixto ';
+					if (Math.random() < 0.5) sexo = ' Masculino '
+					else if (Math.random() > 0.75) sexo = ' Femenino ';
+					equipos = this.crearEquipoRedYBlue()
 					let sala2: Sala = {
 						id: String(++id),
 						nombre: cancha.nombre,
 						sexo: sexo,
 						hora: Math.ceil(Math.random() * 8 + 11) + ":00",
 						estado: 'Sala pública',
-						slotsOcupados: Math.floor(Math.random() * 10 + 1),
 						slotsTotales: 10,
-						equipoRed: [],
-						equipoBlue: []
+						equipoRed: equipos[0],
+						equipoBlue: equipos[1],
+						slotsOcupados: Number(equipos[0].length) + Number(equipos[1].length),
 					}
+
 					cancha.salas.push(sala2)
+
+					console.log(id + " salas: ", cancha.salas)
 					
 					this.firebaseauthService.updateCancha('CanchasLP', cancha)
 					this.canchaSubscription.unsubscribe();
+					if (id > 100) return;
 				})
 			})
-			
 			this.docSubscription.unsubscribe();
 		})
-	}
-
-	preloadBotsOnSalas() {
-		return false;
 	}
 }
 
