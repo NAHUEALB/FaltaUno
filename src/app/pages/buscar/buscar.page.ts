@@ -1,6 +1,9 @@
 import { Component, ComponentFactoryResolver, OnInit } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
 import { Storage } from '@ionic/storage-angular';
+import { Cancha } from 'src/app/models/cancha';
+import { Jugador } from 'src/app/models/jugador';
+import { Sala } from 'src/app/models/sala';
 import { FirebaseauthService } from './../../serv/firebaseauth.service';
 
 
@@ -14,180 +17,21 @@ export class BuscarPage implements OnInit {
 	iconName: String;
 	iconColor: String;
 	docSubscription;
+	canchaSubscription;
 	puentes: any;
 
-	partidos = [
-			{
-				cancha: "Los Robus",
-				direccion: "Calle 1 y 64",
-				slotsOcupados: 7,
-				slotsTotales: 10,
-				hora: "12:00",
-				sexo: " Masculino ",
-				latitud: -34.8699655,
-				longitud: -57.8790419
-			},
-			{
-				cancha: "Maracaná",
-				direccion: "Calle 6 y 59",
-				slotsOcupados: 3,
-				slotsTotales: 10,
-				hora: "12:00",
-				sexo: " Mixto ",
-				latitud: -34.8743378,
-				longitud: -57.8700375
-
-			},
-			{
-				cancha: "Cancha Del Monte",
-				direccion: "Calle 1 y 64",
-				slotsOcupados: 9,
-				slotsTotales: 10,
-				hora: "13:00",
-				sexo: " Femenino ",
-				latitud: -34.8743378 ,
-				longitud: -57.8700375
-			},
-			{
-				cancha: "Fútbol 5 tiro Federal",
-				direccion: "Calle 22 y Palermo",
-				slotsOcupados: 9,
-				slotsTotales: 10,
-				hora: "13:00",
-				sexo: " Masculino ",
-				latitud: -34.8941002,
-				longitud: -57.913749
-			},
-			{
-				cancha: "Canchas de Fútbol",
-				direccion: "Calle 44 y 5",
-				slotsOcupados: 6,
-				slotsTotales: 10,
-				hora: "13:00",
-				sexo: " Masculino ",
-				latitud: -34.901619,
-				longitud: -57.9218867
-			},
-			{
-				cancha: "Club Santa Teresita",
-				direccion: "Calle 44 y 5",
-				slotsOcupados: 5,
-				slotsTotales: 10,
-				hora: "14:00",
-				sexo: " Femenino ",
-				latitud: -34.8875259,
-				longitud:-57.8478191
-			},
-			{
-				cancha: "Calle 55 F.C",
-				direccion: "Calle 1 y 64",
-				slotsOcupados: 9,
-				slotsTotales: 10,
-				hora: "14:00",
-				sexo: " Mixto ",
-				latitud: -34.9231194,
-				longitud: -57.951446
-			},
-			{
-				cancha: "Estadio 7",
-				direccion: "Calle 6 y 59",
-				slotsOcupados: 8,
-				slotsTotales: 10,
-				hora: "14:00",
-				sexo: " Masculino ",
-				latitud: -34.926258,
-				longitud: -57.963309
-			},
-			{
-				cancha: "Garra Charrua",
-				direccion: "Calle 1 y 64",
-				slotsOcupados: 7,
-				slotsTotales: 10,
-				hora: "15:00",
-				sexo: " Mixto ",
-				latitud: -34.926258,
-				longitud: -57.963309
-			},
-			{
-				cancha: "Camp Nou",
-				direccion: "Calle 6 y 59",
-				slotsOcupados: 3,
-				slotsTotales: 10,
-				hora: "15:00",
-				sexo: " Mixto ",
-				latitud: -34.9332215,
-				longitud: -57.9522312
-			},
-			{
-				cancha: "Mega Estadio",
-				direccion: "Calle 22 y Palermo",
-				slotsOcupados: 9,
-				slotsTotales: 10,
-				hora: "15:00",
-				sexo: " Masculino ",
-				latitud: -34.9255513,
-				longitud:-57.9469955
-			},
-			{
-				cancha: "Complejo Sport",
-				direccion: "Calle 1 y 64",
-				slotsOcupados: 2,
-				slotsTotales: 10,
-				hora: "16:00",
-				sexo: " Masculino ",
-				latitud: -34.9210431,
-				longitud: -57.940258
-			},
-			{
-				cancha: "Complejo 62 Fútbol 5",
-				direccion: "Calle 6 y 59",
-				slotsOcupados: 2,
-				slotsTotales: 10,
-				hora: "16:00",
-				sexo: " Mixto ",
-				latitud: -34.9210431,
-				longitud: -57.940258
-			},
-			{
-				cancha: "Ttu Fútbol 5",
-				direccion: "Calle 22 y Palermo",
-				slotsOcupados: 7,
-				slotsTotales: 10,
-				hora: "16:00",
-				sexo: " Mixto ",
-				latitud: -34.9210431,
-				longitud: -57.940258
-			},
-			{
-				cancha: "Fútbol 5 La Rambla",
-				direccion: "Calle 1 y 64",
-				slotsOcupados: 3,
-				slotsTotales: 10,
-				hora: "17:00",
-				sexo: " Mixto ",
-				latitud: -34.9336092,
-				longitud: -57.9694005
-			},
-			{
-				cancha: "Complejo Mash Fútbol 5",
-				direccion: "Calle 6 y 59",
-				slotsOcupados: 2,
-				slotsTotales: 10,
-				hora: "17:00",
-				sexo: " Femenino ",
-				latitud: -34.9230396,
-				longitud: -57.9687499
-			},
-			{
-				cancha: "Cancha 42 - Fútbol 5",
-				direccion: "Calle 44 y 5",
-				slotsOcupados: 9,
-				slotsTotales: 10,
-				hora: "18:00",
-				sexo: " Femenino ",
-				latitud: -34.9230396,
-				longitud: -57.9687499
-			}
+	partidos: Sala[] = [
+		{
+			id: "1",
+			nombre: "Cargando...",
+			slotsOcupados: 0,
+			slotsTotales: 10,
+			hora: "00:00",
+			sexo: " Mixto ",
+			estado: "Sala pública",
+			equipoRed: [],
+			equipoBlue: [],
+		},
 	];
 
 	distancias = {
@@ -251,14 +95,10 @@ export class BuscarPage implements OnInit {
 		let now = new Date();
 		let horaNow = now.getHours();
 		let horaPartido = elem.hora.split(":")[0] - 0;
-
 		let tiempo = Math.max(0, Math.floor(horaPartido - horaNow));
 		let slots = Math.floor(10 - elem.slotsOcupados);
 		let distancia = Math.floor(this.distancias[elem.cancha]*(4/3));
-
 		elem.orden = tiempo + slots + distancia;
-
-		//console.log(elem.cancha+", "+elem.hora+"hs, "+elem.slotsOcupados+"/10, "+this.distancias[elem.cancha]+"km: "+tiempo+"+"+slots+"+"+distancia+" = "+elem.orden);
 	}
 
 	ordenarPartidos(partidos) {
@@ -294,21 +134,19 @@ export class BuscarPage implements OnInit {
 	irALaSala(){
 		this.storage.set("sala", {
 			nombre: 'asd',
-			sexo: ' No binario ',
+			sexo: ' Mixto ',
 			estado: 'Sala pública'
 		}).then(()=>{
 			this.router.navigate(["/sala"]);
 		})
 	}
 
-	ionViewWillEnter() {
+	refresh() {
 		this.storage.get("jugador").then(jugador => {
 			let ciudadDelJugador = jugador.ubicacion;
 
 			this.docSubscription = this.firebaseauthService.getDocumentById('Puentes', 'bridge-canchas').subscribe((document: any) =>{
-				let puentes;
-				console.log("puentes: " + document.canchasLP)
-	
+				let puentes;	
 				switch (ciudadDelJugador) {
 					case ' La Plata ':
 						puentes = document.canchasLP;
@@ -324,17 +162,29 @@ export class BuscarPage implements OnInit {
 						break;
 				}
 
-				console.log(puentes)
+				this.partidos = [];
+				puentes.forEach(idCancha => {
+					this.canchaSubscription = this.firebaseauthService.getDocumentById('CanchasLP', String(idCancha)).subscribe((canchaDocument: any) =>{
+						let cancha: Cancha = canchaDocument;
+						cancha.salas.forEach(p => this.partidos.push(p))
+						this.canchaSubscription.unsubscribe();
 
-				
-				//this.puentes.map(e => console.log(e))
-				/*this.storage.set("jugador", document).then(()=>{
-					this.router.navigate(['/inicio']);
-				})*/
+						this.partidos.forEach(unPartido => {
+							this.setSexo(unPartido)
+							this.setColorSlot(unPartido)
+							this.setOrden(unPartido)
+						});
+						this.ordenarPartidos(this.partidos);
+					})
+				})
+
 				this.docSubscription.unsubscribe();
 			})
 
 		});
 	}
 
+	ionViewWillEnter() {
+		this.refresh()
+	}
 }

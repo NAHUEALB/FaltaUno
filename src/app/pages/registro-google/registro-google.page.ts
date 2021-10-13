@@ -58,7 +58,6 @@ export class RegistroGooglePage implements OnInit {
 		this.firebaseauthService.createDocument<Jugador>(this.jugador, this.enlace, this.jugador.id);
 		this.docSubscription = this.firebaseauthService.getDocumentById(this.enlace, this.jugador.id).subscribe((document: any) =>{
 			this.storage.clear();
-			console.log(document);
 			this.jugador = document;
 			this.storage.set("jugador", document).then(() => {
 				this.router.navigate(['/inicio']);

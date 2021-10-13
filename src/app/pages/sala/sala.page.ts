@@ -116,7 +116,6 @@ export class SalaPage implements OnInit {
 	}
 	
 	mezclarEquipos(arr1, arr2) {
-		console.log(arr1, arr2)
 		let arrAux = [
 			...arr1.filter(e => e.nombre != " (vacío) "), 
 			...arr2.filter(e => e.nombre != " (vacío) ")
@@ -142,7 +141,6 @@ export class SalaPage implements OnInit {
 				this.equipoRed.push(arrAux[2*i + 1])
 			}
 		}
-		console.log(arrAux)
 		return arrAux
 	}
 
@@ -480,7 +478,7 @@ export class SalaPage implements OnInit {
 
 					cancha.salas = [];
 
-					let sexo = ' No binario ';
+					let sexo = ' Mixto ';
 					if (Math.random() < 0.5) sexo = ' Masculino '
 					else if (Math.random() > 0.75) sexo = ' Femenino ';
 					let sala1: Sala = {
@@ -489,6 +487,8 @@ export class SalaPage implements OnInit {
 						sexo: sexo,
 						hora: Math.ceil(Math.random() * 8 + 11) + ":00",
 						estado: 'Sala pública',
+						slotsOcupados: Math.floor(Math.random() * 10 + 1),
+						slotsTotales: 10,
 						equipoRed: [],
 						equipoBlue: []
 					}
@@ -499,6 +499,8 @@ export class SalaPage implements OnInit {
 						sexo: sexo,
 						hora: Math.ceil(Math.random() * 8 + 11) + ":00",
 						estado: 'Sala pública',
+						slotsOcupados: Math.floor(Math.random() * 10 + 1),
+						slotsTotales: 10,
 						equipoRed: [],
 						equipoBlue: []
 					}

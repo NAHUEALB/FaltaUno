@@ -5,6 +5,8 @@ export class Sala {
     nombre: string;
     sexo: string;
     estado: string;
+    slotsOcupados: number;
+	slotsTotales: number;
     hora: string;
     equipoRed: Jugador[] = [];
     equipoBlue: Jugador[] = [];

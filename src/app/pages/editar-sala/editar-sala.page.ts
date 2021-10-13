@@ -42,6 +42,8 @@ export class EditarSalaPage implements OnInit {
 			nombre: '',
 			sexo: "",
 			estado: '',
+			slotsOcupados: 0,
+			slotsTotales: 0,
 			hora: '',
 			equipoRed: [],
 			equipoBlue: []

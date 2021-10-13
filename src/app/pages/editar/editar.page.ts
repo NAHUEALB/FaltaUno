@@ -87,37 +87,6 @@ export class EditarPage implements OnInit {
 				this.router.navigate(["/perfil"]);
 			})
 		});
-
-		// const juga2 = this.storage.get("jugador")
-		// .then(res => {
-		// 	console.log(res);
-		// 	console.log("id: " + res.id);
-		// })
-
-		
-
-		/*this.database.firestore()
-		.collection('Jugador')
-		.doc("L52TbHMvBueg0EutDGHYJzIVba12")
-		.update({
-			nombre: this.jugador.nombre,
-			fnacimiento: this.jugador.fnacimiento,
-			ubicacion: this.jugador.ubicacion,
-			sexo: this.jugador.sexo,
-		}).then(() => { console.log("funcionó eaea") });
-		console.log("funcionó?")*/
-		/*.update({
-			nombre: this.jugador.nombre,
-			fnacimiento: this.jugador.fnacimiento,
-			ubicacion: this.jugador.ubicacion,
-			sexo: this.jugador.sexo,
-		}).then(() => {
-			this.storage.set("jugador", document).then(() => {
-				this.router.navigate(['/perfil']);
-			})
-		}).catch(() => {
-			console.log("Error modificando la base de datos de firebase")
-		})*/
 	}
 
 	irAlPerfil(){
