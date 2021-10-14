@@ -157,27 +157,29 @@ export class BuscarPage implements OnInit {
                 let cancha: Cancha = canchaDocument;
                 cancha.salas.forEach((e) => {
                   if (e.id == idSala) {
-                    this.storage
-                      .set('sala', {
-                        id: e.id,
-                        nombre: e.nombre,
-                        hora: e.hora,
-                        estado: e.estado,
-                        slotsOcupados: e.slotsOcupados,
-                        slotsTotales: e.slotsTotales,
-                        sexo: e.sexo,
-                        equipoRed: e.equipoRed,
-                        equipoBlue: e.equipoBlue,
-                      })
-                      .then(() => {
-                        let canchaExtra: NavigationExtras = {
-                          state: {
-                            cancha: cancha,
-                            partido: partido
-                          },
-                        };
-                        this.router.navigate(['sala'], canchaExtra);
-                      });
+                    this.storage.set('sala', {
+                      id: e.id,
+                      nombre: e.nombre,
+                      hora: e.hora,
+                      estado: e.estado,
+                      slotsOcupados: e.slotsOcupados,
+                      slotsTotales: e.slotsTotales,
+                      sexo: e.sexo,
+                      equipoRed: e.equipoRed,
+                      equipoBlue: e.equipoBlue,
+                    })
+                    .then(() => {
+                      this.storage.set('cancha', cancha)
+                    })
+                    .then(() => {
+                      let canchaExtra: NavigationExtras = {
+                        state: {
+                          cancha: cancha,
+                          partido: partido
+                        },
+                      };
+                      this.router.navigate(['sala'], canchaExtra);
+                    });
                   }
                 });
                 this.canchaSubscription.unsubscribe();

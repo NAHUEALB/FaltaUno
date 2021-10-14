@@ -95,6 +95,7 @@ export class EditarSalaPage implements OnInit {
 	}
 
 	ionViewWillLeave(){
+		this.cargando = false;
 		if(this.docSubscription) this.docSubscription.unsubscribe();
 		if(this.usuarioSubscription) this.usuarioSubscription.unsubscribe();
 	}

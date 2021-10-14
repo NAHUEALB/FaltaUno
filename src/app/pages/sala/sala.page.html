@@ -73,7 +73,10 @@
     </ion-col>
   </ion-row>
 
-  <h4 id="precio">Precio de la cancha: ${{salaPrecio}}</h4>
+  <h4 class="data-sala" id="sexo">Tipo de partido: {{salaSexo}}</h4>
+  <h4 class="data-sala" id="modo">Sala en modo {{salaEstado}}</h4>
+  <h4 class="data-sala" id="precio">Precio de la cancha: ${{salaPrecio}}</h4>
+  <h4 class="data-sala" id="direccion">Dirección: {{salaDireccion}}</h4>
 
 	<div class="perfil-container">
 		<div class="opcion-card" (click)="abandonarSala()">
@@ -90,10 +93,8 @@
 		</div>
 	</div>
 
-  <h4 id="direccion">Dirección de la sala en 2 renglones: {{salaDireccion}}</h4>
-
-  <div style="height: 150px; margin: 10px; margin-top: 30px">
-    <app-mapa></app-mapa>
+  <div style="height: 300px; margin: 10px; margin-top: 30px">
+    <!--app-mapa></app-mapa-->
   </div>
 
   <script src = "faker.min.js" > </script>

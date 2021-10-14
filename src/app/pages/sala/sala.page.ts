@@ -26,6 +26,8 @@ export class SalaPage implements OnInit {
 	salaNombre = 'Sala'
 	salaDireccion = 'Esperando geolocalización'
 	salaPrecio = 1800
+	salaEstado = '...'
+	salaSexo = '...'
 
 	idsFirebaseBots = [];
 	arrJugadores: Jugador[] = [];
@@ -50,20 +52,28 @@ export class SalaPage implements OnInit {
 	ngOnInit() {}
 
 	ionViewWillEnter() {
-		this.storage.get("sala").then(sala => {
-			this.equipoRed = sala.equipoRed;
-			this.equipoBlue = sala.equipoBlue;
-			
-			this.storage.get("jugador").then(jugador => {
-				(Math.random() > 0.5) ? this.equipoRed.push(jugador) : this.equipoBlue.push(jugador)
-
-				for (let i=this.equipoRed.length; i<5; i++) this.equipoRed.push(this.jugadorVacio)
-				for (let i=this.equipoBlue.length; i<5; i++) this.equipoBlue.push(this.jugadorVacio)
-
-				this.equipoRed.concat(this.equipoBlue).forEach(p => {
-					let valoracion = this.getValoracion(p.puntaje, p.cvotos);
-					this.fillStars(p, valoracion);
-				});
+		//let cancha = this.router.getCurrentNavigation().extras.state.cancha;
+		this.storage.get('cancha').then(cancha => {
+			this.salaDireccion = cancha.direccion;
+			this.salaPrecio = cancha.precio;
+			this.storage.get("sala").then(sala => {
+				this.equipoRed = sala.equipoRed;
+				this.equipoBlue = sala.equipoBlue;
+				this.salaNombre = sala.nombre;
+				console.log(sala.estado)
+				this.salaEstado = (sala.estado == ' Sala pública ') ? 'público 🔓' : 'privado 🔐';
+				this.salaSexo = (sala.sexo == ' No binario ') ? 'Mixto' : sala.sexo
+				this.storage.get("jugador").then(jugador => {
+					(Math.random() > 0.5) ? this.equipoRed.push(jugador) : this.equipoBlue.push(jugador)
+	
+					for (let i=this.equipoRed.length; i<5; i++) this.equipoRed.push(this.jugadorVacio)
+					for (let i=this.equipoBlue.length; i<5; i++) this.equipoBlue.push(this.jugadorVacio)
+	
+					this.equipoRed.concat(this.equipoBlue).forEach(p => {
+						let valoracion = this.getValoracion(p.puntaje, p.cvotos);
+						this.fillStars(p, valoracion);
+					});
+				})
 			})
 		})
 		this.descargarJugadores()
