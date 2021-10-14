@@ -15,6 +15,7 @@ import { MapaPage } from './mapa.page';
     IonicModule,
     MapaPageRoutingModule
   ],
-  declarations: [MapaPage]
+  declarations: [MapaPage],
+  exports:[MapaPage]
 })
 export class MapaPageModule {}

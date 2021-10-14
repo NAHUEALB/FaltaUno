@@ -1,6 +1,8 @@
 import { GoogleMaps, GoogleMap, GoogleMapOptions, GoogleMapsEvent } from '@ionic-native/google-maps/ngx';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import {Map, marker, tileLayer} from "leaflet"
+
 
 @Component({
   selector: 'app-mapa',
@@ -9,7 +11,10 @@ import { Router } from '@angular/router';
 })
 export class MapaPage implements OnInit {
 
-  map: GoogleMap;
+  // map: GoogleMap;
+  latLong = [-34.9228288,-57.9584442,17];
+  map: Map;
+  marker: marker;
   latitud;
   longitud;
   calle = "";
@@ -17,9 +22,9 @@ export class MapaPage implements OnInit {
 
   constructor(private router: Router) { 
     let cancha = this.router.getCurrentNavigation().extras.state.cancha;
-    this.nombreCancha = cancha.cancha;
-    this.latitud= cancha.latitud;
-    this.longitud= cancha.longitud;
+    this.nombreCancha = cancha.nombre;
+    this.latitud= cancha.lat;
+    this.longitud= cancha.lon;
     this.calle = cancha.direccion;
   }
   ionViewWillLeave(){
@@ -27,6 +32,21 @@ export class MapaPage implements OnInit {
     this.map.off();
    });
   }
+
+//   showMap() {
+//     this.map = new Map('myMap').setView(this.latLong, 30);
+//     tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png').addTo(this.map);
+//     this.showMarker(this.latLong);
+//     this.map.invalidateSize()
+//   }
+
+// showMarker(latLong) {
+//     this.marker = marker(latLong, 15);
+//     this.marker.addTo(this.map)
+//     .bindPopup(this.nombreCancha);
+//     this.map.setView(latLong);
+// }
+
 
   cargarMapa(){
     let mapOptions: GoogleMapOptions = {
@@ -70,6 +90,7 @@ export class MapaPage implements OnInit {
 
   ngOnInit() {
     this.cargarMapa();
+    // this.showMap();
   }
 
 }
