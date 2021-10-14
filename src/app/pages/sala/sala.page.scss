@@ -4,22 +4,33 @@
 	justify-content: center;
 }
 
+#precio {
+	color: lime;
+	font-weight: bold;
+	margin-top: 0;
+}
+
+#direccion {
+	height: 32px;
+	color: white;
+	margin-bottom: 10px;
+}
+
 .halflist {
 	padding: 3px 0;
-	font-family: 'Karla', sans-serif;
+	font-family: 'Rubik', 'Karla', sans-serif;
 	font-size: 20px;
 	font-weight: bold;
 	border-radius: 5px;
-    //text-align: center;
 }
 
 .hl-left {
-	background: rgb(255, 205, 205);
+	background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgb(254, 210, 255) 100%);
 	margin: 4% 0 4% 12%;
 }
 
 .hl-right {
-	background: rgb(208, 208, 255);
+	background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgb(204, 255, 208) 100%);
 	margin: 4% 12% 4% 0;
 }
 

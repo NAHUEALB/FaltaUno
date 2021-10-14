@@ -23,6 +23,10 @@ export class SalaPage implements OnInit {
 	jugSubscription;
 	cargando = false;
 
+	salaNombre = 'Sala'
+	salaDireccion = 'Esperando geolocalización'
+	salaPrecio = 1800
+
 	idsFirebaseBots = [];
 	arrJugadores: Jugador[] = [];
 	
@@ -114,6 +118,14 @@ export class SalaPage implements OnInit {
 
 	pagar() {
 		console.log("pagado en el banco de mentiritas, cantidad: ${123}")
+	}
+
+	invitarPorRRSS() {
+		console.log("Envía este link: https://jajacualquiera.com/invite")
+	}
+
+	abandonarSala() {
+		console.log("Falta navegación a /buscar y en un futuro reembolsos")
 	}
 
 	crearFirebaseBot(cantidad) {
@@ -505,8 +517,6 @@ export class SalaPage implements OnInit {
 					}
 
 					cancha.salas.push(sala2)
-
-					console.log(id + " salas: ", cancha.salas)
 					
 					this.firebaseauthService.updateCancha('CanchasLP', cancha)
 					this.canchaSubscription.unsubscribe();

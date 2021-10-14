@@ -127,7 +127,6 @@ export class BuscarPage implements OnInit {
   // }
 
   irALaSala(partido) {
-    console.log(partido);
     let idSala = partido.id;
     this.storage.get('jugador').then((jugador) => {
     //   let ciudadDelJugador = jugador.ubicacion;
@@ -152,7 +151,6 @@ export class BuscarPage implements OnInit {
           }
 
           puentes.forEach((idCancha) => {
-            console.log(idCancha);
             this.canchaSubscription = this.firebaseauthService
               .getDocumentById('CanchasLP', String(idCancha))
               .subscribe((canchaDocument: any) => {
@@ -172,7 +170,6 @@ export class BuscarPage implements OnInit {
                         equipoBlue: e.equipoBlue,
                       })
                       .then(() => {
-                        // console.log(e);
                         let canchaExtra: NavigationExtras = {
                           state: {
                             cancha: cancha,

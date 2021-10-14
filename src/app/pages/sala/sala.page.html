@@ -3,12 +3,27 @@
     <ion-buttons slot="start">
 			<ion-back-button></ion-back-button>
 		</ion-buttons>
-    <ion-title>Sala</ion-title>
+    <ion-title>{{salaNombre}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="background">
-	
+
+	<div class="perfil-container">
+		<div class="opcion-card" (click)="irAlEditarSala()">
+			<ion-icon class="perfil-icon" name="brush"></ion-icon>
+			<p>Editar</p>
+		</div>
+		<div class="opcion-card" (click)="mezclarEquipos(this.equipoRed, this.equipoBlue)">
+			<ion-icon class="perfil-icon" name="dice"></ion-icon>
+			<p>Mezclar</p>
+		</div>
+		<div class="opcion-card" (click)="abrirModal()">
+			<ion-icon class="perfil-icon" name="help"></ion-icon>
+			<p>Ayuda</p>
+		</div>
+	</div>
+
   <ion-row class="lists-container">
     <ion-col>
       <ion-list class="blk-halfcard" lines="none">
@@ -58,43 +73,28 @@
     </ion-col>
   </ion-row>
 
+  <h4 id="precio">Precio de la cancha: ${{salaPrecio}}</h4>
+
 	<div class="perfil-container">
-		<div class="opcion-card" (click)="irAlEditarSala()">
-			<ion-icon class="perfil-icon" name="brush"></ion-icon>
-			<p>Editar</p>
+		<div class="opcion-card" (click)="abandonarSala()">
+			<ion-icon class="perfil-icon" name="backspace"></ion-icon>
+			<p>Salir</p>
 		</div>
-		<div class="opcion-card" 
-      (click)="pagar()">
-      
+		<div class="opcion-card" (click)="pagar()">
 			<ion-icon class="perfil-icon" id="logo-usd" name="logo-usd"></ion-icon>
 			<p>Pagar</p>
 		</div>
-		<div class="opcion-card" (click)="mezclarEquipos(this.equipoRed, this.equipoBlue)">
-			<ion-icon class="perfil-icon" name="dice"></ion-icon>
-			<p>Mezclar</p>
+		<div class="opcion-card" (click)="invitarPorRRSS()">
+			<ion-icon class="perfil-icon" name="share-social"></ion-icon>
+			<p>Invitar</p>
 		</div>
 	</div>
 
-  <ion-list class="blk-halfcard"lines="none">
-    <ion-item class="halflist hl-right" *ngFor="let spec of espectadores">
-      <div>
-        <div>
-          {{ spec.nombre }}
-        </div>
-        <div class="stars">
-          <div *ngFor="let star of spec.stars">
-            <img *ngIf="star === 'full'" class="star" [src]="'/assets/stars/star-full.png'">
-            <img *ngIf="star === 'half'" class="star" [src]="'/assets/stars/star-half.png'">
-            <img *ngIf="star === 'null'" class="star" [src]="'/assets/stars/star-null.png'">
-          </div>
-          <ion-icon class="paycheck-icon" name="logo-usd"></ion-icon>
-        </div>
-      </div> 
-    </ion-item>
-  </ion-list>
-<div style="height: 150px;">
-  <app-mapa></app-mapa>
-</div>
+  <h4 id="direccion">Dirección de la sala en 2 renglones: {{salaDireccion}}</h4>
+
+  <div style="height: 150px; margin: 10px; margin-top: 30px">
+    <app-mapa></app-mapa>
+  </div>
 
   <script src = "faker.min.js" > </script>
 </ion-content>
