@@ -33,56 +33,8 @@ export class SalaPage implements OnInit {
 		pagado: false,
 		stars: []
 	}
-	equipoRed = [
-		{
-		nombre: "Juan",
-		puntaje: 15,
-		cvotos: 4,
-		pagado: true,
-		stars: []
-		},
-		{
-		nombre: "Pedro",
-		puntaje: 21,
-		cvotos: 7,
-		pagado: false,
-		stars: []
-		},
-		{
-		nombre: "Jesus de nazaret del señor",
-		puntaje: 18,
-		cvotos: 8,
-		pagado: false,
-		stars: []
-		},
-		this.jugadorVacio,
-		this.jugadorVacio,
-	];
-	equipoBlue = [
-		{
-		nombre: "Johana de los ángeles crec",
-		puntaje: 30,
-		cvotos: 8,
-		pagado: false,
-		stars: []
-		},
-		{
-		nombre: "Paula",
-		puntaje: 22,
-		cvotos: 5,
-		pagado: true,
-		stars: []
-		},
-		{
-		nombre: "Marcos",
-		puntaje: 11,
-		cvotos: 5,
-		pagado: false,
-		stars: []
-		},
-		this.jugadorVacio,
-		this.jugadorVacio,
-	];
+	equipoRed = [];
+	equipoBlue = [];
 	stars: any[];
 
 	constructor(
@@ -160,6 +112,10 @@ export class SalaPage implements OnInit {
 		return arrAux
 	}
 
+	pagar() {
+		console.log("pagado en el banco de mentiritas, cantidad: ${123}")
+	}
+
 	crearFirebaseBot(cantidad) {
 		var arrNombres = ["Adrián", "Agustín", "Alberto", "Alejandro", "Alexander", "Alexis", "Alonso", "Ángel", "Anthony", "Antonio", "Bautista", "Benicio", "Benjamín", "Carlos", "César", "Cristóbal", "Daniel", "David", "Diego", "Dylan", "Eduardo", "Emiliano", "Emmanuel", "Enrique", "Erik", "Ernesto", "Ethan", "Fabián", "Facundo", "Felipe", "Félix", "Fernando", "Francisco", "Gabriel", "Gaspar", "Hugo", "Ian", "Iker", "Isaac", "Jacob", "Javier", "Jayden", "Jeremy", "Jerónimo", "Jesús", "Joaquín", "Jorge", "José", "José Antonio", "Josué", "Juan", "Julio", "Justin", "Kevin", "Lautaro", "Liam", "Lian", "Lorenzo", "Lucas", "Luis", "Manuel", "Mario", "Martín", "Mateo", "Matías", "Maximiliano", "Maykel", "Miguel", "Miguel  ngel", "Nelson", "Noah", "Oscar", "Pablo", "Pedro", "Rafael", "Ramón", "Raúl", "Ricardo", "Rigoberto", "Roberto", "Rolando", "Samuel", "Santiago", "Santino", "Santos", "Sebastián", "Thiago", "Tomás", "Valentino", "Vicente", "Víctor"];
 		this.docSubscription = this.firebaseauthService.getDocumentById('Puentes', 'bridge-jugadores').subscribe((document: any) =>{
@@ -178,6 +134,8 @@ export class SalaPage implements OnInit {
 						puntaje: Math.floor(Math.random() * 15 + 20),
 						cvotos: Math.floor(Math.random() * 4 + 7),
 						stars: [],
+						ubicacion: " La Plata ",
+						sexo: " No binario ",
 						id: ""
 					};
 					data.id = res.user.uid;	

@@ -15,12 +15,13 @@ Es una aplicación que ofrece una plataforma para facilitar la creación, organi
 - [x] Funcionalidad para editar datos de usuario
 - [x] Diseño de la UI de búsqueda de partidos
 - [x] Listado de partidos disponibles
-- [ ] Mapa con los partidos disponibles
+- [x] Mapa con los partidos disponibles
+- [x] Funcionalidad para editar datos de la sala
 - [ ] Invitación mediante RRSS
 - [ ] Implementación de un método de pago
 
 ## Entrega 3
-- [ ] Conectar partidos con los jugadores
+- [x] Conectar partidos con los jugadores
 - [ ] Asignar valoraciones e interacciones
 - [ ] Poner en marcha y lanzar al mercado
 - [ ] Expandirnos a Asia y Europa
