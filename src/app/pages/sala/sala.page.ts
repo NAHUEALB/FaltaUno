@@ -119,7 +119,6 @@ export class SalaPage implements OnInit {
 			...arr1.filter(e => e.nombre != " (vacío) "), 
 			...arr2.filter(e => e.nombre != " (vacío) ")
 		];
-		console.log("arraux prev: " + arrAux.length)
 		var currentIndex = arrAux.length, temporaryValue, randomIndex
 		while (0 !== currentIndex) {
 			randomIndex = Math.floor(Math.random() * currentIndex)
@@ -129,9 +128,7 @@ export class SalaPage implements OnInit {
 			arrAux[randomIndex] = temporaryValue
 		}
 		// Ahora en arrAux están todos los jugadores mezclados
-		console.log("solo con jugadores: " + arrAux.length)
 		for (let i = arrAux.length; i < 10; i++) arrAux.push(this.jugadorVacio)
-		console.log("rellenando con vacios: " + arrAux.length)
 		this.equipoRed = []
 		this.equipoBlue = []
 		for (let i = 0; i < 5; i++) {
