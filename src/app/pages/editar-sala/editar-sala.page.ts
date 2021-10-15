@@ -20,7 +20,7 @@ import { DatabaseService } from 'src/app/serv/database.service';
 export class EditarSalaPage implements OnInit {
   	salaForm: FormGroup;
 	sala: Sala;
-	sexos = ["No binario", "Hombre", "Mujer"];
+	sexos = ["Mixto", "Hombre", "Mujer"];
   	estados = ["Sala pública", "Sala privada"]
 	docSubscription;
 	usuarioSubscription;

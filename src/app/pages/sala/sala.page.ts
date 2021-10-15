@@ -1,3 +1,4 @@
+import { ModalController, MenuController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Storage } from '@ionic/storage-angular';
@@ -6,6 +7,7 @@ import { FirebaseauthService } from './../../serv/firebaseauth.service';
 import { Jugador } from 'src/app/models/jugador';
 import { Cancha } from 'src/app/models/cancha';
 import { Sala } from 'src/app/models/sala';
+import { AyudaMenuLateralPage } from '../ayuda-menu-lateral/ayuda-menu-lateral.page';
 
 @Component({
 	selector: 'app-sala',
@@ -44,6 +46,8 @@ export class SalaPage implements OnInit {
 	stars: any[];
 
 	constructor(
+		public menuCtrl: MenuController,
+		private modalController: ModalController,
 		private router: Router,
 		public firebaseauthService: FirebaseauthService,
 		private storage: Storage
@@ -97,6 +101,19 @@ export class SalaPage implements OnInit {
 		this.router.navigate([`/editar-sala`]);
 	}
 	
+	async abrirModal() {
+		this.menuCtrl.close();
+		const modal = await this.modalController.create({
+		  component: AyudaMenuLateralPage,
+		  cssClass:'modal-css',
+		  swipeToClose:true,
+		  presentingElement: await this.modalController.getTop()
+
+		});
+		await modal.present();
+	}
+
+
 	mezclarEquipos(arr1, arr2) {
 		let arrAux = [
 			...arr1.filter(e => e.nombre != " (vacío) "), 
@@ -135,7 +152,8 @@ export class SalaPage implements OnInit {
 	}
 
 	abandonarSala() {
-		console.log("Falta navegación a /buscar y en un futuro reembolsos")
+		this.router.navigate(['/buscar']);
+		// console.log("Falta navegación a /buscar y en un futuro reembolsos")
 	}
 
 	crearFirebaseBot(cantidad) {
