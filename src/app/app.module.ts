@@ -2,7 +2,7 @@ import { GoogleMaps } from '@ionic-native/google-maps/ngx';
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
-
+import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 
 import { AppComponent } from './app.component';
@@ -38,6 +38,7 @@ import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 		GoogleMaps,
 		FormBuilder,
 		FormsModule,
+		SocialSharing,
 		{provide: RouteReuseStrategy, useClass: IonicRouteStrategy},
 	],
 	schemas: [CUSTOM_ELEMENTS_SCHEMA],

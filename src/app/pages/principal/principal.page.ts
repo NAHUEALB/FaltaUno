@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ModalController, MenuController } from '@ionic/angular';
 import { AyudaPage } from '../ayuda/ayuda.page';
 import { Router, NavigationExtras } from '@angular/router';
-
+import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 import { ToastController } from '@ionic/angular';
 import { Storage } from '@ionic/storage-angular';
 
@@ -28,7 +28,8 @@ export class PrincipalPage implements OnInit {
 		private router: Router,
 		public authService: FirebaseauthService,
 		public toastController: ToastController,
-		private storage: Storage) {
+		private storage: Storage,
+		private socialSharing: SocialSharing) {
 		this.menuCtrl.enable(false);
 		this.jugador = {
 			id: '',
@@ -56,6 +57,14 @@ export class PrincipalPage implements OnInit {
 	}
 
 	ngOnInit() {
+	}
+
+	socialShare(){
+		let options = {
+			message: 'share this', // not supported on some apps (Facebook, Instagram)
+			url: 'https://ionicframework.com/docs/native/social-sharing',
+		  };
+		this.socialSharing.shareWithOptions(options);
 	}
 
 	irAlRegistrar() {
