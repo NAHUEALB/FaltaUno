@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 
 @Component({
@@ -8,7 +8,10 @@ import { ModalController } from '@ionic/angular';
 })
 export class AyudaPage implements OnInit {
 
-  constructor(private modalController: ModalController){}
+  @Input() enlaceMP: Response;
+
+
+  constructor(private modalController: ModalController){  }
   cerrarModal(){
     this.modalController.dismiss({
       'dismissed': true
@@ -16,6 +19,7 @@ export class AyudaPage implements OnInit {
   }
 
   ngOnInit() {
+      console.log("El enlaceMP de pago es: "+ this.enlaceMP);
   }
 
 }

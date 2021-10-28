@@ -65,6 +65,10 @@ const routes: Routes = [
   },  {
     path: 'editar-sala',
     loadChildren: () => import('./pages/editar-sala/editar-sala.module').then( m => m.EditarSalaPageModule)
+  },
+  {
+    path: 'mercado-pago',
+    loadChildren: () => import('./pages/mercado-pago/mercado-pago.module').then( m => m.MercadoPagoPageModule)
   }
 
   

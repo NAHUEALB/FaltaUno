@@ -8,6 +8,8 @@ import { Storage } from '@ionic/storage-angular';
 
 import { FirebaseauthService } from 'src/app/serv/firebaseauth.service';
 import { Jugador } from 'src/app/models/jugador';
+import { Item, Request, Response } from 'src/app/models/request.model';
+import { MercadopagoService } from 'src/app/serv/mercadopago.service';
 
 @Component({
 	selector: 'app-principal',
@@ -21,6 +23,7 @@ export class PrincipalPage implements OnInit {
 	usuarioSubscription: any;
 	enlace = "Jugador/";
 	msj = "Sesión con Google iniciada con éxito";
+	enlaceMP = new Response();
 
 	constructor(
 		private menuCtrl: MenuController,
@@ -29,7 +32,8 @@ export class PrincipalPage implements OnInit {
 		public authService: FirebaseauthService,
 		public toastController: ToastController,
 		private storage: Storage,
-		private socialSharing: SocialSharing) {
+		private socialSharing: SocialSharing,
+		private mercadoPagoService: MercadopagoService) {
 		this.menuCtrl.enable(false);
 		this.jugador = {
 			id: '',
@@ -56,6 +60,20 @@ export class PrincipalPage implements OnInit {
 		await modal.present();
 	}
 
+
+	async abrirModalPago() {
+		const modal = await this.modalController.create({
+			component: AyudaPage,
+			cssClass: 'modal-css',
+			componentProps: {
+				'enlaceMP': this.enlaceMP.sandbox_init_point
+			  },
+			swipeToClose: true,
+			presentingElement: await this.modalController.getTop()
+		});
+		await modal.present();
+	}
+
 	ngOnInit() {
 	}
 
@@ -66,6 +84,36 @@ export class PrincipalPage implements OnInit {
 		  };
 		this.socialSharing.shareWithOptions(options);
 	}
+
+	pagarMP(){
+		let item : Item = new Item();
+		item.title = "Dummy Title";
+		item.description = "Dummy Description";
+		item.category_id = "cat123";
+		item.picture_url = "http://www.myapp.com/myimage.jpg";
+		item.quantity = 1;
+		item.currency_id = "USD"
+		item.unit_price = 10;
+
+		let request : Request = new Request();
+		request.items.push(item);
+		this.mercadoPagoService.requestHttp(request).then((rsp:any) =>{
+			this.enlaceMP.sandbox_init_point = rsp;
+			console.log(this.enlaceMP.sandbox_init_point);
+			this.abrirModalPago();
+		});
+
+
+		// await this.mercadoPagoService.requestHttp(request).then(rsp =>{
+		// 	this.enlace = rsp;
+		// 	console.log(this.enlace);
+		// });
+
+
+
+	}
+
+
 
 	irAlRegistrar() {
 		this.router.navigate([`/registrar`]);
