@@ -3,6 +3,7 @@ import { FirebaseauthService } from './../../serv/firebaseauth.service';
 import { Storage } from '@ionic/storage-angular';
 import { Jugador } from 'src/app/models/jugador';
 import { Cancha } from 'src/app/models/cancha';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-partido',
@@ -26,7 +27,7 @@ export class PartidoPage implements OnInit {
 	salaSexo = '...'
   partidoMinutos = 0
   partidoSegundos = 0
-  votosSalir = 5
+  votosSalir = 0
   votoEmitido = false // FALTA IMPLEMENTAR
 
 	idsFirebaseBots = [];
@@ -45,7 +46,8 @@ export class PartidoPage implements OnInit {
 
   constructor(
     private storage: Storage,
-		public firebaseauthService: FirebaseauthService
+		public firebaseauthService: FirebaseauthService,
+		private router: Router
   ) { }
 
   ngOnInit() {
@@ -68,12 +70,17 @@ export class PartidoPage implements OnInit {
 	
 					for (let i=this.equipoRed.length; i<5; i++) this.equipoRed.push(this.jugadorVacio)
 					for (let i=this.equipoBlue.length; i<5; i++) this.equipoBlue.push(this.jugadorVacio)
+          this.llenarConBots(false)
 				})
 			})
 		})
     this.nextSegundo()
 		this.descargarJugadores()
 	}
+
+  irAlPospartido() {
+    this.router.navigate([`/pospartido`]);
+  }
 
   descargarJugadores() {
 		this.arrJugadores = [];
@@ -99,28 +106,36 @@ export class PartidoPage implements OnInit {
 		}, 1000);
 	}
   
-  cronometroA10Minutos() { // es el boton de "ayuda"
-    this.partidoMinutos = 10
-    this.partidoSegundos = 13
-    this.llenarConBots(false)
-  }
-
-  cronometroA20Segundos() { // es el boton de "ayuda"
-    this.partidoMinutos = 59
-    this.partidoSegundos = 38
-    this.llenarConBots(true)
+  avanzarCronometro() { // es el boton de "ayuda"
+    if (this.partidoMinutos < 10) {
+      this.partidoMinutos = 10
+      this.partidoSegundos = 13
+      this.llenarConBots(false)
+    } else {
+      this.partidoMinutos = 59
+      this.partidoSegundos = 38
+      this.llenarConBots(true)
+    }
   }
 
   llenarConBots(voto = false) {
     console.log("llenando de bots con voto " + voto)
+    console.log(this.equipoRed.length, this.equipoBlue.length)
     this.equipoBlue[2] = {nombre: "Mariana", voto: voto};
     this.equipoRed[3] = {nombre: "Riki", voto: voto};
-    this.equipoBlue[3] = {nombre: "Mario", voto: voto};
-    this.equipoRed[4] = {nombre: "Gimena", voto: voto};
+    this.equipoBlue[3] = {nombre: "Mario", voto: false};
+    this.equipoRed[4] = {nombre: "Gimena", voto: false};
     this.equipoBlue[4] = {nombre: "Andrea", voto: voto};
+    this.equipoRed[0].voto = voto;
+    this.equipoBlue[1].voto = voto;
+    this.votosSalir = voto ? 5 : 0
   }
 
   votarSalir() {
-
+    this.equipoRed[2].voto = true
+    this.votosSalir++
+    setTimeout(() => {
+      this.irAlPospartido()
+    }, 2500)
   }
 }

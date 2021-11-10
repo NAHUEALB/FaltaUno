@@ -45,12 +45,12 @@
 
 .hl-left {
 	background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgb(255, 220, 207) 100%);
-	margin: 4% 0 4% 12%;
+	margin: 2% 0 2% 12%;
 }
 
 .hl-right {
 	background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgb(205, 212, 255) 100%);
-	margin: 4% 12% 4% 0;
+	margin: 2% 12% 2% 0;
 }
 
 #nombre-jugador {
@@ -60,6 +60,12 @@
 	-webkit-line-clamp: 1;
 	overflow: hidden;
     //text-align: center;
+}
+
+.paycheck-icon {
+	position: relative;
+	right: -95px;
+	top: -5px;
 }
 
 .jugador-vacio {

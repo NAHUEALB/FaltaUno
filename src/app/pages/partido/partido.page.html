@@ -19,6 +19,11 @@
             <div [class.jugador-vacio]="jugador.nombre == ' (vacío) '" id="nombre-jugador">
               {{ jugador.nombre }}
             </div>
+            <ion-icon 
+              class="paycheck-icon"
+              [class.pay-correct]="jugador.voto == true"
+              name="thumbs-up">
+            </ion-icon>
           </div>  
         </ion-item>
       </ion-list>
@@ -30,6 +35,11 @@
             <div [class.jugador-vacio]="jugador.nombre == ' (vacío) '" id="nombre-jugador">
               {{ jugador.nombre }}
             </div>
+            <ion-icon 
+              class="paycheck-icon"
+              [class.pay-correct]="jugador.voto == true"
+              name="thumbs-up">
+            </ion-icon>
           </div> 
         </ion-item>
       </ion-list>
@@ -38,8 +48,7 @@
 
 	<div class="perfil-container">
 		<!--div class="opcion-card" (click)="abrirModal()"-->
-    <!--div class="opcion-card" (click)="cronometroA20Segundos()"-->
-    <div class="opcion-card" (click)="cronometroA10Minutos()">
+    <div class="opcion-card" (click)="avanzarCronometro()">
 			<ion-icon class="perfil-icon" name="help"></ion-icon>
 			<p>Ayuda</p>
 		</div>
