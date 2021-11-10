@@ -27,6 +27,7 @@ export class PartidoPage implements OnInit {
   partidoMinutos = 0
   partidoSegundos = 0
   votosSalir = 5
+  votoEmitido = false // FALTA IMPLEMENTAR
 
 	idsFirebaseBots = [];
 	arrJugadores: Jugador[] = [];
@@ -70,6 +71,7 @@ export class PartidoPage implements OnInit {
 				})
 			})
 		})
+    this.nextSegundo()
 		this.descargarJugadores()
 	}
 
@@ -88,11 +90,37 @@ export class PartidoPage implements OnInit {
 
   nextSegundo() {
     setTimeout(() => {
-      if (this.partidoSegundos++ === 60) {
+      this.partidoSegundos++
+      if (this.partidoSegundos === 60) {
         this.partidoSegundos = 0
         this.partidoMinutos++
-        if (this.partidoMinutos < 60) this.nextSegundo();
-      } 
+      }
+      if (this.partidoMinutos < 60) this.nextSegundo();
 		}, 1000);
 	}
+  
+  cronometroA10Minutos() { // es el boton de "ayuda"
+    this.partidoMinutos = 10
+    this.partidoSegundos = 13
+    this.llenarConBots(false)
+  }
+
+  cronometroA20Segundos() { // es el boton de "ayuda"
+    this.partidoMinutos = 59
+    this.partidoSegundos = 38
+    this.llenarConBots(true)
+  }
+
+  llenarConBots(voto = false) {
+    console.log("llenando de bots con voto " + voto)
+    this.equipoBlue[2] = {nombre: "Mariana", voto: voto};
+    this.equipoRed[3] = {nombre: "Riki", voto: voto};
+    this.equipoBlue[3] = {nombre: "Mario", voto: voto};
+    this.equipoRed[4] = {nombre: "Gimena", voto: voto};
+    this.equipoBlue[4] = {nombre: "Andrea", voto: voto};
+  }
+
+  votarSalir() {
+
+  }
 }
