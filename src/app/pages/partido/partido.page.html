@@ -1,9 +1,67 @@
-<ion-header>
+<ion-header class="ion-no-border">
   <ion-toolbar>
-    <ion-title>partido</ion-title>
+    <ion-title style="text-align: center" >{{salaNombre}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="background">
 
+	<div class="perfil-container">
+		<div class="opcion-card" (click)="irAlEditarSala()">
+			<ion-icon class="perfil-icon" name="brush"></ion-icon>
+			<p>Editar</p>
+		</div>
+		<div class="opcion-card" (click)="mezclarEquipos(this.equipoRed, this.equipoBlue)">
+			<ion-icon class="perfil-icon" name="dice"></ion-icon>
+			<p>Mezclar</p>
+		</div>
+		<div class="opcion-card" (click)="abrirModal()">
+			<ion-icon class="perfil-icon" name="help"></ion-icon>
+			<p>Ayuda</p>
+		</div>
+	</div>
+
+  <h2 class="data-sala">{{partidoMinutos}}:{{partidoSegundos}}</h2>
+  <h4 class="data-sala" id="modo">Votos para salir: {{votosSalir}} de 10</h4>
+  <h4 class="data-sala" id="sexo">Tipo de partido: {{salaSexo}}</h4>
+  <h4 class="data-sala" id="precio">Precio de la cancha: ${{salaPrecio}}</h4>
+
+  <ion-row class="lists-container">
+    <ion-col>
+      <ion-list class="blk-halfcard" lines="none">
+        <ion-item class="halflist hl-left" *ngFor="let jugador of equipoRed">
+          <div>
+            <div [class.jugador-vacio]="jugador.nombre == ' (vacío) '" id="nombre-jugador">
+              {{ jugador.nombre }}
+            </div>
+          </div>  
+        </ion-item>
+      </ion-list>
+    </ion-col>
+    <ion-col>
+      <ion-list class="blk-halfcard"lines="none">
+        <ion-item class="halflist hl-right" *ngFor="let jugador of equipoBlue">
+          <div>
+            <div [class.jugador-vacio]="jugador.nombre == ' (vacío) '" id="nombre-jugador">
+              {{ jugador.nombre }}
+            </div>
+          </div> 
+        </ion-item>
+      </ion-list>
+    </ion-col>
+  </ion-row>
+
+	<div class="perfil-container">
+		<!--div class="opcion-card" (click)="abrirModal()"-->
+    <div class="opcion-card" (click)="irAlPartido()">
+			<ion-icon class="perfil-icon" name="help"></ion-icon>
+			<p>Ayuda</p>
+		</div>
+		<div class="opcion-card" (click)="invitarPorRRSS()">
+			<ion-icon class="perfil-icon" name="thumbs-up"></ion-icon>
+			<p>Votar para salir</p>
+		</div>
+	</div>
+
+  <script src = "faker.min.js" > </script>
 </ion-content>

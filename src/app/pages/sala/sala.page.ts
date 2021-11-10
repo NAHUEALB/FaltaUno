@@ -100,6 +100,10 @@ export class SalaPage implements OnInit {
 	irAlEditarSala() {
 		this.router.navigate([`/editar-sala`]);
 	}
+
+	irAlPartido() {
+		this.router.navigate([`/partido`]);
+	}
 	
 	async abrirModal() {
 		this.menuCtrl.close();
