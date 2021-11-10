@@ -65,6 +65,18 @@ const routes: Routes = [
   },  {
     path: 'editar-sala',
     loadChildren: () => import('./pages/editar-sala/editar-sala.module').then( m => m.EditarSalaPageModule)
+  },
+  {
+    path: 'partido',
+    loadChildren: () => import('./pages/partido/partido.module').then( m => m.PartidoPageModule)
+  },
+  {
+    path: 'pospartido',
+    loadChildren: () => import('./pages/pospartido/pospartido.module').then( m => m.PospartidoPageModule)
+  },
+  {
+    path: 'pospartidoadmin',
+    loadChildren: () => import('./pages/pospartidoadmin/pospartidoadmin.module').then( m => m.PospartidoadminPageModule)
   }
 
   
