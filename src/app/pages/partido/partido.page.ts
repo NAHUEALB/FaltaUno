@@ -134,6 +134,7 @@ export class PartidoPage implements OnInit {
   votarSalir() {
     this.equipoRed[2].voto = true
     this.votosSalir++
+    document.getElementById("boton-voto").style.color = 'lime'
     setTimeout(() => {
       this.irAlPospartido()
     }, 2500)
