@@ -68,7 +68,7 @@ export class SalaPage implements OnInit {
 				this.salaEstado = (sala.estado == ' Sala pública ') ? 'público 🔓' : 'privado 🔐';
 				this.salaSexo = (sala.sexo == ' No binario ') ? 'Mixto' : sala.sexo
 				this.storage.get("jugador").then(jugador => {
-					(Math.random() > 0.5) ? this.equipoRed.push(jugador) : this.equipoBlue.push(jugador)
+					this.equipoRed.push(jugador)
 	
 					for (let i=this.equipoRed.length; i<5; i++) this.equipoRed.push(this.jugadorVacio)
 					for (let i=this.equipoBlue.length; i<5; i++) this.equipoBlue.push(this.jugadorVacio)

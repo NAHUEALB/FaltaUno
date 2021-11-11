@@ -1,9 +1,72 @@
-<ion-header>
+<ion-header class="ion-no-border">
   <ion-toolbar>
-    <ion-title>pospartidoadmin</ion-title>
+    <ion-title>Pospartido</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="background">
+  <h5 class="data-sala">Sos el administrador, podés cargar el resultado final en los siguientes recuadros</h5>
+  <div class="resultado-final">
+    <input type="number" name="" class="input-resultado" id="resultado-red" value="0"> - 
+    <input type="number" name="" class="input-resultado" id="resultado-blue" value="0">
+  </div>
+  <div class="cancha-container">
+    <h2 class="data-sala" id="nombre"><b>{{salaNombre}}</b></h2>
+    <h5 class="data-sala">¿Cómo fue tu experiencia con la cancha?</h5>
+    <div class="votos-flex">
+      <div class="opcion-card" (click)="this.clickPositivo()">
+        <ion-icon class="perfil-icon" id="boton-voto-up" name="thumbs-up" style="color:lightgrey"></ion-icon>
+      </div>
+      <div class="opcion-card" (click)="this.clickNegativo()">
+        <ion-icon class="perfil-icon" id="boton-voto-down" name="thumbs-down" style="color:lightgrey"></ion-icon>
+      </div>
+    </div>
+  </div>
+  
+  <ion-row class="lists-container-full">
+    <ion-col>
+      <h2 class="data-sala" style="color: rgb(192, 255, 180);" id="nombre"><b>Votá a los jugadores</b></h2>
+      <ion-list class="blk-halfcard" lines="none">
+        <ion-item class="halflist hl-left" style="background-color: salmon;" *ngFor="let jugador of equipoRed">
+          <div *ngIf="jugador.nombre !== 'Nicolas'">
+            <div [class.jugador-vacio]="jugador.nombre == ' (vacío) '" id="nombre-jugador">
+              {{ jugador.nombre }}
+            </div>
+            <div class="stars">
+              <div *ngFor="let star of jugador.stars | keyvalue">
+                <img *ngIf="star.value === 'full'" class="star" (click)="votarJugador(star.key)" [src]="'/assets/stars/star-full.png'">
+                <img *ngIf="star.value === 'half'" class="star" (click)="votarJugador(star.key)" [src]="'/assets/stars/star-half.png'">
+                <img *ngIf="star.value === 'null'" class="star" (click)="votarJugador(star.key)" [src]="'/assets/stars/star-null.png'">
+              </div>
+            </div>
+          </div>  
+        </ion-item>
+      </ion-list>
+      <ion-list class="blk-halfcard"lines="none">
+        <ion-item class="halflist" style="background-color: lightblue;" *ngFor="let jugador of equipoBlue">
+          <div>
+            <div [class.jugador-vacio]="jugador.nombre == ' (vacío) '" id="nombre-jugador">
+              {{ jugador.nombre }}
+            </div>
+            <div class="stars">
+              <div *ngFor="let star of jugador.stars">
+                <img *ngIf="star === 'full'" class="star" [src]="'/assets/stars/star-full.png'">
+                <img *ngIf="star === 'half'" class="star" [src]="'/assets/stars/star-half.png'">
+                <img *ngIf="star === 'null'" class="star" [src]="'/assets/stars/star-null.png'">
+              </div>
+            </div>
+          </div> 
+        </ion-item>
+      </ion-list>
+    </ion-col>
+  </ion-row>
 
+	<div class="perfil-container">
+		<div class="opcion-card" (click)="irAlInicio()">
+			<ion-icon class="perfil-icon" name="exit"></ion-icon>
+			<p>Enviar y salir</p>
+		</div>
+	</div>
+
+  <script src = "faker.min.js" > </script>
 </ion-content>

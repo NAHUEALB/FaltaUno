@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FirebaseauthService } from './../../serv/firebaseauth.service';
 import { Storage } from '@ionic/storage-angular';
 import { Jugador } from 'src/app/models/jugador';
-import { Cancha } from 'src/app/models/cancha';
 import { Router } from '@angular/router';
 
 @Component({
