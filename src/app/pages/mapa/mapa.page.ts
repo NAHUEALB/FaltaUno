@@ -1,7 +1,6 @@
 import { GoogleMaps, GoogleMap, GoogleMapOptions, GoogleMapsEvent } from '@ionic-native/google-maps/ngx';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-// import {Map, marker, tileLayer} from "leaflet"
 
 
 @Component({
@@ -12,9 +11,6 @@ import { Router } from '@angular/router';
 export class MapaPage implements OnInit {
 
   map: GoogleMap;
-  // latLong = [-34.9228288,-57.9584442,17];
-  // map: Map;
-  // marker: marker;
   latitud;
   longitud;
   calle = "";

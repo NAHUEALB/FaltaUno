@@ -8,14 +8,23 @@
 	</ion-img>
 	
 <hr>
+<ion-button 
+class="bt-modern bt-text bt-noclicked" 
+id="bt-iniciar"
+(click)="irAlLogin()" 
+color="transparent"
+fill="clear">
+INICIAR SESIÓN
+</ion-button> 
+<hr>
 	<ion-button 
-		class="bt-modern bt-text bt-noclicked" 
-		id="bt-iniciar"
-		(click)="irAlLogin()" 
-		color="transparent"
-		fill="clear">
-		INICIAR SESIÓN
-	</ion-button> 
+		class="bt-modern bt-text" 
+		id="bt-registrar" 
+		color="transparent"	
+		fill="clear" 
+		(click)="socialShare()">
+		SHARE
+	</ion-button>
 <hr>
 	<ion-button 
 		class="bt-modern bt-text" 
@@ -24,6 +33,15 @@
 		color="transparent"
 		fill="clear">
 		REGISTRARSE
+	</ion-button>
+<hr>
+	<ion-button 
+		class="bt-modern bt-text" 
+		id="bt-registrar"
+		(click)="pagarMP()" 
+		color="transparent"
+		fill="clear">
+		pagarMP
 	</ion-button>
 <hr>
 	<div>

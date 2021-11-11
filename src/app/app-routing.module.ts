@@ -62,7 +62,8 @@ const routes: Routes = [
   {
     path: 'ayuda-menu-lateral',
     loadChildren: () => import('./pages/ayuda-menu-lateral/ayuda-menu-lateral.module').then( m => m.AyudaMenuLateralPageModule)
-  },  {
+  },
+  {
     path: 'editar-sala',
     loadChildren: () => import('./pages/editar-sala/editar-sala.module').then( m => m.EditarSalaPageModule)
   },
@@ -77,6 +78,10 @@ const routes: Routes = [
   {
     path: 'pospartidoadmin',
     loadChildren: () => import('./pages/pospartidoadmin/pospartidoadmin.module').then( m => m.PospartidoadminPageModule)
+  },
+  { 
+    path: 'mercado-pago',
+    loadChildren: () => import('./pages/mercado-pago/mercado-pago.module').then( m => m.MercadoPagoPageModule)
   }
 
   
