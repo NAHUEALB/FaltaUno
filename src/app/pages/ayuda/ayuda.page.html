@@ -1,6 +1,7 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Ayuda</ion-title>
+    <ion-title > {{ !this.enlaceMP ? 'Ayuda' : 'Pagar' }}</ion-title>
+    <!-- <ion-title *ngIf="this.enlaceMP"> Pagar</ion-title> -->
     <ion-button class="boton" slot="end" (click)="cerrarModal()" style="margin-right:10px">
       <ion-icon slot="icon-only" name="close"></ion-icon>
     </ion-button>
@@ -10,11 +11,16 @@
 
 <ion-content class="background">
 
+  <h1 *ngIf="!this.enlaceMP">Acerca de Falta Uno</h1>
+  <p *ngIf="!this.enlaceMP">Venimos a ayudarte a organizar partidos de fútbol, desde la falta de jugadores para completar equipos hasta los métodos de pagos.</p>
+  <p *ngIf="!this.enlaceMP">Para cada partido hay que conseguir gente, coordinar horarios, juntar rápidamente la plata, entre muchas complicaciones más.</p>
+  <p *ngIf="!this.enlaceMP">Tanto si te falta alguien para completar o si querés jugar y no tenés con quién, Falta Uno te ofrece todas estas soluciones en un solo lugar.</p>
+  <p *ngIf="!this.enlaceMP">¡Dejá de preocuparte, registrate y empezá a disfrutar del fútbol sin complicaciones!</p>
+  
+  <p *ngIf="this.enlaceMP">Te redirigiremos a la página de MercadoPago para finalizar el trámite.</p>
+  <p *ngIf="this.enlaceMP">Recordá que es una página externa, por lo que te recomendamos tener cuidado y no dar información sensible de más.</p>
+  <p *ngIf="this.enlaceMP">Al finalizar serás redirigido nuevamente a esta página de partido.</p>
+  
   <ion-button *ngIf="this.enlaceMP" href={{this.enlaceMP}}>LINK DE PAGO</ion-button>
 
-  <h1>Acerca de Falta Uno</h1>
-  <p>Venimos a ayudarte a organizar partidos de fútbol, desde la falta de jugadores para completar equipos hasta los métodos de pagos.</p>
-  <p>Para cada partido hay que conseguir gente, coordinar horarios, juntar rápidamente la plata, entre muchas complicaciones más.</p>
-  <p>Tanto si te falta alguien para completar o si querés jugar y no tenés con quién, Falta Uno te ofrece todas estas soluciones en un solo lugar.</p>
-  <p>¡Dejá de preocuparte, registrate y empezá a disfrutar del fútbol sin complicaciones!</p>
 </ion-content>

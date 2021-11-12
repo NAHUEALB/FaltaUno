@@ -2,12 +2,15 @@ import { ModalController, MenuController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Storage } from '@ionic/storage-angular';
-
+import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 import { FirebaseauthService } from './../../serv/firebaseauth.service';
 import { Jugador } from 'src/app/models/jugador';
 import { Cancha } from 'src/app/models/cancha';
 import { Sala } from 'src/app/models/sala';
 import { AyudaMenuLateralPage } from '../ayuda-menu-lateral/ayuda-menu-lateral.page';
+import { MercadopagoService } from 'src/app/serv/mercadopago.service';
+import { Item, Request, Response } from 'src/app/models/request.model';
+import { AyudaPage } from '../ayuda/ayuda.page';
 
 @Component({
 	selector: 'app-sala',
@@ -44,13 +47,16 @@ export class SalaPage implements OnInit {
 	equipoRed = [];
 	equipoBlue = [];
 	stars: any[];
+	enlaceMP = new Response();
 
 	constructor(
 		public menuCtrl: MenuController,
 		private modalController: ModalController,
 		private router: Router,
 		public firebaseauthService: FirebaseauthService,
-		private storage: Storage
+		private storage: Storage,
+		private socialSharing: SocialSharing,
+		private mercadoPagoService: MercadopagoService
 	) {}
 
 	ngOnInit() {}
@@ -82,6 +88,50 @@ export class SalaPage implements OnInit {
 		})
 		this.descargarJugadores()
 	}
+
+
+	socialShare(){
+		let options = {
+			message: 'Unete a mi partido: ', 
+			url: 'https://faltauno.com/id/jVHAsL',
+		  };
+		this.socialSharing.shareWithOptions(options);
+	}
+
+
+	
+	pagarMP(){
+		let item : Item = new Item();
+		item.title = "Partido";
+		item.description = "Cancha 2";
+		item.category_id = "cat123";
+		item.picture_url = "http://www.myapp.com/myimage.jpg";
+		item.quantity = 1;
+		item.currency_id = "ARS"
+		item.unit_price = 180;
+
+		let request : Request = new Request();
+		request.items.push(item);
+		this.mercadoPagoService.requestHttp(request).then((rsp:any) =>{
+			this.enlaceMP.sandbox_init_point = rsp;
+			console.log(this.enlaceMP.sandbox_init_point);
+			this.abrirModalPago();
+		});
+	}
+
+	async abrirModalPago() {
+		const modal = await this.modalController.create({
+			component: AyudaPage,
+			cssClass: 'modal-css',
+			componentProps: {
+				'enlaceMP': this.enlaceMP.sandbox_init_point
+			  },
+			swipeToClose: true,
+			presentingElement: await this.modalController.getTop()
+		});
+		await modal.present();
+	}
+
 
 	getValoracion(puntos, votos) {
 		if (votos != 0) return Number((puntos/votos).toFixed(2));

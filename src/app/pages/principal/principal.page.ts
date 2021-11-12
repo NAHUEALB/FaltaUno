@@ -85,34 +85,6 @@ export class PrincipalPage implements OnInit {
 		this.socialSharing.shareWithOptions(options);
 	}
 
-	pagarMP(){
-		let item : Item = new Item();
-		item.title = "Dummy Title";
-		item.description = "Dummy Description";
-		item.category_id = "cat123";
-		item.picture_url = "http://www.myapp.com/myimage.jpg";
-		item.quantity = 1;
-		item.currency_id = "USD"
-		item.unit_price = 10;
-
-		let request : Request = new Request();
-		request.items.push(item);
-		this.mercadoPagoService.requestHttp(request).then((rsp:any) =>{
-			this.enlaceMP.sandbox_init_point = rsp;
-			console.log(this.enlaceMP.sandbox_init_point);
-			this.abrirModalPago();
-		});
-
-
-		// await this.mercadoPagoService.requestHttp(request).then(rsp =>{
-		// 	this.enlace = rsp;
-		// 	console.log(this.enlace);
-		// });
-
-
-
-	}
-
 
 
 	irAlRegistrar() {
