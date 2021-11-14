@@ -78,7 +78,7 @@ export class PartidoPage implements OnInit {
 	}
 
   irAlPospartido() {
-    this.router.navigate([`/pospartido`]);
+    this.router.navigate([`/pospartidoadmin`]);
   }
 
   descargarJugadores() {

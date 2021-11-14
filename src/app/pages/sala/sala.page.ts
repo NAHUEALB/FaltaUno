@@ -247,6 +247,21 @@ export class SalaPage implements OnInit {
 		})
 	}
 
+	llenarConBots(pagado = false) {
+		console.log("llenando de bots con voto " + pagado)
+		console.log(this.equipoRed.length, this.equipoBlue.length)
+		this.equipoBlue[2] = {nombre: "Mariana", pagado: pagado, stars:["full", "full", "full", "null", "null"]};
+		this.equipoRed[3] = {nombre: "Riki", pagado: pagado, stars:["full", "full", "half", "null", "null"]};
+		this.equipoBlue[3] = {nombre: "Mario", pagado: pagado, stars:["full", "full", "full", "half", "null"]};
+		this.equipoRed[4] = {nombre: "Gimena", pagado: pagado, stars:["full", "half", "null", "null", "null"]};
+		this.equipoBlue[4] = {nombre: "Andrea", pagado: pagado, stars:["full", "full", "full", "full", "half"]};
+		this.equipoRed[0].pagado = true;
+		this.equipoBlue[0].pagado = pagado;
+		this.equipoRed[1].pagado = pagado;
+		this.equipoBlue[1].pagado = pagado;
+		this.equipoRed[2].pagado = true;
+	}
+
 	descargarJugadores() {
 		this.arrJugadores = [];
 		this.jugadoresSubscription = this.firebaseauthService.getDocumentById('Puentes', 'bridge-jugadores').subscribe((idsJugadores: any) =>{
