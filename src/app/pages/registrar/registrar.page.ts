@@ -24,7 +24,7 @@ export class RegistrarPage implements OnInit {
 	usuarioSubscription;
 	cargando = false;
 
-	localidades = ["La Plata", "Ensenada", "Berisso"];
+	localidades = ["La Plata"/*, "Ensenada", "Berisso"*/];
 	sexos = ["No binario", "Hombre", "Mujer"];
 
 	constructor(
@@ -103,32 +103,31 @@ export class RegistrarPage implements OnInit {
 				})
 				.catch((err) => {
 					this.cargando = false;
-					let codigo: string = err.code;
-					if(codigo.includes("auth/user-not-found")){
+					if(err.code.includes("auth/user-not-found")){
 						this.presentToast("Usuario ingresado no existe", 3000);
-					}else{
-						if(codigo.includes("auth/wrong-password")){
-							this.presentToast("Contraseña incorrecta", 3000);
-						}else{
-							this.presentToast(err, 3000);
-						}
+						return
 					}
+					if(err.code.includes("auth/wrong-password")){
+						this.presentToast("Contraseña incorrecta", 3000);
+						return
+					}
+					this.presentToast(err, 3000);
 				});
 			})
 			.catch(err =>{
 				this.cargando = false;
 				if(err.code.includes("auth/email-already-in-use")){
 					this.presentToast("Correo electronico ya registrado", 3000);
-				}else{
-					if("auth/invalid-email"){
-						this.presentToast("Correo electronico con formato incorrecto", 3000);
-					}else{
-						this.presentToast(err, 3000);
-					}
+					return
 				}
+				if(err.code.includes("auth/invalid-email")){
+					this.presentToast("Correo electronico con formato incorrecto", 3000);
+					return
+				}
+				this.presentToast(err, 3000);
+
 			})		
 		}, 300);
-
 	}
 
 
