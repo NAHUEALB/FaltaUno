@@ -1,4 +1,7 @@
 import { Component, ComponentFactoryResolver, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
 import { NavigationExtras, Router } from '@angular/router';
 import { Storage } from '@ionic/storage-angular';
 import { Cancha } from 'src/app/models/cancha';
@@ -42,7 +45,8 @@ export class BuscarPage implements OnInit {
   constructor(
     private router: Router,
     private storage: Storage,
-    public firebaseauthService: FirebaseauthService
+    public firebaseauthService: FirebaseauthService,
+    public http: HttpClient
   ) {}
 
   ngOnInit() {
@@ -190,7 +194,7 @@ export class BuscarPage implements OnInit {
         });
     });
   }
-
+  prueba
   refresh() {
     this.storage.get('jugador').then((jugador) => {
     //   let ciudadDelJugador = jugador.ubicacion;
@@ -232,6 +236,15 @@ export class BuscarPage implements OnInit {
                 this.ordenarPartidos(this.partidos);
               });
           });
+
+          let requestSql = 'https://backend-f1-java.herokuapp.com/prueba/'
+          /* fetch(requestSql)
+          .then((res) => res.json())
+          .then((data) => console.log(data)) */
+          this.http.get(requestSql).subscribe(
+            data => {this.prueba = data; console.log(data)},
+            err => console.log(err)
+          )
 
           this.docSubscription.unsubscribe();
         });

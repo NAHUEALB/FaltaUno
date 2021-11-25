@@ -34,6 +34,7 @@
     "es6-promise-plugin": "^4.2.2",
     "firebase": "^8.10.0",
     "leaflet": "^1.7.1",
+    "node-fetch": "^3.1.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.2"
