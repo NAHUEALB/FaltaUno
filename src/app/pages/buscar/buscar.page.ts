@@ -21,6 +21,8 @@ export class BuscarPage implements OnInit {
   canchaSubscription;
   puentes: any;
 
+  partidosSql = []
+
   partidos: Sala[] = [
     {
       id: '1',
@@ -121,39 +123,63 @@ export class BuscarPage implements OnInit {
     document.getElementById('blk-mapa').style.display = 'none';
   }
 
-  // mostrarMapa(partidoSeleccionado){
-  // 	let canchaExtra : NavigationExtras = {
-  // 		state: {
-  // 			cancha: partidoSeleccionado
-  // 		}
-  // 	}
-  // 	this.router.navigate(['mapa'], canchaExtra);
-  // }
+  cargarPartidos() {
+    this.storage.get('jugador').then((jugador) => {
+      let requestSql = 'https://backend-f1-java.herokuapp.com/partido/'
+      fetch(requestSql)
+      .then((res) => res.json())
+      .then((data) => {
+        this.partidosSql = []
+        console.log(data)
+        data.forEach(p => {
+          let ids = [p.idJug1, p.idJug2, p.idJug3, p.idJug4, p.idJug5, p.idJug6, p.idJug7, p.idJug8, p.idJug9, p.idJug10]
+          let idsNoVacias = ids.filter(jid => jid !== 0)
+          let nuevoPartido = {
+            nombre: p.sala,
+            estado: "Sala pública",
+            slotsOcupados: idsNoVacias.length,
+            slotsTotales: 10,
+            sexo: p.sexo,
+            hora: p.hora + ":00"
+          }
+          this.partidosSql.push(nuevoPartido)          
+        });
+        console.log(this.partidosSql)
+        this.partidosSql.forEach((unPartido) => {
+          this.setSexo(unPartido);
+          this.setColorSlot(unPartido);
+          this.setOrden(unPartido);
+        });
+        this.ordenarPartidos(this.partidosSql);
+      })
+    });
+  }
 
   irALaSala(partido) {
-    let idSala = partido.id;
+    let requestSql = 'https://backend-f1-java.herokuapp.com/partido/'+partido.idPartido
+    fetch(requestSql)
+    .then((res) => res.json())
+    .then((data) => {
+      this.partidosSql = []
+      console.log(data)
+      data.forEach(p => {
+        let canchaExtra: NavigationExtras = {
+          state: {
+            nombre_cancha: partido.cancha.nombre_cancha,
+            direccion: partido.cancha.direccion,
+            precio: partido.cancha.precio,
+            partido: partido
+          },
+        };
+        this.router.navigate(['sala'], canchaExtra);
+      })
+    })
+    /* let idSala = partido.id;
     this.storage.get('jugador').then((jugador) => {
-    //   let ciudadDelJugador = jugador.ubicacion;
-	  let ciudadDelJugador = " La Plata ";
       this.docSubscription = this.firebaseauthService
         .getDocumentById('Puentes', 'bridge-canchas')
         .subscribe((document: any) => {
-          let puentes;
-          switch (ciudadDelJugador) {
-            case ' La Plata ':
-              puentes = document.canchasLP;
-              break;
-            case ' Berisso ':
-              puentes = document.canchasBE;
-              break;
-            case ' Ensenada ':
-              puentes = document.canchasEN;
-              break;
-            default:
-              console.log('Error preguntando la ciudad del jugador');
-              break;
-          }
-
+          let puentes = document.canchasLP;
           puentes.forEach((idCancha) => {
             this.canchaSubscription = this.firebaseauthService
               .getDocumentById('CanchasLP', String(idCancha))
@@ -189,69 +215,12 @@ export class BuscarPage implements OnInit {
                 this.canchaSubscription.unsubscribe();
               });
           });
-
           this.docSubscription.unsubscribe();
-        });
-    });
-  }
-  prueba
-  refresh() {
-    this.storage.get('jugador').then((jugador) => {
-    //   let ciudadDelJugador = jugador.ubicacion;
-      let ciudadDelJugador = " La Plata ";
-
-      this.docSubscription = this.firebaseauthService
-        .getDocumentById('Puentes', 'bridge-canchas')
-        .subscribe((document: any) => {
-          let puentes;
-          switch (ciudadDelJugador) {
-            case ' La Plata ':
-              puentes = document.canchasLP;
-              break;
-            case ' Berisso ':
-              puentes = document.canchasBE;
-              break;
-            case ' Ensenada ':
-              puentes = document.canchasEN;
-              break;
-            default:
-              console.log('Error preguntando la ubicacion del jugador');
-              break;
-          }
-
-          this.partidos = [];
-          puentes.forEach((idCancha) => {
-            this.canchaSubscription = this.firebaseauthService
-              .getDocumentById('CanchasLP', String(idCancha))
-              .subscribe((canchaDocument: any) => {
-                let cancha: Cancha = canchaDocument;
-                cancha.salas.forEach((p) => this.partidos.push(p));
-                this.canchaSubscription.unsubscribe();
-
-                this.partidos.forEach((unPartido) => {
-                  this.setSexo(unPartido);
-                  this.setColorSlot(unPartido);
-                  this.setOrden(unPartido);
-                });
-                this.ordenarPartidos(this.partidos);
-              });
-          });
-
-          let requestSql = 'https://backend-f1-java.herokuapp.com/prueba/'
-          /* fetch(requestSql)
-          .then((res) => res.json())
-          .then((data) => console.log(data)) */
-          this.http.get(requestSql).subscribe(
-            data => {this.prueba = data; console.log(data)},
-            err => console.log(err)
-          )
-
-          this.docSubscription.unsubscribe();
-        });
-    });
+        }); 
+    });*/
   }
 
   ionViewWillEnter() {
-    this.refresh();
+    this.cargarPartidos();
   }
 }

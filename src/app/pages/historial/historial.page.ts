@@ -11,8 +11,6 @@ export class HistorialPage implements OnInit {
   partido: Partido;
   stars = [];
   valoracion: number;
-  
-  constructor() { }
 
   ngOnInit() {
   }
@@ -45,12 +43,9 @@ export class HistorialPage implements OnInit {
     }
   }
 
-
   actualizarListado(value){
     setTimeout(() =>{
-      console.info("Cerrar refresh");
       value.target.complete();
     }, 3000);
   }
-
 }

@@ -23,7 +23,7 @@
 			<p>Inicio</p>
 		</div>
 		<div class="opcion-card">
-			<ion-icon class="perfil-icon" name="refresh" (click)="refresh()"></ion-icon>
+			<ion-icon class="perfil-icon" name="refresh" (click)="cargarPartidos()"></ion-icon>
 			<p>Recargar</p>
 		</div>
 	</div>
@@ -33,7 +33,7 @@
 		</ion-item>
 	</center>
 	<ion-list id="blk-lista" class="blk-card lista-partidos" lines="none">
-		<ion-item-sliding *ngFor="let partido of partidos">
+		<ion-item-sliding *ngFor="let partido of partidosSql">
 
 			<ion-item-options side="start"><ion-item-option color="primary" (click)="irALaSala(partido)" expandable>Unirse</ion-item-option></ion-item-options>
 			<!-- <ion-item-options side="start"><ion-item-option color="primary" (click)="mostrarMapa(partido)" expandable>Unirse</ion-item-option></ion-item-options> -->
