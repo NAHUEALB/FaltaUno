@@ -52,10 +52,10 @@ export class BuscarPage implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.partidos.forEach((unPartido) => {
-      this.setSexo(unPartido);
-      this.setColorSlot(unPartido);
-      this.setOrden(unPartido);
+    this.partidos.forEach((p) => {
+      this.setSexo(p);
+      this.setColorSlot(p);
+      this.setOrden(p);
     });
     this.ordenarPartidos(this.partidos);
   }
@@ -132,9 +132,12 @@ export class BuscarPage implements OnInit {
         this.partidosSql = []
         console.log(data)
         data.forEach(p => {
+          console.log(p)
           let ids = [p.idJug1, p.idJug2, p.idJug3, p.idJug4, p.idJug5, p.idJug6, p.idJug7, p.idJug8, p.idJug9, p.idJug10]
           let idsNoVacias = ids.filter(jid => jid !== 0)
           let nuevoPartido = {
+            cancha: p.cancha,
+            idpartido: p.idpartido,
             nombre: p.sala,
             estado: "Sala pública",
             slotsOcupados: idsNoVacias.length,
@@ -145,10 +148,10 @@ export class BuscarPage implements OnInit {
           this.partidosSql.push(nuevoPartido)          
         });
         console.log(this.partidosSql)
-        this.partidosSql.forEach((unPartido) => {
-          this.setSexo(unPartido);
-          this.setColorSlot(unPartido);
-          this.setOrden(unPartido);
+        this.partidosSql.forEach((p) => {
+          this.setSexo(p);
+          this.setColorSlot(p);
+          this.setOrden(p);
         });
         this.ordenarPartidos(this.partidosSql);
       })
@@ -156,18 +159,21 @@ export class BuscarPage implements OnInit {
   }
 
   irALaSala(partido) {
-    let requestSql = 'https://backend-f1-java.herokuapp.com/partido/'+partido.idPartido
+    console.log("partido ",partido)
+    let requestSql = 'https://backend-f1-java.herokuapp.com/partido/'+partido.idpartido
     fetch(requestSql)
     .then((res) => res.json())
     .then((data) => {
+      let ids = [data.idJug1, data.idJug2, data.idJug3, data.idJug4, data.idJug5, data.idJug6, data.idJug7, data.idJug8, data.idJug9, data.idJug10]
       this.partidosSql = []
-      console.log(data)
-      data.forEach(p => {
+      console.log("ids ",ids)
+      ids.forEach(p => {
         let canchaExtra: NavigationExtras = {
           state: {
-            nombre_cancha: partido.cancha.nombre_cancha,
+            idpartido: partido.idpartido,
             direccion: partido.cancha.direccion,
             precio: partido.cancha.precio,
+            nombre_cancha: partido.cancha.nombreCancha,
             partido: partido
           },
         };

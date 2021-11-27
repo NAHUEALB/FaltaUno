@@ -11,6 +11,7 @@ import { AyudaMenuLateralPage } from '../ayuda-menu-lateral/ayuda-menu-lateral.p
 import { MercadopagoService } from 'src/app/serv/mercadopago.service';
 import { Item, Request, Response } from 'src/app/models/request.model';
 import { AyudaPage } from '../ayuda/ayuda.page';
+import { PartidoPage } from '../partido/partido.page';
 
 @Component({
 	selector: 'app-sala',
@@ -62,8 +63,10 @@ export class SalaPage implements OnInit {
 	ngOnInit() {}
 
 	ionViewWillEnter() {
+		let partido = this.router.getCurrentNavigation().extras.state.partido
+		console.log("partidooooooooooooooo, ,m , , , ", partido)
 		//let cancha = this.router.getCurrentNavigation().extras.state.cancha;
-		this.storage.get('cancha').then(cancha => {
+		/* this.storage.get('cancha').then(cancha => {
 			this.salaDireccion = cancha.direccion;
 			this.salaPrecio = cancha.precio;
 			this.storage.get("sala").then(sala => {
@@ -86,21 +89,18 @@ export class SalaPage implements OnInit {
 				})
 			})
 		})
-		this.descargarJugadores()
+		this.descargarJugadores() */
 	}
 
-
-	socialShare(){
+	/* socialShare(){
 		let options = {
 			message: 'Unete a mi partido: ', 
 			url: 'https://faltauno.com/id/jVHAsL',
 		  };
 		this.socialSharing.shareWithOptions(options);
-	}
-
-
+	} */
 	
-	pagarMP(){
+	/* pagarMP(){
 		let item : Item = new Item();
 		item.title = "Partido";
 		item.description = "Cancha 2";
@@ -117,7 +117,7 @@ export class SalaPage implements OnInit {
 			console.log(this.enlaceMP.sandbox_init_point);
 			this.abrirModalPago();
 		});
-	}
+	} */
 
 	async abrirModalPago() {
 		const modal = await this.modalController.create({
@@ -131,7 +131,6 @@ export class SalaPage implements OnInit {
 		});
 		await modal.present();
 	}
-
 
 	getValoracion(puntos, votos) {
 		if (votos != 0) return Number((puntos/votos).toFixed(2));
@@ -167,7 +166,6 @@ export class SalaPage implements OnInit {
 		await modal.present();
 	}
 
-
 	mezclarEquipos(arr1, arr2) {
 		let arrAux = [
 			...arr1.filter(e => e.nombre != " (vacío) "), 
@@ -201,16 +199,16 @@ export class SalaPage implements OnInit {
 		console.log("pagado en el banco de mentiritas, cantidad: ${123}")
 	}
 
-	invitarPorRRSS() {
+	/* invitarPorRRSS() {
 		console.log("Envía este link: https://jajacualquiera.com/invite")
-	}
+	} */
 
 	abandonarSala() {
 		this.router.navigate(['/buscar']);
 		// console.log("Falta navegación a /buscar y en un futuro reembolsos")
 	}
 
-	crearFirebaseBot(cantidad) {
+	/* crearFirebaseBot(cantidad) {
 		var arrNombres = ["Adrián", "Agustín", "Alberto", "Alejandro", "Alexander", "Alexis", "Alonso", "Ángel", "Anthony", "Antonio", "Bautista", "Benicio", "Benjamín", "Carlos", "César", "Cristóbal", "Daniel", "David", "Diego", "Dylan", "Eduardo", "Emiliano", "Emmanuel", "Enrique", "Erik", "Ernesto", "Ethan", "Fabián", "Facundo", "Felipe", "Félix", "Fernando", "Francisco", "Gabriel", "Gaspar", "Hugo", "Ian", "Iker", "Isaac", "Jacob", "Javier", "Jayden", "Jeremy", "Jerónimo", "Jesús", "Joaquín", "Jorge", "José", "José Antonio", "Josué", "Juan", "Julio", "Justin", "Kevin", "Lautaro", "Liam", "Lian", "Lorenzo", "Lucas", "Luis", "Manuel", "Mario", "Martín", "Mateo", "Matías", "Maximiliano", "Maykel", "Miguel", "Miguel  ngel", "Nelson", "Noah", "Oscar", "Pablo", "Pedro", "Rafael", "Ramón", "Raúl", "Ricardo", "Rigoberto", "Roberto", "Rolando", "Samuel", "Santiago", "Santino", "Santos", "Sebastián", "Thiago", "Tomás", "Valentino", "Vicente", "Víctor"];
 		this.docSubscription = this.firebaseauthService.getDocumentById('Puentes', 'bridge-jugadores').subscribe((document: any) =>{
 			let bridge = document
@@ -245,7 +243,7 @@ export class SalaPage implements OnInit {
 			}
 			this.docSubscription.unsubscribe();
 		})
-	}
+	} */
 
 	llenarConBots(pagado = false) {
 		console.log("llenando de bots con voto " + pagado)
