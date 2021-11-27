@@ -17,11 +17,24 @@ import { MercadopagoService } from 'src/app/serv/mercadopago.service';
 	styleUrls: ['./principal.page.scss'],
 })
 export class PrincipalPage implements OnInit {
-
-	jugador: Jugador;
-	docSubscription: any;
-	usuarioSubscription: any;
+	docSubscription;
+	usuarioSubscription;
+	
 	enlace = "Jugador/";
+	jugador = {
+		id: '',
+		idFirebase: '',
+		email: '',
+		nombre: '',
+		usuario: '',
+		fnacimiento: '',
+		puntaje: 0,
+		cantidad_votos: 0,
+		sexo: "",
+		perfil: false,
+		ubicacion: '',
+	};
+
 	msj = "Sesión con Google iniciada con éxito";
 	enlaceMP = new Response();
 
@@ -33,23 +46,36 @@ export class PrincipalPage implements OnInit {
 		public toastController: ToastController,
 		private storage: Storage,
 		private socialSharing: SocialSharing,
-		private mercadoPagoService: MercadopagoService) {
+		private mercadoPagoService: MercadopagoService) 
+	{
 		this.menuCtrl.enable(false);
-		this.jugador = {
-			id: '',
-			nombre: '',
-			usuario: '',
-			fnacimiento: '',
-			puntaje: 0,
-			cvotos: 0,
-			sexo: "",
-			perfil: false,
-			foto: '',
-			ubicacion: '',
-			html: '',
-		}
+	}
+	
+	ngOnInit() {
 	}
 
+	ionViewWillLeave() {
+		if (this.docSubscription) this.docSubscription.unsubscribe();
+		if (this.usuarioSubscription) this.usuarioSubscription.unsubscribe();
+	}
+	
+	irAlRegistrar() {
+		this.router.navigate([`/registrar`]);
+	}
+	
+	irAlLogin() {
+		this.router.navigate([`/login`]);
+	}
+	
+	
+	async presentToast(msg: string, time: number) {
+		const toast = await this.toastController.create({
+			message: msg,
+			duration: time,
+		});
+		toast.present();
+	}
+	
 	async abrirModal() {
 		const modal = await this.modalController.create({
 			component: AyudaPage,
@@ -59,43 +85,47 @@ export class PrincipalPage implements OnInit {
 		});
 		await modal.present();
 	}
-
-
+	
 	async abrirModalPago() {
 		const modal = await this.modalController.create({
 			component: AyudaPage,
 			cssClass: 'modal-css',
 			componentProps: {
 				'enlaceMP': this.enlaceMP.sandbox_init_point
-			  },
+			},
 			swipeToClose: true,
 			presentingElement: await this.modalController.getTop()
 		});
 		await modal.present();
 	}
-
-	ngOnInit() {
-	}
-
+	
 	socialShare(){
 		let options = {
 			message: 'share this', // not supported on some apps (Facebook, Instagram)
 			url: 'https://ionicframework.com/docs/native/social-sharing',
-		  };
+		};
 		this.socialSharing.shareWithOptions(options);
 	}
 
-
-
-	irAlRegistrar() {
-		this.router.navigate([`/registrar`]);
-	}
-
-	irAlLogin() {
-		this.router.navigate([`/login`]);
-	}
-
-	async irAlLoginGoogle() {
+	/* 	cargarJugador() {
+		let data: Jugador;
+		data = {
+			id: '',
+			nombre: '',
+			usuario: '',
+			fnacimiento: '2020-01-01',
+			puntaje: 0,
+			cantidad_votos: 0,
+			sexo: 'No binario',
+			perfil: true,
+			foto: '',
+			ubicacion: 'No definida',
+			html: '',
+		}
+		return data;
+	} */
+	
+	/* async irAlLoginGoogle() {
 		try {
 			this.authService.loginGoogle()
 			.then(() => {
@@ -125,42 +155,11 @@ export class PrincipalPage implements OnInit {
 		} catch (err) {
 			console.log("Detalles: " + err);
 		}
-	}
+	} */
 
-	irAlLoginFacebook() {
+	/* irAlLoginFacebook() {
 		console.log("ajsdkjasjkd te la CREISTE WEEEE JASKDJAKJSDKAJSD");
-	}
-
-	cargarJugador() {
-		let data: Jugador;
-		data = {
-			id: '',
-			nombre: '',
-			usuario: '',
-			fnacimiento: '2020-01-01',
-			puntaje: 0,
-			cvotos: 0,
-			sexo: 'No binario',
-			perfil: true,
-			foto: '',
-			ubicacion: 'No definida',
-			html: '',
-		}
-		return data;
-	}
-
-	async presentToast(msg: string, time: number) {
-		const toast = await this.toastController.create({
-			message: msg,
-			duration: time,
-		});
-		toast.present();
-	}
-
-	ionViewWillLeave() {
-		if (this.docSubscription) this.docSubscription.unsubscribe();
-		if (this.usuarioSubscription) this.usuarioSubscription.unsubscribe();
-	}
+	} */
 }
 
 

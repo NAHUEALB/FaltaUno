@@ -28,7 +28,7 @@
       <ion-list class="blk-halfcard" lines="none">
         <ion-item class="halflist hl-left" *ngFor="let jugador of equipoRed">
           <div>
-            <div [class.jugador-vacio]="jugador.nombre == ' (vacío) '" id="nombre-jugador">
+            <div [class.jugador-vacio]="jugador.nombre == ' (disponible) '" id="nombre-jugador">
               {{ jugador.nombre }}
             </div>
             <div class="stars">
@@ -38,6 +38,7 @@
                 <img *ngIf="star === 'null'" class="star" [src]="'/assets/stars/star-null.png'">
               </div>
               <ion-icon 
+                *ngIf="jugador.nombre != ' (disponible) '"
                 class="paycheck-icon"
                 [class.pay-correct]="jugador.pagado == true"
                 name="logo-usd">
@@ -51,7 +52,7 @@
       <ion-list class="blk-halfcard"lines="none">
         <ion-item class="halflist hl-right" *ngFor="let jugador of equipoBlue">
           <div>
-            <div [class.jugador-vacio]="jugador.nombre == ' (vacío) '" id="nombre-jugador">
+            <div [class.jugador-vacio]="jugador.nombre == ' (disponible) '" id="nombre-jugador">
               {{ jugador.nombre }}
             </div>
             <div class="stars">
@@ -61,6 +62,7 @@
                 <img *ngIf="star === 'null'" class="star" [src]="'/assets/stars/star-null.png'">
               </div>
               <ion-icon 
+                *ngIf="jugador.nombre != ' (disponible) '"
                 class="paycheck-icon"
                 [class.pay-correct]="jugador.pagado == true"
                 name="logo-usd">

@@ -35,7 +35,7 @@ export class PartidoPage implements OnInit {
 	jugadorVacio = {
 		nombre: " (vacío) ",
 		puntaje: 0,
-		cvotos: 0,
+		cantidad_votos: 0,
 		pagado: false,
 		stars: []
 	}

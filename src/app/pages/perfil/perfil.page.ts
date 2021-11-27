@@ -15,7 +15,20 @@ import { Storage } from '@ionic/storage-angular';
 
 export class PerfilPage implements OnInit {
 	enlace = 'Jugador';
-	jugador: Jugador;
+	jugador = {
+		id: '',
+		id_firebase: '',
+		nombre: '',
+		usuario: '',
+		password: '',
+		email: '',
+		fnacimiento: '',
+		puntaje: 0,
+		cantidad_votos: 0,
+		sexo: "",
+		perfil: false,
+		ubicacion: ' La Plata ',
+	};
 	partido: Partido;
 	edad: number;
 	valoracion: number;
@@ -23,36 +36,22 @@ export class PerfilPage implements OnInit {
 	nameIcon: String;
 	idColor: String;
 	imgUrl: String;
+	resultado = "3 - 4"
 	ACTUALIZAR_STORAGE = "actualizar:storage";
 
   	constructor( 
 	private router: Router, 
 	private storage: Storage,
-	// private events: Events
-	){ 		
-		this.jugador = {
-			id:"0",
-			nombre: '',
-			usuario: '',
-			fnacimiento: '',
-			puntaje: 0,
-			cvotos: 0,
-			sexo: '',
-			perfil: false,
-			foto: '',
-			ubicacion: '',
-			html: '',
-		}
-
-		this.partido = {
-			resultado : "15 - 2",
-			fecha: "10-2-2020",
-			valoracion:12
-		}
-		
-
+	){ 	
+		this.storage.get('jugador')
+		.then((jugador) => {
+			this.jugador = jugador; 
+			console.log("INFO DEL JUGADOR OBTENIDA DESDE PERFIL",this.jugador)
+		})
+		.catch(() => {
+			console.log("Primer error de querer cargar info del jugador desde el Storage")
+		});
 	}
-
 
   	ngOnInit() {}
 
@@ -60,11 +59,33 @@ export class PerfilPage implements OnInit {
 		this.storage.get("jugador").then(jugadorDelStorage => {
 			this.jugador = jugadorDelStorage;
 			this.edad = this.getEdad(this.jugador.fnacimiento);
-			this.valoracion = this.getValoracion(this.jugador.puntaje, this.jugador.cvotos);
+			this.valoracion = this.getValoracion(this.jugador.puntaje, this.jugador.cantidad_votos);
+			this.resultado = "4 - 2"
 			this.fillStars(this.valoracion);
 			this.showSexo();
 			this.showFotoCiudad();
 		});
+	}
+
+	irAlEditar(){
+		this.storage.set("jugador", this.jugador).then(()=>{
+			console.log("INFO DEL JUGADOR GUARDADA DESDE PERFIL", this.jugador)
+			this.router.navigate([`/editar`]);
+		})
+	}
+
+	irAlHistorial(){
+		this.storage.set("jugador", this.jugador).then(()=>{
+			console.log("INFO DEL JUGADOR GUARDADA DESDE PERFIL", this.jugador)
+			this.router.navigate([`/historial`]);
+		})
+	}
+
+	irAlInicio(){
+		this.storage.set("jugador", this.jugador).then(()=>{
+			console.log("INFO DEL JUGADOR GUARDADA DESDE PERFIL", this.jugador)
+			this.router.navigate([`/inicio`]);
+		})
 	}
 
 	getEdad(dateNacimiento) {
@@ -136,22 +157,5 @@ export class PerfilPage implements OnInit {
 				this.imgUrl = '../../../assets/imgs/localidades/03-ensenada.jpg'; 
 				break;
 		}
-	}
-
-	// ionViewWillLeave(){
-	// 	this.events.destroy(this.ACTUALIZAR_STORAGE);
-	// }
-
-
-	irAlEditar(){
-		this.router.navigate(['/editar']);
-	}
-
-	irAlHistorial(){
-		this.router.navigate([`/historial`]);
-	}
-
-	irAlInicio(){
-		this.router.navigate([`/inicio`]);
 	}
 }

@@ -39,9 +39,9 @@ export class SalaPage implements OnInit {
 	arrJugadores: Jugador[] = [];
 	
 	jugadorVacio = {
-		nombre: " (vacío) ",
+		nombre: " (disponible) ",
 		puntaje: 0,
-		cvotos: 0,
+		cantidad_votos: 0,
 		pagado: false,
 		stars: []
 	}
@@ -51,57 +51,72 @@ export class SalaPage implements OnInit {
 	enlaceMP = new Response();
 
 	partido
+	jugador
 	jugadores = []
-	idsJugadores
+	idsJugadores = []
 
 	constructor(
 		public menuCtrl: MenuController,
 		private modalController: ModalController,
 		private router: Router,
-		private route: ActivatedRoute,
 		public firebaseauthService: FirebaseauthService,
 		private storage: Storage,
 		private socialSharing: SocialSharing,
 		private mercadoPagoService: MercadopagoService
 	) {
-		this.partido = this.router.getCurrentNavigation().extras.state.partido
-		this.idsJugadores = this.router.getCurrentNavigation().extras.state.idsJugadores
-		this.salaNombre = this.partido.cancha.nombreCancha
-		this.salaDireccion = this.partido.cancha.direccion
-		this.salaPrecio = this.partido.cancha.precio
-		this.salaEstado = this.partido.estado
-		this.salaSexo = this.partido.sexo
-		this.jugadores = []
-		for (let i=0; i<10; i++) {
-			if (this.idsJugadores[i] !== 0) {
-				let requestSql = 'https://backend-f1-java.herokuapp.com/jugadores/' + this.idsJugadores[i] 
-				fetch(requestSql)
-				.then(res => res.json())
-				.then(data => {
-					let jugador = data;
-					let scoreStars = jugador.puntaje / jugador.cantVotos
-					this.fillStars(jugador, scoreStars)
-					this.jugadores.push(jugador)
-					this.repartirEquiposRedYBlue(this.jugadores)
-				})
-			}
-		}
+		this.storage.get('jugador')
+		.then((jugador) => {
+			this.jugador = jugador; 
+			console.log("INFO DEL JUGADOR OBTENIDA DESDE SALA",this.jugador)
+			this.storage.get('partido').then((partido) => {
+				this.partido = partido; 
+				console.log("INFO DEL PARTIDO OBTENIDA DESDE SALA",this.partido)
+				let {idJug1, idJug2, idJug3, idJug4, idJug5, idJug6, idJug7, idJug8, idJug9, idJug10} = this.partido
+				this.idsJugadores = [idJug1, idJug2, idJug3, idJug4, idJug5, idJug6, idJug7, idJug8, idJug9, idJug10]
+				console.log("IDS DE PARTIDOS OBTENIDA DESDE SALA",this.idsJugadores)
+				this.salaNombre = this.partido.cancha.nombreCancha
+				this.salaDireccion = this.partido.cancha.direccion
+				this.salaPrecio = this.partido.cancha.precio
+				this.salaEstado = ' Sala Pública '
+				this.salaSexo = this.partido.sexo
+				this.jugadores = []
+				for (let i=0; i<10; i++) {
+					if (this.idsJugadores[i] !== 0) {
+						let requestSql = 'https://backend-f1-java.herokuapp.com/jugadores/' + this.idsJugadores[i] 
+						fetch(requestSql)
+						.then(res => res.json())
+						.then(data => {
+							let jugador = data;
+							let scoreStars = jugador.puntaje / jugador.cantidad_votos
+							this.fillStars(jugador, scoreStars)
+							this.jugadores.push(jugador)
+							this.repartirEquiposRedYBlue(this.jugadores)
+						})
+					}
+				}
+			})
+		})
 	}
 
 	ngOnInit() {}
 
 	ionViewWillEnter() {
+		// QUERY MODIFICAR EL PARTIDO PARA METER EL ID DE ESTE JUGADOR
+		let requestSql = 'https://backend-f1-java.herokuapp.com/partido/' + this.jugador
+
 		console.log("entrando a sala")
 	}
 
 	repartirEquiposRedYBlue(jugs) {
+		// en el orden que están, se reparte uno para red, otro blue, otro red, otro blue y así
+		// por lo tanto, índices impares quedarían en el lado red, pares quedarían en el lado blue
 		this.equipoRed = []
 		this.equipoBlue = []
-		jugs.forEach((j, i) => i%2!=0 ? this.equipoRed.push(j) : this.equipoBlue.push(j))
+		jugs.forEach((j, i) => i%2==0 ? this.equipoRed.push(j) : this.equipoBlue.push(j))
 		for (let i=0; i<5; i++) 
-			if (!this.equipoRed[i]) this.equipoRed.push({nombre: " (vacío) "})
+			if (!this.equipoRed[i]) this.equipoRed.push({nombre: " (disponible) "})
 		for (let i=0; i<5; i++) 
-			if (!this.equipoBlue[i]) this.equipoBlue.push({nombre: " (vacío) "})
+			if (!this.equipoBlue[i]) this.equipoBlue.push({nombre: " (disponible) "})
 	}
 
 	async abrirModalPago() {
@@ -110,7 +125,7 @@ export class SalaPage implements OnInit {
 			cssClass: 'modal-css',
 			componentProps: {
 				'enlaceMP': this.enlaceMP.sandbox_init_point
-			  },
+			},
 			swipeToClose: true,
 			presentingElement: await this.modalController.getTop()
 		});
@@ -153,8 +168,8 @@ export class SalaPage implements OnInit {
 
 	mezclarEquipos(arr1, arr2) {
 		let arrAux = [
-			...arr1.filter(e => e.nombre != " (vacío) "), 
-			...arr2.filter(e => e.nombre != " (vacío) ")
+			...arr1.filter(e => e.nombre != " (disponible) "), 
+			...arr2.filter(e => e.nombre != " (disponible) ")
 		];
 		var currentIndex = arrAux.length, temporaryValue, randomIndex
 		while (0 !== currentIndex) {
@@ -186,7 +201,7 @@ export class SalaPage implements OnInit {
 
 	abandonarSala() {
 		this.router.navigate(['/buscar']);
-		// console.log("Falta navegación a /buscar y en un futuro reembolsos")
+		// QUERY MODIFICAR EL PARTIDO PARA SACAR EL ID DE ESTE JUGADOR
 	}
 }
 

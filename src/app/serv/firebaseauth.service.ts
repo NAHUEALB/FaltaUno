@@ -55,7 +55,7 @@ export class FirebaseauthService {
   updateDocument(path,data: Jugador){
     return this.fireStore.collection(path).doc(data.id).set({
       'nombre': data.nombre,
-      'cvotos': data.cvotos,
+      'cantidad_votos': data.cantidad_votos,
       'fnacimiento': data.fnacimiento,
       'foto': data.foto,
       'id': data.id,

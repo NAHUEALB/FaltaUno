@@ -14,12 +14,12 @@ import { FirebaseauthService } from './../../serv/firebaseauth.service';
   templateUrl: './buscar.page.html',
   styleUrls: ['./buscar.page.scss'],
 })
+
 export class BuscarPage implements OnInit {
   iconName: String;
   iconColor: String;
-  docSubscription;
-  canchaSubscription;
-  puentes: any;
+  jugador
+  partido
 
   partidosSql = []
 
@@ -49,8 +49,17 @@ export class BuscarPage implements OnInit {
     private storage: Storage,
     public firebaseauthService: FirebaseauthService,
     public http: HttpClient
-  ) {}
-
+  ) {
+    this.storage.get('jugador')
+    .then((jugador) => {
+      this.jugador = jugador; 
+      console.log("INFO DEL JUGADOR OBTENIDA DESDE BUSCAR",this.jugador)
+    })
+    .catch(() => {
+      console.log("Primer error de querer cargar info del jugador desde el Storage")
+    });
+  }
+    
   ngOnInit() {
     this.partidos.forEach((p) => {
       this.setSexo(p);
@@ -59,9 +68,68 @@ export class BuscarPage implements OnInit {
     });
     this.ordenarPartidos(this.partidos);
   }
+  
+  ionViewWillEnter() {
+    this.refreshPartidos();
+  }
 
   irAlInicio() {
-    this.router.navigate([`/inicio`]);
+    this.storage.set("jugador", this.jugador).then(()=>{
+			console.log("INFO DEL JUGADOR GUARDADA DESDE BUSCAR", this.jugador)
+      this.storage.set("listaPartidos", this.partidosSql).then(()=>{
+        console.log("INFO DE LOS PARTIDOS GUARDADA DESDE BUSCAR", this.partidosSql)
+        this.router.navigate([`/inicio`]);
+      })
+		})
+  }
+
+  irALaSala(partido) {
+    let requestSql = 'https://backend-f1-java.herokuapp.com/partidos/'+partido.idpartido
+    fetch(requestSql)
+    .then((res) => res.json())
+    .then((data) => {
+      //let ids = [data.idJug1, data.idJug2, data.idJug3, data.idJug4, data.idJug5, data.idJug6, data.idJug7, data.idJug8, data.idJug9, data.idJug10]
+      //this.partidosSql = []
+      this.storage.set("jugador", this.jugador).then(()=>{
+        console.log("INFO DEL JUGADOR GUARDADA DESDE BUSCAR", this.jugador)
+        this.storage.set("partido", data).then(()=>{
+          console.log("INFO DEL PARTIDO GUARDADA DESDE BUSCAR", data)
+          this.router.navigate([`/sala`]);
+        })
+      })
+    })
+  }
+  
+  refreshPartidos() {
+    this.storage.get('jugador').then((jugador) => {
+      let requestSql = 'https://backend-f1-java.herokuapp.com/partidos/'
+      fetch(requestSql)
+      .then((res) => res.json())
+      .then((data) => {
+        this.partidosSql = []
+        data.forEach(p => {
+          let ids = [p.idJug1, p.idJug2, p.idJug3, p.idJug4, p.idJug5, p.idJug6, p.idJug7, p.idJug8, p.idJug9, p.idJug10]
+          let idsNoVacias = ids.filter(jid => jid !== 0)
+          let nuevoPartido = {
+            cancha: p.cancha,
+            idpartido: p.idpartido,
+            nombre: p.sala,
+            estado: "Sala pública",
+            slotsOcupados: idsNoVacias.length,
+            slotsTotales: 10,
+            sexo: p.sexo,
+            hora: p.hora + ":00"
+          }
+          this.partidosSql.push(nuevoPartido)          
+        });
+        this.partidosSql.forEach((p) => {
+          this.setSexo(p);
+          this.setColorSlot(p);
+          this.setOrden(p);
+        });
+        this.ordenarPartidos(this.partidosSql);
+      })
+    });
   }
 
   setSexo(elem) {
@@ -108,7 +176,7 @@ export class BuscarPage implements OnInit {
       return a.orden - b.orden;
     });
   }
-
+  
   swapAMapa() {
     document.getElementById('perfil-icon-a-mapa').style.display = 'none';
     document.getElementById('perfil-icon-a-lista').style.display = 'block';
@@ -121,112 +189,5 @@ export class BuscarPage implements OnInit {
     document.getElementById('perfil-icon-a-lista').style.display = 'none';
     document.getElementById('blk-lista').style.display = 'block';
     document.getElementById('blk-mapa').style.display = 'none';
-  }
-
-  cargarPartidos() {
-    this.storage.get('jugador').then((jugador) => {
-      let requestSql = 'https://backend-f1-java.herokuapp.com/partido/'
-      fetch(requestSql)
-      .then((res) => res.json())
-      .then((data) => {
-        this.partidosSql = []
-        console.log(data)
-        data.forEach(p => {
-          console.log(p)
-          let ids = [p.idJug1, p.idJug2, p.idJug3, p.idJug4, p.idJug5, p.idJug6, p.idJug7, p.idJug8, p.idJug9, p.idJug10]
-          let idsNoVacias = ids.filter(jid => jid !== 0)
-          let nuevoPartido = {
-            cancha: p.cancha,
-            idpartido: p.idpartido,
-            nombre: p.sala,
-            estado: "Sala pública",
-            slotsOcupados: idsNoVacias.length,
-            slotsTotales: 10,
-            sexo: p.sexo,
-            hora: p.hora + ":00"
-          }
-          this.partidosSql.push(nuevoPartido)          
-        });
-        console.log(this.partidosSql)
-        this.partidosSql.forEach((p) => {
-          this.setSexo(p);
-          this.setColorSlot(p);
-          this.setOrden(p);
-        });
-        this.ordenarPartidos(this.partidosSql);
-      })
-    });
-  }
-
-  irALaSala(partido) {
-    console.log("partido ",partido)
-    let requestSql = 'https://backend-f1-java.herokuapp.com/partido/'+partido.idpartido
-    fetch(requestSql)
-    .then((res) => res.json())
-    .then((data) => {
-      let ids = [data.idJug1, data.idJug2, data.idJug3, data.idJug4, data.idJug5, data.idJug6, data.idJug7, data.idJug8, data.idJug9, data.idJug10]
-      this.partidosSql = []
-      console.log("ids ",ids)
-      ids.forEach(p => {
-        let canchaExtra: NavigationExtras = {
-          state: {
-            idpartido: partido.idpartido,
-            direccion: partido.cancha.direccion,
-            precio: partido.cancha.precio,
-            nombre_cancha: partido.cancha.nombreCancha,
-            partido: partido
-          },
-        };
-        this.router.navigate(['sala'], canchaExtra);
-      })
-    })
-    /* let idSala = partido.id;
-    this.storage.get('jugador').then((jugador) => {
-      this.docSubscription = this.firebaseauthService
-        .getDocumentById('Puentes', 'bridge-canchas')
-        .subscribe((document: any) => {
-          let puentes = document.canchasLP;
-          puentes.forEach((idCancha) => {
-            this.canchaSubscription = this.firebaseauthService
-              .getDocumentById('CanchasLP', String(idCancha))
-              .subscribe((canchaDocument: any) => {
-                let cancha: Cancha = canchaDocument;
-                cancha.salas.forEach((e) => {
-                  if (e.id == idSala) {
-                    this.storage.set('sala', {
-                      id: e.id,
-                      nombre: e.nombre,
-                      hora: e.hora,
-                      estado: e.estado,
-                      slotsOcupados: e.slotsOcupados,
-                      slotsTotales: e.slotsTotales,
-                      sexo: e.sexo,
-                      equipoRed: e.equipoRed,
-                      equipoBlue: e.equipoBlue,
-                    })
-                    .then(() => {
-                      this.storage.set('cancha', cancha)
-                    })
-                    .then(() => {
-                      let canchaExtra: NavigationExtras = {
-                        state: {
-                          cancha: cancha,
-                          partido: partido
-                        },
-                      };
-                      this.router.navigate(['sala'], canchaExtra);
-                    });
-                  }
-                });
-                this.canchaSubscription.unsubscribe();
-              });
-          });
-          this.docSubscription.unsubscribe();
-        }); 
-    });*/
-  }
-
-  ionViewWillEnter() {
-    this.cargarPartidos();
   }
 }

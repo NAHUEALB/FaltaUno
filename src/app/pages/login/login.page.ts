@@ -1,7 +1,7 @@
 import { FirebaseauthService } from './../../serv/firebaseauth.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { NavigationExtras, Router } from '@angular/router';
 import { MenuController } from '@ionic/angular';
 
 import { Storage } from '@ionic/storage-angular';
@@ -18,13 +18,26 @@ import { ToastController } from '@ionic/angular';
 })
 
 export class LoginPage implements OnInit {
-	enlace = 'Jugador';
-	jugadorForm: FormGroup;
-	jugador: Jugador; 
-	jugadorExtra: Jugador;
-	localidades = ['La Plata', 'Ensenada', 'Berisso'];
 	docSubscription;
 	usuarioSubscription;
+
+	enlace = 'Jugador';
+	jugadorForm: FormGroup;
+	jugador = {
+		id: '',
+		id_firebase: '',
+		nombre: '',
+		usuario: '',
+		email: '',
+		fnacimiento: '',
+		puntaje: 0,
+		cantidad_votos: 0,
+		sexo: "",
+		perfil: false,
+		ubicacion: ' La Plata ',
+	}; 
+	
+	localidades = ['La Plata'/*, 'Ensenada', 'Berisso'*/];
 	msj = 'Cargando informacion de usuario';
 	cargando = false;
 
@@ -37,20 +50,6 @@ export class LoginPage implements OnInit {
 	public firebaseauthService: FirebaseauthService,
 	private storage: Storage
 	){
-		this.jugador = {
-			id:"0",
-			nombre: '',
-			usuario: '',
-			fnacimiento: '',
-			puntaje: 0,
-			cvotos: 0,
-			sexo: '',
-			perfil: false,
-			foto: '',
-			ubicacion: '',
-			html: '',
-		}
-
 		this.jugadorForm = this.formBuilder.group({
 			usuario: new FormControl('', Validators.email),
 			contraseña: new FormControl('', Validators.minLength(7)),
@@ -59,29 +58,33 @@ export class LoginPage implements OnInit {
 
 	ngOnInit() {}
 
-	async presentToast(msg: string, time: number) {
-		const toast = await this.toastController.create({
-			message: msg,
-			duration: time,
-		});
-		toast.present();
+	ionViewWillLeave() {
+		if (this.docSubscription) this.docSubscription.unsubscribe();
+		if (this.usuarioSubscription) this.usuarioSubscription.unsubscribe();
 	}
-
+	
+	irAlInicio() {
+		this.storage.set("jugador", this.jugador).then(()=>{
+			console.log("INFO DEL JUGADOR GUARDADA DESDE LOGIN", this.jugador)
+			this.router.navigate([`/inicio`]);
+		})
+	}
+	
 	login() {
 		this.cargando = true;
-		let user = this.jugadorForm.value.usuario;
-		let pw = this.jugadorForm.value.contraseña;
-    	this.firebaseauthService.login(user, pw)
+		let userEmail = this.jugadorForm.value.usuario;
+		let userPassword = this.jugadorForm.value.contraseña;
+		console.log(userEmail, userPassword) // OK
+    	this.firebaseauthService.login(userEmail, userPassword)
 		.then(() => {
 			this.usuarioSubscription = this.firebaseauthService.getUserCurrent().subscribe(res =>{
+				console.log("response ", res)
+				this.jugador.id_firebase = res.uid
 				this.docSubscription = this.firebaseauthService.getDocumentById(this.enlace, res.uid).subscribe((document: any) =>{
-					this.jugador = document;
-					this.storage.set("jugador", document).then(()=>{
-						this.router.navigate(['/inicio']);
-					})
-					this.docSubscription.unsubscribe();
+					this.jugador.email = userEmail
+					this.presentToast("Sesión iniciada con éxito", 3000);
+					this.irAlInicio()
 				})
-				this.usuarioSubscription.unsubscribe();
 			});
 		})
 		.catch((err) => {
@@ -102,5 +105,13 @@ export class LoginPage implements OnInit {
 				}
 			}	
 		});				
-  	}
+	}
+
+	async presentToast(msg: string, time: number) {
+		const toast = await this.toastController.create({
+			message: msg,
+			duration: time,
+		});
+		toast.present();
+	}
 }

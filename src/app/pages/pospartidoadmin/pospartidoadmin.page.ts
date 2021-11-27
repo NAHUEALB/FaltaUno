@@ -32,7 +32,7 @@ export class PospartidoadminPage implements OnInit {
 	jugadorVacio = {
 		nombre: " (vacío) ",
 		puntaje: 0,
-		cvotos: 0,
+		cantidad_votos: 0,
 		pagado: false,
 		stars: []
 	}
@@ -108,13 +108,13 @@ export class PospartidoadminPage implements OnInit {
 
   llenarConBots() {
     console.log(this.equipoRed.length, this.equipoBlue.length)
-    this.equipoRed[2] = {nombre: "Nicolas", cvotos: 1}
-    this.equipoBlue[2] = {nombre: "Mariana", cvotos:1};
-    this.equipoRed[3] = {nombre: "Riki", cvotos:1};
-    this.equipoBlue[3] = {nombre: "Mario", cvotos:1};
-    this.equipoRed[4] = {nombre: "Gimena", cvotos:1};
-    this.equipoBlue[4] = {nombre: "Andrea", cvotos:1};
-  }
+    this.equipoRed[2] = {nombre: "Nicolas", cantidad_votos: 1}
+    this.equipoBlue[2] = {nombre: "Mariana", cantidad_votos:1};
+    this.equipoRed[3] = {nombre: "Riki", cantidad_votos:1};
+    this.equipoBlue[3] = {nombre: "Mario", cantidad_votos:1};
+    this.equipoRed[4] = {nombre: "Gimena", cantidad_votos:1};
+    this.equipoBlue[4] = {nombre: "Andrea", cantidad_votos:1};
+  }cantidad_votos
 
   clickPositivo() {
     if (this.votoEmitido) return

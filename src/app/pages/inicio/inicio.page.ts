@@ -1,7 +1,7 @@
 import { FirebaseauthService } from './../../serv/firebaseauth.service';
 import { ModalController, MenuController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationExtras, Router } from '@angular/router';
 import { Jugador } from 'src/app/models/jugador';
 import { Storage } from '@ionic/storage-angular';
 
@@ -13,9 +13,25 @@ import { AyudaPage } from '../ayuda/ayuda.page';
   styleUrls: ['./inicio.page.scss'],
 })
 export class InicioPage implements OnInit {
-	enlace: 'Jugador';
-	jugador: Jugador;
-	nombre: string = ''; 
+	docSubscription;
+	usuarioSubscription;
+	
+	enlace = 'Jugador';
+	jugador = {
+		id: '',
+		id_firebase: '',
+		nombre: '',
+		usuario: '',
+		password: '',
+		email: '',
+		fnacimiento: '',
+		puntaje: 0,
+		cantidad_votos: 0,
+		sexo: "",
+		perfil: false,
+		ubicacion: ' La Plata ',
+	}; 
+
 	enlaceNoticia = 'Noticia';
 	indexNumerador = 1;
 	mostrarNoticias = false;
@@ -23,87 +39,112 @@ export class InicioPage implements OnInit {
 
 	partidos = [
 		{
-			cancha: "Megastadio",
-			direccion: "Calle 1 y 64",
+			nombre: "Megastadio",
+			cancha: {
+				direccion: "Calle 1 y 64",
+				nombreCancha: "Megastadio"
+			},
 			slotsOcupados: 7,
 			slotsTotales: 10,
 			hora: "12:00",
 			sexo: " Masculino ",
 		},
 		{
-			cancha: "Estadio 7",
-			direccion: "Calle 6 y 59",
-			slotsOcupados: 3,
+			nombre: "Estadio 7",
+			cancha: {
+				direccion: "Calle 6 y 59",
+				nombreCancha: "Estadio 7"
+			},
+			slotsOcupados: 6,
 			slotsTotales: 10,
-			hora: "12:00",
-			sexo: " Mixto "
+			hora: "17:00",
+			sexo: " Mixto ",
 		}
 	]
 
 	constructor(
-	private menuCtrl: MenuController, 
-	private router: Router, 
-	// public firebaseauthService: FirebaseauthService,
-	private storage: Storage,
-	private modalController: ModalController,
+		private menuCtrl: MenuController, 
+		private router: Router, 
+		private storage: Storage,
+		private modalController: ModalController,
 	){
 		this.menuCtrl.enable(true);
-		
-		this.jugador = {
-			id:"0",
-			nombre: '',
-			usuario: '',
-			fnacimiento: '',
-			puntaje: 0,
-			cvotos: 0,
-			sexo: '',
-			perfil: false,
-			foto: '',
-			ubicacion: '',
-			html: '',
-		}	
+
+		this.storage.get('jugador')
+		.then((jugador) => {
+			this.jugador = jugador; 
+			console.log("INFO DEL JUGADOR OBTENIDA DESDE INICIO",this.jugador)
+			!this.jugador.nombre && this.actualizarJugadorPorIdFirebase()
+			this.storage.get('listaPartidos')
+			.then(lista => {
+				console.log(lista)
+				if (lista[0]) this.partidos[0] = lista[0]
+				if (lista[1]) this.partidos[1] = lista[1]
+			})
+			.catch(err => console.log("no existe lista de partidos aun", err))
+		})
+		.catch(() => {
+			console.log("Primer error de querer cargar info del jugador desde el Storage")
+		});
 	}
 
 	ngOnInit() {
 		this.mostrarNoticias = true;
-		this.partidos.forEach(unPartido => {
-			this.setSexo(unPartido)
-			this.setColorSlot(unPartido)
+		this.partidos.forEach(p => {
+			this.setSexo(p)
+			this.setColorSlot(p)
 		});
 	}
 
 	irAlHistorial(){
-		this.router.navigate([`/historial`]);
+		this.storage.set("jugador", this.jugador).then(()=>{
+			console.log("INFO DEL JUGADOR GUARDADA DESDE INICIO", this.jugador)
+			this.router.navigate([`/historial`]);
+		})
 	}
 
 	irAlPerfil(){
-		this.router.navigate([`/perfil`]);
+		this.storage.set("jugador", this.jugador).then(()=>{
+			console.log("INFO DEL JUGADOR GUARDADA DESDE INICIO", this.jugador)
+			this.router.navigate([`/perfil`]);
+		})
 	}
 	
 	irAlBuscar() {
-		this.router.navigate([`/buscar`]);
+		this.storage.set("jugador", this.jugador).then(()=>{
+			console.log("INFO DEL JUGADOR GUARDADA DESDE INICIO", this.jugador)
+			this.router.navigate([`/buscar`]);
+		})
 	}
 
 	ionViewWillEnter() {
 		this.mostrarNoticias = true;
-		this.storage.get("jugador").then(jugadorDelStorage => {
-			this.jugador = jugadorDelStorage;
-			this.nombre = " " + this.jugador.nombre;
-		})
-		.catch(() => {
-			console.log("No se cargó el storage antes de querer mostrarlo")
-		});
-
 		this.nextNoticia();
 	}
 
 	ionViewWillLeave() {
-		this.nombre = "";
+		this.jugador.nombre = "";
 		this.mostrarNoticias = false;
 	}
 
+	actualizarJugadorPorIdFirebase() {
+		let requestSql = 'https://backend-f1-java.herokuapp.com/jugadores/firebase/' + this.jugador.id_firebase
+		fetch(requestSql)
+		.then((res) => res.json())
+		.then((data) => {
+			this.jugador.id = data.idjugador
+			this.jugador.nombre = data.nombre
+			this.jugador.sexo = data.sexo
+			this.jugador.fnacimiento = data.fnacimiento
+			this.jugador.cantidad_votos = data.cantVotos
+			this.jugador.puntaje = data.puntaje
+			console.log("INFO DEL JUGADOR ACTUALIZADA DESDE INICIO POR FETCH", this.jugador)
+		}).catch(() => {
+			console.log("Segundo error de querer cargar info del jugador desde la base de datos SQL")
+		});
+	}
+
 	nextNoticia() {
-		// nahu hacé todo el refactor que quieras jajsdjkas
 		let oldSlider = document.getElementById("slide"+this.indexNumerador);
 		let oldNumerador = document.getElementById("numerador"+this.indexNumerador);
 

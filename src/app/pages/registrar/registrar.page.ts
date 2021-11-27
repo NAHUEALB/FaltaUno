@@ -17,15 +17,29 @@ import { Storage } from '@ionic/storage-angular';
 })
 
 export class RegistrarPage implements OnInit {
-	enlace = 'Jugador';
-	jugadorForm: FormGroup;
-	jugador: Jugador;
 	docSubscription;
 	usuarioSubscription;
-	cargando = false;
+	
+	enlace = 'Jugador';
+	jugadorForm: FormGroup;
+	jugador = {
+		id: '',
+		idFirebase: '',
+		nombre: '',
+		usuario: '',
+		password: '',
+		email: '',
+		fnacimiento: '',
+		puntaje: 0,
+		cantidad_votos: 0,
+		sexo: "",
+		perfil: false,
+		ubicacion: ' La Plata ',
+	};
 
 	localidades = ["La Plata"/*, "Ensenada", "Berisso"*/];
 	sexos = ["No binario", "Hombre", "Mujer"];
+	cargando = false;
 
 	constructor(
 	public formBuilder: FormBuilder, 
@@ -36,20 +50,6 @@ export class RegistrarPage implements OnInit {
 	public firebaseauthService: FirebaseauthService,
 	private storage: Storage
 	){ 
-		this.jugador = {
-			id: '',
-			nombre: '',
-			usuario: '',
-			fnacimiento: '',
-			puntaje: 0,
-			cvotos: 0,
-			sexo: "",
-			perfil: false,
-			foto: '',
-			ubicacion: this.localidades[1],
-			html: '',
-		}
-
 		this.jugadorForm = this.formBuilder.group({
 			nombrereg: '',
 			usuario: new FormControl('', Validators.email),
@@ -58,7 +58,6 @@ export class RegistrarPage implements OnInit {
 			ubicacion: '',
 			sexo: '',
 		})
-		
 	}
 
 	ngOnInit() {
@@ -69,50 +68,54 @@ export class RegistrarPage implements OnInit {
 		this.jugadorForm.reset();
 	}
 
-	async presentToast(msg: string, time: number) {
-		const toast = await this.toastController.create({
-			message: msg,
-			duration: time,
-		});
-		toast.present();
+	ionViewWillLeave() {
+		if (this.docSubscription) this.docSubscription.unsubscribe();
+		if (this.usuarioSubscription) this.usuarioSubscription.unsubscribe();
+	}
+
+	irAlLogin() {
+		this.router.navigate([`/login`]);
 	}
 
 	crearJugador(){
 		this.cargando = true;
-		let user= this.jugadorForm.value.usuario;
-		let pw = this.jugadorForm.value.contrareg;
+		this.jugador.email = this.jugadorForm.value.usuario;
+		this.jugador.password = this.jugadorForm.value.contrareg;
+		this.jugador.nombre = this.jugadorForm.value.nombrereg;
+		this.jugador.fnacimiento = this.jugadorForm.value.fnacimiento;
+		this.jugador.ubicacion = this.jugadorForm.value.ubicacion;
+		this.jugador.sexo = this.jugadorForm.value.sexo;
 		setTimeout(() => {
-			this.firebaseauthService.registrar(user, pw)
+			this.firebaseauthService.registrar(this.jugador.email, this.jugador.password)
 			.then(res => {
-				let data = this.cargarJugador();
-				data.id = res.user.uid;	
-				this.firebaseauthService.createDocument<Jugador>(data, this.enlace, res.user.uid);
-				let user = this.jugadorForm.value.usuario;
-				let pw = this.jugadorForm.value.contrareg;
-				this.firebaseauthService.login(user, pw)
-				.then(() => {
-					this.usuarioSubscription = this.firebaseauthService.getUserCurrent().subscribe(res =>{
-						this.docSubscription = this.firebaseauthService.getDocumentById(this.enlace, res.uid).subscribe((document: any) =>{
-							this.storage.clear();
-							this.jugador = document;
-							this.storage.set("jugador", document).then(() => {
-								this.router.navigate(['/inicio']);
-							})
-						})
-					});
+				this.jugador.idFirebase = res.user.uid;	
+				let userEmail = this.jugadorForm.value.usuario;
+				console.log("INFO?! ",this.jugador.email, this.jugador.idFirebase)
+				// REACTIVAR CUANDO FUNCIONE EL POSTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT
+				// this.firebaseauthService.createDocument(this.jugador, this.enlace, res.user.uid);
+				console.log(this.jugador)
+				let querySql = {
+					email: this.jugador.email,
+					password: this.jugador.password,
+					nombre: this.jugador.nombre,
+					fnacimiento: this.jugador.fnacimiento,
+					sexo: this.jugador.sexo,
+					localidad: this.jugador.ubicacion,
+					idFirebase: this.jugador.idFirebase,
+					pagado: 0,
+				}
+				let requestSql = 'https://backend-f1-java.herokuapp.com/jugadores/crearjugador/' 
+				fetch(requestSql, {
+					method: "POST", 
+					body: JSON.stringify(querySql),
+					headers: {"Content-type": "application/json; charset=UTF-8"}
 				})
-				.catch((err) => {
-					this.cargando = false;
-					if(err.code.includes("auth/user-not-found")){
-						this.presentToast("Usuario ingresado no existe", 3000);
-						return
-					}
-					if(err.code.includes("auth/wrong-password")){
-						this.presentToast("Contraseña incorrecta", 3000);
-						return
-					}
-					this.presentToast(err, 3000);
-				});
+				.then(res => res.json())
+				.then(data => {
+					this.presentToast("Gracias por registrarte, ingresá con tus credenciales para empezar a buscar partidos", 3000);
+					this.irAlLogin()
+				})
+				.catch(err => this.presentToast(err, 3000))
 			})
 			.catch(err =>{
 				this.cargando = false;
@@ -125,32 +128,15 @@ export class RegistrarPage implements OnInit {
 					return
 				}
 				this.presentToast(err, 3000);
-
 			})		
 		}, 300);
 	}
-
-
-	cargarJugador(){
-		let data: Jugador;
-		data={
-			id : '',
-			nombre : this.jugadorForm.value.nombrereg,
-			usuario : '',
-			fnacimiento: this.jugadorForm.value.fnacimiento,
-			puntaje : 0,
-			cvotos : 0,
-			sexo : this.jugadorForm.value.sexo,
-			perfil : true,
-			foto : '',
-			ubicacion : this.jugadorForm.value.ubicacion,
-			html : '',
-		}
-		return data;
-	}
-
-	ionViewWillLeave(){
-		if(this.docSubscription) this.docSubscription.unsubscribe();
-		if(this.usuarioSubscription) this.usuarioSubscription.unsubscribe();
+	
+	async presentToast(msg: string, time: number) {
+		const toast = await this.toastController.create({
+			message: msg,
+			duration: time,
+		});
+		toast.present();
 	}
 }

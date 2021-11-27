@@ -29,7 +29,7 @@ export class RegistroGooglePage implements OnInit {
 			usuario: '',
 			fnacimiento: '',
 			puntaje: 0,
-			cvotos: 0,
+			cantidad_votos: 0,
 			sexo: "",
 			perfil: false,
 			foto: '',

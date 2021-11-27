@@ -18,14 +18,28 @@ import { DatabaseService } from 'src/app/serv/database.service';
 })
 
 export class EditarPage implements OnInit {
-	jugadorForm: FormGroup;
-	jugador: Jugador;
-	localidades = ["La Plata", "Ensenada", "Berisso"];
-	sexos = ["No binario", "Hombre", "Mujer"];
 	docSubscription;
 	usuarioSubscription;
-	cargando = false;
+
+	jugadorForm: FormGroup;
 	enlace = 'Jugador';
+	jugador = {
+		id: '',
+		id_firebase: '',
+		nombre: '',
+		usuario: '',
+		password: '',
+		email: '',
+		fnacimiento: '',
+		puntaje: 0,
+		cantidad_votos: 0,
+		sexo: "",
+		perfil: false,
+		ubicacion: ' La Plata ',
+	};
+	localidades = ["La Plata"/*, "Ensenada", "Berisso"*/];
+	sexos = ["No binario", "Hombre", "Mujer"];
+	
 	ACTUALIZAR_STORAGE = "actualizar:storage";
 
 	constructor(
@@ -37,20 +51,6 @@ export class EditarPage implements OnInit {
 	public firebaseauthService: FirebaseauthService,
 	private events: Events
 	){ 
-		this.jugador = {
-			id: "",
-			nombre: '',
-			usuario: "",
-			fnacimiento: "",
-			puntaje: 0,
-			cvotos: 0,
-			sexo: "",
-			perfil: false,
-			foto: "",
-			ubicacion: this.localidades[0],
-			html: ''
-		}
-
 		this.jugadorForm = this.formBuilder.group({
 			nombre: '',
 			fnacimiento: '',
@@ -73,20 +73,18 @@ export class EditarPage implements OnInit {
 		})
 	}
 
-	editarJugador() {
-		this.cargando = true;
-		
+	editarJugador() {		
 		this.jugador.nombre = this.jugadorForm.value.nombre;
 		this.jugador.fnacimiento = this.jugadorForm.value.fnacimiento;
 		this.jugador.ubicacion = this.jugadorForm.value.ubicacion;
 		this.jugador.sexo = this.jugadorForm.value.sexo;
 		
-		this.firebaseauthService.updateDocument(this.enlace, this.jugador).then(res => {
+		/* this.firebaseauthService.updateDocument(this.enlace, this.jugador).then(res => {
 			// this.events.publish("actualizar:storage", false);
 			this.storage.set("jugador", this.jugador).then(()=>{
 				this.router.navigate(["/perfil"]);
 			})
-		});
+		}); */
 	}
 
 	irAlPerfil(){

@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>¡Hola{{nombre}}!</ion-title>
+    <ion-title>¡Hola {{this.jugador.nombre || "..." }}!</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -33,7 +33,7 @@
 				<ion-icon class="cancha-icon" name="football" [id]="partido.iconColor" ></ion-icon>
 				<ion-img class="flamas" [id]="partido.optionFlama" src="../assets/flames.gif"></ion-img>
 				<div class="cancha-data">
-					<p id="cancha-nombre">{{ partido.cancha }}</p>
+					<p id="cancha-nombre">{{ partido.nombre }}</p>
 					<p id="cancha-details">
 						{{ partido.hora }}  -  
 						<b [id]="partido.slotColor">{{ partido.slotsOcupados }}</b>/<b>{{ partido.slotsTotales }} </b> 

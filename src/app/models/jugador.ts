@@ -4,7 +4,7 @@ export class Jugador{
     usuario: string;
     fnacimiento: string; 
 	puntaje: number;
-	cvotos: number;
+	cantidad_votos: number;
 	sexo: string;
 	perfil: boolean;
 	foto: string;
