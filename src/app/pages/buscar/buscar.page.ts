@@ -23,27 +23,6 @@ export class BuscarPage implements OnInit {
 
   partidosSql = []
 
-  partidos: Sala[] = [
-    {
-      id: '1',
-      nombre: 'Cargando...',
-      slotsOcupados: 0,
-      slotsTotales: 10,
-      hora: '00:00',
-      sexo: ' Mixto ',
-      estado: 'Sala pública',
-      equipoRed: [],
-      equipoBlue: [],
-    },
-  ];
-
-  distancias = {
-    Megastadio: 3,
-    'Estadio 7': 2,
-    'Cancha La Lora': 6,
-    'Cancha Loca': 5,
-  };
-
   constructor(
     private router: Router,
     private storage: Storage,
@@ -55,14 +34,7 @@ export class BuscarPage implements OnInit {
     .catch(() => console.log("Primer error de querer cargar info del jugador desde el Storage"));
   }
     
-  ngOnInit() {
-    this.partidos.forEach((p) => {
-      this.setSexo(p);
-      this.setColorSlot(p);
-      this.setOrden(p);
-    });
-    this.ordenarPartidos(this.partidos);
-  }
+  ngOnInit() {}
   
   ionViewWillEnter() {
     this.refreshPartidos();
@@ -143,19 +115,14 @@ export class BuscarPage implements OnInit {
   }
 
   setOrden(elem) {
-    let now = new Date();
-    let horaNow = now.getHours();
     let horaPartido = elem.hora.split(':')[0] - 0;
-    let tiempo = Math.max(0, Math.floor(horaPartido - horaNow));
-    let slots = Math.floor(10 - elem.slotsOcupados);
-    let distancia = Math.floor(this.distancias[elem.cancha] * (4 / 3));
-    elem.orden = tiempo + slots + distancia;
+    let tiempo = Math.max(0, horaPartido/2);
+    let slots = 2*(10 - elem.slotsOcupados);
+    elem.orden = tiempo + slots;
   }
 
   ordenarPartidos(partidos) {
-    partidos.sort(function (a, b) {
-      return a.orden - b.orden;
-    });
+    partidos.sort((a, b) => a.orden - b.orden);
   }
   
   swapAMapa() {
