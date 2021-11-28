@@ -64,6 +64,10 @@ const routes: Routes = [
     loadChildren: () => import('./pages/ayuda-menu-lateral/ayuda-menu-lateral.module').then( m => m.AyudaMenuLateralPageModule)
   },
   {
+    path: 'ayuda-pago',
+    loadChildren: () => import('./pages/ayuda-pago/ayuda-pago.module').then( m => m.AyudaPagoPageModule)
+  },
+  {
     path: 'editar-sala',
     loadChildren: () => import('./pages/editar-sala/editar-sala.module').then( m => m.EditarSalaPageModule)
   },
