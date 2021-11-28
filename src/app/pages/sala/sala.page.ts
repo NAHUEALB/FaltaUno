@@ -68,34 +68,7 @@ export class SalaPage implements OnInit {
 		.then((jugador) => {
 			this.jugador = jugador; 
 			console.log("INFO DEL JUGADOR OBTENIDA DESDE SALA",this.jugador)
-			this.storage.get('partido').then((partido) => {
-				this.partido = partido; 
-				console.log("INFO DEL PARTIDO OBTENIDA DESDE SALA",this.partido)
-				let {idJug1, idJug2, idJug3, idJug4, idJug5, idJug6, idJug7, idJug8, idJug9, idJug10} = this.partido
-				this.idsJugadores = [idJug1, idJug2, idJug3, idJug4, idJug5, idJug6, idJug7, idJug8, idJug9, idJug10]
-				console.log("IDS DE PARTIDOS OBTENIDA DESDE SALA",this.idsJugadores)
-				this.salaNombre = this.partido.cancha.nombreCancha
-				this.salaDireccion = this.partido.cancha.direccion
-				this.salaPrecio = this.partido.cancha.precio
-				this.salaEstado = ' Sala Pública '
-				this.salaSexo = this.partido.sexo
-				this.jugadores = []
-				for (let i=0; i<10; i++) {
-					if (this.idsJugadores[i] !== 0) {
-						let requestSql = 'https://backend-f1-java.herokuapp.com/jugadores/' + this.idsJugadores[i] 
-						fetch(requestSql)
-						.then(res => res.json())
-						.then(data => {
-							let jugador = data;
-							let scoreStars = jugador.puntaje / jugador.cantidad_votos
-							this.fillStars(jugador, scoreStars)
-							this.jugadores.push(jugador)
-							this.repartirEquiposRedYBlue(this.jugadores)
-						})
-					}
-				}
-			})
-		})
+		}).catch(() => console.log("Error al recuperar la info del jugador"));
 	}
 
 	ngOnInit() {}
@@ -103,8 +76,48 @@ export class SalaPage implements OnInit {
 	ionViewWillEnter() {
 		// QUERY MODIFICAR EL PARTIDO PARA METER EL ID DE ESTE JUGADOR
 		let requestSql = 'https://backend-f1-java.herokuapp.com/partido/' + this.jugador
+		console.log("INFO DEL PARTIDO AL REENTRAR A UNA SALA",this.partido)
+		this.actualizarJugadoresDeLaSala()
+	}
+	
+	irAlEditarSala() {
+		this.storage.set("partido", this.partido)
+		.then(() => this.router.navigate([`/editar-sala`]))
+	}
 
-		console.log("entrando a sala")
+	irAlPartido() {
+		this.router.navigate([`/partido`]);
+	}
+
+	actualizarJugadoresDeLaSala() {
+		this.storage.get('partido')
+		.then((partido) => {
+			this.partido = partido; 
+			console.log("INFO DEL PARTIDO OBTENIDA DESDE SALA",this.partido)
+			let {idJug1, idJug2, idJug3, idJug4, idJug5, idJug6, idJug7, idJug8, idJug9, idJug10} = this.partido
+			this.idsJugadores = [idJug1, idJug2, idJug3, idJug4, idJug5, idJug6, idJug7, idJug8, idJug9, idJug10]
+			console.log("IDS DE PARTIDOS OBTENIDA DESDE SALA",this.idsJugadores)
+			this.salaNombre = this.partido.cancha.nombreCancha
+			this.salaDireccion = this.partido.cancha.direccion
+			this.salaPrecio = this.partido.cancha.precio
+			this.salaEstado = ' Sala Pública '
+			this.salaSexo = this.partido.sexo
+			this.jugadores = []
+			for (let i=0; i<10; i++) {
+				if (this.idsJugadores[i] !== 0) {
+					let requestSql = 'https://backend-f1-java.herokuapp.com/jugadores/' + this.idsJugadores[i] 
+					fetch(requestSql)
+					.then(res => res.json())
+					.then(data => {
+						let jugador = data;
+						let scoreStars = jugador.puntaje / jugador.cantidad_votos
+						this.fillStars(jugador, scoreStars)
+						this.jugadores.push(jugador)
+						this.repartirEquiposRedYBlue(this.jugadores)
+					})
+				}
+			}
+		}).catch(() => console.log("Error al recuperar la info del partido"));
 	}
 
 	repartirEquiposRedYBlue(jugs) {
@@ -146,13 +159,6 @@ export class SalaPage implements OnInit {
 		}
 	}
 
-	irAlEditarSala() {
-		this.router.navigate([`/editar-sala`]);
-	}
-
-	irAlPartido() {
-		this.router.navigate([`/partido`]);
-	}
 	
 	async abrirModal() {
 		this.menuCtrl.close();
@@ -200,8 +206,14 @@ export class SalaPage implements OnInit {
 	}
 
 	abandonarSala() {
-		this.router.navigate(['/buscar']);
-		// QUERY MODIFICAR EL PARTIDO PARA SACAR EL ID DE ESTE JUGADOR
+		this.storage.set("jugador", this.jugador).then(()=>{
+			console.log("INFO DEL JUGADOR GUARDADA DESDE SALA", this.jugador)
+			this.storage.set("partido", {}).then(()=>{
+				console.log("INFO VACIADA DE LOS PARTIDOS DESDE SALA!!!")
+				// QUERY MODIFICAR EL PARTIDO PARA SACAR EL ID DE ESTE JUGADOR
+				this.router.navigate([`/buscar`]);
+      		})
+		})
 	}
 }
 

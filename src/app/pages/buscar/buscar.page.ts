@@ -54,10 +54,7 @@ export class BuscarPage implements OnInit {
     .then((jugador) => {
       this.jugador = jugador; 
       console.log("INFO DEL JUGADOR OBTENIDA DESDE BUSCAR",this.jugador)
-    })
-    .catch(() => {
-      console.log("Primer error de querer cargar info del jugador desde el Storage")
-    });
+    }).catch(() => console.log("Primer error de querer cargar info del jugador desde el Storage"));
   }
     
   ngOnInit() {
