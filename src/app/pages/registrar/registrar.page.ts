@@ -116,14 +116,14 @@ export class RegistrarPage implements OnInit {
 			.catch(err =>{
 				this.cargando = false;
 				if(err.code.includes("auth/email-already-in-use")){
-					this.presentToast("Correo electronico ya registrado", 3000);
+					this.presentToast("💀 Correo electronico ya registrado", 3000);
 					return
 				}
 				if(err.code.includes("auth/invalid-email")){
-					this.presentToast("Correo electronico con formato incorrecto", 3000);
+					this.presentToast("💀 Correo electronico con formato incorrecto", 3000);
 					return
 				}
-				this.presentToast(err, 3000);
+				this.presentToast("💀 " + err, 3000);
 			})		
 		}, 300);
 	}

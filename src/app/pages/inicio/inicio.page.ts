@@ -127,6 +127,7 @@ export class InicioPage implements OnInit {
 		.then((res) => res.json())
 		.then((data) => {
 			this.jugador.id = data.idjugador
+			this.jugador.password = data.password
 			this.jugador.nombre = data.nombre
 			this.jugador.sexo = data.sexo
 			this.jugador.fnacimiento = data.fnacimiento

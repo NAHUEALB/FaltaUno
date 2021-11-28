@@ -25,6 +25,7 @@ export class LoginPage implements OnInit {
 	jugadorForm: FormGroup;
 	jugador = {
 		id: '',
+		password: '',
 		id_firebase: '',
 		nombre: '',
 		email: '',
@@ -78,7 +79,8 @@ export class LoginPage implements OnInit {
 				this.jugador.id_firebase = res.uid
 				this.docSubscription = this.firebaseauthService.getDocumentById(this.enlace, res.uid).subscribe((document: any) =>{
 					this.jugador.email = userEmail
-					this.presentToast("Sesión iniciada con éxito", 3000);
+					this.jugador.password = userPassword
+					this.presentToast("Sesión iniciada con éxito ✅", 3000);
 					this.irAlInicio()
 				})
 			});
@@ -88,15 +90,15 @@ export class LoginPage implements OnInit {
 			let codigo: string = err.code;
 			switch(codigo){
 				case "auth/user-not-found":{
-					this.presentToast("Usuario ingresado no existe", 3000);
+					this.presentToast("💀 Usuario ingresado no existe", 3000);
 					break;
 				}
 				case "auth/wrong-password":{
-					this.presentToast("Contraseña incorrecta", 3000);	
+					this.presentToast("💀 Contraseña incorrecta", 3000);	
 					break;
 				}
 				default:{
-					this.presentToast(err, 3000);
+					this.presentToast("💀 "+err, 3000);
 					break;
 				}
 			}	
