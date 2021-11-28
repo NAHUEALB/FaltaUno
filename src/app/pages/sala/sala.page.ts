@@ -66,7 +66,7 @@ export class SalaPage implements OnInit {
 	) {
 		this.storage.get('jugador')
 		.then(jugador => this.jugador = jugador)
-		.catch(() => console.log("Error al recuperar la info del jugador"));
+		.catch(() => console.error("Error al recuperar la info del jugador"));
 	}
 
 	ngOnInit() {}
@@ -78,22 +78,23 @@ export class SalaPage implements OnInit {
 	}
 	
 	irAlEditarSala() {
-		this.storage.set("partido", this.partido)
-		.then(() => this.router.navigate([`/editar-sala`]))
+		this.storage.set("jugador", this.jugador)
+		.then(() => this.storage.set("partido", this.partido)
+			.then(() => this.router.navigate([`/editar-sala`])))
 	}
 
 	irAlPartido() {
-		this.router.navigate([`/partido`]);
+		this.storage.set("jugador", this.jugador)
+		.then(() => this.storage.set("partido", this.partido)
+			.then(() => this.router.navigate([`/partido`])))
 	}
 
 	actualizarJugadoresDeLaSala() {
 		this.storage.get('partido')
 		.then((partido) => {
 			this.partido = partido; 
-			console.log("INFO DEL PARTIDO OBTENIDA DESDE SALA",this.partido)
 			let {idJug1, idJug2, idJug3, idJug4, idJug5, idJug6, idJug7, idJug8, idJug9, idJug10} = this.partido
 			this.idsJugadores = [idJug1, idJug2, idJug3, idJug4, idJug5, idJug6, idJug7, idJug8, idJug9, idJug10]
-			console.log("IDS DE PARTIDOS OBTENIDA DESDE SALA",this.idsJugadores)
 			this.salaNombre = this.partido.cancha.nombreCancha
 			this.salaDireccion = this.partido.cancha.direccion
 			this.salaPrecio = this.partido.cancha.precio
@@ -114,7 +115,7 @@ export class SalaPage implements OnInit {
 					})
 				}
 			}
-		}).catch(() => console.log("Error al recuperar la info del partido"));
+		}).catch(() => console.error("Error al recuperar la info del partido"));
 	}
 
 	repartirEquiposRedYBlue(jugs) {
@@ -199,18 +200,17 @@ export class SalaPage implements OnInit {
 	}
 
 	pagar() {
-		console.log("pagado en el banco de mentiritas, cantidad: ${123}")
+		return true
 	}
 
 	abandonarSala() {
-		this.storage.set("jugador", this.jugador).then(()=>{
-			console.log("INFO DEL JUGADOR GUARDADA DESDE SALA", this.jugador)
-			this.storage.set("partido", {}).then(()=>{
-				console.log("INFO VACIADA DE LOS PARTIDOS DESDE SALA!!!")
+		this.storage.set("jugador", this.jugador)
+		.then(() => this.storage.set("partido", {})
+			.then(() => {
 				// QUERY MODIFICAR EL PARTIDO PARA SACAR EL ID DE ESTE JUGADOR
 				this.router.navigate([`/buscar`]);
       		})
-		})
+		)
 	}
 }
 

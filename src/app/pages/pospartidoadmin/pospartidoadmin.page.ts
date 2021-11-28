@@ -58,7 +58,6 @@ export class PospartidoadminPage implements OnInit {
 				this.equipoRed = sala.equipoRed;
 				this.equipoBlue = sala.equipoBlue;
 				this.salaNombre = sala.nombre;
-				console.log(sala.estado)
 				this.salaEstado = (sala.estado == ' Sala pública ') ? 'público 🔓' : 'privado 🔐';
 				this.salaSexo = (sala.sexo == ' No binario ') ? 'Mixto' : sala.sexo
 				this.storage.get("jugador").then(jugador => {
@@ -66,9 +65,9 @@ export class PospartidoadminPage implements OnInit {
 	
 					for (let i=this.equipoRed.length; i<5; i++) this.equipoRed.push(this.jugadorVacio)
 					for (let i=this.equipoBlue.length; i<5; i++) this.equipoBlue.push(this.jugadorVacio)
-          this.llenarConBots()
-          this.equipoRed.splice(2,1)
-          this.iniciarStars()
+					//this.llenarConBots()
+					this.equipoRed.splice(2,1)
+					this.iniciarStars()
 				})
 			})
 		})
@@ -99,22 +98,22 @@ export class PospartidoadminPage implements OnInit {
 
 	fillStars(player, value) {
 		player.stars = [];
-    console.log(value)
 		for (let i=0; i<5; i++) {
-      if (value >= i) player.stars.push("full")
-      else player.stars.push("null")
+			if (value >= i) player.stars.push("full")
+			else player.stars.push("null")
 		}
 	}
 
-  llenarConBots() {
-    console.log(this.equipoRed.length, this.equipoBlue.length)
+  /* llenarConBots() {
     this.equipoRed[2] = {nombre: "Nicolas", cantidad_votos: 1}
     this.equipoBlue[2] = {nombre: "Mariana", cantidad_votos:1};
     this.equipoRed[3] = {nombre: "Riki", cantidad_votos:1};
     this.equipoBlue[3] = {nombre: "Mario", cantidad_votos:1};
     this.equipoRed[4] = {nombre: "Gimena", cantidad_votos:1};
     this.equipoBlue[4] = {nombre: "Andrea", cantidad_votos:1};
-  }cantidad_votos
+  } */
+  
+  cantidad_votos
 
   clickPositivo() {
     if (this.votoEmitido) return

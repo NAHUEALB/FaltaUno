@@ -42,6 +42,10 @@ export class PartidoPage implements OnInit {
 	equipoRed = [];
 	equipoBlue = [];
 	stars: any[];
+	partido
+	jugador
+	jugadores = []
+	idsJugadores = []
 
   constructor(
     private storage: Storage,
@@ -53,45 +57,62 @@ export class PartidoPage implements OnInit {
   }
 
   ionViewWillEnter() {
-		//let cancha = this.router.getCurrentNavigation().extras.state.cancha;
-		this.storage.get('cancha').then(cancha => {
-			this.salaDireccion = cancha.direccion;
-			this.salaPrecio = cancha.precio;
-			this.storage.get("sala").then(sala => {
-				this.equipoRed = sala.equipoRed;
-				this.equipoBlue = sala.equipoBlue;
-				this.salaNombre = sala.nombre;
-				console.log(sala.estado)
-				this.salaEstado = (sala.estado == ' Sala pública ') ? 'público 🔓' : 'privado 🔐';
-				this.salaSexo = (sala.sexo == ' No binario ') ? 'Mixto' : sala.sexo
-				this.storage.get("jugador").then(jugador => {
-					(Math.random() > 0.5) ? this.equipoRed.push(jugador) : this.equipoBlue.push(jugador)
-	
-					for (let i=this.equipoRed.length; i<5; i++) this.equipoRed.push(this.jugadorVacio)
-					for (let i=this.equipoBlue.length; i<5; i++) this.equipoBlue.push(this.jugadorVacio)
-          this.llenarConBots(false)
-				})
-			})
-		})
+    this.actualizarJugadoresDeLaSala()
     this.nextSegundo()
-		this.descargarJugadores()
 	}
 
   irAlPospartido() {
     this.router.navigate([`/pospartidoadmin`]);
   }
 
-  descargarJugadores() {
-		this.arrJugadores = [];
-		this.jugadoresSubscription = this.firebaseauthService.getDocumentById('Puentes', 'bridge-jugadores').subscribe((idsJugadores: any) =>{
-			for (let i in idsJugadores.jugadores) {
-				this.jugSubscription = this.firebaseauthService.getDocumentById('Jugador', idsJugadores.jugadores[i]).subscribe((jugDocument: any) =>{
-					this.arrJugadores.push(jugDocument)
-					this.jugSubscription.unsubscribe()
-				})
+  actualizarJugadoresDeLaSala() {
+		this.storage.get('partido')
+		.then((partido) => {
+			this.partido = partido; 
+			let {idJug1, idJug2, idJug3, idJug4, idJug5, idJug6, idJug7, idJug8, idJug9, idJug10} = this.partido
+			this.idsJugadores = [idJug1, idJug2, idJug3, idJug4, idJug5, idJug6, idJug7, idJug8, idJug9, idJug10]
+			this.salaNombre = this.partido.cancha.nombreCancha
+			this.salaDireccion = this.partido.cancha.direccion
+			this.salaPrecio = this.partido.cancha.precio
+			this.salaEstado = ' Sala Pública '
+			this.salaSexo = this.partido.sexo
+			this.jugadores = []
+			for (let i=0; i<10; i++) {
+				if (this.idsJugadores[i] !== 0) {
+					let requestSql = 'https://backend-f1-java.herokuapp.com/jugadores/' + this.idsJugadores[i] 
+					fetch(requestSql)
+					.then(res => res.json())
+					.then(data => {
+						let jugador = data;
+						let scoreStars = jugador.puntaje / jugador.cantidad_votos
+						this.fillStars(jugador, scoreStars)
+						this.jugadores.push(jugador)
+						this.repartirEquiposRedYBlue(this.jugadores)
+					})
+				}
 			}
-			this.jugadoresSubscription.unsubscribe();
-		})
+		}).catch(() => console.log("Error al recuperar la info del partido"));
+	}
+
+  repartirEquiposRedYBlue(jugs) {
+		// en el orden que están, se reparte uno para red, otro blue, otro red, otro blue y así
+		// por lo tanto, índices impares quedarían en el lado red, pares quedarían en el lado blue
+		this.equipoRed = []
+		this.equipoBlue = []
+		jugs.forEach((j, i) => i%2==0 ? this.equipoRed.push(j) : this.equipoBlue.push(j))
+		for (let i=0; i<5; i++) 
+			if (!this.equipoRed[i]) this.equipoRed.push({nombre: " (disponible) "})
+		for (let i=0; i<5; i++) 
+			if (!this.equipoBlue[i]) this.equipoBlue.push({nombre: " (disponible) "})
+	}
+
+  fillStars(player, value) {
+		player.stars = [];
+		for (let i=0; i<5; i++) {
+			if (value - .75 >= i) player.stars.push("full")
+			else if (value - .25 >= i) player.stars.push("half")
+			else player.stars.push("null");
+		}
 	}
 
   nextSegundo() {
@@ -109,27 +130,14 @@ export class PartidoPage implements OnInit {
     if (this.partidoMinutos < 10) {
       this.partidoMinutos = 10
       this.partidoSegundos = 13
-      this.llenarConBots(false)
+      //this.llenarConBots(false)
     } else {
       this.partidoMinutos = 59
       this.partidoSegundos = 38
-      this.llenarConBots(true)
+      //this.llenarConBots(true)
     }
   }
-
-  llenarConBots(voto = false) {
-    console.log("llenando de bots con voto " + voto)
-    console.log(this.equipoRed.length, this.equipoBlue.length)
-    this.equipoBlue[2] = {nombre: "Mariana", voto: voto};
-    this.equipoRed[3] = {nombre: "Riki", voto: voto};
-    this.equipoBlue[3] = {nombre: "Mario", voto: false};
-    this.equipoRed[4] = {nombre: "Gimena", voto: false};
-    this.equipoBlue[4] = {nombre: "Andrea", voto: voto};
-    this.equipoRed[0].voto = voto;
-    this.equipoBlue[1].voto = voto;
-    this.votosSalir = voto ? 5 : 0
-  }
-
+  
   votarSalir() {
     this.equipoRed[2].voto = true
     this.votosSalir++

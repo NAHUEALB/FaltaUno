@@ -26,7 +26,6 @@ export class RegistroGooglePage implements OnInit {
     	this.jugador = {
 			id: '',
 			nombre: '',
-			usuario: '',
 			fnacimiento: '',
 			puntaje: 0,
 			cantidad_votos: 0,

@@ -27,7 +27,6 @@ export class LoginPage implements OnInit {
 		id: '',
 		id_firebase: '',
 		nombre: '',
-		usuario: '',
 		email: '',
 		fnacimiento: '',
 		puntaje: 0,
@@ -64,21 +63,17 @@ export class LoginPage implements OnInit {
 	}
 	
 	irAlInicio() {
-		this.storage.set("jugador", this.jugador).then(()=>{
-			console.log("INFO DEL JUGADOR GUARDADA DESDE LOGIN", this.jugador)
-			this.router.navigate([`/inicio`]);
-		})
+		this.storage.set("jugador", this.jugador)
+		.then(()=> this.router.navigate([`/inicio`]))
 	}
 	
 	login() {
 		this.cargando = true;
 		let userEmail = this.jugadorForm.value.usuario;
 		let userPassword = this.jugadorForm.value.contraseña;
-		console.log(userEmail, userPassword) // OK
     	this.firebaseauthService.login(userEmail, userPassword)
 		.then(() => {
-			this.usuarioSubscription = this.firebaseauthService.getUserCurrent().subscribe(res =>{
-				console.log("response ", res)
+			this.usuarioSubscription = this.firebaseauthService.getUserCurrent().subscribe(res => {
 				this.jugador.id_firebase = res.uid
 				this.docSubscription = this.firebaseauthService.getDocumentById(this.enlace, res.uid).subscribe((document: any) =>{
 					this.jugador.email = userEmail

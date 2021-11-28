@@ -58,7 +58,6 @@ export class EditarSalaPage implements OnInit {
 
 	ngOnInit() {
 		this.storage.get("sala").then(res => {
-			console.log(res)
 			this.sala = res;
 			this.salaForm.patchValue({
 				nombre: this.sala.nombre,

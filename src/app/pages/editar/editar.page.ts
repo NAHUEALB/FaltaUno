@@ -27,7 +27,6 @@ export class EditarPage implements OnInit {
 		id: '',
 		id_firebase: '',
 		nombre: '',
-		usuario: '',
 		password: '',
 		email: '',
 		fnacimiento: '',

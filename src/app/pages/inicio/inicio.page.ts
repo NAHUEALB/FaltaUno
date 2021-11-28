@@ -21,7 +21,6 @@ export class InicioPage implements OnInit {
 		id: '',
 		id_firebase: '',
 		nombre: '',
-		usuario: '',
 		password: '',
 		email: '',
 		fnacimiento: '',
@@ -78,24 +77,18 @@ export class InicioPage implements OnInit {
 	}
 
 	irAlHistorial(){
-		this.storage.set("jugador", this.jugador).then(()=>{
-			console.log("INFO DEL JUGADOR GUARDADA DESDE INICIO", this.jugador)
-			this.router.navigate([`/historial`]);
-		})
+		this.storage.set("jugador", this.jugador)
+		.then(() => this.router.navigate([`/historial`]))
 	}
 
 	irAlPerfil(){
-		this.storage.set("jugador", this.jugador).then(()=>{
-			console.log("INFO DEL JUGADOR GUARDADA DESDE INICIO", this.jugador)
-			this.router.navigate([`/perfil`]);
-		})
+		this.storage.set("jugador", this.jugador)
+		.then(() => this.router.navigate([`/perfil`]))
 	}
 	
 	irAlBuscar() {
-		this.storage.set("jugador", this.jugador).then(()=>{
-			console.log("INFO DEL JUGADOR GUARDADA DESDE INICIO", this.jugador)
-			this.router.navigate([`/buscar`]);
-		})
+		this.storage.set("jugador", this.jugador)
+		.then(() => this.router.navigate([`/buscar`]))
 	}
 
 	ionViewWillEnter() {
@@ -107,7 +100,6 @@ export class InicioPage implements OnInit {
 		this.storage.get('jugador')
 		.then((jugador) => {
 			this.jugador = jugador; 
-			console.log("INFO DEL JUGADOR OBTENIDA DESDE INICIO",this.jugador)
 			!this.jugador.nombre && this.actualizarJugadorPorIdFirebase()
 			this.storage.get('listaPartidos')
 			.then(lista => {
@@ -139,7 +131,6 @@ export class InicioPage implements OnInit {
 			this.jugador.fnacimiento = data.fnacimiento
 			this.jugador.cantidad_votos = data.cantVotos
 			this.jugador.puntaje = data.puntaje
-			console.log("INFO DEL JUGADOR ACTUALIZADA DESDE INICIO POR FETCH", this.jugador)
 		}).catch(() => {
 			console.log("Segundo error de querer cargar info del jugador desde la base de datos SQL")
 		});

@@ -19,7 +19,6 @@ export class PerfilPage implements OnInit {
 		id: '',
 		id_firebase: '',
 		nombre: '',
-		usuario: '',
 		password: '',
 		email: '',
 		fnacimiento: '',
@@ -44,13 +43,8 @@ export class PerfilPage implements OnInit {
 	private storage: Storage,
 	){ 	
 		this.storage.get('jugador')
-		.then((jugador) => {
-			this.jugador = jugador; 
-			console.log("INFO DEL JUGADOR OBTENIDA DESDE PERFIL",this.jugador)
-		})
-		.catch(() => {
-			console.log("Primer error de querer cargar info del jugador desde el Storage")
-		});
+		.then(jugador => this.jugador = jugador)
+		.catch(() => console.log("Primer error de querer cargar info del jugador desde el Storage"));
 	}
 
   	ngOnInit() {}
@@ -68,24 +62,18 @@ export class PerfilPage implements OnInit {
 	}
 
 	irAlEditar(){
-		this.storage.set("jugador", this.jugador).then(()=>{
-			console.log("INFO DEL JUGADOR GUARDADA DESDE PERFIL", this.jugador)
-			this.router.navigate([`/editar`]);
-		})
+		this.storage.set("jugador", this.jugador)
+		.then(() => this.router.navigate([`/editar`]))
 	}
 
 	irAlHistorial(){
-		this.storage.set("jugador", this.jugador).then(()=>{
-			console.log("INFO DEL JUGADOR GUARDADA DESDE PERFIL", this.jugador)
-			this.router.navigate([`/historial`]);
-		})
+		this.storage.set("jugador", this.jugador)
+		.then(() => this.router.navigate([`/historial`]))
 	}
 
 	irAlInicio(){
-		this.storage.set("jugador", this.jugador).then(()=>{
-			console.log("INFO DEL JUGADOR GUARDADA DESDE PERFIL", this.jugador)
-			this.router.navigate([`/inicio`]);
-		})
+		this.storage.set("jugador", this.jugador)
+		.then(() => this.router.navigate([`/inicio`]))
 	}
 
 	getEdad(dateNacimiento) {

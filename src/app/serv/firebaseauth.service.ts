@@ -26,7 +26,7 @@ export class FirebaseauthService {
     try {
       return this.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider);
     } catch (err) {
-      console.log("Detalles: " + err);
+      console.error("Detalles: " + err);
     }
   }
 
@@ -64,7 +64,6 @@ export class FirebaseauthService {
       'sexo': data.sexo,
       'perfil': data.perfil,
       'ubicacion': data.ubicacion,
-      'usuario': data.usuario 
     });
   }
 

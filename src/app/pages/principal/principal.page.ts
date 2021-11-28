@@ -26,7 +26,6 @@ export class PrincipalPage implements OnInit {
 		idFirebase: '',
 		email: '',
 		nombre: '',
-		usuario: '',
 		fnacimiento: '',
 		puntaje: 0,
 		cantidad_votos: 0,
@@ -99,30 +98,12 @@ export class PrincipalPage implements OnInit {
 		await modal.present();
 	}
 	
-	socialShare(){
+	/* socialShare(){
 		let options = {
 			message: 'share this', // not supported on some apps (Facebook, Instagram)
 			url: 'https://ionicframework.com/docs/native/social-sharing',
 		};
 		this.socialSharing.shareWithOptions(options);
-	}
-
-	/* 	cargarJugador() {
-		let data: Jugador;
-		data = {
-			id: '',
-			nombre: '',
-			usuario: '',
-			fnacimiento: '2020-01-01',
-			puntaje: 0,
-			cantidad_votos: 0,
-			sexo: 'No binario',
-			perfil: true,
-			foto: '',
-			ubicacion: 'No definida',
-			html: '',
-		}
-		return data;
 	} */
 	
 	/* async irAlLoginGoogle() {
@@ -153,12 +134,8 @@ export class PrincipalPage implements OnInit {
 				})
 			})
 		} catch (err) {
-			console.log("Detalles: " + err);
+			console.err("Detalles: " + err);
 		}
-	} */
-
-	/* irAlLoginFacebook() {
-		console.log("ajsdkjasjkd te la CREISTE WEEEE JASKDJAKJSDKAJSD");
 	} */
 }
 

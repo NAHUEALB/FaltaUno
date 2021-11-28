@@ -26,7 +26,6 @@ export class RegistrarPage implements OnInit {
 		id: '',
 		idFirebase: '',
 		nombre: '',
-		usuario: '',
 		password: '',
 		email: '',
 		fnacimiento: '',
@@ -89,11 +88,7 @@ export class RegistrarPage implements OnInit {
 			this.firebaseauthService.registrar(this.jugador.email, this.jugador.password)
 			.then(res => {
 				this.jugador.idFirebase = res.user.uid;	
-				let userEmail = this.jugadorForm.value.usuario;
-				console.log("INFO?! ",this.jugador.email, this.jugador.idFirebase)
-				// REACTIVAR CUANDO FUNCIONE EL POSTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT
-				// this.firebaseauthService.createDocument(this.jugador, this.enlace, res.user.uid);
-				console.log(this.jugador)
+				this.firebaseauthService.createDocument(this.jugador, this.enlace, res.user.uid);
 				let querySql = {
 					email: this.jugador.email,
 					password: this.jugador.password,

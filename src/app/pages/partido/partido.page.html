@@ -16,14 +16,21 @@
       <ion-list class="blk-halfcard" lines="none">
         <ion-item class="halflist hl-left" *ngFor="let jugador of equipoRed">
           <div>
-            <div [class.jugador-vacio]="jugador.nombre == ' (vacío) '" id="nombre-jugador">
+            <div [class.jugador-vacio]="jugador.nombre == ' (disponible) '" id="nombre-jugador">
               {{ jugador.nombre }}
             </div>
-            <ion-icon 
-              class="paycheck-icon"
-              [class.pay-correct]="jugador.voto == true"
-              name="thumbs-up">
-            </ion-icon>
+            <div class="stars" *ngIf="jugador.stars">
+              <ion-icon 
+                class="paycheck-icon"
+                [class.pay-correct]="jugador.voto == true"
+                name="thumbs-up">
+              </ion-icon>
+              <div *ngFor="let star of jugador.stars">
+                <img *ngIf="star === 'full'" class="star" [src]="'/assets/stars/star-full.png'">
+                <img *ngIf="star === 'half'" class="star" [src]="'/assets/stars/star-half.png'">
+                <img *ngIf="star === 'null'" class="star" [src]="'/assets/stars/star-null.png'">
+              </div>
+            </div>
           </div>  
         </ion-item>
       </ion-list>
@@ -32,14 +39,21 @@
       <ion-list class="blk-halfcard"lines="none">
         <ion-item class="halflist hl-right" *ngFor="let jugador of equipoBlue">
           <div>
-            <div [class.jugador-vacio]="jugador.nombre == ' (vacío) '" id="nombre-jugador">
+            <div [class.jugador-vacio]="jugador.nombre == ' (disponible) '" id="nombre-jugador">
               {{ jugador.nombre }}
             </div>
-            <ion-icon 
-              class="paycheck-icon"
-              [class.pay-correct]="jugador.voto == true"
-              name="thumbs-up">
-            </ion-icon>
+            <div class="stars" *ngIf="jugador.stars">
+              <ion-icon 
+                class="paycheck-icon"
+                [class.pay-correct]="jugador.voto == true"
+                name="thumbs-up">
+              </ion-icon>
+              <div *ngFor="let star of jugador.stars">
+                <img *ngIf="star === 'full'" class="star" [src]="'/assets/stars/star-full.png'">
+                <img *ngIf="star === 'half'" class="star" [src]="'/assets/stars/star-half.png'">
+                <img *ngIf="star === 'null'" class="star" [src]="'/assets/stars/star-null.png'">
+              </div>
+            </div>
           </div> 
         </ion-item>
       </ion-list>

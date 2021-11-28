@@ -51,10 +51,8 @@ export class BuscarPage implements OnInit {
     public http: HttpClient
   ) {
     this.storage.get('jugador')
-    .then((jugador) => {
-      this.jugador = jugador; 
-      console.log("INFO DEL JUGADOR OBTENIDA DESDE BUSCAR",this.jugador)
-    }).catch(() => console.log("Primer error de querer cargar info del jugador desde el Storage"));
+    .then((jugador) => this.jugador = jugador)
+    .catch(() => console.log("Primer error de querer cargar info del jugador desde el Storage"));
   }
     
   ngOnInit() {
@@ -71,26 +69,18 @@ export class BuscarPage implements OnInit {
   }
 
   irAlInicio() {
-    this.storage.set("jugador", this.jugador).then(()=>{
-			console.log("INFO DEL JUGADOR GUARDADA DESDE BUSCAR", this.jugador)
-      this.storage.set("listaPartidos", this.partidosSql).then(()=>{
-        console.log("INFO DE LOS PARTIDOS GUARDADA DESDE BUSCAR", this.partidosSql)
-        this.router.navigate([`/inicio`]);
-      })
-		})
+    this.storage.set("jugador", this.jugador)
+    .then(() => this.storage.set("listaPartidos", this.partidosSql)
+      .then(() => this.router.navigate([`/inicio`])))
   }
 
   irALaSala(partido) {
     let requestSql = 'https://backend-f1-java.herokuapp.com/partidos/'+partido.idpartido
     fetch(requestSql)
     .then(res => res.json())
-    .then(data => {
-      this.storage.set("jugador", this.jugador)
-      .then(() => {
-        this.storage.set("partido", data)
-        .then(()=>this.router.navigate([`/sala`]))
-      })
-    })
+    .then(data => this.storage.set("jugador", this.jugador)
+      .then(() => this.storage.set("partido", data)
+        .then(() => this.router.navigate([`/sala`]))))
   }
   
   refreshPartidos() {

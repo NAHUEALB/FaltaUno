@@ -24,8 +24,6 @@ export class MercadopagoService {
         )
         .subscribe((data: any) => {
           this.response = data.sandbox_init_point;
-
-          console.log(this.response);
           resolve(this.response);
         });
 
