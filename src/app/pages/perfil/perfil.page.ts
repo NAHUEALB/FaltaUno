@@ -50,8 +50,8 @@ export class PerfilPage implements OnInit {
   	ngOnInit() {}
 
 	ionViewWillEnter(){
-		this.storage.get("jugador").then(jugadorDelStorage => {
-			this.jugador = jugadorDelStorage;
+		this.storage.get("jugador").then(jugador => {
+			this.jugador = jugador;
 			this.edad = this.getEdad(this.jugador.fnacimiento);
 			this.valoracion = this.getValoracion(this.jugador.puntaje, this.jugador.cantidad_votos);
 			this.resultado = "4 - 2"

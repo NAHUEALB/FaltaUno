@@ -77,9 +77,7 @@ export class SalaPage implements OnInit {
 		this.actualizarJugadoresDeLaSala()
 	}
 
-	ionViewWillLeave() {
-		console.log("Saliendo de Sala, el partido del Storage tiene .idsJugadores como array")
-	}
+	ionViewWillLeave() {}
 	
 	irAlEditarSala() {
 		this.storage.set("jugador", this.jugador)
@@ -176,15 +174,19 @@ export class SalaPage implements OnInit {
 			sexo: this.partido.sexo,
 			sala: this.partido.sala
 		} 
-		let requestSqlPartido = 'https://backend-f1-java.herokuapp.com/partidos/actualizar/'
-		console.log("ENVIANDO ", dataSqlPartido, " A ", requestSqlPartido)
+		let path = '/partidos/actualizar'
+		let requestSqlPartido = 'https://backend-f1-java.herokuapp.com' + path
+		console.log(
+			"%cACT JUGADORES DEL PARTIDO ID [" + dataSqlPartido.idpartido + "] -----> " + path,
+			"color:brown; background-color: cyan; font-size: 16px; font-weight: bold;"
+		)
 		fetch(requestSqlPartido, {
 			method: "PUT", 
 			body: JSON.stringify(dataSqlPartido),
 			headers: {"Content-type": "application/json; charset=UTF-8"}
 		})
 		.then(res => res.json())
-		.then(() => this.presentToast("Se actualizó la información del partido ✅", 3000))
+		.then(() => this.presentToast("Se actualizó la información del partido ✅", 1500))
 		.catch(err => this.presentToast("💀 La última modificación al partido no logró completarse con éxito", 3000))
 	}
 
@@ -222,21 +224,24 @@ export class SalaPage implements OnInit {
 			idFirebase: this.jugador.id_firebase,
 			cantVotos: this.jugador.cantidad_votos,
 		}
-		let requestSqlJugador = 'https://backend-f1-java.herokuapp.com/jugadores/actualizar'
-		console.log("ENVIANDO ", dataSqlJugador, " A ", requestSqlJugador)
+		let path = '/jugadores/actualizar'
+		let requestSqlJugador = 'https://backend-f1-java.herokuapp.com' + path
+		console.log(
+			"%cACTUALIZAR JUGADOR SI PAGÓ [" + dataSqlJugador.nombre + "] -----> " + path,
+			"color:white; background-color: green; font-size: 16px; font-weight: bold;"
+		)
 		fetch(requestSqlJugador, {
 			method: "PUT", 
 			body: JSON.stringify(dataSqlJugador),
 			headers: {"Content-type": "application/json; charset=UTF-8"}
 		})
 		.then(res => res.json())
-		.then(() => this.presentToast("Se registró tu pago correctamente ✅", 3000))
+		.then(() => this.presentToast("Se registró tu pago correctamente ✅", 2000))
 		.catch(() => this.presentToast("💀 Hubo un error registrando tu pago", 5000))
 	}
 
 	abandonarSala() {
 		this.jugador.pagado = 0
-		console.log(this.partido)	
 		this.storage.set("jugador", this.jugador)
 		.then(() => this.storage.set("partido", {})
 			.then(() => {
@@ -254,8 +259,12 @@ export class SalaPage implements OnInit {
 					idFirebase: this.jugador.id_firebase,
 					cantVotos: this.jugador.cantidad_votos,
 				}
-				let requestSqlJugador = 'https://backend-f1-java.herokuapp.com/jugadores/actualizar'
-				console.log("ENVIANDO ", dataSqlJugador, " A ", requestSqlJugador)
+				let path = '/jugadores/actualizar'
+				let requestSqlJugador = 'https://backend-f1-java.herokuapp.com' + path
+				console.log(
+					"%cACTUALIZAR JUGADOR NO PAGÓ [" + dataSqlJugador.nombre + "] -----> " + path,
+					"color:white; background-color: red; font-size: 16px; font-weight: bold;"
+				)
 				fetch(requestSqlJugador, {
 					method: "PUT", 
 					body: JSON.stringify(dataSqlJugador),
@@ -282,8 +291,12 @@ export class SalaPage implements OnInit {
 						sexo: this.partido.sexo,
 						sala: this.partido.sala
 					} 
-					let requestSqlPartido = 'https://backend-f1-java.herokuapp.com/partidos/actualizar'
-					console.log("ENVIANDO ", dataSqlPartido, " A ", requestSqlPartido)
+					let path = '/partidos/actualizar'
+					let requestSqlPartido = 'https://backend-f1-java.herokuapp.com' + path
+					console.log(
+						"%cACTUALIZANDO PARTIDO ID [" + dataSqlPartido.idpartido + "] -----> " + path,
+						"color:black; background-color: yellow; font-size: 16px; font-weight: bold;"
+					)
 					fetch(requestSqlPartido, {
 						method: "PUT", 
 						body: JSON.stringify(dataSqlPartido),

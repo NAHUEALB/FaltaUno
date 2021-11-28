@@ -55,7 +55,7 @@ export class AppComponent {
 			this.menuCtrl.enable(false);
 			this.firebaseauthService.logout();
 			this.router.navigate([`/principal`]);
-			this.presentToast("Sesión cerrada con éxito ✅", 3000);
+			this.presentToast("Sesión cerrada con éxito ✅", 2000);
 		} else this.router.navigate([`/${option.ruta}`]);
 		
 	}

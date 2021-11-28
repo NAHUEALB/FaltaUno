@@ -88,7 +88,7 @@ export class EditarPage implements OnInit {
 		if(this.usuarioSubscription) this.usuarioSubscription.unsubscribe();
 	}
 
-	editarJugador() {		
+	editarJugador() {	
 		this.jugador.nombre = this.jugadorForm.value.nombre;
 		this.jugador.fnacimiento = this.jugadorForm.value.fnacimiento;
 		this.jugador.ubicacion = this.jugadorForm.value.ubicacion;
@@ -107,8 +107,12 @@ export class EditarPage implements OnInit {
 			idFirebase: this.jugador.id_firebase,
 			cantVotos: this.jugador.cantidad_votos,
 		}
-		let requestSqlJugador = 'https://backend-f1-java.herokuapp.com/jugadores/actualizar'
-		console.log("ENVIANDO ", dataSqlJugador, " A ", requestSqlJugador)
+		let path = '/jugadores/actualizar'
+		let requestSqlJugador = 'https://backend-f1-java.herokuapp.com' + path
+		console.log(
+			"%cACTUALIZANDO JUGADOR [" + dataSqlJugador.nombre + "] -----> " + path,
+			"color:black; background-color: lime; font-size: 16px; font-weight: bold;"
+		)
 		fetch(requestSqlJugador, {
 			method: "PUT", 
 			body: JSON.stringify(dataSqlJugador),
@@ -116,9 +120,14 @@ export class EditarPage implements OnInit {
 		})
 		.then(res => res.json())
 		.then(() => {
-			console.log("EDITADO: ", this.jugador)
-			this.presentToast("Tu perfil se actualizó correctamente ✅", 3000);
+			this.storage.set("jugador", this.jugador)
+			.then(() => {
+				this.presentToast("Tu perfil se actualizó correctamente ✅", 2000)
+				this.router.navigate([`/perfil`]);
+			})
+			.catch(() => this.presentToast("💀 Hubo un problema guardando tu información. Inténtalo nuevamente.", 3000))
 		})
+		.catch(() => this.presentToast("💀 Hubo un problema actualizando la base de datos. Inténtalo de nuevo en unos segundos.", 3000))
 	}
 
 	async presentToast(msg: string, time: number) {

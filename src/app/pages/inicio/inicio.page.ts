@@ -126,6 +126,7 @@ export class InicioPage implements OnInit {
 		fetch(requestSql)
 		.then((res) => res.json())
 		.then((data) => {
+			console.log("RECUPERANDO CON IDFIREBASE",data)
 			this.jugador.id = data.idjugador
 			this.jugador.password = data.password
 			this.jugador.nombre = data.nombre
@@ -133,6 +134,7 @@ export class InicioPage implements OnInit {
 			this.jugador.fnacimiento = data.fnacimiento
 			this.jugador.cantidad_votos = data.cantVotos
 			this.jugador.puntaje = data.puntaje
+			console.log("TRAIDO DE THIS.JUGADOR",this.jugador)
 		}).catch(() => {
 			console.log("Segundo error de querer cargar info del jugador desde la base de datos SQL")
 		});

@@ -80,7 +80,7 @@ export class LoginPage implements OnInit {
 				this.docSubscription = this.firebaseauthService.getDocumentById(this.enlace, res.uid).subscribe((document: any) =>{
 					this.jugador.email = userEmail
 					this.jugador.password = userPassword
-					this.presentToast("Sesión iniciada con éxito ✅", 3000);
+					this.presentToast("Sesión iniciada con éxito ✅", 1500);
 					this.irAlInicio()
 				})
 			});
