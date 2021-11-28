@@ -83,50 +83,44 @@ export class BuscarPage implements OnInit {
   irALaSala(partido) {
     let requestSql = 'https://backend-f1-java.herokuapp.com/partidos/'+partido.idpartido
     fetch(requestSql)
-    .then((res) => res.json())
-    .then((data) => {
-      //let ids = [data.idJug1, data.idJug2, data.idJug3, data.idJug4, data.idJug5, data.idJug6, data.idJug7, data.idJug8, data.idJug9, data.idJug10]
-      //this.partidosSql = []
-      this.storage.set("jugador", this.jugador).then(()=>{
-        console.log("INFO DEL JUGADOR GUARDADA DESDE BUSCAR", this.jugador)
-        this.storage.set("partido", data).then(()=>{
-          console.log("INFO DEL PARTIDO GUARDADA DESDE BUSCAR", data)
-          this.router.navigate([`/sala`]);
-        })
+    .then(res => res.json())
+    .then(data => {
+      this.storage.set("jugador", this.jugador)
+      .then(() => {
+        this.storage.set("partido", data)
+        .then(()=>this.router.navigate([`/sala`]))
       })
     })
   }
   
   refreshPartidos() {
-    this.storage.get('jugador').then((jugador) => {
-      let requestSql = 'https://backend-f1-java.herokuapp.com/partidos/'
-      fetch(requestSql)
-      .then((res) => res.json())
-      .then((data) => {
-        this.partidosSql = []
-        data.forEach(p => {
-          let ids = [p.idJug1, p.idJug2, p.idJug3, p.idJug4, p.idJug5, p.idJug6, p.idJug7, p.idJug8, p.idJug9, p.idJug10]
-          let idsNoVacias = ids.filter(jid => jid !== 0)
-          let nuevoPartido = {
-            cancha: p.cancha,
-            idpartido: p.idpartido,
-            nombre: p.sala,
-            estado: "Sala pública",
-            slotsOcupados: idsNoVacias.length,
-            slotsTotales: 10,
-            sexo: p.sexo,
-            hora: p.hora + ":00"
-          }
-          this.partidosSql.push(nuevoPartido)          
-        });
-        this.partidosSql.forEach((p) => {
-          this.setSexo(p);
-          this.setColorSlot(p);
-          this.setOrden(p);
-        });
-        this.ordenarPartidos(this.partidosSql);
-      })
-    });
+    let requestSql = 'https://backend-f1-java.herokuapp.com/partidos/'
+    fetch(requestSql)
+    .then(res => res.json())
+    .then(data => {
+      this.partidosSql = []
+      data.forEach(p => {
+        let ids = [p.idJug1, p.idJug2, p.idJug3, p.idJug4, p.idJug5, p.idJug6, p.idJug7, p.idJug8, p.idJug9, p.idJug10]
+        let idsNoVacias = ids.filter(jid => jid !== 0)
+        let nuevoPartido = {
+          cancha: p.cancha,
+          idpartido: p.idpartido,
+          nombre: p.sala,
+          estado: "Sala pública",
+          slotsOcupados: idsNoVacias.length,
+          slotsTotales: 10,
+          sexo: p.sexo,
+          hora: p.hora + ":00"
+        }
+        this.partidosSql.push(nuevoPartido)          
+      });
+      this.partidosSql.forEach(p => {
+        this.setSexo(p);
+        this.setColorSlot(p);
+        this.setOrden(p);
+      });
+      this.ordenarPartidos(this.partidosSql);
+    })
   }
 
   setSexo(elem) {

@@ -67,26 +67,7 @@ export class InicioPage implements OnInit {
 		private router: Router, 
 		private storage: Storage,
 		private modalController: ModalController,
-	){
-		this.menuCtrl.enable(true);
-
-		this.storage.get('jugador')
-		.then((jugador) => {
-			this.jugador = jugador; 
-			console.log("INFO DEL JUGADOR OBTENIDA DESDE INICIO",this.jugador)
-			!this.jugador.nombre && this.actualizarJugadorPorIdFirebase()
-			this.storage.get('listaPartidos')
-			.then(lista => {
-				console.log(lista)
-				if (lista[0]) this.partidos[0] = lista[0]
-				if (lista[1]) this.partidos[1] = lista[1]
-			})
-			.catch(err => console.log("no existe lista de partidos aun", err))
-		})
-		.catch(() => {
-			console.log("Primer error de querer cargar info del jugador desde el Storage")
-		});
-	}
+	){ }
 
 	ngOnInit() {
 		this.mostrarNoticias = true;
@@ -119,7 +100,27 @@ export class InicioPage implements OnInit {
 
 	ionViewWillEnter() {
 		this.mostrarNoticias = true;
+		this.menuCtrl.enable(true);
+
 		this.nextNoticia();
+		
+		this.storage.get('jugador')
+		.then((jugador) => {
+			this.jugador = jugador; 
+			console.log("INFO DEL JUGADOR OBTENIDA DESDE INICIO",this.jugador)
+			!this.jugador.nombre && this.actualizarJugadorPorIdFirebase()
+			this.storage.get('listaPartidos')
+			.then(lista => {
+				if (lista) {
+					if (lista[0]) this.partidos[0] = lista[0]
+					if (lista[1]) this.partidos[1] = lista[1]
+				}
+			})
+			.catch(err => console.log("no existe lista de partidos aun", err))
+		})
+		.catch(() => {
+			console.log("Primer error de querer cargar info del jugador desde el Storage")
+		});
 	}
 
 	ionViewWillLeave() {

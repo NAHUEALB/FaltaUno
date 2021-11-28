@@ -65,10 +65,8 @@ export class SalaPage implements OnInit {
 		private mercadoPagoService: MercadopagoService
 	) {
 		this.storage.get('jugador')
-		.then((jugador) => {
-			this.jugador = jugador; 
-			console.log("INFO DEL JUGADOR OBTENIDA DESDE SALA",this.jugador)
-		}).catch(() => console.log("Error al recuperar la info del jugador"));
+		.then(jugador => this.jugador = jugador)
+		.catch(() => console.log("Error al recuperar la info del jugador"));
 	}
 
 	ngOnInit() {}
@@ -76,7 +74,6 @@ export class SalaPage implements OnInit {
 	ionViewWillEnter() {
 		// QUERY MODIFICAR EL PARTIDO PARA METER EL ID DE ESTE JUGADOR
 		let requestSql = 'https://backend-f1-java.herokuapp.com/partido/' + this.jugador
-		console.log("INFO DEL PARTIDO AL REENTRAR A UNA SALA",this.partido)
 		this.actualizarJugadoresDeLaSala()
 	}
 	
