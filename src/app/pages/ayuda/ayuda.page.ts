@@ -18,8 +18,6 @@ export class AyudaPage implements OnInit {
     });
   }
 
-  ngOnInit() {
-      console.log("El enlaceMP de pago es: "+ this.enlaceMP);
-  }
+  ngOnInit() {}
 
 }

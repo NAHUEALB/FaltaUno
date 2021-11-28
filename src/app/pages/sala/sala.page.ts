@@ -8,7 +8,7 @@ import { ToastController } from '@ionic/angular';
 import { Jugador } from 'src/app/models/jugador';
 import { Cancha } from 'src/app/models/cancha';
 import { Sala } from 'src/app/models/sala';
-import { AyudaMenuLateralPage } from '../ayuda-menu-lateral/ayuda-menu-lateral.page';
+import { AyudaPagoPage } from '../ayuda-pago/ayuda-pago.page';
 import { MercadopagoService } from 'src/app/serv/mercadopago.service';
 import { Item, Request, Response } from 'src/app/models/request.model';
 import { AyudaPage } from '../ayuda/ayuda.page';
@@ -186,7 +186,7 @@ export class SalaPage implements OnInit {
 			headers: {"Content-type": "application/json; charset=UTF-8"}
 		})
 		.then(res => res.json())
-		.then(() => this.presentToast("Se actualizó la información del partido ✅", 1500))
+		.then(() => this.presentToast("Se actualizó la información del partido ✅", 700))
 		.catch(err => this.presentToast("💀 La última modificación al partido no logró completarse con éxito", 3000))
 	}
 
@@ -205,7 +205,7 @@ export class SalaPage implements OnInit {
 
 	pagar() {
 		let indexJugador = this.partido.idsJugadores.findIndex(idplayer => idplayer == this.jugador.id)
-		this.jugadores[indexJugador].pagado ? this.abrirModal() : this.abrirModalPago()
+		this.jugadores[indexJugador].pagado == 0 && this.abrirModalPago()
 		this.jugadores[indexJugador].pagado = 1
 		this.jugador.pagado = 1
 		this.repartirEquiposRedYBlue()
@@ -236,7 +236,7 @@ export class SalaPage implements OnInit {
 			headers: {"Content-type": "application/json; charset=UTF-8"}
 		})
 		.then(res => res.json())
-		.then(() => this.presentToast("Se registró tu pago correctamente ✅", 2000))
+		.then(() => this.presentToast("Se registró tu pago correctamente ✅", 1000))
 		.catch(() => this.presentToast("💀 Hubo un error registrando tu pago", 5000))
 	}
 
@@ -311,7 +311,7 @@ export class SalaPage implements OnInit {
 
 	async abrirModalPago() {
 		const modal = await this.modalController.create({
-			component: AyudaPage,
+			component: AyudaPagoPage,
 			cssClass: 'modal-css',
 			swipeToClose: true,
 			presentingElement: await this.modalController.getTop(),
@@ -325,7 +325,7 @@ export class SalaPage implements OnInit {
 	async abrirModal() {
 		//this.menuCtrl.close();
 		const modal = await this.modalController.create({
-		  component: AyudaMenuLateralPage,
+		  component: AyudaPage,
 		  cssClass:'modal-css',
 		  swipeToClose:true,
 		  presentingElement: await this.modalController.getTop()
