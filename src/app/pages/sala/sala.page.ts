@@ -53,7 +53,6 @@ export class SalaPage implements OnInit {
 	partido
 	jugador
 	jugadores = []
-	idsJugadores = []
 
 	constructor(
 		public menuCtrl: MenuController,
@@ -76,6 +75,10 @@ export class SalaPage implements OnInit {
 		let requestSql = 'https://backend-f1-java.herokuapp.com/partido/' + this.jugador
 		this.actualizarJugadoresDeLaSala()
 	}
+
+	ionViewWillLeave() {
+		console.log("Saliendo de Sala, el partido del Storage tiene .idsJugadores como array")
+	}
 	
 	irAlEditarSala() {
 		this.storage.set("jugador", this.jugador)
@@ -94,7 +97,13 @@ export class SalaPage implements OnInit {
 		.then((partido) => {
 			this.partido = partido; 
 			let {idJug1, idJug2, idJug3, idJug4, idJug5, idJug6, idJug7, idJug8, idJug9, idJug10} = this.partido
-			this.idsJugadores = [idJug1, idJug2, idJug3, idJug4, idJug5, idJug6, idJug7, idJug8, idJug9, idJug10]
+			this.partido.idsJugadores = [idJug1, idJug2, idJug3, idJug4, idJug5, idJug6, idJug7, idJug8, idJug9, idJug10]
+			for (let i = 0; i < this.partido.idsJugadores.length; i++) {
+				if (this.partido.idsJugadores[i] == 0) {
+					this.partido.idsJugadores[i] = this.jugador.id
+					break
+				}				
+			}
 			this.salaNombre = this.partido.cancha.nombreCancha
 			this.salaDireccion = this.partido.cancha.direccion
 			this.salaPrecio = this.partido.cancha.precio
@@ -102,32 +111,38 @@ export class SalaPage implements OnInit {
 			this.salaSexo = this.partido.sexo
 			this.jugadores = []
 			for (let i=0; i<10; i++) {
-				if (this.idsJugadores[i] !== 0) {
-					let requestSql = 'https://backend-f1-java.herokuapp.com/jugadores/' + this.idsJugadores[i] 
+				if (this.partido.idsJugadores[i] !== 0) {
+					let requestSql = 'https://backend-f1-java.herokuapp.com/jugadores/' + this.partido.idsJugadores[i] 
 					fetch(requestSql)
 					.then(res => res.json())
 					.then(data => {
 						let jugador = data;
-						let scoreStars = jugador.puntaje / jugador.cantidad_votos
+						let scoreStars = (jugador.puntaje / jugador.cantVotos)
 						this.fillStars(jugador, scoreStars)
-						this.jugadores.push(jugador)
+						this.jugadores[i] = jugador
 						this.repartirEquiposRedYBlue(this.jugadores)
 					})
-				}
+				} 
 			}
 		}).catch(() => console.error("Error al recuperar la info del partido"));
 	}
 
 	repartirEquiposRedYBlue(jugs) {
-		// en el orden que están, se reparte uno para red, otro blue, otro red, otro blue y así
-		// por lo tanto, índices impares quedarían en el lado red, pares quedarían en el lado blue
 		this.equipoRed = []
 		this.equipoBlue = []
-		jugs.forEach((j, i) => i%2==0 ? this.equipoRed.push(j) : this.equipoBlue.push(j))
-		for (let i=0; i<5; i++) 
-			if (!this.equipoRed[i]) this.equipoRed.push({nombre: " (disponible) "})
-		for (let i=0; i<5; i++) 
-			if (!this.equipoBlue[i]) this.equipoBlue.push({nombre: " (disponible) "})
+		let idsFiltradas = this.partido.idsJugadores.filter(id => id !== 0)
+		for (let i = 0; i < idsFiltradas.length; i++) {
+			let idplayer = this.partido.idsJugadores[i];
+			let player = jugs.find(p => p.idjugador == idplayer)
+			if (i % 2 == 0) this.equipoRed.push(player) 
+			else this.equipoBlue.push(player)
+		}
+		for (let i=0; i<5; i++) if (!this.equipoRed[i]) {
+			this.equipoRed[i] = {nombre: " (disponible) "}
+		}
+		for (let i=0; i<5; i++) if (!this.equipoBlue[i]) {
+			this.equipoBlue[i] = {nombre: " (disponible) "}
+		}
 	}
 
 	async abrirModalPago() {
@@ -156,7 +171,6 @@ export class SalaPage implements OnInit {
 			else player.stars.push("null");
 		}
 	}
-
 	
 	async abrirModal() {
 		this.menuCtrl.close();
@@ -200,7 +214,12 @@ export class SalaPage implements OnInit {
 	}
 
 	pagar() {
-		return true
+		this.jugador.pagado = Math.abs(this.jugador.pagado - 1)
+		let indexJugador = this.partido.idsJugadores.findIndex(idplayer => idplayer == this.jugador.id)
+		this.jugadores[indexJugador].pagado = this.jugador.pagado
+		console.log(this.jugadores[indexJugador].nombre)
+		console.log(this.jugadores)
+		this.repartirEquiposRedYBlue(this.jugadores)
 	}
 
 	abandonarSala() {

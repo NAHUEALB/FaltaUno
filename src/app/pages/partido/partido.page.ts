@@ -47,25 +47,25 @@ export class PartidoPage implements OnInit {
 	jugadores = []
 	idsJugadores = []
 
-  constructor(
-    private storage: Storage,
-		public firebaseauthService: FirebaseauthService,
-		private router: Router
-  ) { }
+	constructor(
+		private storage: Storage,
+			public firebaseauthService: FirebaseauthService,
+			private router: Router
+	) { }
 
-  ngOnInit() {
-  }
-
-  ionViewWillEnter() {
-    this.actualizarJugadoresDeLaSala()
-    this.nextSegundo()
+	ngOnInit() {
 	}
 
-  irAlPospartido() {
-    this.router.navigate([`/pospartidoadmin`]);
-  }
+	ionViewWillEnter() {
+		this.actualizarJugadoresDeLaSala()
+		this.nextSegundo()
+	}
 
-  actualizarJugadoresDeLaSala() {
+	irAlPospartido() {
+		this.router.navigate([`/pospartidoadmin`]);
+	}
+
+  	actualizarJugadoresDeLaSala() {
 		this.storage.get('partido')
 		.then((partido) => {
 			this.partido = partido; 
@@ -94,7 +94,7 @@ export class PartidoPage implements OnInit {
 		}).catch(() => console.log("Error al recuperar la info del partido"));
 	}
 
-  repartirEquiposRedYBlue(jugs) {
+  	repartirEquiposRedYBlue(jugs) {
 		// en el orden que están, se reparte uno para red, otro blue, otro red, otro blue y así
 		// por lo tanto, índices impares quedarían en el lado red, pares quedarían en el lado blue
 		this.equipoRed = []
@@ -105,8 +105,8 @@ export class PartidoPage implements OnInit {
 		for (let i=0; i<5; i++) 
 			if (!this.equipoBlue[i]) this.equipoBlue.push({nombre: " (disponible) "})
 	}
-
-  fillStars(player, value) {
+	
+  	fillStars(player, value) {
 		player.stars = [];
 		for (let i=0; i<5; i++) {
 			if (value - .75 >= i) player.stars.push("full")
@@ -115,14 +115,14 @@ export class PartidoPage implements OnInit {
 		}
 	}
 
-  nextSegundo() {
-    setTimeout(() => {
-      this.partidoSegundos++
-      if (this.partidoSegundos === 60) {
-        this.partidoSegundos = 0
-        this.partidoMinutos++
-      }
-      if (this.partidoMinutos < 60) this.nextSegundo();
+  	nextSegundo() {
+		setTimeout(() => {
+			this.partidoSegundos++
+			if (this.partidoSegundos === 60) {
+				this.partidoSegundos = 0
+				this.partidoMinutos++
+			}
+			if (this.partidoMinutos < 60) this.nextSegundo();
 		}, 1000);
 	}
   

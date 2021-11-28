@@ -32,6 +32,7 @@ export class PrincipalPage implements OnInit {
 		sexo: "",
 		perfil: false,
 		ubicacion: '',
+		pagado: 0
 	};
 
 	msj = "Sesión con Google iniciada con éxito";

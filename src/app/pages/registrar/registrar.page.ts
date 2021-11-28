@@ -34,6 +34,7 @@ export class RegistrarPage implements OnInit {
 		sexo: "",
 		perfil: false,
 		ubicacion: ' La Plata ',
+		pagado: 0
 	};
 
 	localidades = ["La Plata"/*, "Ensenada", "Berisso"*/];

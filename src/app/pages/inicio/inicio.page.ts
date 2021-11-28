@@ -29,6 +29,7 @@ export class InicioPage implements OnInit {
 		sexo: "",
 		perfil: false,
 		ubicacion: ' La Plata ',
+		pagado: 0
 	}; 
 
 	enlaceNoticia = 'Noticia';
