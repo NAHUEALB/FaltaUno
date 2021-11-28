@@ -30,7 +30,10 @@ export class BuscarPage implements OnInit {
     public http: HttpClient
   ) {
     this.storage.get('jugador')
-    .then((jugador) => this.jugador = jugador)
+    .then((jugador) => {
+      this.jugador = jugador
+      this.partido = {}
+    })
     .catch(() => console.log("Primer error de querer cargar info del jugador desde el Storage"));
   }
     
@@ -42,8 +45,9 @@ export class BuscarPage implements OnInit {
 
   irAlInicio() {
     this.storage.set("jugador", this.jugador)
-    .then(() => this.storage.set("listaPartidos", this.partidosSql)
-      .then(() => this.router.navigate([`/inicio`])))
+    .then(() => this.storage.set("partido", this.partido)
+      .then(() => this.storage.set("listaPartidos", this.partidosSql)
+        .then(() => this.router.navigate([`/inicio`]))))
   }
 
   irALaSala(partido) {

@@ -73,7 +73,8 @@ export class SalaPage implements OnInit {
 	ionViewWillEnter() {
 		// QUERY MODIFICAR EL PARTIDO PARA METER EL ID DE ESTE JUGADOR
 		let requestSql = 'https://backend-f1-java.herokuapp.com/partido/' + this.jugador
-		this.actualizarJugadoresDeLaSala()
+		let firstLoad = true
+		this.actualizarJugadoresDeLaSala(firstLoad)
 	}
 
 	ionViewWillLeave() {
@@ -92,7 +93,31 @@ export class SalaPage implements OnInit {
 			.then(() => this.router.navigate([`/partido`])))
 	}
 
-	actualizarJugadoresDeLaSala() {
+	async abrirModalPago() {
+		const modal = await this.modalController.create({
+			component: AyudaPage,
+			cssClass: 'modal-css',
+			swipeToClose: true,
+			presentingElement: await this.modalController.getTop()
+			/* componentProps: {
+				'enlaceMP': this.enlaceMP.sandbox_init_point
+			}, */
+		});
+		await modal.present();
+	}
+
+	async abrirModal() {
+		//this.menuCtrl.close();
+		const modal = await this.modalController.create({
+		  component: AyudaMenuLateralPage,
+		  cssClass:'modal-css',
+		  swipeToClose:true,
+		  presentingElement: await this.modalController.getTop()
+		});
+		await modal.present();
+	}
+	
+	actualizarJugadoresDeLaSala(firstLoad = false) {
 		this.storage.get('partido')
 		.then((partido) => {
 			this.partido = partido; 
@@ -119,6 +144,12 @@ export class SalaPage implements OnInit {
 						let jugador = data;
 						let scoreStars = (jugador.puntaje / jugador.cantVotos)
 						this.fillStars(jugador, scoreStars)
+						if (firstLoad) {
+							console.log("es primera carga:")
+							console.log(this.partido.idsJugadores.findIndex(idplayer => idplayer == this.jugador.id))
+							//let indexJugador = this.partido.idsJugadores.findIndex(idplayer => idplayer == this.jugador.id)
+							//indexJugador != -1 && this.jugadores[indexJugador] ? this.jugadores[indexJugador].pagado = 0 : true;
+						}
 						this.jugadores[i] = jugador
 						this.repartirEquiposRedYBlue(this.jugadores)
 					})
@@ -130,58 +161,78 @@ export class SalaPage implements OnInit {
 	repartirEquiposRedYBlue(jugs) {
 		this.equipoRed = []
 		this.equipoBlue = []
-		let idsFiltradas = this.partido.idsJugadores.filter(id => id !== 0)
+		let idsFiltradas = jugs.filter(jug => jug.idjugador !== 0).map(jug => jug.idjugador)
 		for (let i = 0; i < idsFiltradas.length; i++) {
-			let idplayer = this.partido.idsJugadores[i];
-			let player = jugs.find(p => p.idjugador == idplayer)
-			if (i % 2 == 0) this.equipoRed.push(player) 
-			else this.equipoBlue.push(player)
+			let idplayer = idsFiltradas[i];
+			for (let j = 0; j < jugs.length; j++) {
+				const player = jugs[j];
+				if (player && player.idjugador == idplayer)
+					if (i % 2 == 0) this.equipoRed.push(player) 
+					else this.equipoBlue.push(player)
+			}
 		}
-		for (let i=0; i<5; i++) if (!this.equipoRed[i]) {
-			this.equipoRed[i] = {nombre: " (disponible) "}
-		}
-		for (let i=0; i<5; i++) if (!this.equipoBlue[i]) {
-			this.equipoBlue[i] = {nombre: " (disponible) "}
-		}
+		for (let i=0; i<5; i++) 
+			if (!this.equipoRed[i]) this.equipoRed[i] = {nombre: " (disponible) "}
+		for (let i=0; i<5; i++) 
+			if (!this.equipoBlue[i]) this.equipoBlue[i] = {nombre: " (disponible) "}
 	}
 
-	async abrirModalPago() {
-		const modal = await this.modalController.create({
-			component: AyudaPage,
-			cssClass: 'modal-css',
-			componentProps: {
-				'enlaceMP': this.enlaceMP.sandbox_init_point
-			},
-			swipeToClose: true,
-			presentingElement: await this.modalController.getTop()
-		});
-		await modal.present();
+	pagar() {
+		let indexJugador = this.partido.idsJugadores.findIndex(idplayer => idplayer == this.jugador.id)
+		this.jugadores[indexJugador].pagado ? this.abrirModal() : this.abrirModalPago()
+		this.jugadores[indexJugador].pagado = 1
+		this.jugador.pagado = 1
+		this.repartirEquiposRedYBlue(this.jugadores)
 	}
 
-	getValoracion(puntos, votos) {
-		if (votos != 0) return Number((puntos/votos).toFixed(2));
-		return 0;
-	}
-
-	fillStars(player, value) {
-		player.stars = [];
-		for (let i=0; i<5; i++) {
-			if (value - .75 >= i) player.stars.push("full")
-			else if (value - .25 >= i) player.stars.push("half")
-			else player.stars.push("null");
-		}
-	}
-	
-	async abrirModal() {
-		this.menuCtrl.close();
-		const modal = await this.modalController.create({
-		  component: AyudaMenuLateralPage,
-		  cssClass:'modal-css',
-		  swipeToClose:true,
-		  presentingElement: await this.modalController.getTop()
-
-		});
-		await modal.present();
+	abandonarSala() {
+		this.jugador.pagado = 0
+		this.storage.set("jugador", this.jugador)
+		.then(() => this.storage.set("partido", {})
+			.then(() => {
+				if (false) {	
+					// QUERY MODIFICAR JUGADOR PARA PONERLE PAGADO = 0
+					let dataSqlJugador = this.jugador
+					dataSqlJugador.pagado = 0
+					let requestSqlJugador = 'https://backend-f1-java.herokuapp.com/modJugador/' + this.jugador.id
+					console.log("ENVIANDO ", dataSqlJugador, " A ", requestSqlJugador)
+					fetch(requestSqlJugador, {
+						method: "PUT", 
+						body: JSON.stringify(dataSqlJugador),
+						headers: {"Content-type": "application/json; charset=UTF-8"}
+					})
+					.then(res => res.json())
+					.then(() => {
+						
+						// QUERY MODIFICAR PARTIDO PARA LIMPIAR EL ID DEL idJugN QUE CORRESPONDA
+						let indexJugador = this.partido.idsJugadores.findIndex(idplayer => idplayer == this.jugador.id)
+						let dataSqlPartido = {
+							idJug1: indexJugador == 0 ? 0 : this.jugadores[0] || 0,
+							idJug2: indexJugador == 1 ? 0 : this.jugadores[1] || 0,
+							idJug3: indexJugador == 2 ? 0 : this.jugadores[2] || 0,
+							idJug4: indexJugador == 3 ? 0 : this.jugadores[3] || 0,
+							idJug5: indexJugador == 4 ? 0 : this.jugadores[4] || 0,
+							idJug6: indexJugador == 5 ? 0 : this.jugadores[5] || 0,
+							idJug7: indexJugador == 6 ? 0 : this.jugadores[6] || 0,
+							idJug8: indexJugador == 7 ? 0 : this.jugadores[7] || 0,
+							idJug9: indexJugador == 8 ? 0 : this.jugadores[8] || 0,
+							idJug10: indexJugador == 9 ? 0 : this.jugadores[9] || 0
+						} 
+						let requestSqlPartido = 'https://backend-f1-java.herokuapp.com/modIdsPartido/' + this.partido.idpartido
+						console.log("ENVIANDO ", dataSqlPartido, " A ", requestSqlPartido)
+						fetch(requestSqlPartido, {
+							method: "PUT", 
+							body: JSON.stringify(dataSqlPartido),
+							headers: {"Content-type": "application/json; charset=UTF-8"}
+						})
+						.then(res => res.json())
+						.then(() => this.router.navigate([`/buscar`]))
+					})
+				} else {
+					this.router.navigate([`/buscar`])
+				}
+      		})
+		)
 	}
 
 	mezclarEquipos(arr1, arr2) {
@@ -212,24 +263,19 @@ export class SalaPage implements OnInit {
 		}
 		return arrAux
 	}
-
-	pagar() {
-		this.jugador.pagado = Math.abs(this.jugador.pagado - 1)
-		let indexJugador = this.partido.idsJugadores.findIndex(idplayer => idplayer == this.jugador.id)
-		this.jugadores[indexJugador].pagado = this.jugador.pagado
-		console.log(this.jugadores[indexJugador].nombre)
-		console.log(this.jugadores)
-		this.repartirEquiposRedYBlue(this.jugadores)
+	
+	getValoracion(puntos, votos) {
+		if (votos != 0) return Number((puntos/votos).toFixed(2));
+		return 0;
 	}
 
-	abandonarSala() {
-		this.storage.set("jugador", this.jugador)
-		.then(() => this.storage.set("partido", {})
-			.then(() => {
-				// QUERY MODIFICAR EL PARTIDO PARA SACAR EL ID DE ESTE JUGADOR
-				this.router.navigate([`/buscar`]);
-      		})
-		)
+	fillStars(player, value) {
+		player.stars = [];
+		for (let i=0; i<5; i++) {
+			if (value - .75 >= i) player.stars.push("full")
+			else if (value - .25 >= i) player.stars.push("half")
+			else player.stars.push("null");
+		}
 	}
 }
 
