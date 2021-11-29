@@ -44,7 +44,7 @@ export class PerfilPage implements OnInit {
 	){ 	
 		this.storage.get('jugador')
 		.then(jugador => this.jugador = jugador)
-		.catch(() => console.log("Primer error de querer cargar info del jugador desde el Storage"));
+		.catch(() => console.error("Primer error de querer cargar info del jugador desde el Storage"));
 	}
 
   	ngOnInit() {}

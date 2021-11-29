@@ -111,10 +111,10 @@ export class InicioPage implements OnInit {
 					if (lista[1]) this.partidos[1] = lista[1]
 				}
 			})
-			.catch(err => console.log("no existe lista de partidos aun", err))
+			.catch(err => console.error("no existe lista de partidos aun", err))
 		})
 		.catch(() => {
-			console.log("Primer error de querer cargar info del jugador desde el Storage")
+			console.error("Primer error de querer cargar info del jugador desde el Storage")
 		});
 	}
 

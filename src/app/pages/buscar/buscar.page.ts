@@ -34,7 +34,7 @@ export class BuscarPage implements OnInit {
       this.jugador = jugador
       this.partido = {}
     })
-    .catch(() => console.log("Primer error de querer cargar info del jugador desde el Storage"));
+    .catch(() => console.error("Primer error de querer cargar info del jugador desde el Storage"));
   }
     
   ngOnInit() {}

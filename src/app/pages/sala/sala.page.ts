@@ -30,7 +30,7 @@ export class SalaPage implements OnInit {
 	jugadoresSubscription;
 	jugSubscription;
 	cargando = false;
-	delayEntreRefresh = 1500000
+	delayEntreRefresh = 10000
 	mantenerActualizado = true
 
 	salaNombre = 'Sala'
@@ -196,7 +196,6 @@ export class SalaPage implements OnInit {
 	async actualizarSala() {
 		let idPartido = (await this.storage.get("partido")).idpartido
 		this.partido = await this.descargarPartido(idPartido)
-
 		this.salaNombre = this.partido.cancha.nombreCancha
 		this.salaDireccion = this.partido.cancha.direccion
 		this.salaPrecio = this.partido.cancha.precio

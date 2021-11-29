@@ -135,7 +135,7 @@ export class PospartidoadminPage implements OnInit {
   }
 
   votarJugador(cantidad) {
-    console.log("click en la estrella " + cantidad)
+    console.error("click en la estrella " + cantidad)
     this.fillStars(this.equipoRed[0], cantidad)
   }
 

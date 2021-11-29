@@ -91,7 +91,7 @@ export class PartidoPage implements OnInit {
 					})
 				}
 			}
-		}).catch(() => console.log("Error al recuperar la info del partido"));
+		}).catch(() => console.error("Error al recuperar la info del partido"));
 	}
 
   	repartirEquiposRedYBlue(jugs) {
