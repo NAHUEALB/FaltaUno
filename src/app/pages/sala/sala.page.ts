@@ -100,7 +100,6 @@ export class SalaPage implements OnInit {
 	async abandonarSala() {
 		let idPartido = (await this.storage.get("partido")).idpartido
 		this.partido = await this.descargarPartido(idPartido)
-		console.log("PARTIDO RECIEN SALIDO DEL HORNO",this.partido)
 		
 		// QUERY MODIFICAR JUGADOR PARA PONERLE PAGADO = 0
 		let dataSqlJugador = {
@@ -116,12 +115,13 @@ export class SalaPage implements OnInit {
 			idFirebase: this.jugador.id_firebase,
 			cantVotos: this.jugador.cantidad_votos,
 		}
-		this.jugador = await this.actualizarJugador(dataSqlJugador)
+		await this.actualizarJugador(dataSqlJugador)
 		this.jugador.pagado = 0
-		console.log("JUGADOR AL ABANDONAR",this.jugador)
 
 		// QUERY MODIFICAR PARTIDO PARA LIMPIAR EL ID DEL idJugN QUE CORRESPONDA
-		let indexJugador = this.partido.idsJugadores.find(idplayer => idplayer == this.jugador.id)
+		let {idJug1, idJug2, idJug3, idJug4, idJug5, idJug6, idJug7, idJug8, idJug9, idJug10} = this.partido
+		this.partido.idsJugadores = [idJug1, idJug2, idJug3, idJug4, idJug5, idJug6, idJug7, idJug8, idJug9, idJug10]
+		let indexJugador = this.partido.idsJugadores.findIndex(idplayer => idplayer == this.jugador.id)
 		let dataSqlPartido = {
 			idcancha: this.partido.cancha.idcancha,
 			idpartido: this.partido.idpartido,
@@ -139,9 +139,7 @@ export class SalaPage implements OnInit {
 			sexo: this.partido.sexo,
 			sala: this.partido.sala
 		} 
-		this.partido = await this.actualizarPartido(dataSqlPartido)
-		console.log("JUGADOR AL ABANDONAR",this.partido)
-
+		await this.actualizarPartido(dataSqlPartido)
 		await this.storage.set("jugador", this.jugador)
 		await this.storage.set("partido", {})
 		this.router.navigate([`/buscar`])
@@ -206,15 +204,10 @@ export class SalaPage implements OnInit {
 		this.salaSexo = this.partido.sexo
 		let {idJug1, idJug2, idJug3, idJug4, idJug5, idJug6, idJug7, idJug8, idJug9, idJug10} = this.partido
 		this.partido.idsJugadores = [idJug1, idJug2, idJug3, idJug4, idJug5, idJug6, idJug7, idJug8, idJug9, idJug10]
-		console.log("V1",this.partido.idsJugadores)
 		let indexAInsertar
-		console.log("ID DEL JUGADOR",this.jugador.id)
-		console.log("INSERTAR EN",this.partido.idsJugadores)
-		console.log("YA EXISTE?",this.partido.idsJugadores.includes(this.jugador.id))
 		if (this.jugador.id && !this.partido.idsJugadores.includes(this.jugador.id)) {
 			indexAInsertar = this.partido.idsJugadores.indexOf(0)
 			this.partido.idsJugadores[indexAInsertar] = this.jugador.id
-			console.log("V2",this.partido.idsJugadores)
 		}
 
 		this.jugadores = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
