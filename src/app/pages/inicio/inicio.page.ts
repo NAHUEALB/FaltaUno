@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
 import { Jugador } from 'src/app/models/jugador';
 import { Storage } from '@ionic/storage-angular';
+import { ToastController } from '@ionic/angular';
 
 import { AyudaPage } from '../ayuda/ayuda.page';
 
@@ -66,6 +67,7 @@ export class InicioPage implements OnInit {
 		private menuCtrl: MenuController, 
 		private router: Router, 
 		private storage: Storage,
+		public toastController: ToastController,
 		private modalController: ModalController,
 	){ }
 
@@ -126,7 +128,6 @@ export class InicioPage implements OnInit {
 		fetch(requestSql)
 		.then((res) => res.json())
 		.then((data) => {
-			console.log("RECUPERANDO CON IDFIREBASE",data)
 			this.jugador.id = data.idjugador
 			this.jugador.password = data.password
 			this.jugador.nombre = data.nombre
@@ -134,10 +135,8 @@ export class InicioPage implements OnInit {
 			this.jugador.fnacimiento = data.fnacimiento
 			this.jugador.cantidad_votos = data.cantVotos
 			this.jugador.puntaje = data.puntaje
-			console.log("TRAIDO DE THIS.JUGADOR",this.jugador)
-		}).catch(() => {
-			console.log("Segundo error de querer cargar info del jugador desde la base de datos SQL")
-		});
+		})
+		.catch(() => this.presentToast("💀 Hubo un problema recuperando al jugador de Firebase", 2000))
 	}
 
 	nextNoticia() {
@@ -196,5 +195,13 @@ export class InicioPage implements OnInit {
 			presentingElement: await this.modalController.getTop()
 		});
 		await modal.present();
+	}
+
+	async presentToast(msg: string, time: number) {
+		const toast = await this.toastController.create({
+			message: msg,
+			duration: time,
+		});
+		toast.present();
 	}
 }
