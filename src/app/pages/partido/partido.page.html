@@ -6,7 +6,7 @@
 
 <ion-content class="background">
 
-  <h1 class="cronometro-sala" id="cronometro">{{partidoMinutos}}:{{partidoSegundos}}</h1>
+  <h1 class="cronometro-sala" id="cronometro">{{partidoMinutosText}}:{{partidoSegundosText}}</h1>
   <h4 class="data-sala" id="modo">Votos para salir: {{votosSalir}} de 10</h4>
   <h4 class="data-sala" id="sexo">Tipo de partido: {{salaSexo}}</h4>
   <h4 class="data-sala" id="precio">Precio de la cancha: ${{salaPrecio}}</h4>
@@ -20,11 +20,6 @@
               {{ jugador.nombre }}
             </div>
             <div class="stars" *ngIf="jugador.stars">
-              <ion-icon 
-                class="paycheck-icon"
-                [class.pay-correct]="jugador.voto == true"
-                name="thumbs-up">
-              </ion-icon>
               <div *ngFor="let star of jugador.stars">
                 <img *ngIf="star === 'full'" class="star" [src]="'/assets/stars/star-full.png'">
                 <img *ngIf="star === 'half'" class="star" [src]="'/assets/stars/star-half.png'">
@@ -43,11 +38,6 @@
               {{ jugador.nombre }}
             </div>
             <div class="stars" *ngIf="jugador.stars">
-              <ion-icon 
-                class="paycheck-icon"
-                [class.pay-correct]="jugador.voto == true"
-                name="thumbs-up">
-              </ion-icon>
               <div *ngFor="let star of jugador.stars">
                 <img *ngIf="star === 'full'" class="star" [src]="'/assets/stars/star-full.png'">
                 <img *ngIf="star === 'half'" class="star" [src]="'/assets/stars/star-half.png'">
@@ -68,7 +58,7 @@
 		</div>
 		<div class="opcion-card" (click)="votarSalir()">
 			<ion-icon class="perfil-icon" id="boton-voto" name="thumbs-up"></ion-icon>
-			<p>Votar para salir</p>
+			<p>Finalizar</p>
 		</div>
 	</div>
 

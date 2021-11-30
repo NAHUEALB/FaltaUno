@@ -52,6 +52,10 @@ export class BuscarPage implements OnInit {
 
   irALaSala(partido) {
     let requestSql = 'https://backend-f1-java.herokuapp.com/partidos/'+partido.idpartido
+    console.log(
+			"%cJUGADOR AL SALIR DEL BUSCAR [" + this.jugador.id + " - " + this.jugador.nombre + "]",
+			"color:cyan; background-color: black; font-size: 16px; font-weight: bold;"
+		)
     fetch(requestSql)
     .then(res => res.json())
     .then(data => this.storage.set("jugador", this.jugador)

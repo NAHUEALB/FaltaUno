@@ -10,8 +10,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./pospartido.page.scss'],
 })
 export class PospartidoPage implements OnInit {
-
-  enlace = 'Jugador';
+  	enlace = 'Jugador';
 	enlaceCanchasLP = 'CanchasLP';
 	docSubscription;
 	canchaSubscription;
@@ -19,16 +18,19 @@ export class PospartidoPage implements OnInit {
 	jugadoresSubscription;
 	jugSubscription;
 
-  salaNombre = 'Sala'
+  	salaNombre = 'Sala'
 	salaDireccion = 'Esperando geolocalización'
 	salaPrecio = 1800
 	salaEstado = '...'
 	salaSexo = '...'
-  votoEmitido = false;
+	partido
+  	votoEmitido = false;
 
 	idsFirebaseBots = [];
 	arrJugadores: Jugador[] = [];
 	
+	jugador
+	jugadores
 	jugadorVacio = {
 		nombre: " (vacío) ",
 		puntaje: 0,
@@ -40,57 +42,60 @@ export class PospartidoPage implements OnInit {
 	equipoBlue = [];
 	stars: any[];
 
-  constructor(
-    private storage: Storage,
-		public firebaseauthService: FirebaseauthService,
-		private router: Router
-  ) { }
-
-  ngOnInit() {
-  }
-
-  ionViewWillEnter() {
-		this.storage.get('cancha').then(cancha => {
-			this.salaDireccion = cancha.direccion;
-			this.salaPrecio = cancha.precio;
-			this.storage.get("sala").then(sala => {
-				this.equipoRed = sala.equipoRed;
-				this.equipoBlue = sala.equipoBlue;
-				this.salaNombre = sala.nombre;
-				this.salaEstado = (sala.estado == ' Sala pública ') ? 'público 🔓' : 'privado 🔐';
-				this.salaSexo = (sala.sexo == ' No binario ') ? 'Mixto' : sala.sexo
-				this.storage.get("jugador").then(jugador => {
-					(Math.random() > 0.5) ? this.equipoRed.push(jugador) : this.equipoBlue.push(jugador)
-	
-					for (let i=this.equipoRed.length; i<5; i++) this.equipoRed.push(this.jugadorVacio)
-					for (let i=this.equipoBlue.length; i<5; i++) this.equipoBlue.push(this.jugadorVacio)
-					//this.llenarConBots()
-					this.equipoRed.splice(2,1)
+	constructor(
+		private storage: Storage,
+			public firebaseauthService: FirebaseauthService,
+			private router: Router
+	) { 
+		this.storage.get('jugador').then(jugador => {
+			this.jugador = jugador
+			this.storage.get('partido').then(partido => {
+				this.partido = partido
+				this.storage.get('jugadores').then(jugadores => {
+					this.jugadores = jugadores
+					this.repartirRedYBlue()
 					this.iniciarStars()
 				})
 			})
 		})
-		this.descargarJugadores()
+		.catch(() => console.error("Error al recuperar la info del jugador"));
 	}
 
-  irAlInicio() {
-    this.router.navigate([`/inicio`]);
-  }
+	ngOnInit() {
+	}
 
-  descargarJugadores() {
-		this.arrJugadores = [];
-		this.jugadoresSubscription = this.firebaseauthService.getDocumentById('Puentes', 'bridge-jugadores').subscribe((idsJugadores: any) =>{
-			for (let i in idsJugadores.jugadores) {
-				this.jugSubscription = this.firebaseauthService.getDocumentById('Jugador', idsJugadores.jugadores[i]).subscribe((jugDocument: any) =>{
-					this.arrJugadores.push(jugDocument)
-					this.jugSubscription.unsubscribe()
-				})
-			}
-			this.jugadoresSubscription.unsubscribe();
+  	ionViewWillEnter() {
+		this.storage.get('jugadores').then(jugadores => {
+			this.jugadores = jugadores
+			this.storage.get('partido').then(partido => {
+				this.partido = partido
+				this.salaDireccion = this.partido.cancha.direccion;
+				this.salaPrecio = this.partido.cancha.precio;
+				this.salaNombre = this.partido.cancha.nombre;
+				this.salaEstado = (this.partido.estado == ' Sala pública ') ? 'público 🔓' : 'privado 🔐';
+				this.salaSexo = (this.partido.sexo == ' No binario ') ? 'Mixto' : this.partido.sexo
+				this.repartirRedYBlue()
+				this.iniciarStars()
+			})
 		})
 	}
 
-  getValoracion(puntos, votos) {
+	irAlInicio() {
+		this.router.navigate([`/inicio`]);
+	}
+
+	repartirRedYBlue() {
+		this.equipoRed = [] 
+		this.equipoBlue = []
+		for (let j = 0; j < 10; j++) {
+			console.log("JUGADOR A REPARTIR", this.jugadores[j])
+			let player = this.jugadores[j];
+			if (this.jugadores[j] && this.jugador.id !== this.jugadores[j].idjugador)
+				(j % 2 == 0) ? this.equipoRed.push(player) : this.equipoBlue.push(player)
+		}
+	}
+
+	getValoracion(puntos, votos) {
 		if (votos != 0) return Number((puntos/votos).toFixed(2));
 		return 0;
 	}
@@ -102,15 +107,6 @@ export class PospartidoPage implements OnInit {
 			else player.stars.push("null")
 		}
 	}
-
- /*  llenarConBots() {
-    this.equipoRed[2] = {nombre: "Nicolas", cantidad_votos: 1}
-    this.equipoBlue[2] = {nombre: "Mariana", cantidad_votos:1};
-    this.equipoRed[3] = {nombre: "Riki", cantidad_votos:1};
-    this.equipoBlue[3] = {nombre: "Mario", cantidad_votos:1};
-    this.equipoRed[4] = {nombre: "Gimena", cantidad_votos:1};
-    this.equipoBlue[4] = {nombre: "Andrea", cantidad_votos:1};
-  } */
 
   clickPositivo() {
     if (this.votoEmitido) return

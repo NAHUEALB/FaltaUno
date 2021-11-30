@@ -80,8 +80,26 @@ export class LoginPage implements OnInit {
 				this.docSubscription = this.firebaseauthService.getDocumentById(this.enlace, res.uid).subscribe((document: any) =>{
 					this.jugador.email = userEmail
 					this.jugador.password = userPassword
-					this.presentToast("Sesión iniciada con éxito ✅", 1500);
-					this.irAlInicio()
+					let requestSql = 'https://backend-f1-java.herokuapp.com/jugadores/firebase/' + this.jugador.id_firebase
+					fetch(requestSql)
+					.then((res) => res.json())
+					.then((data) => {
+						console.log(data)
+						if (data) {
+							this.jugador.id = data.idjugador
+							this.jugador.password = data.password
+							this.jugador.nombre = data.nombre
+							this.jugador.sexo = data.sexo
+							this.jugador.fnacimiento = data.fnacimiento
+							this.jugador.cantidad_votos = data.cantVotos
+							this.jugador.puntaje = data.puntaje
+							this.presentToast("Sesión iniciada con éxito ✅", 1500);
+							this.irAlInicio()
+						} else {
+							this.presentToast("💀 Hubo un error recuperando al jugador de Firebase", 4000);
+						}
+					})
+					.catch(() => this.presentToast("💀 Hubo un problema recuperando al jugador de Firebase", 2000))					
 				})
 			});
 		})

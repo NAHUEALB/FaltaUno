@@ -72,6 +72,9 @@ export class SalaPage implements OnInit {
 		this.storage.get('jugador')
 		.then(jugador => this.jugador = jugador)
 		.catch(() => console.error("Error al recuperar la info del jugador"));
+		this.jugadores = []
+		this.equipoRed = []
+		this.equipoBlue = []
 	}
 
 	ngOnInit() {}
@@ -92,9 +95,14 @@ export class SalaPage implements OnInit {
 	}
 
 	irAlPartido() {
-		this.storage.set("jugador", this.jugador)
-		.then(() => this.storage.set("partido", this.partido)
-			.then(() => this.router.navigate([`/partido`])))
+		this.storage.set("jugador", this.jugador).then(() => {
+			this.storage.set("partido", this.partido).then(() => {
+				this.storage.set("jugadores", this.jugadores).then(() => {
+					console.log("MANDANDO JUGADORES", this.jugadores)
+					this.router.navigate([`/partido`])
+				})
+			})
+		})
 	}
 	
 	async abandonarSala() {
@@ -203,9 +211,12 @@ export class SalaPage implements OnInit {
 		this.salaSexo = this.partido.sexo
 		let {idJug1, idJug2, idJug3, idJug4, idJug5, idJug6, idJug7, idJug8, idJug9, idJug10} = this.partido
 		this.partido.idsJugadores = [idJug1, idJug2, idJug3, idJug4, idJug5, idJug6, idJug7, idJug8, idJug9, idJug10]
-		let indexAInsertar
+		console.log(
+			"%cJUGADOR AL ENTRAR A SALA [" + this.jugador.id + " - " + this.jugador.nombre + "]",
+			"color:cyan; background-color: black; font-size: 16px; font-weight: bold;"
+		)
 		if (this.jugador.id && !this.partido.idsJugadores.includes(this.jugador.id)) {
-			indexAInsertar = this.partido.idsJugadores.indexOf(0)
+			let indexAInsertar = this.partido.idsJugadores.indexOf(0)
 			this.partido.idsJugadores[indexAInsertar] = this.jugador.id
 		}
 
@@ -224,19 +235,19 @@ export class SalaPage implements OnInit {
 				this.jugadores[i] = this.jugadorAux
 				if (c_jugadores == c_jugadores_no_nulos) {
 					actualizadoEnHeroku = true
-					this.repartirRedYBlue(actualizadoEnHeroku) 
 					setTimeout(() => {
 						if (this.mantenerActualizado) this.actualizarSala()
 					}, this.delayEntreRefresh);
 				} 
+				this.repartirRedYBlue(actualizadoEnHeroku) 
 			}
 		}
 		!actualizadoEnHeroku && this.repartirRedYBlue(true)
 	}
 
 	repartirRedYBlue(updatePartido = false) {
-		this.equipoRed = [] 
-		this.equipoBlue = []
+		if (!this.equipoRed) this.equipoRed = []
+		if (!this.equipoBlue) this.equipoBlue = []
 		let idsFiltradas = this.jugadores
 		.filter(jug => jug.idjugador)
 		.map(jug => jug.idjugador)
@@ -245,10 +256,7 @@ export class SalaPage implements OnInit {
 			for (let j = 0; j < this.jugadores.length; j++) {
 				let player = this.jugadores[j];
 				if (player && player.idjugador == idplayer)
-					if (i % 2 == 0) 
-						this.equipoRed.push(player) 
-					else 
-						this.equipoBlue.push(player)
+					(i % 2 == 0) ? this.equipoRed[j/2] = player : this.equipoBlue[Math.floor(j/2)] = player
 			}
 		}
 		for (let i=0; i<5; i++) 
@@ -303,7 +311,7 @@ export class SalaPage implements OnInit {
 			headers: {"Content-type": "application/json; charset=UTF-8"}
 		})
 		.then(res => res.json())
-		.then(() => this.presentToast("Se actualizó la información del partido ✅", 700))
+		.then(() => console.log("Sala actualizada"))
 		.catch(err => this.presentToast("💀 La última modificación al partido no logró completarse con éxito", 3000))
 	}
 
