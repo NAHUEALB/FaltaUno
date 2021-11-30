@@ -74,7 +74,7 @@ export class RegistrarPage implements OnInit {
 	}
 
 	irAlLogin() {
-		this.router.navigate([`/login`]);
+		setTimeout(() => this.router.navigate([`/login`]), 100)
 	}
 
 	crearJugador(){

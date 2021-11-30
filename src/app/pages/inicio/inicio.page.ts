@@ -91,7 +91,7 @@ export class InicioPage implements OnInit {
 	
 	irAlBuscar() {
 		this.storage.set("jugador", this.jugador)
-		.then(() => this.router.navigate([`/buscar`]))
+		.then(() => setTimeout(() => this.router.navigate([`/buscar`]), 100))
 	}
 
 	ionViewWillEnter() {

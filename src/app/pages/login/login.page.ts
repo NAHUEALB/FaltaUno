@@ -66,7 +66,7 @@ export class LoginPage implements OnInit {
 	
 	irAlInicio() {
 		this.storage.set("jugador", this.jugador)
-		.then(()=> this.router.navigate([`/inicio`]))
+		.then(()=> setTimeout(() => this.router.navigate([`/inicio`]), 100))
 	}
 	
 	login() {

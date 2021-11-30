@@ -60,11 +60,11 @@ export class PrincipalPage implements OnInit {
 	}
 	
 	irAlRegistrar() {
-		this.router.navigate([`/registrar`]);
+		setTimeout(() => this.router.navigate([`/registrar`]), 100)
 	}
 	
 	irAlLogin() {
-		this.router.navigate([`/login`]);
+		setTimeout(() => this.router.navigate([`/login`]), 100)
 	}
 	
 	

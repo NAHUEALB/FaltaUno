@@ -129,6 +129,19 @@ hr {
 
 // SECCIÓN PARA LAS CLASES DE LOS BOTONES NEON
 
+@keyframes gradient {
+	0% {background: radial-gradient(circle at center, rgba( 72, 255, 0, 0 ) 0%, #222 0%, #222 100%);}
+	10% {background: radial-gradient(circle at center, rgba( 72, 255, 0, 0.1 ) 10%, #222 10%, #222 100%);}
+	20% {background: radial-gradient(circle at center, rgba( 72, 255, 0, 0.2 ) 20%, #222 20%, #222 100%);}
+	30% {background: radial-gradient(circle at center, rgba( 72, 255, 0, 0.3 ) 30%, #222 30%, #222 100%);}
+	40% {background: radial-gradient(circle at center, rgba( 72, 255, 0, 0.4 ) 40%, #222 40%, #222 100%);}
+	50% {background: radial-gradient(circle at center, rgba( 72, 255, 0, 0.5 ) 50%, #222 50%, #222 100%);}
+	60% {background: radial-gradient(circle at center, rgba( 72, 255, 0, 0.6 ) 60%, #222 60%, #222 100%);}
+	70% {background: radial-gradient(circle at center, rgba( 72, 255, 0, 0.7 ) 70%, #222 70%, #222 100%);}
+	80% {background: radial-gradient(circle at center, rgba( 72, 255, 0, 0.8 ) 80%, #222 80%, #222 100%);}
+	100% {background: radial-gradient(circle at center, rgba( 72, 255, 0, 0.8 ) 99%, #222 100%, #222 100%);}
+}
+
 .bt-round { // forma redondeada genérica
     border-radius: 24px;
 	background: rgba(255, 255, 255, 0.08);
@@ -139,6 +152,12 @@ hr {
 	margin: 0;
 	background: radial-gradient(circle, rgba(90, 89, 30, 0.2) 60%, #222 100%);
 	border-radius: 5px;
+}
+
+.bt-modern:active {
+	animation: gradient 200ms;
+	width: 95%;
+	color: black;
 }
 
 .bt-triple { // comparte fila con 2 botones más
