@@ -23,32 +23,32 @@
     <ion-col>
       <h2 class="data-sala" style="color: rgb(192, 255, 180);" id="nombre"><b>Votá a los jugadores</b></h2>
       <ion-list class="blk-halfcard" lines="none">
-        <ion-item class="halflist hl-left" style="background-color: salmon;" *ngFor="let jugador of equipoRed">
+        <ion-item class="halflist hl-left" style="background-color: salmon;" *ngFor="let jugador of equipoRed | keyvalue">
           <div *ngIf="jugador.nombre !== 'Nicolas'">
             <div [class.jugador-vacio]="jugador.nombre == ' (vacío) '" id="nombre-jugador">
-              {{ jugador.nombre }}
+              {{ jugador.value.nombre }}
             </div>
             <div class="stars">
-              <div *ngFor="let star of jugador.stars | keyvalue">
-                <img *ngIf="star.value === 'full'" class="star" (click)="votarJugador(star.key)" [src]="'/assets/stars/star-full.png'">
-                <img *ngIf="star.value === 'half'" class="star" (click)="votarJugador(star.key)" [src]="'/assets/stars/star-half.png'">
-                <img *ngIf="star.value === 'null'" class="star" (click)="votarJugador(star.key)" [src]="'/assets/stars/star-null.png'">
+              <div *ngFor="let star of jugador.value.stars | keyvalue">
+                <img *ngIf="star.value === 'full'" class="star" (click)="votarJugadorEspecifico(jugador.key, star.key, 'red')" [src]="'/assets/stars/star-full.png'">
+                <img *ngIf="star.value === 'half'" class="star" (click)="votarJugadorEspecifico(jugador.key, star.key, 'red')" [src]="'/assets/stars/star-half.png'">
+                <img *ngIf="star.value === 'null'" class="star" (click)="votarJugadorEspecifico(jugador.key, star.key, 'red')" [src]="'/assets/stars/star-null.png'">
               </div>
             </div>
           </div>  
         </ion-item>
       </ion-list>
       <ion-list class="blk-halfcard"lines="none">
-        <ion-item class="halflist" style="background-color: lightblue;" *ngFor="let jugador of equipoBlue">
+        <ion-item class="halflist" style="background-color: lightblue;" *ngFor="let jugador of equipoBlue | keyvalue">
           <div>
             <div [class.jugador-vacio]="jugador.nombre == ' (vacío) '" id="nombre-jugador">
-              {{ jugador.nombre }}
+              {{ jugador.value.nombre }}
             </div>
             <div class="stars">
-              <div *ngFor="let star of jugador.stars">
-                <img *ngIf="star === 'full'" class="star" [src]="'/assets/stars/star-full.png'">
-                <img *ngIf="star === 'half'" class="star" [src]="'/assets/stars/star-half.png'">
-                <img *ngIf="star === 'null'" class="star" [src]="'/assets/stars/star-null.png'">
+              <div *ngFor="let star of jugador.value.stars | keyvalue">
+                <img *ngIf="star.value === 'full'" class="star" (click)="votarJugadorEspecifico(jugador.key, star.key, 'blue')" [src]="'/assets/stars/star-full.png'">
+                <img *ngIf="star.value === 'half'" class="star" (click)="votarJugadorEspecifico(jugador.key, star.key, 'blue')" [src]="'/assets/stars/star-half.png'">
+                <img *ngIf="star.value === 'null'" class="star" (click)="votarJugadorEspecifico(jugador.key, star.key, 'blue')" [src]="'/assets/stars/star-null.png'">
               </div>
             </div>
           </div> 

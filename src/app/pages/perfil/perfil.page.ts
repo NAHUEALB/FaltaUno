@@ -50,7 +50,7 @@ export class PerfilPage implements OnInit {
   	ngOnInit() {}
 
 	ionViewWillEnter(){
-		this.storage.get("jugador").then(jugador => {
+		this.descargarJugador(this.jugador.id_firebase).then(jugador => {
 			this.jugador = jugador;
 			this.edad = this.getEdad(this.jugador.fnacimiento);
 			this.valoracion = this.getValoracion(this.jugador.puntaje, this.jugador.cantidad_votos);
@@ -74,6 +74,16 @@ export class PerfilPage implements OnInit {
 	irAlInicio(){
 		this.storage.set("jugador", this.jugador)
 		.then(() => this.router.navigate([`/inicio`]))
+	}
+
+	async descargarJugador(idJugador) {
+		let path = '/jugadores/' + idJugador
+		let partidoSql = 'https://backend-f1-java.herokuapp.com' + path
+		console.log(
+			"%cDESCARGAR JUGADOR ACTUALIZADO [" + idJugador + "] -----> " + path,
+			"color:green; background-color: lime; font-size: 16px; font-weight: bold;"
+		)
+		return await (await fetch(partidoSql)).json()
 	}
 
 	getEdad(dateNacimiento) {

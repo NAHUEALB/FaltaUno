@@ -84,8 +84,7 @@ export class LoginPage implements OnInit {
 					fetch(requestSql)
 					.then((res) => res.json())
 					.then((data) => {
-						console.log(data)
-						if (data) {
+						if (data.status != 500) {
 							this.jugador.id = data.idjugador
 							this.jugador.password = data.password
 							this.jugador.nombre = data.nombre
