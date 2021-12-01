@@ -204,7 +204,7 @@ export class SalaPage implements OnInit {
 	async actualizarSala() {
 		let idPartido = (await this.storage.get("partido")).idpartido
 		this.partido = await this.descargarPartido(idPartido)
-		this.salaNombre = this.partido.cancha.nombreCancha
+		this.salaNombre = this.partido.sala
 		this.salaDireccion = this.partido.cancha.direccion
 		this.salaPrecio = this.partido.cancha.precio
 		this.salaEstado = ' Sala Pública '

@@ -19,8 +19,8 @@ import { DatabaseService } from 'src/app/serv/database.service';
 })
 export class EditarSalaPage implements OnInit {
   	salaForm: FormGroup;
-	sala: Sala;
-	sexos = ["Mixto", "Hombre", "Mujer"];
+	partido
+	sexos = ["Mixto", "Masculino", "Femenino"];
   	estados = ["Sala pública", "Sala privada"]
 	docSubscription;
 	usuarioSubscription;
@@ -37,65 +37,80 @@ export class EditarSalaPage implements OnInit {
 	public firebaseauthService: FirebaseauthService,
 	private events: Events
 	){ 
-		this.sala = {
-      		id: '',
-			nombre: '',
-			sexo: "",
-			estado: '',
-			slotsOcupados: 0,
-			slotsTotales: 0,
-			hora: '',
-			equipoRed: [],
-			equipoBlue: []
-		}
-
 		this.salaForm = this.formBuilder.group({
 			nombre: '',
-			sexo: '',
-      		estado: '',
+			/* sexo: '',
+      		estado: '', */
 		});
 	}
 
-	ngOnInit() {
-		this.storage.get("sala").then(res => {
-			this.sala = res;
+	ngOnInit() {}
+
+	ionViewWillEnter() {
+		this.menuCtrl.enable(true);
+		this.storage.get("partido").then(partido => {
+			this.partido = partido;
+			/* this.partido.estado = this.estados[0]
+			this.partido.sexo.trim() */
+			console.log(this.partido, this.partido.sala)
 			this.salaForm.patchValue({
-				nombre: this.sala.nombre,
-				sexo: this.sala.sexo,
-				estado: this.sala.estado
+				nombre: this.partido.sala,
+				/* sexo: this.partido.sexo,
+				estado: this.partido.estado */
 			})
 		})
 	}
-
-	onSubmit(){
-	}
-
-	editarSala() {
-		this.cargando = true;
-		
-		this.sala.nombre = this.salaForm.value.nombre;
-		this.sala.sexo = this.salaForm.value.sexo;
-    	this.sala.estado = this.salaForm.value.estado;
-		
-		this.firebaseauthService.updateSala(this.enlace, this.sala).then(res => {
-			// this.events.publish("actualizar:storage", false);
-			this.storage.set("sala", this.sala).then(()=>{
-				this.router.navigate(["/sala"]);
-			})
-		});
+	
+	ionViewWillLeave(){
+		this.cargando = false;
+		if(this.docSubscription) this.docSubscription.unsubscribe();
+		if(this.usuarioSubscription) this.usuarioSubscription.unsubscribe();
 	}
 
 	irALaSala(){
 		this.router.navigate([`/sala`]);
 	}
-
-	ionViewWillEnter() {
-		this.menuCtrl.enable(true);
+	
+	onSubmit(){
 	}
 
-	ionViewWillLeave(){
-		this.cargando = false;
-		if(this.docSubscription) this.docSubscription.unsubscribe();
-		if(this.usuarioSubscription) this.usuarioSubscription.unsubscribe();
+	async editarSala() {
+		this.cargando = true;
+		let idPartido = (await this.storage.get("partido")).idpartido
+		this.partido = await this.descargarPartido(idPartido)
+		this.partido.sala = this.salaForm.value.nombre;/* 
+		this.partido.sexo = this.salaForm.value.sexo;
+    	this.partido.estado = this.salaForm.value.estado; */
+		
+		//await this.firebaseauthService.updateSala(this.enlace, this.partido)
+		await this.storage.set("partido", this.partido)
+		this.actualizarPartido(this.partido)
+			.then(() => this.router.navigate(["/sala"]))
+			.catch(err => console.error(err))
+	}
+
+	async actualizarPartido(partidoActualizado) {
+		let path = '/partidos/actualizar'
+		let requestSqlPartido = 'https://backend-f1-java.herokuapp.com' + path
+		console.log(
+			"%cEDITANDO DATOS DEL PARTIDO [" + this.partido.idpartido + "]",
+			"color:brown; background-color: pink; font-size: 16px; font-weight: bold;"
+		)
+		console.log(partidoActualizado)
+		return await (await fetch(requestSqlPartido, {
+			method: "PUT", 
+			body: JSON.stringify(partidoActualizado),
+			headers: {"Content-type": "application/json; charset=UTF-8"}
+		})).json()
+	}
+
+	async descargarPartido(idPartido) {
+		let path = '/partidos/' + idPartido
+		let partidoSql = 'https://backend-f1-java.herokuapp.com' + path
+		console.log(
+			"%cDESCARGAR PARTIDO ACTUALIZADO [" + idPartido + "] -----> " + path,
+			"color:green; background-color: lime; font-size: 16px; font-weight: bold;"
+		)
+		return await (await fetch(partidoSql)).json()
 	}
 }
