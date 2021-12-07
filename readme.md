@@ -15,15 +15,15 @@ Es una aplicación que ofrece una plataforma para facilitar la creación, organi
 - [x] Funcionalidad para editar datos de usuario
 - [x] Diseño de la UI de búsqueda de partidos
 - [x] Listado de partidos disponibles
-- [x] Mapa con los partidos disponibles
 - [x] Funcionalidad para editar datos de la sala
+- [ ] Mapa con los partidos disponibles
 - [ ] Invitación mediante RRSS
 - [ ] Implementación de un método de pago
 
 ## Entrega 3
 - [x] Conectar partidos con los jugadores
-- [ ] Asignar valoraciones e interacciones
-- [ ] Poner en marcha y lanzar al mercado
-- [ ] Expandirnos a Asia y Europa
-- [ ] Hallar la cura del cáncer
-- [ ] Iniciar la 4ta GM contra los rugbiers
+- [x] Asignar valoraciones e interacciones
+- [x] Actualizar votos y valoración personal
+- [x] Sincronizar instancias de partidos
+- [x] Abandonar sala y reembolsar pago
+- [x] Simular partido una hora mientras se juega
