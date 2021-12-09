@@ -245,19 +245,19 @@ export class PospartidoPage implements OnInit {
     let idPartido = (await this.storage.get('partido')).idpartido;
     this.partido = await this.descargarPartido(idPartido);
 
-    // QUERY MODIFICAR JUGADOR PARA PONERLE PAGADO = 0
+    let jugador = await this.descargarJugador(this.jugador.id);
     let dataSqlJugador = {
       idjugador: this.jugador.id,
-      email: this.jugador.email,
-      password: this.jugador.password,
-      nombre: this.jugador.nombre,
-      fnacimiento: this.jugador.fnacimiento,
-      sexo: this.jugador.sexo,
-      localidad: this.jugador.ubicacion,
-      puntaje: this.jugador.puntaje,
+      email: jugador.email,
+      password: jugador.password,
+      nombre: jugador.nombre,
+      fnacimiento: jugador.fnacimiento,
+      sexo: jugador.sexo,
+      localidad: jugador.localidad,
+      puntaje: jugador.puntaje,
       pagado: 0,
-      idFirebase: this.jugador.id_firebase,
-      cantVotos: this.jugador.cantidad_votos,
+      idFirebase: jugador.idFirebase,
+      cantVotos: jugador.cantVotos,
     };
     await this.actualizarJugador(dataSqlJugador);
     this.jugador.pagado = 0;
